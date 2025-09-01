@@ -124,7 +124,7 @@ date_time,latitude,longitude,depth,magnitude,location
 29 July 2025 - 04:53 AM,06.32,126.26,043,2.5,042km S 29° E of Governor Generoso (Davao Oriental)
 29 July 2025 - 04:39 AM,08.05,124.81,011,1.7,024km N 77° W of Lantapan (Bukidnon)
 29 July 2025 - 04:37 AM,11.41,126.06,013,3.2,049km N 82° E of Hernani (Eastern Samar)
-29 July 2025 - 03:55 AM,07.90,123.42,032,1.7,008km N 14° W of City Of Pagadian  (Zamboanga Del Sur)
+29 July 2025 - 03:55 AM,07.90,123.42,032,1.7,008km N 14° W of City Of Pagadian (Zamboanga Del Sur)
 29 July 2025 - 02:58 AM,19.90,121.09,034,2.8,081km N 30° W of Calayan (Cagayan)
 29 July 2025 - 02:13 AM,17.72,120.69,014,1.5,002km S 74° W of Lagayan (Abra)
 29 July 2025 - 01:32 AM,17.62,120.54,009,1.9,006km N 30° W of Langiden (Abra)
@@ -1147,7 +1147,7 @@ date_time,latitude,longitude,depth,magnitude,location
 07 July 2025 - 02:44 AM,07.64,124.76,001,2.0,004km East of Wao (Lanao Del Sur)
 07 July 2025 - 02:37 AM,07.94,126.51,034,1.9,015km S 44° E of Lingig (Surigao Del Sur)
 07 July 2025 - 02:22 AM,11.82,124.13,005,2.1,011km S 51° E of Pio V. Corpus (Masbate)
-07 July 2025 - 02:06 AM,10.15,124.86,032,1.6,003km N 45° E of City Of Maasin  (Southern Leyte)
+07 July 2025 - 02:06 AM,10.15,124.86,032,1.6,003km N 45° E of City Of Maasin (Southern Leyte)
 07 July 2025 - 02:04 AM,11.86,124.12,004,2.1,008km S 73° E of Pio V. Corpus (Masbate)
 07 July 2025 - 01:53 AM,10.30,125.11,010,2.1,004km N 61° W of Saint Bernard (Southern Leyte)
 07 July 2025 - 01:43 AM,18.90,120.73,002,2.2,038km N 09° W of Pagudpud (Ilocos Norte)
@@ -1419,4 +1419,3 @@ date_time,latitude,longitude,depth,magnitude,location
 01 July 2025 - 12:38 AM,17.47,120.23,018,2.3,019km S 61° W of Caoayan (Ilocos Sur)
 01 July 2025 - 12:32 AM,08.09,126.50,024,1.6,012km N 60° E of Lingig (Surigao Del Sur)
 01 July 2025 - 12:08 AM,07.45,125.61,033,1.9,009km N 89° W of Braulio E. Dujali (Davao Del Norte)
-Jan,Feb,Mar,Apr,May,June

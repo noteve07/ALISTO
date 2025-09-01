@@ -101,7 +101,7 @@ date_time,latitude,longitude,depth,magnitude,location
 31 October 2019 - 03:21 PM,06.91,125.18,033,1.6,012km S 61° E of Makilala (Cotabato)
 31 October 2019 - 03:20 PM,07.13,124.91,053,2.5,027km N 46° W of Makilala (Cotabato)
 31 October 2019 - 03:18 PM,06.83,124.89,051,1.6,007km S 72° E of Tulunan (Cotabato)
-31 October 2019 - 03:09 PM,07.05,125.09,023,1.9,010km North° 00  of Makilala (Cotabato)
+31 October 2019 - 03:09 PM,07.05,125.09,023,1.9,010km North° 00 of Makilala (Cotabato)
 31 October 2019 - 03:06 PM,06.83,124.87,063,2.8,005km S 67° E of Tulunan (Cotabato)
 31 October 2019 - 03:04 PM,07.06,124.85,113,2.3,023km N 05° E of Tulunan (Cotabato)
 31 October 2019 - 03:02 PM,06.97,125.15,006,3.8,030km N 55° E of Tulunan (Cotabato)
@@ -125,8 +125,7 @@ date_time,latitude,longitude,depth,magnitude,location
 31 October 2019 - 01:50 PM,06.96,124.90,027,2.5,014km N 36° E of Tulunan (Cotabato)
 31 October 2019 - 01:43 PM,06.87,125.05,033,1.6,011km S 21° W of Makilala (Cotabato)
 31 October 2019 - 01:34 PM,06.84,125.09,022,4.4,013km S 01° E of Makilala (Cotabato)
-31 October 2019 - 01:33 PM,06.75,124.91,026,2.1,"026
-		  km S 38° E of Tulunan (Cotabato)"
+31 October 2019 - 01:33 PM,06.75,124.91,026,2.1,026km S 38° E of Tulunan (Cotabato)
 31 October 2019 - 01:30 PM,06.79,124.94,022,1.5,014km S 60° E of Tulunan (Cotabato)
 31 October 2019 - 01:28 PM,06.89,125.01,021,2.4,020km N 78° E of Tulunan (Cotabato)
 31 October 2019 - 01:22 PM,06.83,124.91,024,2.6,009km S 72° E of Tulunan (Cotabato)
@@ -145,7 +144,7 @@ date_time,latitude,longitude,depth,magnitude,location
 31 October 2019 - 12:03 PM,06.89,125.00,025,2.8,020km N 77° E of Tulunan (Cotabato)
 31 October 2019 - 11:58 AM,07.07,125.55,119,2.6,006km N 90° W of Davao City (Davao Del Sur)
 31 October 2019 - 11:56 AM,06.94,124.91,064,2.0,013km N 43° E of Tulunan (Cotabato)
-31 October 2019 - 11:54 AM,06.85,124.97,023,2.2,015km  00 °East of Tulunan (Cotabato)
+31 October 2019 - 11:54 AM,06.85,124.97,023,2.2,015km 00 °East of Tulunan (Cotabato)
 31 October 2019 - 11:51 AM,06.94,125.02,026,3.1,008km S 76° W of Makilala (Cotabato)
 31 October 2019 - 11:45 AM,07.04,125.32,019,3.2,026km N 83° E of Kidapawan (Cotabato)
 31 October 2019 - 11:43 AM,06.78,124.70,081,3.5,016km S 63° W of Tulunan (Cotabato)
@@ -158,10 +157,10 @@ date_time,latitude,longitude,depth,magnitude,location
 31 October 2019 - 11:16 AM,06.83,124.95,025,2.4,014km S 79° E of Tulunan (Cotabato)
 31 October 2019 - 11:12 AM,07.26,125.19,003,3.0,035km N 19° E of Makilala (Cotabato)
 31 October 2019 - 11:06 AM,06.82,124.97,018,2.9,016km S 78° E of Tulunan (Cotabato)
-31 October 2019 - 11:05 AM,06.85,125.00,029,1.9,019km  00 °East of Tulunan (Cotabato)
+31 October 2019 - 11:05 AM,06.85,125.00,029,1.9,019km 00 °East of Tulunan (Cotabato)
 31 October 2019 - 10:55 AM,06.75,125.08,003,1.9,023km S 02° W of Makilala (Cotabato)
 31 October 2019 - 10:53 AM,06.81,124.97,023,2.3,016km S 73° E of Tulunan (Cotabato)
-31 October 2019 - 10:52 AM,06.85,124.97,022,1.6,016km  00 °East of Tulunan (Cotabato)
+31 October 2019 - 10:52 AM,06.85,124.97,022,1.6,016km 00 °East of Tulunan (Cotabato)
 31 October 2019 - 10:50 AM,06.97,125.03,037,2.8,007km N 79° W of Makilala (Cotabato)
 31 October 2019 - 10:47 AM,06.97,124.96,029,2.9,014km N 83° W of Makilala (Cotabato)
 31 October 2019 - 10:41 AM,06.88,124.76,057,2.1,008km N 67° W of Tulunan (Cotabato)
@@ -186,21 +185,17 @@ date_time,latitude,longitude,depth,magnitude,location
 31 October 2019 - 09:25 AM,06.89,125.06,028,2.3,026km N 80° E of Tulunan (Cotabato)
 31 October 2019 - 09:20 AM,06.97,124.98,020,3.1,021km N 53° E of Tulunan (Cotabato)
 31 October 2019 - 09:11 AM,06.92,125.06,008,6.5,027km N 75° E of Tulunan (Cotabato)
-31 October 2019 - 08:33 AM,06.81,124.85,033,2.7,"005
-		  km S 32° E of Tulunan (Cotabato)"
+31 October 2019 - 08:33 AM,06.81,124.85,033,2.7,005km S 32° E of Tulunan (Cotabato)
 31 October 2019 - 08:30 AM,06.92,125.04,026,2.0,024km N 71° E of Tulunan (Cotabato)
 31 October 2019 - 08:24 AM,06.81,124.86,045,2.6,006km S 38° E of Tulunan (Cotabato)
 31 October 2019 - 07:53 AM,06.84,124.92,020,1.6,010km S 85° E of Tulunan (Cotabato)
 31 October 2019 - 07:37 AM,06.94,124.90,027,1.9,013km N 39° E of Tulunan (Cotabato)
 31 October 2019 - 07:18 AM,06.90,125.00,020,1.9,019km N 73° E of Tulunan (Cotabato)
-31 October 2019 - 07:10 AM,06.81,124.95,022,3.0,"014
-		  km S 71° E of Tulunan (Cotabato)"
+31 October 2019 - 07:10 AM,06.81,124.95,022,3.0,014km S 71° E of Tulunan (Cotabato)
 31 October 2019 - 06:55 AM,06.96,125.03,021,1.9,025km N 62° E of Tulunan (Cotabato)
-31 October 2019 - 06:46 AM,06.76,124.89,030,2.8,"013
-		  km S 36° E of Tulunan (Cotabato)"
+31 October 2019 - 06:46 AM,06.76,124.89,030,2.8,013km S 36° E of Tulunan (Cotabato)
 31 October 2019 - 06:28 AM,06.77,124.78,036,2.8,010km S 29° W of Tulunan (Cotabato)
-31 October 2019 - 06:26 AM,06.89,124.80,023,2.1,"005
-		  km N 30° W of Tulunan (Cotabato)"
+31 October 2019 - 06:26 AM,06.89,124.80,023,2.1,005km N 30° W of Tulunan (Cotabato)
 31 October 2019 - 06:00 AM,06.70,124.76,031,2.9,019km S 25° W of Tulunan (Cotabato)
 31 October 2019 - 05:48 AM,06.89,125.05,015,2.8,025km N 80° E of Tulunan (Cotabato)
 31 October 2019 - 05:42 AM,06.80,124.86,011,2.1,007km S 36° E of Tulunan (Cotabato)
@@ -336,8 +331,7 @@ date_time,latitude,longitude,depth,magnitude,location
 30 October 2019 - 10:04 AM,06.84,124.93,023,2.5,011km S 86° E of Tulunan (Cotabato)
 30 October 2019 - 09:45 AM,06.75,124.83,027,3.2,012km S 02° W of Tulunan (Cotabato)
 30 October 2019 - 09:38 AM,06.83,125.04,011,4.5,024km S 85° E of Tulunan (Cotabato)
-30 October 2019 - 09:22 AM,06.86,124.84,029,2.1,"002
-		  km N 40° E of Tulunan (Cotabato)"
+30 October 2019 - 09:22 AM,06.86,124.84,029,2.1,002km N 40° E of Tulunan (Cotabato)
 30 October 2019 - 09:18 AM,06.93,124.67,075,2.5,019km N 64° W of Tulunan (Cotabato)
 30 October 2019 - 08:54 AM,06.85,124.75,027,1.8,008km S 87° W of Tulunan (Cotabato)
 30 October 2019 - 08:47 AM,06.84,124.92,024,2.2,010km S 81° E of Tulunan (Cotabato)
@@ -372,8 +366,7 @@ date_time,latitude,longitude,depth,magnitude,location
 30 October 2019 - 03:02 AM,06.77,125.05,010,3.4,026km S 70° E of Tulunan (Cotabato)
 30 October 2019 - 03:01 AM,06.68,124.97,021,2.4,025km S 40° E of Tulunan (Cotabato)
 30 October 2019 - 02:57 AM,06.74,125.01,032,2.1,024km S 58° E of Tulunan (Cotabato)
-30 October 2019 - 02:55 AM,06.80,124.89,027,2.1,"009
-		  km S 53° E of Tulunan (Cotabato)"
+30 October 2019 - 02:55 AM,06.80,124.89,027,2.1,009km S 53° E of Tulunan (Cotabato)
 30 October 2019 - 02:47 AM,16.79,120.23,090,3.1,015km N 59° W of Bacnotan (La Union)
 30 October 2019 - 02:44 AM,06.73,124.92,029,2.8,017km S 39° E of Tulunan (Cotabato)
 30 October 2019 - 02:40 AM,06.96,124.97,001,2.4,019km N 52° E of Tulunan (Cotabato)
@@ -407,17 +400,14 @@ date_time,latitude,longitude,depth,magnitude,location
 29 October 2019 - 11:13 PM,06.81,125.05,010,4.5,025km S 81° E of Tulunan (Cotabato)
 29 October 2019 - 11:06 PM,06.79,124.75,041,2.7,011km S 53° W of Tulunan (Cotabato)
 29 October 2019 - 11:04 PM,06.70,124.74,034,2.3,019km S 31° W of Tulunan (Cotabato)
-29 October 2019 - 11:02 PM,06.79,124.78,018,2.1,"009
-		  km S 39° W of Tulunan (Cotabato)"
+29 October 2019 - 11:02 PM,06.79,124.78,018,2.1,009km S 39° W of Tulunan (Cotabato)
 29 October 2019 - 10:59 PM,06.06,126.97,020,3.1,119km S 57° E of Governor Generoso (Davao Oriental)
 29 October 2019 - 10:40 PM,06.70,124.89,027,2.4,019km S 22° E of Tulunan (Cotabato)
 29 October 2019 - 10:38 PM,06.93,124.97,008,3.3,018km N 60° E of Tulunan (Cotabato)
 29 October 2019 - 10:25 PM,06.86,125.17,027,2.0,009km N 28° W of Bansalan (Davao Del Sur)
 29 October 2019 - 10:23 PM,06.87,124.75,043,3.0,009km N 75° W of Tulunan (Cotabato)
-29 October 2019 - 10:22 PM,06.84,124.96,014,3.7,"015
-		  km S 84° E of Tulunan (Cotabato)"
-29 October 2019 - 10:22 PM,16.55,122.03,015,3.2,"025
-		  km N 83° W of Dinapigue (Isabela)"
+29 October 2019 - 10:22 PM,06.84,124.96,014,3.7,015km S 84° E of Tulunan (Cotabato)
+29 October 2019 - 10:22 PM,16.55,122.03,015,3.2,025km N 83° W of Dinapigue (Isabela)
 29 October 2019 - 10:11 PM,13.51,120.31,004,2.4,020km N 57° W of Paluan (Occidental Mindoro)
 29 October 2019 - 10:11 PM,06.83,124.69,059,2.3,016km S 83° W of Tulunan (Cotabato)
 29 October 2019 - 10:05 PM,06.96,124.85,024,3.1,013km N 09° E of Tulunan (Cotabato)
@@ -438,7 +428,7 @@ date_time,latitude,longitude,depth,magnitude,location
 29 October 2019 - 08:53 PM,06.73,124.87,013,3.5,014km S 21° E of Tulunan (Cotabato)
 29 October 2019 - 08:39 PM,06.82,124.74,029,1.8,010km S 69° W of Tulunan (Cotabato)
 29 October 2019 - 08:36 PM,06.93,124.97,019,3.0,018km N 61° E of Tulunan (Cotabato)
-29 October 2019 - 08:33 PM,06.85,124.84,028,2.7,001km  00 °East of Tulunan (Cotabato)
+29 October 2019 - 08:33 PM,06.85,124.84,028,2.7,001km 00 °East of Tulunan (Cotabato)
 29 October 2019 - 08:23 PM,06.86,125.07,009,2.2,026km N 89° E of Tulunan (Cotabato)
 29 October 2019 - 08:20 PM,06.86,124.89,027,2.4,007km N 84° E of Tulunan (Cotabato)
 29 October 2019 - 08:05 PM,06.81,124.98,032,2.0,018km S 75° E of Tulunan (Cotabato)
@@ -491,10 +481,10 @@ date_time,latitude,longitude,depth,magnitude,location
 29 October 2019 - 03:26 PM,06.76,124.82,031,2.2,011km S 08° W of Tulunan (Cotabato)
 29 October 2019 - 03:25 PM,06.85,124.99,033,1.5,018km S 88° E of Tulunan (Cotabato)
 29 October 2019 - 03:23 PM,06.87,124.92,027,2.7,011km N 82° E of Tulunan (Cotabato)
-29 October 2019 - 03:20 PM,06.85,124.93,027,1.9,011km  00 °East of Tulunan (Cotabato)
+29 October 2019 - 03:20 PM,06.85,124.93,027,1.9,011km 00 °East of Tulunan (Cotabato)
 29 October 2019 - 03:09 PM,06.81,124.85,022,2.0,006km S 30° E of Tulunan (Cotabato)
 29 October 2019 - 03:05 PM,06.79,124.70,048,1.7,016km S 66° W of Tulunan (Cotabato)
-29 October 2019 - 03:02 PM,06.85,124.92,023,4.1,010km  00 °East of Tulunan (Cotabato)
+29 October 2019 - 03:02 PM,06.85,124.92,023,4.1,010km 00 °East of Tulunan (Cotabato)
 29 October 2019 - 02:59 PM,06.73,124.88,028,2.3,015km S 24° E of Tulunan (Cotabato)
 29 October 2019 - 02:54 PM,06.72,124.87,065,2.4,015km S 17° E of Tulunan (Cotabato)
 29 October 2019 - 02:52 PM,06.79,125.03,017,3.3,023km S 72° E of Tulunan (Cotabato)
@@ -674,8 +664,7 @@ date_time,latitude,longitude,depth,magnitude,location
 26 October 2019 - 12:46 PM,05.85,127.00,029,2.7,135km S 49° E of Governor Generoso (Davao Oriental)
 26 October 2019 - 12:37 PM,14.07,121.11,034,2.2,003km S 22° E of Tanauan City (Batangas)
 26 October 2019 - 11:06 AM,18.27,120.58,031,1.9,019km N 53° W of Piddig (Ilocos Norte)
-26 October 2019 - 10:25 AM,16.26,119.96,033,2.4,"018
-		  km S 05° E of Anda (Pangasinan)"
+26 October 2019 - 10:25 AM,16.26,119.96,033,2.4,018km S 05° E of Anda (Pangasinan)
 26 October 2019 - 10:22 AM,05.76,126.66,029,2.9,116km S 83° E of Jose Abad Santos (Davao Occidental)
 26 October 2019 - 07:37 AM,12.30,124.65,090,4.4,002km S 78° E of Lope De Vega (Northern Samar)
 26 October 2019 - 06:24 AM,06.83,125.07,001,2.7,027km S 84° E of Tulunan (Cotabato)
@@ -792,12 +781,11 @@ date_time,latitude,longitude,depth,magnitude,location
 23 October 2019 - 02:45 AM,06.76,125.00,013,4.6,022km S 62° E of Tulunan (Cotabato)
 23 October 2019 - 01:57 AM,06.84,126.37,031,2.2,024km S 20° W of Tarragona (Davao Oriental)
 23 October 2019 - 01:35 AM,06.82,124.89,022,2.8,008km S 60° E of Tulunan (Cotabato)
-23 October 2019 - 01:30 AM,06.73,124.83,027,2.5,014km South° 00  of Tulunan (Cotabato)
+23 October 2019 - 01:30 AM,06.73,124.83,027,2.5,014km South° 00 of Tulunan (Cotabato)
 23 October 2019 - 12:51 AM,06.75,124.91,027,2.1,014km S 40° E of Tulunan (Cotabato)
 23 October 2019 - 12:23 AM,06.67,124.94,001,3.7,023km S 33° E of Tulunan (Cotabato)
 23 October 2019 - 12:15 AM,10.10,126.18,005,2.6,015km N 53° E of Burgos (Surigao Del Norte)
-23 October 2019 - 12:06 AM,10.29,126.55,011,4.0,"060
-		  km E 60° E of Burgos (Surigao Del Norte)"
+23 October 2019 - 12:06 AM,10.29,126.55,011,4.0,060km E 60° E of Burgos (Surigao Del Norte)
 22 October 2019 - 11:56 PM,05.54,124.99,026,2.3,035km S 03° W of Maasim (Sarangani)
 22 October 2019 - 11:16 PM,06.68,124.83,035,2.1,018km S 01° E of Tulunan (Cotabato)
 22 October 2019 - 10:23 PM,06.79,124.59,033,2.6,014km N 41° W of Tacurong City (Sultan Kudarat)
@@ -896,7 +884,7 @@ date_time,latitude,longitude,depth,magnitude,location
 21 October 2019 - 04:55 AM,06.86,125.06,007,1.9,026km N 88° E of Tulunan (Cotabato)
 21 October 2019 - 04:52 AM,09.37,126.28,022,2.4,014km N 42° E of Cortes (Surigao Del Sur)
 21 October 2019 - 04:22 AM,06.78,124.97,020,2.5,017km S 62° E of Tulunan (Cotabato)
-21 October 2019 - 03:55 AM,09.61,125.96,029,2.0,001km South° 00  of Socorro (Surigao Del Norte)
+21 October 2019 - 03:55 AM,09.61,125.96,029,2.0,001km South° 00 of Socorro (Surigao Del Norte)
 21 October 2019 - 03:46 AM,06.80,125.05,014,2.7,025km S 77° E of Tulunan (Cotabato)
 21 October 2019 - 03:43 AM,06.91,124.94,008,2.0,014km N 61° E of Tulunan (Cotabato)
 21 October 2019 - 03:34 AM,10.27,124.88,004,2.4,010km S 82° E of Matalom (Leyte)
@@ -1141,8 +1129,7 @@ date_time,latitude,longitude,depth,magnitude,location
 17 October 2019 - 05:48 PM,06.82,124.77,053,2.2,008km S 62° W of Tulunan (Cotabato)
 17 October 2019 - 05:29 PM,06.81,124.79,013,2.0,007km S 44° W of Tulunan (Cotabato)
 17 October 2019 - 05:20 PM,09.71,126.21,026,3.0,010km S 38° E of General Luna (Surigao Del Norte)
-17 October 2019 - 05:07 PM,09.63,126.25,034,1.8,"020
-		  km S 30° E of General Luna (Surigao Del Norte)"
+17 October 2019 - 05:07 PM,09.63,126.25,034,1.8,020km S 30° E of General Luna (Surigao Del Norte)
 17 October 2019 - 05:02 PM,06.70,124.80,029,2.3,017km S 12° W of Tulunan (Cotabato)
 17 October 2019 - 04:48 PM,06.82,125.00,011,3.2,019km S 80° E of Tulunan (Cotabato)
 17 October 2019 - 04:47 PM,06.84,124.80,057,1.6,004km S 70° W of Tulunan (Cotabato)
@@ -1160,11 +1147,10 @@ date_time,latitude,longitude,depth,magnitude,location
 17 October 2019 - 02:57 PM,06.86,125.07,015,3.9,026km N 87° E of Tulunan (Cotabato)
 17 October 2019 - 02:46 PM,06.83,124.91,027,2.1,010km S 74° E of Tulunan (Cotabato)
 17 October 2019 - 02:24 PM,06.78,124.86,017,2.5,009km S 24° E of Tulunan (Cotabato)
-17 October 2019 - 02:18 PM,06.83,124.83,015,5.2,002km South° 00  of Tulunan (North Cotabato)
+17 October 2019 - 02:18 PM,06.83,124.83,015,5.2,002km South° 00 of Tulunan (North Cotabato)
 17 October 2019 - 02:05 PM,06.80,124.93,027,2.6,013km S 63° E of Tulunan (Cotabato)
 17 October 2019 - 01:45 PM,06.92,124.99,024,2.3,019km N 68° E of Tulunan (Cotabato)
-17 October 2019 - 01:26 PM,06.88,125.05,028,2.7,"025
-		  km N 83° E of Tulunan (Cotabato)"
+17 October 2019 - 01:26 PM,06.88,125.05,028,2.7,025km N 83° E of Tulunan (Cotabato)
 17 October 2019 - 01:14 PM,06.84,125.07,008,2.9,027km S 88° E of Tulunan (Cotabato)
 17 October 2019 - 12:53 PM,06.32,124.82,017,2.1,011km N 60° E of Lake Sebu (South Cotabato)
 17 October 2019 - 12:51 PM,07.83,126.48,162,2.5,005km N 41° E of Cateel (Davao Oriental)
@@ -1192,8 +1178,7 @@ date_time,latitude,longitude,depth,magnitude,location
 17 October 2019 - 10:23 AM,06.79,124.97,017,2.1,017km S 65° E of Tulunan (Cotabato)
 17 October 2019 - 10:09 AM,06.76,124.78,030,2.6,011km S 31° W of Tulunan (North Cotabato)
 17 October 2019 - 10:02 AM,06.86,125.05,012,1.9,025km N 87° E of Tulunan (Cotabato)
-17 October 2019 - 09:53 AM,06.78,125.00,006,4.7,"020
-		  km S 69° E of Tulunan (North Cotabato)"
+17 October 2019 - 09:53 AM,06.78,125.00,006,4.7,020km S 69° E of Tulunan (North Cotabato)
 17 October 2019 - 09:42 AM,06.68,124.88,026,2.2,020km S 15° E of Tulunan (Cotabato)
 17 October 2019 - 09:28 AM,04.55,126.42,066,5.3,143km S 47° E of Sarangani (Davao Occidental)
 17 October 2019 - 09:27 AM,13.87,120.56,002,1.9,009km N 65° W of Calatagan (Batangas)
@@ -1243,8 +1228,7 @@ date_time,latitude,longitude,depth,magnitude,location
 17 October 2019 - 03:36 AM,06.82,124.78,030,1.9,007km S 61° W of Tulunan (Cotabato)
 17 October 2019 - 03:30 AM,06.79,124.85,029,3.3,007km S 16° E of Tulunan (Cotabato)
 17 October 2019 - 03:27 AM,06.68,124.71,033,2.6,023km S 35° W of Tulunan (Cotabato)
-17 October 2019 - 03:27 AM,06.78,124.80,025,1.9,"008
-		  km S 21° W of Tulunan (North Cotabato)"
+17 October 2019 - 03:27 AM,06.78,124.80,025,1.9,008km S 21° W of Tulunan (North Cotabato)
 17 October 2019 - 03:14 AM,06.85,124.68,043,2.1,017km S 90° W of Tulunan (Cotabato)
 17 October 2019 - 03:02 AM,06.71,124.71,032,2.9,021km S 40° W of Tulunan (Cotabato)
 17 October 2019 - 03:01 AM,06.71,124.70,065,1.8,021km S 42° W of Tulunan (Cotabato)
@@ -1345,8 +1329,7 @@ date_time,latitude,longitude,depth,magnitude,location
 16 October 2019 - 08:18 PM,06.82,125.02,009,3.1,021km S 81° E of Tulunan (Cotabato)
 16 October 2019 - 08:17 PM,06.88,125.07,009,2.3,027km N 84° E of Tulunan (Cotabato)
 16 October 2019 - 08:12 PM,06.98,125.03,033,2.2,027km N 58° E of Tulunan (Cotabato)
-16 October 2019 - 08:09 PM,06.76,125.01,009,5.5,"022
-		  km S 63° E of Tulunan (Cotabato)"
+16 October 2019 - 08:09 PM,06.76,125.01,009,5.5,022km S 63° E of Tulunan (Cotabato)
 16 October 2019 - 08:00 PM,06.84,125.07,010,2.4,026km S 87° E of Tulunan (North Cotabato)
 16 October 2019 - 07:51 PM,06.75,124.76,035,2.2,013km S 35° W of Tulunan (North Cotabato)
 16 October 2019 - 07:37 PM,06.76,125.01,009,6.3,023km S 62° E of Tulunan (Cotabato)
@@ -1401,7 +1384,7 @@ date_time,latitude,longitude,depth,magnitude,location
 14 October 2019 - 06:09 PM,06.75,126.18,033,2.6,023km S 10° W of Mati (Davao Oriental)
 14 October 2019 - 05:42 PM,06.34,126.07,040,3.4,034km S 02° W of Governor Generoso (Davao Oriental)
 14 October 2019 - 05:18 PM,12.89,123.29,002,2.7,005km S 73° E of Claveria (Masbate)
-14 October 2019 - 04:48 PM,07.29,125.79,065,2.7,012km S 03° W of Tagum  City (Davao Del Norte)
+14 October 2019 - 04:48 PM,07.29,125.79,065,2.7,012km S 03° W of Tagum City (Davao Del Norte)
 14 October 2019 - 02:12 PM,18.73,120.86,017,2.4,018km N 24° E of Pagudpud (Ilocos Norte)
 14 October 2019 - 01:07 PM,08.92,121.88,071,2.6,099km S 57° W of Basay (Negros Oriental)
 14 October 2019 - 11:34 AM,13.69,120.49,033,2.1,022km S 44° W of Calatagan (Batangas)

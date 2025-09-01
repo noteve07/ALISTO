@@ -13,15 +13,12 @@ date_time,latitude,longitude,depth,magnitude,location
 30 September 2019 - 06:44 PM,04.76,125.55,134,2.7,075km S 07° E of Sarangani (Davao Occidental)
 30 September 2019 - 06:19 PM,07.28,126.85,019,2.7,032km S 79° E of Caraga (Davao Oriental)
 30 September 2019 - 05:16 PM,05.87,126.53,013,2.4,099km S 30° E of Governor Generoso (Davao Oriental)
-30 September 2019 - 04:52 PM,06.92,126.40,080,1.8,"015
-		  km S 21° W of Tarragona (Davao Oriental)"
+30 September 2019 - 04:52 PM,06.92,126.40,080,1.8,015km S 21° W of Tarragona (Davao Oriental)
 30 September 2019 - 04:49 PM,08.88,122.50,028,2.6,061km S 14° W of Bsay (Negros Oriental)
 30 September 2019 - 04:31 PM,05.62,126.51,001,2.6,104km S 74° E of Jose Abad Santos (Davao Occidental)
-30 September 2019 - 04:31 PM,15.44,119.79,027,1.8,"012
-		  km N 86° W of Palauig (Zambales)"
+30 September 2019 - 04:31 PM,15.44,119.79,027,1.8,012km N 86° W of Palauig (Zambales)
 30 September 2019 - 03:05 PM,05.75,126.56,054,2.8,105km S 82° E of Jose Abad Santos (Davao Occidental)
-30 September 2019 - 02:38 PM,05.46,126.55,082,2.9,"114
-		  km S 66° E of Jose Abad Santos (Davao Occidental)"
+30 September 2019 - 02:38 PM,05.46,126.55,082,2.9,114km S 66° E of Jose Abad Santos (Davao Occidental)
 30 September 2019 - 02:10 PM,09.77,126.98,005,4.4,091km S 89° E of General Luna (Surigao Del Norte)
 30 September 2019 - 01:02 PM,08.66,127.38,005,2.3,119km N 74° E of Hinatuan (Surigao Del Sur)
 30 September 2019 - 12:03 PM,05.68,126.49,024,2.5,099km S 77° E of Jose Abad Santos (Davao Occidental)
@@ -147,7 +144,7 @@ date_time,latitude,longitude,depth,magnitude,location
 29 September 2019 - 09:59 AM,06.86,126.80,001,2.5,044km S 62° E of Tarragona (Davao Oriental)
 29 September 2019 - 10:02 AM,05.52,126.66,063,6.4,123km S 71° E of Jose Abad Santos (Davao Occidental)
 29 September 2019 - 09:40 AM,09.70,124.55,021,2.8,006km S 32° W of Anda (Bohol)
-29 September 2019 - 09:26 AM,07.90,123.36,022,2.1,011km N 47° W of Pagadian City  (Zamboanga Del Sur)
+29 September 2019 - 09:26 AM,07.90,123.36,022,2.1,011km N 47° W of Pagadian City (Zamboanga Del Sur)
 29 September 2019 - 08:00 AM,13.57,120.63,007,2.2,025km N 45° E of Paluan (Occidental Mindoro)
 29 September 2019 - 07:26 AM,18.98,121.26,006,2.4,040km S 33° W of Calayan (Cagayan)
 29 September 2019 - 07:19 AM,09.00,126.48,027,2.4,021km N 67° E of Cagwait (Surigao Del Sur)
@@ -200,8 +197,7 @@ date_time,latitude,longitude,depth,magnitude,location
 27 September 2019 - 04:08 PM,14.12,120.14,056,1.6,030km N 04° E of Lubang (Occidental Mindoro)
 27 September 2019 - 04:05 PM,16.89,120.42,031,1.8,001km S 21° E of Bangar (La Union)
 27 September 2019 - 03:05 PM,06.57,126.42,037,2.6,039km S 77° E of Governor Generoso (Davao Oriental)
-27 September 2019 - 02:04 PM,06.34,124.61,001,2.0,"014
-		  km S 13° W of Santo Niño (South Cotabato)"
+27 September 2019 - 02:04 PM,06.34,124.61,001,2.0,014km S 13° W of Santo Niño (South Cotabato)
 27 September 2019 - 01:54 PM,16.66,119.84,038,2.3,030km N 10° W of Bolinao (Pangasinan)
 27 September 2019 - 01:33 PM,06.52,125.27,024,2.5,016km S 23° E of Kiblawan (Davao Del Sur)
 27 September 2019 - 09:43 AM,13.85,120.51,095,2.7,014km N 82° W of Calatagan (Batangas)
@@ -224,7 +220,7 @@ date_time,latitude,longitude,depth,magnitude,location
 26 September 2019 - 04:47 PM,06.09,125.45,028,3.7,019km S 89° E of Alabel (Sarangani)
 26 September 2019 - 02:27 PM,08.76,126.40,029,1.7,012km S 69° E of Marihatag (Surigao Del Sur)
 26 September 2019 - 02:20 PM,13.88,120.53,174,2.9,013km N 67° W of Calatagan (Batangas)
-26 September 2019 - 07:19 AM,09.82,126.16,031,1.6,004km North° 00  of General Luna (Surigao Del Norte)
+26 September 2019 - 07:19 AM,09.82,126.16,031,1.6,004km North° 00 of General Luna (Surigao Del Norte)
 26 September 2019 - 06:56 AM,08.18,126.73,033,1.9,038km N 67° E of Lingig (Surigao Del Sur)
 26 September 2019 - 06:44 AM,13.74,120.84,043,1.8,011km S 84° W of Mabini (Batangas)
 26 September 2019 - 05:25 AM,09.35,122.53,003,1.8,023km S 08° E of Hinoba-an (Negros Occidental)
@@ -314,7 +310,7 @@ date_time,latitude,longitude,depth,magnitude,location
 23 September 2019 - 09:20 AM,04.38,126.38,013,3.3,154km S 41° E of Sarangani (Davao Occidental)
 23 September 2019 - 06:05 AM,09.24,123.13,012,2.0,017km S 73° W of Luzurriaga (Valencia) (Negros Oriental)
 23 September 2019 - 05:28 AM,13.69,120.58,032,2.2,017km S 19° W of Calatagan (Batangas)
-23 September 2019 - 04:53 AM,13.65,120.63,112,1.8,020km South° 00  of Calatagan (Batangas)
+23 September 2019 - 04:53 AM,13.65,120.63,112,1.8,020km South° 00 of Calatagan (Batangas)
 23 September 2019 - 04:33 AM,06.39,126.20,009,2.3,032km S 26° E of Governor Generoso (Davao Oriental)
 23 September 2019 - 03:34 AM,11.11,125.49,081,2.8,004km S 70° E of Giporlos (Eastern Samar)
 23 September 2019 - 03:24 AM,06.88,126.18,014,2.8,008km S 24° W of Mati (Davao Oriental)
@@ -403,9 +399,9 @@ date_time,latitude,longitude,depth,magnitude,location
 20 September 2019 - 04:43 AM,04.50,126.35,012,3.1,143km S 43° E of Sarangani (Davao Occidental)
 20 September 2019 - 03:39 AM,11.50,124.41,009,3.3,008km S 14° E of Naval (Biliran)
 20 September 2019 - 03:28 AM,06.26,126.55,091,2.4,068km S 50° E of Governor Generoso (Davao Oriental)
-20 September 2019 - 03:09AM,03.16,127.14,033,4.9,312km S 36° E of Sarangani (Davao Occidental)
-20 September 2019 - 02:15AM,05.12,126.35,012,3.5,104km S 70° E of Sarangani (Davao Occidental)
-20 September 2019 - 12:37AM,06.53,126.74,034,3.3,074km S 80° E of Governor Generoso (Davao Oriental)
+20 September 2019 - 03:09 AM,03.16,127.14,033,4.9,312km S 36° E of Sarangani (Davao Occidental)
+20 September 2019 - 02:15 AM,05.12,126.35,012,3.5,104km S 70° E of Sarangani (Davao Occidental)
+20 September 2019 - 12:37 AM,06.53,126.74,034,3.3,074km S 80° E of Governor Generoso (Davao Oriental)
 20 September 2019 - 12:36 AM,09.95,126.25,018,2.1,018km N 87° E of San Isidro (Surigao Del Norte)
 19 September 2019 - 09:54 PM,10.27,125.64,013,3.0,014km N 53° E of Libjo (Albor) (Surigao Del Norte)
 19 September 2019 - 09:42 PM,08.41,126.20,006,2.9,007km S 37° E of Tagbina (Surigao Del Sur)
@@ -428,17 +424,15 @@ date_time,latitude,longitude,depth,magnitude,location
 19 September 2019 - 04:20 AM,05.99,125.90,101,2.6,032km S 45° E of Don Marcelino (Davao Occidental)
 19 September 2019 - 04:17 AM,06.28,126.61,054,2.6,072km S 55° E of Governor Generoso (Davao Oriental)
 19 September 2019 - 03:50 AM,09.85,125.05,019,2.4,008km S 21° W of Limasawa (Southern Leyte)
-19 September 2019 - 02:38AM,09.73,126.10,022,3.3,006km S 59° E of Dapa (Dinagat)
+19 September 2019 - 02:38 AM,09.73,126.10,022,3.3,006km S 59° E of Dapa (Dinagat)
 19 September 2019 - 01:03 AM,12.27,120.81,023,2.0,029km S 73° W of San Jose (Occidental Mindoro)
 19 September 2019 - 12:52 AM,04.96,126.55,023,3.8,131km S 66° E of Sarangani (Davao Occidental)
 19 September 2019 - 12:47 AM,05.27,126.32,002,3.6,096km S 79° E of Sarangani (Davao Occidental)
 19 September 2019 - 12:46 AM,06.34,126.27,065,1.9,040km S 32° E of Governor Generoso (Davao Oriental)
 19 September 2019 - 12:34 AM,04.74,126.87,030,2.9,174km S 64° E of Sarangani (Davao Occidental)
 19 September 2019 - 12:29 AM,08.86,126.52,034,2.0,025km N 75° E of Marihatag (Surigao Del Sur)
-19 September 2019 - 12:21 AM,05.55,126.07,003,3.1,"067
-		  km N 78° E of Sarangani (Davao Occidental)"
-19 September 2019 - 12:21 AM,13.68,120.63,107,2.8,"017
-		  km S 01° W of Calatagan (Batangas)"
+19 September 2019 - 12:21 AM,05.55,126.07,003,3.1,067km N 78° E of Sarangani (Davao Occidental)
+19 September 2019 - 12:21 AM,13.68,120.63,107,2.8,017km S 01° W of Calatagan (Batangas)
 19 September 2019 - 12:20 AM,18.48,120.91,001,2.4,002km N 08° E of Adams (Ilocos Norte)
 18 September 2019 - 11:11 PM,13.14,120.19,012,2.7,042km S 45° W of Paluan (Occidental Mindoro)
 18 September 2019 - 10:31 PM,05.22,126.43,021,3.5,109km S 78° E of Sarangani (Davao Occidental)
@@ -593,8 +587,7 @@ date_time,latitude,longitude,depth,magnitude,location
 12 September 2019 - 10:14 AM,13.55,120.71,116,2.8,012km N 11° W of Abra De Ilog (Occidental Mindoro)
 12 September 2019 - 08:59 AM,06.11,125.53,033,2.7,020km S 62° W of Don Marcelino (Davao Occidental)
 12 September 2019 - 08:21 AM,16.55,120.93,002,2.9,009km N 64° W of Ambaguio (Nueva Vizcaya)
-"12 
-			September 2019 - 08:01 AM",16.57,120.95,004,3.5,009km N 42° W of Ambaguio (Nueva Vizcaya)
+12 September 2019 - 08:01 AM,16.57,120.95,004,3.5,009km N 42° W of Ambaguio (Nueva Vizcaya)
 12 September 2019 - 07:53 AM,16.23,122.36,007,3.1,023km S 41° E of Dilasag (Aurora)
 12 September 2019 - 07:47 AM,08.74,126.43,029,2.9,016km S 66° E of Marihatag (Surigao Del Sur)
 12 September 2019 - 06:49 AM,09.24,123.00,005,2.3,018km S 58° E of Santa Catalina (Negros Oriental)
@@ -603,7 +596,6 @@ date_time,latitude,longitude,depth,magnitude,location
 12 September 2019 - 06:01 AM,18.31,120.71,040,2.4,010km S 73° E of Pasuquin (Ilocos Norte)
 12 September 2019 - 05:38 AM,16.27,122.42,020,3.0,026km S 58° E of Dilasag (Aurora)
 12 September 2019 - 05:27 AM,15.45,121.19,017,1.8,015km S 02° E of Laur (Nueva Ecija)
-12 September 2019 - 05:12 AM,14.49,121.20,032,1.3,003km  00 °est of Cardona (Rizal)
 12 September 2019 - 04:32 AM,17.13,119.86,013,2.7,063km S 84° W of Candon City (Ilocos Sur)
 12 September 2019 - 03:52 AM,12.70,124.94,012,3.0,015km N 05° E of Pambujan (Northern Samar)
 12 September 2019 - 03:46 AM,16.65,119.87,030,2.4,029km N 05° W of Bolinao (Pangasinan)
@@ -809,8 +801,7 @@ date_time,latitude,longitude,depth,magnitude,location
 04 September 2019 - 12:02 PM,07.72,126.42,019,2.0,009km S 26° W of Cateel (Davao Oriental)
 04 September 2019 - 11:13 AM,06.62,126.33,025,2.5,028km S 82° E of Governor Generoso (Davao Oriental)
 04 September 2019 - 09:37 AM,10.13,125.90,012,2.3,019km N 51° W of Santa Monica (Sapao) (Surigao Del Norte)
-04 September 2019 - 09:27 AM,13.72,120.18,016,1.8,008km  00 °est of Looc (Occidental Mindoro)
-04 September 2019 - 09:12 AM,09.91,124.79,026,2.9,025km S 13° W of Maasin  (Southern Leyte)
+04 September 2019 - 09:12 AM,09.91,124.79,026,2.9,025km S 13° W of Maasin (Southern Leyte)
 04 September 2019 - 08:40 AM,16.28,122.46,020,2.9,029km S 65° E of Dilasag (Aurora)
 04 September 2019 - 08:07 AM,05.99,126.29,086,2.4,070km S 71° E of Don Marcelino (Davao Occidental)
 04 September 2019 - 08:03 AM,10.00,126.30,010,2.8,025km S 84° E of Burgos (Surigao Del Norte)
@@ -890,8 +881,7 @@ date_time,latitude,longitude,depth,magnitude,location
 01 September 2019 - 12:37 PM,13.73,120.55,096,1.8,015km S 36° W of Calatagan (Batangas)
 01 September 2019 - 10:27 AM,09.45,126.50,028,2.7,039km N 60° E of Cortes (Surigao Del Sur)
 01 September 2019 - 09:26 AM,09.74,126.16,028,1.7,005km S 10° E of General Luna (Surigao Del Norte)
-01 September 2019 - 09:02 AM,05.80,126.21,110,2.5,"067
-		  km S 82° E of Jose Abad Santos (Davao Occidental)"
+01 September 2019 - 09:02 AM,05.80,126.21,110,2.5,067km S 82° E of Jose Abad Santos (Davao Occidental)
 01 September 2019 - 08:53 AM,10.04,124.29,021,2.3,013km N 39° E of Danao (Bohol)
 01 September 2019 - 08:04 AM,10.03,123.33,034,2.0,010km N 50° W of Alcantara (Cebu)
 01 September 2019 - 07:48 AM,09.33,126.54,017,4.5,039km N 81° E of Cortes (Surigao Del Sur)
@@ -899,10 +889,8 @@ date_time,latitude,longitude,depth,magnitude,location
 01 September 2019 - 03:31 AM,11.71,125.11,025,2.4,005km S 89° E of Hinabangan (Western Samar)
 01 September 2019 - 03:15 AM,11.21,126.43,023,3.1,080km N 76° E of Guiuan (Eastern Samar)
 01 September 2019 - 02:56 AM,09.37,125.87,007,2.5,009km 00 West of Carrascal (Surigao Del Sur)
-01 September 2019 - 02:33 AM,08.39,125.94,031,2.0,"007
-		  km N 80° W of Rosario (Agusan Del Sur)"
-01 September 2019 - 12:59 AM,13.63,121.23,008,2.4,"003
-		  km S 48° E of Lobo (Batangas)"
+01 September 2019 - 02:33 AM,08.39,125.94,031,2.0,007km N 80° W of Rosario (Agusan Del Sur)
+01 September 2019 - 12:59 AM,13.63,121.23,008,2.4,003km S 48° E of Lobo (Batangas)
 01 September 2019 - 12:47 AM,17.91,120.51,028,2.3,004km S 60° E of Badoc (Ilocos Norte)
 01 September 2019 - 12:32 AM,11.10,124.92,010,1.9,005km N 25° E of Dagami (Leyte)
 01 September 2019 - 12:32 AM,06.98,126.04,041,2.2,003km N 60° E of Banaybanay (Davao Oriental)

@@ -1,20 +1,13 @@
 date_time,latitude,longitude,depth,magnitude,location
-30 April 2019 - 11:53 PM,09.80,126.69,002,4.1,"059 
-		  km N 89° E of General Luna (Surigao Del Norte)"
-30 April 2019 - 11:40 PM,09.77,126.62,002,4.3,"051 
-		  km S 89° E of General Luna (Surigao Del Norte)"
-30 April 2019 - 11:23 PM,09.56,126.19,012,1.9,"025 
-		  km S 08° E of General Luna (Surigao Del Norte)"
-30 April 2019 - 10:57 PM,13.71,120.63,104,1.7,"013 
-		  km S 01° E of Calatagan (Batangas)"
+30 April 2019 - 11:53 PM,09.80,126.69,002,4.1,059km N 89° E of General Luna (Surigao Del Norte)
+30 April 2019 - 11:40 PM,09.77,126.62,002,4.3,051km S 89° E of General Luna (Surigao Del Norte)
+30 April 2019 - 11:23 PM,09.56,126.19,012,1.9,025km S 08° E of General Luna (Surigao Del Norte)
+30 April 2019 - 10:57 PM,13.71,120.63,104,1.7,013km S 01° E of Calatagan (Batangas)
 30 April 2019 - 10:49 PM,10.42,125.70,015,2.4,015km N 65° E of Loreto (Dinagat)
 30 April 2019 - 09:49 PM,14.65,119.77,021,2.1,048km S 46° W of San Antonio (Zambales)
-30 April 2019 - 09:39 PM,15.04,120.23,033,1.6,"013 
-		  km N 12° E of Castillejos (Zambales)"
-30 April 2019 - 09:31 PM,15.18,120.28,035,1.5,"029 
-		  km N 19° E of Castillejos (Zambales)"
-30 April 2019 - 09:07 PM,06.52,126.51,027,3.1,"050 
-		  km S 73° E of Governor Generoso (Davao Oriental)"
+30 April 2019 - 09:39 PM,15.04,120.23,033,1.6,013km N 12° E of Castillejos (Zambales)
+30 April 2019 - 09:31 PM,15.18,120.28,035,1.5,029km N 19° E of Castillejos (Zambales)
+30 April 2019 - 09:07 PM,06.52,126.51,027,3.1,050km S 73° E of Governor Generoso (Davao Oriental)
 30 April 2019 - 07:32 PM,07.98,126.54,027,2.8,016km S 67° E of Lingig (Surigao Del Sur)
 30 April 2019 - 07:26 PM,15.01,120.28,033,2.3,012km N 45° E of Castillejos (Zambales)
 30 April 2019 - 07:13 PM,14.05,120.42,094,2.4,022km S 80° W of Nasugbu (Batangas)
@@ -23,8 +16,7 @@ date_time,latitude,longitude,depth,magnitude,location
 30 April 2019 - 02:46 PM,09.60,126.45,022,2.7,038km S 58° E of General Luna (Surigao Del Norte)
 30 April 2019 - 12:45 PM,20.66,121.88,017,2.8,015km S 12° E of Itbayat (Batanes)
 30 April 2019 - 11:20 AM,05.83,124.91,017,2.6,011km S 73° W of Maasim (Sarangani)
-30 April 2019 - 10:06 AM,09.62,126.76,011,3.5,"069 
-		  km S 74° E of General Luna (Surigao Del Norte)"
+30 April 2019 - 10:06 AM,09.62,126.76,011,3.5,069km S 74° E of General Luna (Surigao Del Norte)
 30 April 2019 - 08:59 AM,15.04,120.32,031,1.8,017km N 45° E of Castillejos (Zambales)
 30 April 2019 - 08:59 AM,09.62,126.30,015,2.4,024km S 41° E of General Luna (Surigao Del Norte)
 30 April 2019 - 07:56 AM,17.82,120.48,032,2.3,015km S 18° W of Pinili (Ilocos Norte)
@@ -94,8 +86,7 @@ date_time,latitude,longitude,depth,magnitude,location
 29 April 2019 - 02:18 AM,09.73,126.67,012,2.1,057km S 84° E of General Luna (Surigao Del Norte)
 29 April 2019 - 01:51 AM,09.82,126.52,008,3.4,040km N 83° E of General Luna (Surigao Del Norte)
 29 April 2019 - 01:40 AM,09.61,126.38,021,2.1,032km S 52° E of General Luna (Surigao Del Norte)
-29 April 2019 - 01:40 AM,09.68,126.49,025,1.6,"039 
-		  km S 73° E of General Luna (Surigao Del Norte)"
+29 April 2019 - 01:40 AM,09.68,126.49,025,1.6,039km S 73° E of General Luna (Surigao Del Norte)
 29 April 2019 - 01:32 AM,09.79,126.66,011,2.8,056km N 89° E of General Luna (Surigao Del Norte)
 29 April 2019 - 01:06 AM,09.86,126.61,009,3.7,051km N 81° E of General Luna (Surigao Del Norte)
 29 April 2019 - 12:34 AM,09.74,126.78,014,3.7,069km S 86° E of General Luna (Surigao Del Norte)
@@ -324,8 +315,7 @@ date_time,latitude,longitude,depth,magnitude,location
 26 April 2019 - 09:43 PM,09.77,126.62,007,2.8,051km S 88° E of General Luna (Surigao Del Norte)
 26 April 2019 - 09:29 PM,09.67,126.69,005,4.1,060km S 78° E of General Luna (Surigao Del Norte)
 26 April 2019 - 09:00 PM,09.61,126.30,017,2.9,025km S 39° E of General Luna (Surigao Del Norte)
-26 April 2019 - 08:48 PM,09.69,126.62,010,2.8,"052 
-		  km S 79° E of General Luna (Surigao Del Norte)"
+26 April 2019 - 08:48 PM,09.69,126.62,010,2.8,052km S 79° E of General Luna (Surigao Del Norte)
 26 April 2019 - 08:36 PM,09.69,126.59,008,2.6,049km S 77° E of General Luna (Surigao Del Norte)
 26 April 2019 - 08:23 PM,09.76,126.62,008,3.0,051km S 88° E of General Luna (Surigao Del Norte)
 26 April 2019 - 08:15 PM,09.99,126.49,033,1.6,043km N 59° E of General Luna (Surigao Del Norte)
@@ -625,8 +615,7 @@ date_time,latitude,longitude,depth,magnitude,location
 22 April 2019 - 06:42 PM,15.18,120.37,033,2.7,032km N 46° E of San Marcelino (Zambales)
 22 April 2019 - 06:39 PM,15.00,120.33,033,2.4,015km N 62° E of Castillejos (Zambales)
 22 April 2019 - 06:27 PM,13.50,120.74,070,2.6,006km N 08° E of Abra De Ilog (Occidental Mindoro)
-22 April 2019 - 06:08 PM,14.85,120.18,032,2.9,"009 
-		  km S 15° W of Castillejos (Zambales)"
+22 April 2019 - 06:08 PM,14.85,120.18,032,2.9,009km S 15° W of Castillejos (Zambales)
 22 April 2019 - 05:46 PM,15.19,120.42,031,2.2,021km N 83° W of Angeles City (Pampanga)
 22 April 2019 - 05:26 PM,14.99,120.31,010,2.6,014km N 62° E of Castillejos (Zambales)
 22 April 2019 - 05:15 PM,15.02,120.35,005,3.0,019km N 60° E of Castillejos (Zambales)
@@ -818,8 +807,7 @@ date_time,latitude,longitude,depth,magnitude,location
 17 April 2019 - 05:06 PM,11.25,124.36,004,2.2,006km N 40° W of Villaba (Leyte)
 17 April 2019 - 03:25 PM,09.65,126.24,032,1.5,018km S 32° E of General Luna (Surigao Del Norte)
 17 April 2019 - 02:14 PM,14.88,119.94,033,2.2,017km S 65° W of San Antonio (Zambales)
-17 April 2019 - 10:18 AM,19.13,120.81,001,4.0,"071 
-		  km S 76° W of Calayan (Cagayan)"
+17 April 2019 - 10:18 AM,19.13,120.81,001,4.0,071km S 76° W of Calayan (Cagayan)
 17 April 2019 - 09:16 AM,19.17,120.88,020,2.7,063km S 78° W of Calayan (Cagayan)
 17 April 2019 - 08:34 AM,11.71,125.70,014,3.6,027km S 80° E of San Julian (Eastern Samar)
 17 April 2019 - 08:04 AM,16.29,119.93,034,1.6,002km S 81° W of Anda (Pangasinan)
@@ -1251,8 +1239,7 @@ date_time,latitude,longitude,depth,magnitude,location
 01 April 2019 - 09:37 PM,09.58,122.21,006,2.5,029km S 48° W of Sipalay (Negros Occidental)
 01 April 2019 - 07:09 PM,09.28,126.35,021,2.3,018km N 89° E of Cortes (Surigao Del Sur)
 01 April 2019 - 05:55 PM,09.81,126.62,006,4.3,051km N 86° E of General Luna (Surigao Del Norte)
-01 April 2019 - 05:42 PM,14.00,120.54,116,1.7,"012 
-		  km S 47° W of Nasugbu (Batangas)"
+01 April 2019 - 05:42 PM,14.00,120.54,116,1.7,012km S 47° W of Nasugbu (Batangas)
 01 April 2019 - 04:11 PM,13.55,120.97,003,2.3,005km N 17° E of Puerto Galera (Oriental Mindoro)
 01 April 2019 - 02:08 PM,09.94,126.43,019,2.7,035km N 60° E of General Luna (Surigao Del Norte)
 01 April 2019 - 10:16 AM,10.61,125.93,028,5.4,047km N 54° E of Loreto (Dinagat)

@@ -6,36 +6,28 @@ date_time,latitude,longitude,depth,magnitude,location
 31 December 2019 - 08:09 PM,06.61,125.23,011,2.5,005km S 17° E of Kiblawan (Davao Del Sur)
 31 December 2019 - 07:31 PM,06.90,125.08,008,2.1,007km S 08° W of Makilala (Cotabato)
 31 December 2019 - 06:52 PM,06.72,125.13,010,2.7,011km N 53° W of Kiblawan (Davao Del Sur)
-31 December 2019 - 06:45 PM,09.16,126.26,019,2.1,"011
-		  km N 40° E of Tandag (Surigao Del Sur)"
-31 December 2019 - 05:25 PM,06.82,125.13,010,2.5,"009
-		  km N 70° W of Bansalan (Davao Del Sur)"
-31 December 2019 - 01:56 PM,19.31,121.10,038,1.6,"038
-		  km N 86° W of Calayan (Cagayan)"
+31 December 2019 - 06:45 PM,09.16,126.26,019,2.1,011km N 40° E of Tandag (Surigao Del Sur)
+31 December 2019 - 05:25 PM,06.82,125.13,010,2.5,009km N 70° W of Bansalan (Davao Del Sur)
+31 December 2019 - 01:56 PM,19.31,121.10,038,1.6,038km N 86° W of Calayan (Cagayan)
 31 December 2019 - 12:29 PM,06.62,124.95,025,2.0,008km N 02° E of Lutayan (Sultan Kudarat)
-31 December 2019 - 11:35 AM,06.74,124.90,027,2.6,"007
-		  km S 71° E of Datu Paglas (Maguindanao)"
+31 December 2019 - 11:35 AM,06.74,124.90,027,2.6,007km S 71° E of Datu Paglas (Maguindanao)
 31 December 2019 - 10:34 AM,06.50,125.23,021,2.0,017km S 51° W of Sulop (Davao Del Sur)
 31 December 2019 - 09:59 AM,06.78,125.21,002,2.9,007km N 03° W of Magsaysay (Davao Del Sur)
 31 December 2019 - 09:45 AM,13.64,123.52,025,2.0,006km S 05° E of San Jose (Camarines Sur)
 31 December 2019 - 09:08 AM,06.15,125.12,023,2.2,007km N 46° W of General Santos City (South Cotabato)
 31 December 2019 - 08:32 AM,06.65,125.06,024,2.8,019km S 69° W of Magsaysay (Davao Del Sur)
 31 December 2019 - 08:16 AM,15.84,121.76,014,2.3,023km N 68° E of Baler (Aurora)
-31 December 2019 - 06:58 AM,06.58,125.23,029,2.4,"008
-		  km S 09° E of Kiblawan (Davao Del Sur)"
+31 December 2019 - 06:58 AM,06.58,125.23,029,2.4,008km S 09° E of Kiblawan (Davao Del Sur)
 31 December 2019 - 05:59 AM,06.71,125.20,016,2.3,002km S 74° W of Magsaysay (Davao Del Sur)
 31 December 2019 - 05:41 AM,10.73,125.67,028,2.3,034km S 10° W of Guiuan (Eastern Samar)
 31 December 2019 - 04:50 AM,13.72,120.57,122,2.3,014km S 29° W of Calatagan (Batangas)
 31 December 2019 - 04:37 AM,16.57,122.30,020,2.1,007km N 38° E of Dinapigue (Isabela)
 31 December 2019 - 03:59 AM,09.23,125.58,003,3.1,005km S 25° E of Santiago (Agusan Del Norte)
 31 December 2019 - 03:12 AM,05.89,126.72,027,2.0,110km S 40° E of Governor Generoso (Davao Oriental)
-31 December 2019 - 01:39 AM,07.42,126.56,020,2.7,"010
-		  km N 04° W of Caraga (Davao Oriental)"
+31 December 2019 - 01:39 AM,07.42,126.56,020,2.7,010km N 04° W of Caraga (Davao Oriental)
 31 December 2019 - 01:16 AM,06.67,125.18,018,2.7,004km N 65° W of Kiblawan (Davao Del Sur)
-31 December 2019 - 12:31 AM,06.78,124.85,003,2.5,"008
-		  km S 20° E of Tulunan (Cotabato)"
-31 December 2019 - 12:14 AM,18.33,119.88,024,2.8,"071
-		  km N 62° W of Currimao (Ilocos Norte)"
+31 December 2019 - 12:31 AM,06.78,124.85,003,2.5,008km S 20° E of Tulunan (Cotabato)
+31 December 2019 - 12:14 AM,18.33,119.88,024,2.8,071km N 62° W of Currimao (Ilocos Norte)
 30 December 2019 - 11:40 PM,06.44,125.32,020,3.3,017km S08° W of Sulop (Davao Del Sur)
 30 December 2019 - 11:34 PM,18.73,120.82,026,2.1,017km N 09° E of Pagudpud (Ilocos Norte)
 30 December 2019 - 10:49 PM,06.50,124.98,027,2.8,006km S 27° E of Lutayan (Sultan Kudarat)
@@ -76,7 +68,6 @@ date_time,latitude,longitude,depth,magnitude,location
 30 December 2019 - 03:15 AM,16.56,122.47,012,2.8,023km N 81° E of Dinapigue (Isabela)
 30 December 2019 - 03:14 AM,06.60,125.27,028,2.0,008km N 87° W of Sulop (Davao Del Sur)
 30 December 2019 - 02:53 AM,07.61,124.90,001,2.6,003km N 52° W of Kadingilan (Bukidnon)
-30 December 2019 - 02:12 AM,11.04,125.39,086,2.3,007km South° 00  of Balangiga (Eastern Samar)
 30 December 2019 - 01:13 AM,06.58,125.22,020,2.2,008km S 01° E of Kiblawan (Davao Del Sur)
 30 December 2019 - 12:51 AM,06.47,125.32,024,2.5,015km S 09° W of Sulop (Davao Del Sur)
 30 December 2019 - 12:14 AM,06.62,125.29,001,2.5,006km N 67° W of Sulop (Davao Del Sur)
@@ -151,7 +142,7 @@ date_time,latitude,longitude,depth,magnitude,location
 28 December 2019 - 02:23 AM,08.71,127.46,057,3.3,130km S 80° E of Cagwait (Surigao Del Sur)
 28 December 2019 - 02:12 AM,06.55,125.27,020,2.3,013km S 29° E of Kiblawan (Davao Del Sur)
 28 December 2019 - 01:35 AM,17.26,120.01,001,2.2,047km N 81° W of Candon City (Ilocos Sur)
-28 December 2019 - 01:27 AM,07.37,125.74,003,2.4,007km S 65° W of Tagum  City (Davao Del Norte)
+28 December 2019 - 01:27 AM,07.37,125.74,003,2.4,007km S 65° W of Tagum City (Davao Del Norte)
 28 December 2019 - 01:24 AM,09.70,124.82,009,2.6,028km S 79° E of Anda (Bohol)
 28 December 2019 - 12:18 AM,14.28,122.73,013,1.7,004km S 77° E of Jose Panganiban (Camarines Norte)
 27 December 2019 - 11:58 PM,06.60,125.13,032,2.5,011km S 56° W of Kiblawan (Davao Del Sur)
@@ -414,7 +405,6 @@ date_time,latitude,longitude,depth,magnitude,location
 23 December 2019 - 12:23 AM,13.76,120.91,008,2.7,003km N 67° W of Mabini (Batangas)
 22 December 2019 - 11:28 PM,06.76,124.86,034,2.0,011km S 20° E of Tulunan (Cotabato)
 22 December 2019 - 11:22 PM,06.67,125.24,026,1.7,003km N 62° E of Kiblawan (Davao Del Sur)
-22 December 2019 - 11:16 PM,06.66,125.21,013,2.1,001km North° 00  of Kiblawan (Davao Del Sur)
 22 December 2019 - 10:30 PM,06.76,125.08,005,2.3,015km S 78° W of Bansalan (Davao Del Sur)
 22 December 2019 - 09:55 PM,06.63,125.30,013,2.8,006km N 61° W of Sulop (Davao Del Sur)
 22 December 2019 - 08:59 PM,06.68,125.16,028,2.1,007km S 64° W of Magsaysay (Davao Del Sur)
@@ -535,11 +525,9 @@ date_time,latitude,longitude,depth,magnitude,location
 21 December 2019 - 03:45 AM,13.71,119.92,017,3.6,027km S 53° W of Lubang (Occidental Mindoro)
 21 December 2019 - 03:40 AM,09.95,123.19,025,2.9,010km S 28° W of La Libertad (Negros Oriental)
 21 December 2019 - 03:40 AM,06.55,124.94,031,2.7,001km N 68° W of Lutayan (Sultan Kudarat)
-21 December 2019 - 03:39 AM,15.17,121.39,007,2.1,"039
-		  km N 54° E of Doña Remedios Trinidad (Bulacan)"
+21 December 2019 - 03:39 AM,15.17,121.39,007,2.1,039km N 54° E of Doña Remedios Trinidad (Bulacan)
 21 December 2019 - 03:24 AM,06.49,125.31,022,2.4,012km S 18° W of Sulop (Davao Del Sur)
-21 December 2019 - 03:23 AM,15.08,121.32,005,1.7,"027
-		  km N 62° E of Doña Remedios Trinidad (Bulacan)"
+21 December 2019 - 03:23 AM,15.08,121.32,005,1.7,027km N 62° E of Doña Remedios Trinidad (Bulacan)
 21 December 2019 - 02:57 AM,06.65,125.19,018,3.1,002km S 77° W of Kiblawan (Davao Del Sur)
 21 December 2019 - 02:44 AM,06.61,125.19,011,2.2,005km S 26° W of Kiblawan (Davao Del Sur)
 21 December 2019 - 02:35 AM,06.82,125.02,041,1.8,018km S 26° W of Makilala (Cotabato)
@@ -689,7 +677,6 @@ date_time,latitude,longitude,depth,magnitude,location
 19 December 2019 - 09:44 AM,06.33,125.21,031,1.9,008km N 35° W of Malungon (Sarangani)
 19 December 2019 - 09:29 AM,06.50,125.23,032,1.9,017km S 48° W of Sulop (Davao Del Sur)
 19 December 2019 - 08:57 AM,06.05,124.88,045,2.0,026km N 35° W of Maasim (Sarangani)
-19 December 2019 - 08:28 AM,06.60,125.21,019,3.1,006km South° 00  of Kiblawan (Davao Del Sur)
 19 December 2019 - 08:19 AM,06.27,125.28,028,2.1,003km N 79° E of Malungon (Sarangani)
 19 December 2019 - 08:01 AM,06.62,125.31,001,3.5,005km S 73° W of Padada (Davao Del Sur)
 19 December 2019 - 06:17 AM,06.55,125.09,030,2.4,009km N 81° E of Polomolok (South Cotabato)
@@ -801,7 +788,6 @@ date_time,latitude,longitude,depth,magnitude,location
 18 December 2019 - 09:18 AM,09.70,126.28,034,2.1,017km S 55° E of General Luna (Surigao Del Norte)
 18 December 2019 - 09:16 AM,05.99,124.85,035,2.2,023km N 52° W of Maasim (Sarangani)
 18 December 2019 - 09:14 AM,09.69,126.24,029,2.7,014km S 40° E of General Luna (Surigao Del Norte)
-18 December 2019 - 09:11 AM,06.55,124.93,031,2.8,002km  00 °est of Lutayan (Sultan Kudarat)
 18 December 2019 - 09:08 AM,06.44,125.20,031,2.4,022km S 53° E of Lambayong (Mariano Marcos) (Sultan Kudarat)
 18 December 2019 - 09:04 AM,06.52,125.19,021,3.5,015km S 11° W of Kiblawan (Davao Del Sur)
 18 December 2019 - 08:45 AM,06.65,125.21,005,3.5,001km S 21° W of Kiblawan (Davao Del Sur)
@@ -816,7 +802,6 @@ date_time,latitude,longitude,depth,magnitude,location
 18 December 2019 - 06:56 AM,06.78,125.13,010,1.9,008km S 86° W of Bansalan (Davao Del Sur)
 18 December 2019 - 06:50 AM,05.96,125.26,021,1.6,004km S 71° W of Malapatan (Sarangani)
 18 December 2019 - 06:25 AM,06.42,125.07,042,2.5,036km S 57° W of Sulop (Davao Del Sur)
-18 December 2019 - 06:21 AM,08.84,126.30,028,2.4,005km North° 00  of Marihatag (Surigao Del Sur)
 18 December 2019 - 06:01 AM,06.40,125.16,032,2.4,023km N 29° E of Polomolok (South Cotabato)
 18 December 2019 - 05:56 AM,06.59,125.26,011,3.4,009km S 85° W of Sulop (Davao Del Sur)
 18 December 2019 - 05:52 AM,06.63,125.15,020,2.5,008km S 70° W of Kiblawan (Davao Del Sur)
@@ -945,7 +930,6 @@ date_time,latitude,longitude,depth,magnitude,location
 17 December 2019 - 03:38 AM,06.54,125.12,030,2.1,016km S 38° W of Kiblawan (Davao Del Sur)
 17 December 2019 - 03:29 AM,06.45,125.34,034,2.6,016km S 04° W of Sulop (Davao Del Sur)
 17 December 2019 - 03:26 AM,06.72,125.14,032,1.7,008km N 82° W of Magsaysay (Davao Del Sur)
-17 December 2019 - 03:15 AM,06.85,124.95,011,2.1,013km  00 °ast of Tulunan (Cotabato)
 17 December 2019 - 02:52 AM,06.65,125.27,025,2.1,006km S 90° E of Kiblawan (Davao Del Sur)
 17 December 2019 - 02:51 AM,06.66,125.23,020,2.0,002km N 84° E of Kiblawan (Davao Del Sur)
 17 December 2019 - 02:45 AM,13.20,119.61,017,2.7,090km S 51° W of Looc (Occidental Mindoro)
@@ -1025,7 +1009,6 @@ date_time,latitude,longitude,depth,magnitude,location
 16 December 2019 - 03:28 PM,06.52,125.07,032,3.1,006km S 44° E of Lambayong (Mariano Marcos) (Sultan Kudarat)
 16 December 2019 - 03:20 PM,06.61,125.23,016,3.6,005km S 23° E of Kiblawan (Davao Del Sur)
 16 December 2019 - 03:18 PM,06.27,125.18,027,1.7,008km N 89° W of Malungon (Sarangani)
-16 December 2019 - 03:12 PM,10.13,124.96,026,2.1,013km S 90° E of Maasin City  (Southern Leyte)
 16 December 2019 - 03:08 PM,06.89,125.16,027,2.3,013km N 26° W of Bansalan (Davao Del Sur)
 16 December 2019 - 03:01 PM,06.57,125.21,034,1.8,009km S 03° W of Kiblawan (Davao Del Sur)
 16 December 2019 - 03:00 PM,06.71,125.28,029,2.1,005km S 69° E of Matanao (Davao Del Sur)
@@ -1061,7 +1044,6 @@ date_time,latitude,longitude,depth,magnitude,location
 16 December 2019 - 10:56 AM,06.58,125.03,028,2.2,009km N 66° E of Lutayan (Sultan Kudarat)
 16 December 2019 - 10:45 AM,06.49,125.19,023,2.0,018km S 10° W of Kiblawan (Davao Del Sur)
 16 December 2019 - 10:38 AM,06.65,124.87,032,2.9,014km N 39° W of Lutayan (Sultan Kudarat)
-16 December 2019 - 10:34 AM,06.73,125.22,001,4.0,002km North° 00  of Magsaysay (Davao Del Sur)
 16 December 2019 - 10:27 AM,06.66,124.89,033,2.5,014km N 29° W of Lutayan (Sultan Kudarat)
 16 December 2019 - 10:15 AM,06.47,124.98,033,2.0,010km S 19° E of Lutayan (Sultan Kudarat)
 16 December 2019 - 09:58 AM,06.73,124.95,025,2.1,009km S 03° E of Columbio (Sultan Kudarat)
@@ -1215,7 +1197,6 @@ date_time,latitude,longitude,depth,magnitude,location
 15 December 2019 - 07:15 PM,06.56,125.21,016,3.9,018km S 10° W of Matanao (Davao Del Sur)
 15 December 2019 - 07:10 PM,06.57,125.02,031,1.7,030km S 54° W of Matanao (Davao Del Sur)
 15 December 2019 - 07:05 PM,06.55,125.25,026,3.1,020km S 04° E of Matanao (Davao Del Sur)
-15 December 2019 - 07:01 PM,06.54,125.24,013,2.8,020km South° 00  of Matanao (Davao Del Sur)
 15 December 2019 - 06:59 PM,06.55,125.07,035,1.9,027km S 45° W of Matanao (Davao Del Sur)
 15 December 2019 - 06:46 PM,06.56,125.11,034,2.7,023km S 38° W of Matanao (Davao Del Sur)
 15 December 2019 - 06:40 PM,06.62,125.13,017,3.7,017km S 48° W of Matanao (Davao Del Sur)
@@ -1263,7 +1244,6 @@ date_time,latitude,longitude,depth,magnitude,location
 15 December 2019 - 03:09 PM,06.61,125.36,001,5.2,019km S 45° E of Matanao (Davao Del Sur)
 15 December 2019 - 02:58 PM,06.61,125.20,025,2.2,014km S 21° W of Matanao (Davao Del Sur)
 15 December 2019 - 02:56 PM,06.50,125.03,039,2.2,010km S 58° E of Lutayan (Sultan Kudarat)
-15 December 2019 - 02:52 PM,06.67,125.21,017,3.6,002km North° 00  of Kiblawan (Davao Del Sur)
 15 December 2019 - 02:32 PM,06.72,125.24,002,3.4,001km S 51° W of Matanao (Davao Del Sur)
 15 December 2019 - 02:11 PM,06.76,125.13,009,6.9,013km N 75° W of Matanao (Davao Del Sur)
 15 December 2019 - 01:00 PM,14.00,120.42,007,2.3,024km S 68° W of Nasugbu (Batangas)
@@ -1543,7 +1523,6 @@ date_time,latitude,longitude,depth,magnitude,location
 05 December 2019 - 04:23 AM,13.69,120.55,089,2.2,018km S 31° W of Calatagan (Batangas)
 05 December 2019 - 03:58 AM,06.63,124.88,033,2.9,012km N 40° W of Lutayan (Sultan Kudarat)
 05 December 2019 - 03:30 AM,13.91,123.46,001,3.5,018km N 55° E of Tinambac (Camarines Sur)
-05 December 2019 - 02:32 AM,06.65,124.95,011,3.1,011km North° 00  of Lutayan (Sultan Kudarat)
 05 December 2019 - 01:06 AM,08.81,126.35,026,3.5,006km N 82° E of Marihatag (Surigao Del Sur)
 04 December 2019 - 10:48 PM,10.21,125.93,016,2.7,024km N 31° W of Santa Monica (Sapao) (Surigao Del Norte)
 04 December 2019 - 10:37 PM,12.34,120.89,010,3.0,015km S 35° W of Rizal (Occidental Mindoro)

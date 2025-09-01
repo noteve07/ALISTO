@@ -1,27 +1,19 @@
 date_time,latitude,longitude,depth,magnitude,location
-29 February 2020 - 11:05 PM,04.57,126.27,009,2.9,"131
-		  km S 43° E of Sarangani (Davao Occidental)"
+29 February 2020 - 11:05 PM,04.57,126.27,009,2.9,131km S 43° E of Sarangani (Davao Occidental)
 29 February 2020 - 09:14 PM,19.13,121.60,084,2.1,022km S 41° E of Calayan (Cagayan)
 29 February 2020 - 08:45 PM,08.77,121.91,025,1.8,100km N 21° W of Gutalac (Zamboanga Del Norte)
 29 February 2020 - 08:36 PM,10.03,122.26,017,1.3,034km N 28° W of Sipalay City (Negros Occidental)
-29 February 2020 - 07:59 PM,13.69,120.99,032,1.7,"009
-		  km S 34° E of Mabini (Batangas)"
+29 February 2020 - 07:59 PM,13.69,120.99,032,1.7,009km S 34° E of Mabini (Batangas)
 29 February 2020 - 06:26 PM,13.79,120.95,033,2.0,004km N 11° E of Mabini (Batangas)
 29 February 2020 - 05:57 PM,09.89,126.12,032,2.3,003km N 32° E of Pilar (Surigao Del Norte)
-29 February 2020 - 05:51 PM,04.95,126.81,043,3.2,"158
-		  km S 70° E of Sarangani (Davao Occidental)"
-29 February 2020 - 05:28 PM,03.15,128.13,142,4.9,"388
-		  km S 49° E of Sarangani (Davao Occidental)"
-29 February 2020 - 04:58 PM,13.56,120.35,046,2.6,"021
-		  km S 29° E of Looc (Occidental Mindoro)"
-29 February 2020 - 04:22 PM,15.74,119.56,022,2.2,"038
-		  km S 87° W of Santa Cruz (Zambales)"
-29 February 2020 - 03:48 PM,18.46,120.76,027,1.9,"008
-		  km S 38° W of Dumalneg (Ilocos Norte)"
+29 February 2020 - 05:51 PM,04.95,126.81,043,3.2,158km S 70° E of Sarangani (Davao Occidental)
+29 February 2020 - 05:28 PM,03.15,128.13,142,4.9,388km S 49° E of Sarangani (Davao Occidental)
+29 February 2020 - 04:58 PM,13.56,120.35,046,2.6,021km S 29° E of Looc (Occidental Mindoro)
+29 February 2020 - 04:22 PM,15.74,119.56,022,2.2,038km S 87° W of Santa Cruz (Zambales)
+29 February 2020 - 03:48 PM,18.46,120.76,027,1.9,008km S 38° W of Dumalneg (Ilocos Norte)
 29 February 2020 - 02:04 PM,10.21,124.85,005,2.0,009km N 11° E of Maasin (Southern Leyte)
 29 February 2020 - 01:32 PM,04.72,124.93,032,3.3,100km S 37° W of Sarangani (Davao Occidental)
-29 February 2020 - 10:58 AM,06.27,125.28,034,1.8,"004
-		  km N 89° E of Malungon (Sarangani)"
+29 February 2020 - 10:58 AM,06.27,125.28,034,1.8,004km N 89° E of Malungon (Sarangani)
 29 February 2020 - 08:14 AM,13.71,120.59,195,2.6,015km S 20° W of Calatagan (Batangas)
 29 February 2020 - 02:58 AM,10.32,124.85,001,3.1,008km N 57° E of Matalom (Leyte)
 29 February 2020 - 02:56 AM,16.75,119.66,025,2.7,046km N 32° W of Bolinao (Pangasinan)
@@ -317,7 +309,7 @@ date_time,latitude,longitude,depth,magnitude,location
 17 February 2020 - 08:31 PM,06.81,125.04,031,2.0,011km S 89° E of Columbio (Sultan Kudarat)
 17 February 2020 - 06:26 PM,14.13,120.69,035,1.8,010km S 44° W of Magallanes (Cavite)
 17 February 2020 - 06:27 PM,06.28,124.79,032,2.0,006km N 79° E of Lake Sebu (South Cotabato)
-17 February 2020 - 06:24 PM,10.15,124.99,008,2.2,017km N 84° E of Maasin  (Southern Leyte)
+17 February 2020 - 06:24 PM,10.15,124.99,008,2.2,017km N 84° E of Maasin (Southern Leyte)
 17 February 2020 - 05:41 PM,09.67,122.39,012,2.1,010km S 12° W of Sipalay City (Negros Occidental)
 17 February 2020 - 05:38 PM,07.65,124.98,001,2.0,009km N 43° E of Kadingilan (Bukidnon)
 17 February 2020 - 03:49 PM,05.71,126.36,001,2.7,085km S 77° E of Jose Abad Santos (Davao Occidental)
@@ -424,8 +416,7 @@ date_time,latitude,longitude,depth,magnitude,location
 14 February 2020 - 10:40 PM,08.28,126.51,026,1.8,022km S 64° E of Hinatuan (Surigao Del Sur)
 14 February 2020 - 10:38 PM,10.34,126.25,002,2.9,041km N 29° E of Burgos (Surigao Del Norte)
 14 February 2020 - 10:22 PM,13.56,120.86,006,2.6,011km S 06° W of Tingloy (Batangas)
-14 February 2020 - 10:08 PM,14.31,121.39,009,1.7,"00403
-		  km N 43° W of Santa Cruz (Laguna)"
+14 February 2020 - 10:08 PM,14.31,121.39,009,1.7,00403km N 43° W of Santa Cruz (Laguna)
 14 February 2020 - 09:43 PM,09.34,126.46,009,4.1,030km N 76° E of Cortes (Surigao Del Sur)
 14 February 2020 - 09:26 PM,14.31,121.39,005,3.3,004km N 42° W of Santa Cruz (Laguna)
 14 February 2020 - 08:51 PM,08.89,125.92,084,2.3,014km S 64° W of San Miguel (Surigao Del Sur)
@@ -447,8 +438,7 @@ date_time,latitude,longitude,depth,magnitude,location
 14 February 2020 - 12:32 AM,13.71,120.86,021,1.7,006km N 07° W of Tingloy (Batangas)
 14 February 2020 - 12:10 AM,05.74,124.99,017,2.0,013km S 08° W of Maasim (Sarangani)
 13 February 2020 - 11:58 PM,13.94,120.84,023,1.7,011km N 88° W of Agoncillo (Batangas)
-13 February 2020 - 11:53 PM,14.24,121.16,021,1.8,"010 km 
-		  N 47° W of Los Baños (Laguna)"
+13 February 2020 - 11:53 PM,14.24,121.16,021,1.8,010 km N 47° W of Los Baños (Laguna)
 13 February 2020 - 10:41 PM,06.90,124.77,017,2.2,008km N 54° W of Tulunan (Cotabato)
 13 February 2020 - 10:28 PM,13.13,122.44,004,2.1,026km S 20° W of San Francisco (Aurora) (Quezon)
 13 February 2020 - 10:10 PM,06.78,125.10,011,2.3,012km S 85° W of Bansalan (Davao Del Sur)
@@ -498,8 +488,7 @@ date_time,latitude,longitude,depth,magnitude,location
 12 February 2020 - 09:59 PM,16.56,122.48,008,2.1,024km N 81° E of Dinapigue (Isabela)
 12 February 2020 - 09:52 PM,07.33,126.61,134,2.8,005km S 86° E of Caraga (Davao Oriental)
 12 February 2020 - 09:43 PM,05.23,125.98,001,2.7,061km S 68° E of Sarangani (Davao Occidental)
-12 February 2020 - 09:25 PM,06.44,124.64,011,1.6,"003
-		  km S 02° W of Santo Niño (South Cotabato)"
+12 February 2020 - 09:25 PM,06.44,124.64,011,1.6,003km S 02° W of Santo Niño (South Cotabato)
 12 February 2020 - 09:20 PM,05.57,124.99,024,1.6,032km S 03° W of Maasim (Sarangani)
 12 February 2020 - 08:10 PM,17.72,120.49,024,2.1,004km S 56° E of Lapog (San Juan) (Ilocos Sur)
 12 February 2020 - 08:10 PM,06.17,127.11,203,2.7,121km S 37° E of Tarragona (Davao Oriental)
@@ -514,7 +503,6 @@ date_time,latitude,longitude,depth,magnitude,location
 12 February 2020 - 08:45 AM,14.07,119.93,031,3.0,031km N 40° W of Lubang (Occidental Mindoro)
 12 February 2020 - 06:02 AM,09.70,123.60,008,2.6,010km S 86° E of Alcoy (Cebu)
 12 February 2020 - 04:54 AM,14.99,119.99,034,1.6,012km N 66° W of San Antonio (Zambales)
-12 February 2020 - 03:41 AM,06.69,125.21,028,2.3,004km North° 00  of Kiblawan (Davao Del Sur)
 12 February 2020 - 03:27 AM,05.69,126.63,015,3.0,115km S 79° E of Jose Abad Santos (Davao Occidental)
 12 February 2020 - 03:12 AM,07.38,126.48,121,2.8,011km N 62° W of Caraga (Davao Oriental)
 12 February 2020 - 02:13 AM,06.74,125.00,023,3.0,009km S 39° E of Columbio (Sultan Kudarat)
@@ -756,7 +744,6 @@ date_time,latitude,longitude,depth,magnitude,location
 05 February 2020 - 03:22 PM,12.74,120.96,015,2.1,018km N 06° E of Calintaan (Occidental Mindoro)
 05 February 2020 - 03:20 PM,06.17,125.15,033,1.8,007km N 20° W of General Santos City (South Cotabato)
 05 February 2020 - 12:54 PM,10.25,125.85,027,2.4,033km S 69° E of Loreto (Dinagat Islands)
-05 February 2020 - 12:08 PM,07.79,126.45,025,2.0,000km  00 °West of Cateel (Davao Oriental)
 05 February 2020 - 11:53 AM,06.17,125.16,032,2.4,007km N 05° W of General Santos City (South Cotabato)
 05 February 2020 - 10:54 AM,06.80,125.03,014,3.5,014km N 31° E of Columbio (Sultan Kudarat)
 05 February 2020 - 09:42 AM,04.15,125.65,105,3.3,143km S 08° E of Sarangani (Davao Occidental)

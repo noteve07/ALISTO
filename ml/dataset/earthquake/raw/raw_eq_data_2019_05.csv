@@ -1,39 +1,26 @@
 date_time,latitude,longitude,depth,magnitude,location
-31 May 2019 - 11:18 PM,13.29,122.62,001,2.9,"008
-		  km S 63° W of San Andres (Quezon)"
-31 May 2019 - 11:16 PM,08.67,126.69,020,2.5,"045
-		  km S 72° E of Marihatag (Surigao Del Sur)"
+31 May 2019 - 11:18 PM,13.29,122.62,001,2.9,008km S 63° W of San Andres (Quezon)
+31 May 2019 - 11:16 PM,08.67,126.69,020,2.5,045km S 72° E of Marihatag (Surigao Del Sur)
 31 May 2019 - 10:57 PM,06.16,126.66,069,2.3,084km S 50° E of Governor Generoso (Davao Oriental)
-31 May 2019 - 10:55 PM,06.83,126.02,025,2.4,"007
-		  km S 74° W of San Isidro (Davao Oriental)"
-31 May 2019 - 10:51 PM,06.21,126.65,064,1.9,"080
-		  km S 53° E of Governor Generoso (Davao Oriental)"
-31 May 2019 - 09:48 PM,12.98,124.37,032,1.9,"021
-		  km S 66° E of Prieto Diaz (Sorsogon)"
+31 May 2019 - 10:55 PM,06.83,126.02,025,2.4,007km S 74° W of San Isidro (Davao Oriental)
+31 May 2019 - 10:51 PM,06.21,126.65,064,1.9,080km S 53° E of Governor Generoso (Davao Oriental)
+31 May 2019 - 09:48 PM,12.98,124.37,032,1.9,021km S 66° E of Prieto Diaz (Sorsogon)
 31 May 2019 - 09:22 PM,06.09,126.87,033,2.0,107km S 55° E of Governor Generoso (Davao Oriental)
-31 May 2019 - 09:00 PM,06.20,126.65,073,3.5,"081
-		  km S 52° E of Governor Generoso (Davao Oriental)"
-31 May 2019 - 08:59 PM,06.07,126.84,026,2.7,"106
-		  km S 53° E of Governor Generoso (Davao Oriental)"
+31 May 2019 - 09:00 PM,06.20,126.65,073,3.5,081km S 52° E of Governor Generoso (Davao Oriental)
+31 May 2019 - 08:59 PM,06.07,126.84,026,2.7,106km S 53° E of Governor Generoso (Davao Oriental)
 31 May 2019 - 08:26 PM,06.24,126.62,071,2.3,076km S 53° E of Governor Generoso (Davao Oriental)
-31 May 2019 - 08:03 PM,06.04,126.78,064,2.7,"103
-		  km S 49° E of Governor Generoso (Davao Oriental)"
-31 May 2019 - 07:52 PM,06.14,126.40,045,2.3,"067
-		  km S 32° E of Governor Generoso (Davao Oriental)"
-31 May 2019 - 07:47 PM,10.23,126.22,013,2.6,"028
-		  km N 35° E of Burgos (Surigao Del Norte)"
-31 May 2019 - 07:15 PM,06.36,126.72,024,2.0,"079
-		  km S 65° E of Governor Generoso (Davao Oriental)"
+31 May 2019 - 08:03 PM,06.04,126.78,064,2.7,103km S 49° E of Governor Generoso (Davao Oriental)
+31 May 2019 - 07:52 PM,06.14,126.40,045,2.3,067km S 32° E of Governor Generoso (Davao Oriental)
+31 May 2019 - 07:47 PM,10.23,126.22,013,2.6,028km N 35° E of Burgos (Surigao Del Norte)
+31 May 2019 - 07:15 PM,06.36,126.72,024,2.0,079km S 65° E of Governor Generoso (Davao Oriental)
 31 May 2019 - 07:03 PM,06.06,126.64,043,2.6,090km S 44° E of Governor Generoso (Davao Oriental)
 31 May 2019 - 06:59 PM,06.25,126.60,032,2.3,073km S 53° E of Governor Generoso (Davao Oriental)
-31 May 2019 - 06:55 PM,06.13,126.67,055,2.9,"088
-		  km S 49° E of Governor Generoso (Davao Oriental)"
+31 May 2019 - 06:55 PM,06.13,126.67,055,2.9,088km S 49° E of Governor Generoso (Davao Oriental)
 31 May 2019 - 06:40 PM,06.13,126.71,039,3.2,091km S 50° E of Governor Generoso (Davao Oriental)
 31 May 2019 - 06:12 PM,06.15,126.70,078,6.2,088km S 51° E of Governor Generoso (Davao Oriental)
 31 May 2019 - 06:08 PM,08.72,126.49,034,2.2,023km S 66° E of Marihatag (Surigao Del Sur)
 31 May 2019 - 04:48 PM,09.69,126.15,033,1.8,011km S 04° E of General Luna (Surigao Del Norte)
-31 May 2019 - 04:31 PM,06.22,125.58,021,3.2,"013
-		  km N 81° W of Don Marcelino (Davao Occidental)"
+31 May 2019 - 04:31 PM,06.22,125.58,021,3.2,013km N 81° W of Don Marcelino (Davao Occidental)
 31 May 2019 - 01:54 PM,09.88,122.61,063,2.3,008km N 11° E of Candoni (Negros Occidental)
 31 May 2019 - 01:15 PM,17.23,119.99,011,2.4,049km S 76° W of San Esteban (Ilocos Sur)
 31 May 2019 - 12:06 PM,09.31,126.42,018,2.3,025km N 83° E of Cortes (Surigao Del Sur)
@@ -220,8 +207,7 @@ date_time,latitude,longitude,depth,magnitude,location
 22 May 2019 - 06:52 PM,03.77,127.31,032,4.6,261km S 48° E of Sarangani (Davao Occidental)
 22 May 2019 - 04:15 PM,05.68,126.37,075,2.7,087km S 75° E of Jose Abad Santos (Davao Occidental)
 22 May 2019 - 02:58 PM,04.78,128.01,164,3.9,291km S 76° E of Sarangani (Davao Occidental)
-22 May 2019 - 01:26 PM,05.25,126.28,015,2.7,"092
-		  km S 77° E of Sarangani (Davao Occidental)"
+22 May 2019 - 01:26 PM,05.25,126.28,015,2.7,092km S 77° E of Sarangani (Davao Occidental)
 22 May 2019 - 12:48 PM,12.44,120.82,010,2.1,017km S 84° W of Rizal (Occidental Mindoro)
 22 May 2019 - 12:38 PM,13.76,123.01,004,3.6,004km S 69° E of Sipocot (Camarines Sur)
 22 May 2019 - 12:22 PM,11.86,125.99,010,2.7,059km S 71° E of Dolores (Eastern Samar)
@@ -443,7 +429,7 @@ date_time,latitude,longitude,depth,magnitude,location
 15 May 2019 - 09:28 PM,04.22,126.19,015,4.7,156km S 30° E of Sarangani (Davao Occidental)
 15 May 2019 - 09:14 PM,20.83,122.01,022,3.0,018km N 76° E of Itbayat (Batanes)
 15 May 2019 - 08:58 PM,05.97,125.80,034,2.8,028km S 25° E of Don Marcelino (Davao Occidental)
-15 May 2019 - 08:36 PM,11.75,125.26,052,3.5,022km  00 °est of San Julian (Eastern Samar)
+15 May 2019 - 08:36 PM,11.75,125.26,052,3.5,022km 00° West of San Julian (Eastern Samar)
 15 May 2019 - 08:10 PM,10.94,126.15,029,3.1,047km S 78° E of Guiuan (Eastern Samar)
 15 May 2019 - 08:09 PM,10.89,126.03,028,1.6,038km S 64° E of Guiuan (Eastern Samar)
 15 May 2019 - 08:08 PM,10.95,126.26,002,2.6,060km S 81° E of Guiuan (Eastern Samar)
@@ -478,7 +464,6 @@ date_time,latitude,longitude,depth,magnitude,location
 14 May 2019 - 11:05 PM,15.51,119.97,033,2.0,003km S 37° E of Masinloc (Zambales)
 14 May 2019 - 08:29 PM,07.70,126.32,135,2.8,017km S 55° W of Cateel (Davao Oriental)
 14 May 2019 - 08:23 PM,12.45,120.93,012,2.4,005km S 82° W of Rizal (Occidental Mindoro)
-14 May 2019 - 08:12 PM,13.72,120.63,092,2.1,013km South° 00  of Calatagan (Batangas)
 14 May 2019 - 08:01 PM,06.36,126.77,032,2.4,083km S 67° E of Governor Generoso (Davao Oriental)
 14 May 2019 - 06:56 PM,05.32,126.47,008,2.9,112km S 84° E of Sarangani (Davao Occidental)
 14 May 2019 - 06:42 PM,05.36,126.64,017,3.5,128km S 63° E of Jose Abad Santos (Davao Occidental)
@@ -688,8 +673,7 @@ date_time,latitude,longitude,depth,magnitude,location
 08 May 2019 - 10:43 AM,09.14,125.70,021,2.1,021km S 49° E of Santiago (Agusan Del Norte)
 08 May 2019 - 09:21 AM,06.17,126.51,065,3.2,072km S 42° E of Governor Generoso (Davao Oriental)
 08 May 2019 - 09:07 AM,12.35,120.83,003,2.5,020km S 54° W of Rizal (Occidental Mindoro)
-08 May 2019 - 08:24 AM,09.66,126.23,033,1.6,"016 
-		  km S 31°  E of General Luna (Surigao Del Norte)"
+08 May 2019 - 08:24 AM,09.66,126.23,033,1.6,016 km S 31°  E of General Luna (Surigao Del Norte)
 08 May 2019 - 08:20 AM,09.59,126.31,017,2.6,027km S 39° E of General Luna (Surigao Del Norte)
 08 May 2019 - 07:51 AM,10.03,122.39,005,2.2,030km N 05° W of Sipalay (Negros Occidental)
 08 May 2019 - 07:09 AM,09.65,126.59,007,2.7,050km S 72° E of General Luna (Surigao Del Norte)
@@ -743,8 +727,7 @@ date_time,latitude,longitude,depth,magnitude,location
 06 May 2019 - 11:48 PM,09.03,126.11,019,1.5,024km N 60° W of Cagwait (Surigao Del Sur)
 06 May 2019 - 11:02 PM,09.62,126.35,012,2.5,028km S 50° E of General Luna (Surigao Del Norte)
 06 May 2019 - 10:58 PM,09.38,126.65,022,3.0,052km N 77° E of Cortes (Surigao Del Sur)
-06 May 2019 - 10:09 PM,09.39,126.69,027,2.6,"056 
-		  km N 77° E of Cortes (Surigao Del Sur)"
+06 May 2019 - 10:09 PM,09.39,126.69,027,2.6,056 km N 77° E of Cortes (Surigao Del Sur)
 06 May 2019 - 09:03 PM,05.43,126.58,159,3.6,118km S 65° E of Jose Abad Santos (Davao Occidental)
 06 May 2019 - 08:58 PM,09.83,126.93,001,2.8,085km N 87° E of General Luna (Surigao Del Norte)
 06 May 2019 - 08:42 PM,09.84,126.11,001,2.4,008km N 38° W of General Luna (Surigao Del Norte)
@@ -880,8 +863,7 @@ date_time,latitude,longitude,depth,magnitude,location
 03 May 2019 - 11:34 PM,06.32,125.17,005,2.8,012km N 56° W of Malungon (Sarangani)
 03 May 2019 - 11:07 PM,08.14,126.36,072,2.5,009km S 31° E of Bislig City (Surigao Del Sur)
 03 May 2019 - 11:04 PM,06.76,127.38,020,3.8,105km S 62° E of Manay (Davao Oriental)
-03 May 2019 - 10:09 PM,09.67,126.21,027,2.2,"014 
-		  km S 25° E of General Luna (Surigao Del Norte)"
+03 May 2019 - 10:09 PM,09.67,126.21,027,2.2,014 km S 25° E of General Luna (Surigao Del Norte)
 03 May 2019 - 09:10 PM,09.51,126.22,028,2.0,032km S 13° E of General Luna (Surigao Del Norte)
 03 May 2019 - 08:21 PM,11.30,125.60,007,2.7,004km S 48° W of Hernani (Eastern Samar)
 03 May 2019 - 08:16 PM,15.10,120.38,032,2.3,027km N 45° E of Castillejos (Zambales)
@@ -973,26 +955,19 @@ date_time,latitude,longitude,depth,magnitude,location
 01 May 2019 - 10:35 AM,09.52,126.56,011,2.1,048km N 57° E of Cortes (Surigao Del Sur)
 01 May 2019 - 09:54 AM,11.48,126.03,023,2.5,048km N 70° E of Hernani (Eastern Samar)
 01 May 2019 - 08:33 AM,09.47,126.41,015,1.8,045km S 39° E of General Luna (Surigao Del Norte)
-01 May 2019 - 07:43 AM,11.75,125.17,028,2.1,"031 
-		  km S 89° W of San Julian (Eastern Samar)"
+01 May 2019 - 07:43 AM,11.75,125.17,028,2.1,031 km S 89° W of San Julian (Eastern Samar)
 01 May 2019 - 06:27 AM,09.63,126.26,020,2.1,020km S 33° E of General Luna (Surigao Del Norte)
 01 May 2019 - 05:33 AM,06.76,125.06,030,2.9,016km S 80° W of Bansalan (Davao Del Sur)
 01 May 2019 - 05:32 AM,11.73,125.86,018,3.5,044km S 87° E of San Julian (Eastern Samar)
 01 May 2019 - 05:26 AM,09.76,126.67,008,3.3,057km S 87° E of General Luna (Surigao Del Norte)
 01 May 2019 - 04:41 AM,09.67,126.49,022,2.4,039km S 72° E of General Luna (Surigao Del Norte)
-01 May 2019 - 04:06 AM,10.36,126.40,010,2.6,"069 
-		  km N 22° E of General Luna (Surigao Del Norte)"
+01 May 2019 - 04:06 AM,10.36,126.40,010,2.6,069 km N 22° E of General Luna (Surigao Del Norte)
 01 May 2019 - 03:05 AM,13.59,123.09,002,2.2,016km N 87° E of Pili (Camarines Sur)
 01 May 2019 - 02:25 AM,09.98,126.23,027,2.3,023km N 21° E of General Luna (Surigao Del Norte)
 01 May 2019 - 02:10 AM,09.52,126.68,004,2.3,064km S 63° E of General Luna (Surigao Del Norte)
-01 May 2019 - 01:15 AM,14.31,120.40,106,2.1,"017 
-		  km S 31° W of Mariveles (Bataan)"
-01 May 2019 - 01:09 AM,09.95,122.96,020,2.2,"004 
-		  km S 49° E of Kabankalan City (Negros Occidental)"
-01 May 2019 - 12:57 AM,18.62,121.83,013,2.0,"036 
-		  km N 35° W of Santa Ana (Cagayan)"
+01 May 2019 - 01:15 AM,14.31,120.40,106,2.1,017 km S 31° W of Mariveles (Bataan)
+01 May 2019 - 01:09 AM,09.95,122.96,020,2.2,004 km S 49° E of Kabankalan City (Negros Occidental)
+01 May 2019 - 12:57 AM,18.62,121.83,013,2.0,036 km N 35° W of Santa Ana (Cagayan)
 01 May 2019 - 12:56 AM,15.09,120.32,033,1.9,022km N 36° W of Castillejos (Zambales)
-01 May 2019 - 12:50 AM,13.20,123.01,007,2.4,"009 
-		  km N 27° E of San Pascual (Masbate)"
-01 May 2019 - 12:09 AM,12.99,124.60,029,2.0,"043 
-		  km N 38° E of Biri (Northern Samar)"
+01 May 2019 - 12:50 AM,13.20,123.01,007,2.4,009 km N 27° E of San Pascual (Masbate)
+01 May 2019 - 12:09 AM,12.99,124.60,029,2.0,043 km N 38° E of Biri (Northern Samar)

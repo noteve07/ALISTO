@@ -9,20 +9,15 @@ date_time,latitude,longitude,depth,magnitude,location
 30 November 2019 - 07:44 PM,05.73,126.68,016,2.1,122km S 33° E of Governor Generoso (Davao Oriental)
 30 November 2019 - 07:31 PM,06.77,124.85,032,1.5,009km S 18° E of Tulunan (Cotabato)
 30 November 2019 - 06:34 PM,12.50,125.42,021,2.3,018km N 82° E of Mapanas (Northern Samar)
-30 November 2019 - 06:13 PM,05.99,125.89,062,2.3,"032
-		  km S 44° E of Don Marcelino (Davao Occidental)"
-30 November 2019 - 04:10 PM,18.43,120.68,027,3.2,"009
-		  km S 22° E of Burgos (Ilocos Norte)"
-30 November 2019 - 03:18 PM,17.08,120.19,002,3.5,"027
-		  km 00 W of Santa Cruz (Ilocos Sur)"
+30 November 2019 - 06:13 PM,05.99,125.89,062,2.3,032km S 44° E of Don Marcelino (Davao Occidental)
+30 November 2019 - 04:10 PM,18.43,120.68,027,3.2,009km S 22° E of Burgos (Ilocos Norte)
+30 November 2019 - 03:18 PM,17.08,120.19,002,3.5,027km 00 W of Santa Cruz (Ilocos Sur)
 30 November 2019 - 01:18 PM,07.08,125.37,009,2.5,026km N 86° W of Davao City (Davao Del Sur)
 30 November 2019 - 12:44 PM,07.05,125.25,020,2.4,016km S 72° E of Magpet (Cotabato)
 30 November 2019 - 12:35 PM,05.82,125.57,203,3.4,009km S 32° W of Jose Abad Santos (Davao Occidental)
-30 November 2019 - 12:34 PM,07.05,125.13,029,2.2,"011
-		  km N 27° E of Makilala (Cotabato)"
+30 November 2019 - 12:34 PM,07.05,125.13,029,2.2,011km N 27° E of Makilala (Cotabato)
 30 November 2019 - 12:31 PM,17.98,120.36,033,1.9,013km S 72° W of Currimao (Ilocos Norte)
-30 November 2019 - 11:29 AM,06.70,125.14,034,2.2,"008
-		  km S 82° W of Magsaysay (Davao Del Sur)"
+30 November 2019 - 11:29 AM,06.70,125.14,034,2.2,008km S 82° W of Magsaysay (Davao Del Sur)
 30 November 2019 - 08:05 AM,17.60,122.38,008,2.0,030km N 14° E of Divilacan (Isabela)
 30 November 2019 - 07:06 AM,17.63,122.36,006,2.2,034km N 10° E of Divilacan (Isabela)
 30 November 2019 - 06:48 AM,06.75,124.82,030,3.0,011km S 02° W of Tulunan (Cotabato)
@@ -79,7 +74,7 @@ date_time,latitude,longitude,depth,magnitude,location
 29 November 2019 - 01:51 AM,07.39,126.79,026,2.4,026km N 74° E of Caraga (Davao Oriental)
 29 November 2019 - 01:44 AM,06.24,125.58,035,2.3,014km N 72° W of Don Marcelino (Davao Occidental)
 29 November 2019 - 01:18 AM,13.68,120.61,109,2.5,017km S 08° W of Calatagan (Batangas)
-29 November 2019 - 12:56 AM,10.14,124.87,033,1.6,003km N 77° E of Maasin City  (Southern Leyte)
+29 November 2019 - 12:56 AM,10.14,124.87,033,1.6,003km N 77° E of Maasin City (Southern Leyte)
 29 November 2019 - 12:36 AM,09.50,122.33,030,2.2,030km S 18° W of Sipalay City (Negros Occidental)
 29 November 2019 - 12:23 AM,11.58,125.75,035,3.0,035km S 85° E of Borongan City (Eastern Samar)
 29 November 2019 - 12:11 AM,05.18,126.27,001,2.3,093km S 73° E of Sarangani (Davao Occidental)
@@ -219,7 +214,7 @@ date_time,latitude,longitude,depth,magnitude,location
 25 November 2019 - 12:33 AM,07.15,125.27,020,2.6,029km N 43° E of Makilala (Cotabato)
 25 November 2019 - 12:23 AM,06.83,125.21,015,2.5,019km S 44° E of Makilala (Cotabato)
 25 November 2019 - 12:21 AM,09.77,126.30,015,2.5,015km S 86° E of General Luna (Surigao Del Norte)
-25 November 2019 - 12:18 AM,09.99,124.90,035,1.7,017km S 22° E of Maasin City  (Southern Leyte)
+25 November 2019 - 12:18 AM,09.99,124.90,035,1.7,017km S 22° E of Maasin City (Southern Leyte)
 25 November 2019 - 12:07 AM,08.34,125.58,034,2.0,024km S 47° W of San Luis (Agusan Del Sur)
 24 November 2019 - 11:47 PM,06.63,125.01,032,2.5,023km N 53° E of Koronadal City (South Cotabato)
 24 November 2019 - 11:32 PM,18.13,120.50,032,1.7,008km N 18° W of Paoay (Ilocos Norte)
@@ -230,7 +225,6 @@ date_time,latitude,longitude,depth,magnitude,location
 24 November 2019 - 09:43 PM,19.08,121.20,011,1.7,035km S 51° W of Calayan (Cagayan)
 24 November 2019 - 09:41 PM,05.26,127.44,104,2.7,214km S 71° E of Jose Abad Santos (Davao Occidental)
 24 November 2019 - 09:27 PM,06.85,125.22,010,3.2,016km N 01° E of Magsaysay (Davao Del Sur)
-24 November 2019 - 09:07 PM,09.75,126.16,026,2.0,004km South° 00  of General Luna (Surigao Del Norte)
 24 November 2019 - 09:06 PM,09.92,126.26,012,3.7,019km N 37° E of General Luna (Surigao Del Norte)
 24 November 2019 - 08:57 PM,06.93,125.07,025,1.9,003km S 32° W of Makilala (Cotabato)
 24 November 2019 - 08:53 PM,06.90,124.95,010,2.9,014km N 66° E of Tulunan (Cotabato)
@@ -308,7 +302,7 @@ date_time,latitude,longitude,depth,magnitude,location
 22 November 2019 - 01:00 PM,13.84,120.47,026,1.7,017km N 87° W of Calatagan (Batangas)
 22 November 2019 - 12:27 PM,06.78,124.87,027,2.0,009km S 33° E of Tulunan (Cotabato)
 22 November 2019 - 12:05 PM,06.01,126.12,138,2.7,072km S 04° E of Governor Generoso (Davao Oriental)
-22 November 2019 - 11:35 AM,10.02,126.19,009,3.0,013km  00 °East of Burgos (Surigao Del Norte)
+22 November 2019 - 11:35 AM,10.02,126.19,009,3.0,013km 00° E of Burgos (Surigao Del Norte)
 22 November 2019 - 10:46 AM,06.92,125.05,011,2.8,006km S 44° W of Makilala (Cotabato)
 22 November 2019 - 10:11 AM,06.78,124.97,024,2.4,018km S 65° E of Tulunan (Cotabato)
 22 November 2019 - 08:45 AM,07.71,124.95,010,2.4,014km N 13° E of Kadingilan (Bukidnon)
@@ -376,10 +370,8 @@ date_time,latitude,longitude,depth,magnitude,location
 21 November 2019 - 12:52 AM,07.74,124.82,013,2.2,019km N 34° W of Kadingilan (Bukidnon)
 21 November 2019 - 12:21 AM,06.90,125.12,004,2.8,008km S 26° E of Makilala (Cotabato)
 21 November 2019 - 12:00 AM,16.85,119.84,021,2.8,051km N 06° W of Bolinao (Pangasinan)
-20 November 2019 - 10:31 PM,07.62,124.85,001,2.5,"009
-		  km N 70° W of Kadingilan (Bukidnon)"
-20 November 2019 - 10:31 PM,13.58,120.47,031,1.7,"018
-		  km N 01° E of Paluan (Occidental Mindoro)"
+20 November 2019 - 10:31 PM,07.62,124.85,001,2.5,009km N 70° W of Kadingilan (Bukidnon)
+20 November 2019 - 10:31 PM,13.58,120.47,031,1.7,018km N 01° E of Paluan (Occidental Mindoro)
 20 November 2019 - 10:25 PM,07.57,124.85,001,2.7,009km S 70° W of Kadingilan (Bukidnon)
 20 November 2019 - 10:23 PM,07.73,125.00,021,2.1,004km S 22° W of Maramag (Bukidnon)
 20 November 2019 - 10:22 PM,06.88,125.04,014,2.1,024km N 83° E of Tulunan (Cotabato)
@@ -445,8 +437,7 @@ date_time,latitude,longitude,depth,magnitude,location
 19 November 2019 - 02:23 PM,06.78,125.04,013,2.3,024km S 70° E of Tulunan (Cotabato)
 19 November 2019 - 02:09 PM,07.09,125.37,001,3.3,026km N 83° W of Davao City (Davao Del Sur)
 19 November 2019 - 12:18 PM,07.70,124.98,005,2.2,013km N 28° E of Kadingilan (Bukidnon)
-19 November 2019 - 10:54 AM,06.73,124.93,004,2.4,"018 
-		  km S 42° E of Tulunan (Cotabato)"
+19 November 2019 - 10:54 AM,06.73,124.93,004,2.4,018 km S 42° E of Tulunan (Cotabato)
 19 November 2019 - 09:44 AM,07.67,124.87,001,2.8,010km N 33° W of Kadingilan (Bukidnon)
 19 November 2019 - 09:33 AM,09.54,126.24,033,2.2,029km S 19° E of General Luna (Surigao Del Norte)
 19 November 2019 - 08:39 AM,08.01,127.00,007,4.0,064km S 87° E of Lingig (Surigao Del Sur)
@@ -616,7 +607,6 @@ date_time,latitude,longitude,depth,magnitude,location
 16 November 2019 - 02:36 AM,08.73,122.63,028,2.4,055km N 66° W of Manukan (Zamboanga Del Norte)
 16 November 2019 - 02:32 AM,07.65,124.91,004,2.9,006km N 15° W of Kadingilan (Bukidnon)
 16 November 2019 - 02:27 AM,06.92,125.05,026,2.3,006km S 51° W of Makilala (Cotabato)
-16 November 2019 - 02:07 AM,09.95,124.09,004,2.5,004km North° 00  of Sagbayan (Bohol)
 16 November 2019 - 01:34 AM,06.82,125.03,030,2.4,022km S 81° E of Tulunan (Cotabato)
 16 November 2019 - 01:26 AM,06.25,126.41,111,3.4,057km S 40° E of Governor Generoso (Davao Oriental)
 16 November 2019 - 01:23 AM,07.07,125.27,024,2.5,018km N 43° E of Makilala (Cotabato)
@@ -951,7 +941,7 @@ date_time,latitude,longitude,depth,magnitude,location
 09 November 2019 - 06:47 AM,05.70,127.11,118,3.0,155km S 47° E of Governor Generoso (Davao Oriental)
 09 November 2019 - 05:56 AM,18.73,121.09,050,2.0,014km N 03° E of Claveria (Cagayan)
 09 November 2019 - 05:27 AM,06.86,125.18,001,2.1,015km S 45° E of Makilala (Cotabato)
-09 November 2019 - 05:12 AM,05.26,121.97,034,3.2,113km S 04° E of  Banguingui (Tongkil) (Sulu)
+09 November 2019 - 05:12 AM,05.26,121.97,034,3.2,113km S 04° E of Banguingui (Tongkil) (Sulu)
 09 November 2019 - 05:10 AM,05.58,127.22,011,2.5,174km S 47° E of Governor Generoso (Davao Oriental)
 09 November 2019 - 04:24 AM,07.22,125.54,006,2.1,019km N 26° W of Davao City (Davao Del Sur)
 09 November 2019 - 03:57 AM,04.78,127.82,089,5.0,270km S 74° E of Sarangani (Davao Occidental)
@@ -966,10 +956,10 @@ date_time,latitude,longitude,depth,magnitude,location
 09 November 2019 - 01:54 AM,07.07,125.25,024,2.2,021km N 56° E of Makilala (Cotabato)
 09 November 2019 - 12:58 AM,06.84,125.05,015,2.7,013km S 17° W of Makilala (Cotabato)
 09 November 2019 - 12:51 AM,08.27,125.13,002,2.2,014km N 22° E of Malaybalay City (Bukidnon)
-09 November 2019 - 12:39 AM,05.75,124.62,009,3.8,027km South 00°  of Kiamba (Sarangani)
+09 November 2019 - 12:39 AM,05.75,124.62,009,3.8,027km S 00° of Kiamba (Sarangani)
 09 November 2019 - 12:21 AM,06.90,125.18,020,2.6,012km S 55° E of Makilala (Cotabato)
 09 November 2019 - 12:02 AM,13.49,120.22,011,2.9,026km S 07° W of Looc (Occidental Mindoro)
-08 November 2019 - 11:56 PM,06.76,124.83,024,2.2,011km South 00°  of Tulunan (Cotabato)
+08 November 2019 - 11:56 PM,06.76,124.83,024,2.2,011km S 00° of Tulunan (Cotabato)
 08 November 2019 - 11:38 PM,09.07,126.64,012,2.5,041km N 75° E of Bayabas (Surigao Del Sur)
 08 November 2019 - 11:36 PM,07.08,127.03,034,2.1,056km S 75° E of Manay (Davao Oriental)
 08 November 2019 - 11:26 PM,06.71,124.86,029,2.1,016km S 12° E of Tulunan (Cotabato)
@@ -1232,8 +1222,7 @@ date_time,latitude,longitude,depth,magnitude,location
 05 November 2019 - 08:50 PM,06.75,124.89,028,2.1,014km S 31° E of Tulunan (Cotabato)
 05 November 2019 - 08:48 PM,06.78,124.96,022,2.7,017km S 60° E of Tulunan (Cotabato)
 05 November 2019 - 08:36 PM,13.39,124.02,028,2.1,025km N 28° W of Rapu-rapu (Albay)
-05 November 2019 - 08:30 PM,07.09,125.28,007,2.4,"025
-		  km N 56° E of Makilala (Cotabato)"
+05 November 2019 - 08:30 PM,07.09,125.28,007,2.4,025km N 56° E of Makilala (Cotabato)
 05 November 2019 - 08:15 PM,10.38,126.56,001,3.5,066km N 53° E of Burgos (Surigao Del Norte)
 05 November 2019 - 08:09 PM,06.92,125.06,023,2.0,006km S 38° W of Makilala (Cotabato)
 05 November 2019 - 08:07 PM,18.16,121.09,018,2.1,018km N 34° W of Kabugao (Apayao)
@@ -1405,7 +1394,7 @@ date_time,latitude,longitude,depth,magnitude,location
 03 November 2019 - 08:30 PM,07.09,125.29,005,2.6,027km N 57° E of Makilala (Cotabato)
 03 November 2019 - 08:29 PM,06.90,125.24,034,2.4,018km S 66° E of Makilala (Cotabato)
 03 November 2019 - 08:27 PM,06.79,124.76,020,2.1,011km S 48° W of Tulunan (Cotabato)
-03 November 2019 - 08:02 PM,06.85,124.89,021,2.3,006km  East of Tulunan (Cotabato)
+03 November 2019 - 08:02 PM,06.85,124.89,021,2.3,006km 00° E Tulunan (Cotabato)
 03 November 2019 - 07:52 PM,06.91,125.16,035,2.7,010km S 53° E of Makilala (Cotabato)
 03 November 2019 - 07:48 PM,06.79,125.12,014,2.7,020km S 09° E of Makilala (Cotabato)
 03 November 2019 - 07:45 PM,19.14,121.03,004,3.3,048km S 71° W of Calayan (Cagayan)
@@ -1493,7 +1482,7 @@ date_time,latitude,longitude,depth,magnitude,location
 03 November 2019 - 12:04 AM,06.88,125.23,008,2.0,018km S 60° E of Makilala (Cotabato)
 02 November 2019 - 11:55 PM,06.79,125.05,005,3.8,020km S 12° W of Makilala (Cotabato)
 02 November 2019 - 11:45 PM,07.19,125.11,100,2.3,025km N 06° E of Makilala (Cotabato)
-02 November 2019 - 11:18 PM,06.85,124.82,036,2.1,001km  West of Tulunan (Cotabato)
+02 November 2019 - 11:18 PM,06.85,124.82,036,2.1,001km 00° W of Tulunan (Cotabato)
 02 November 2019 - 11:12 PM,06.85,125.10,004,2.6,012km S 04° E of Makilala (Cotabato)
 02 November 2019 - 10:57 PM,07.07,125.24,027,2.5,021km N 54° E of Makilala (Cotabato)
 02 November 2019 - 10:55 PM,06.72,124.79,022,2.0,015km S 16° W of Tulunan (Cotabato)
@@ -1607,7 +1596,6 @@ date_time,latitude,longitude,depth,magnitude,location
 02 November 2019 - 03:11 AM,09.77,126.45,025,1.8,032km S 88° E of General Luna (Surigao Del Norte)
 02 November 2019 - 03:10 AM,07.00,125.42,005,3.5,022km S 72° W of Davao City (Davao Del Sur)
 02 November 2019 - 03:05 AM,13.00,120.39,012,2.0,037km S 77° W of Santa Cruz (Occidental Mindoro)
-02 November 2019 - 02:56 AM,06.85,124.87,003,3.2,005km  East of Tulunan (Cotabato)
 02 November 2019 - 02:50 AM,06.83,125.06,017,2.7,015km S 15° W of Makilala (Cotabato)
 02 November 2019 - 02:47 AM,06.88,124.91,015,2.8,009km N 69° E of Tulunan (Cotabato)
 02 November 2019 - 02:38 AM,06.78,125.00,004,4.5,020km S 66° E of Tulunan (Cotabato)
@@ -1734,7 +1722,6 @@ date_time,latitude,longitude,depth,magnitude,location
 01 November 2019 - 07:10 AM,06.94,125.05,025,2.5,027km N 67° E of Tulunan (Cotabato)
 01 November 2019 - 07:07 AM,06.79,124.92,027,2.0,012km S 57° E of Tulunan (Cotabato)
 01 November 2019 - 07:05 AM,07.07,125.19,025,3.5,010km S 71° E of Magpet (Cotabato)
-01 November 2019 - 07:00 AM,07.10,125.29,018,3.7,019km  00 °ast of Magpet (Cotabato)
 01 November 2019 - 06:51 AM,07.11,125.25,023,2.0,024km N 46° E of Makilala (Cotabato)
 01 November 2019 - 06:47 AM,06.66,124.75,030,2.0,022km S 22° W of Tulunan (Cotabato)
 01 November 2019 - 06:39 AM,06.86,125.19,030,1.9,016km S 44° E of Makilala (Cotabato)
