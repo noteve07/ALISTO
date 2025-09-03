@@ -1,6 +1,14 @@
-Copyright (c) 2025 Epicentra Team
+Copyright (c) 2025 ALISTO Team
 All rights reserved.
 
-This project is for academic purposes only and is the intellectual property of the Epicentra development team.  
+This project is for academic purposes only and is the intellectual property of the ALISTO development team.  
 No part of this project may be copied, distributed, or modified without prior written permission from the authors.  
 Unauthorized use, reproduction, or distribution of this project, in whole or in part, is strictly prohibited.
+
+Data Source Disclaimer:
+This project uses real-time and earthquake data provided by DOST-PHIVOLCS.  
+All rights to the original data remain with DOST-PHIVOLCS.  
+Use of this data is subject to their permission.
+
+Credits:
+Any external libraries, references, or resources used in this project are credited in the documentation and source files.
