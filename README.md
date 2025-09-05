@@ -3,13 +3,20 @@
 
 ---
 
-ALISTO is a web-based platform that monitors earthquakes in real time, displays seismic data on an interactive map of the Philippines, and predicts provincial risk levels using machine learning. The project aims to enhance disaster preparedness and public safety by providing accessible and data-driven insights.
+<p align="center">
+  <img 
+    src="https://raw.githubusercontent.com/noteve07/misc/37736657fa7f51232867f2d0feadfdb5fda81538/assets/software-under-development.gif" 
+    alt="Software Under Development"
+  >
+</p>
+
+<p align="center">
+  <b>🚧 PROJECT UNDER DEVELOPMENT 🚧</b>
+</p>
 
 ---
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/noteve07/misc/37736657fa7f51232867f2d0feadfdb5fda81538/assets/software-under-development.gif" alt="Software Under Development">
-</p>
+ALISTO is a web-based platform that monitors earthquakes in real time, displays seismic data on an interactive map of the Philippines, and predicts provincial risk levels using machine learning. The project aims to enhance disaster preparedness and public safety by providing accessible and data-driven insights.
 
 ---
 
