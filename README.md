@@ -7,6 +7,12 @@ ALISTO is a web-based platform that monitors earthquakes in real time, displays 
 
 ---
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/noteve07/misc/37736657fa7f51232867f2d0feadfdb5fda81538/assets/software-under-development.gif" alt="Software Under Development">
+</p>
+
+---
+
 ## 🚀 Tech Stack
 - **Frontend**: React.js (with Leaflet.js for maps)  
 - **Backend**: FastAPI (Python)  
