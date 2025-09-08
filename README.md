@@ -34,6 +34,7 @@ ALISTO is a web-based platform that monitors earthquakes in real time, displays 
 3. **Risk Level Evaluation** – Machine learning model classifies each province as **Low**, **Medium**, or **High Risk** based on earthquake + volcanic advisories.  
 4. **Geolocation API** – Personalized alerts based on the user’s location.  
 5. **Data Export** – Export earthquake and risk data in CSV/JSON.  
+6. **Chatbot** – Interact with ISA (Intelligent Seismic Assistant) Chatbot
 
 ---
 
@@ -43,7 +44,7 @@ ALISTO is a web-based platform that monitors earthquakes in real time, displays 
   - Dashboard  
   - Live Monitoring (map + real-time data)  
   - Risk Analysis (ML predictions per province)  
-  - Export Data  
+  - Chat with ISA
   - Account  
 
 ---
