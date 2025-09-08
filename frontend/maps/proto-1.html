@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        #map {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
+    </style>
+</head>
+<body> 
+    <div id="map"></div>
+    <script>
+        // Philippines bounding box (tighter)
+        var philBounds = L.latLngBounds(
+            L.latLng(5.0, 117.0), // Southwest (closer)
+            L.latLng(19.0, 126.0) // Northeast (closer)
+        );
+
+        var map = L.map('map', {
+            minZoom: 6,
+            maxZoom: 10,
+            maxBounds: philBounds,
+            maxBoundsViscosity: 1.0
+        }).setView([12.8797, 121.7740], 7);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 10,
+            minZoom: 6,
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA'
+        }).addTo(map);
+
+        // Example earthquake data: [latitude, longitude, riskLevel, location, magnitude, depth]
+        var earthquakes = [
+            [14.5995, 120.9842, 'high', 'Manila', 'N/A', 'N/A'],
+            [10.3157, 123.8854, 'medium', 'Cebu', 'N/A', 'N/A'],
+            [7.1907, 125.4553, 'low', 'Davao', 'N/A', 'N/A'],
+            [14.6745, 120.4703, 'low', 'Balanga City, Bataan', '3.2', '10km']
+        ];
+
+        // Risk color mapping
+        var riskColors = {
+            high: '#FF4500',    // Orangered for high risk
+            medium: '#FFA500',  // Orange for medium risk
+            low: '#FFD700'      // Gold (Yellow) for low risk
+        };
+
+        const allRings = [];
+        const animationDuration = 3000; // 3 seconds, for a slower, gentler animation
+
+        earthquakes.forEach(function(eq) {
+            var magnitude = isNaN(parseFloat(eq[4])) ? 1 : parseFloat(eq[4]);
+            var latlng = [eq[0], eq[1]];
+            var color = riskColors[eq[2]];
+            // Radius is now in meters and scales with the map zoom
+            var maxRadius = magnitude * 4000; 
+
+            var popupContent = `<b>${eq[3]}</b><br>
+                Latitude: ${eq[0]}<br>
+                Longitude: ${eq[1]}<br>
+                Magnitude: ${eq[4]}<br>
+                Depth: ${eq[5]}<br>
+                Risk: ${eq[2].charAt(0).toUpperCase() + eq[2].slice(1)}`;
+
+            for (let i = 0; i < 3; i++) {
+                const circle = L.circle(latlng, {
+                    color: color,
+                    fillOpacity: 0, // This makes it a ring, not a solid circle
+                    radius: 0,
+                    weight: 3,
+                    opacity: 0
+                }).addTo(map);
+
+                allRings.push({
+                    circle: circle,
+                    maxRadius: maxRadius,
+                    delay: i * 1000 // 1s delay between each ring
+                });
+            }
+
+            // An invisible marker is kept to handle the popup functionality
+            L.marker(latlng, {
+                opacity: 0,
+                icon: L.divIcon({className: '', iconSize: [10, 10]})
+            }).addTo(map).bindPopup(popupContent);
+        });
+
+        let animationStartTime;
+
+        function animateRings(timestamp) {
+            if (animationStartTime === undefined) {
+                animationStartTime = timestamp;
+            }
+            const elapsedTime = timestamp - animationStartTime;
+
+            allRings.forEach(ring => {
+                const timeInAnimation = elapsedTime - ring.delay;
+                if (timeInAnimation < 0) return; // Ring's animation hasn't started yet
+
+                const cycleTime = timeInAnimation % animationDuration;
+                const progress = cycleTime / animationDuration;
+
+                // A gentle ease-out function for a smoother animation
+                const easedProgress = 1 - Math.pow(1 - progress, 2);
+
+                const radius = ring.maxRadius * easedProgress;
+                const opacity = 0.8 * (1 - progress); // Fade out effect
+
+                ring.circle.setRadius(radius);
+                ring.circle.setStyle({ 
+                    weight: 3 - (progress * 2), // Ring thins out as it expands
+                    opacity: opacity 
+                });
+            });
+
+            requestAnimationFrame(animateRings);
+        }
+
+        requestAnimationFrame(animateRings);
+    </script>
+</body>
+</html>
