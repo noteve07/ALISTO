@@ -12,22 +12,22 @@
 <body> 
     <div id="map"></div>
     <script>
-        // Philippines bounding box (tighter)
+        // Philippines bounding box
         var philBounds = L.latLngBounds(
-            L.latLng(5.0, 117.0), // Southwest (closer)
-            L.latLng(19.0, 126.0) // Northeast (closer)
+            L.latLng(4.5, 116.5), // Southwest
+            L.latLng(21.5, 127.0) // Northeast
         );
 
         var map = L.map('map', {
-            minZoom: 6,
-            maxZoom: 10,
+            minZoom: 5,
+            maxZoom: 12,
             maxBounds: philBounds,
             maxBoundsViscosity: 1.0
-        }).setView([12.8797, 121.7740], 7);
+        }).setView([12.8797, 121.7740], 6);
 
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 10,
-            minZoom: 6,
+            maxZoom: 12,
+            minZoom: 5,
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA'
         }).addTo(map);
 
@@ -41,21 +41,41 @@
 
         // Risk color mapping
         var riskColors = {
-            high: '#FF4500',    // Orangered for high risk
-            medium: '#FFA500',  // Orange for medium risk
-            low: '#FFD700'      // Gold (Yellow) for low risk
+            high: 'red',
+            medium: 'orange',
+            low: 'yellow'
         };
 
-        const allRings = [];
-        const animationDuration = 3000; // 3 seconds, for a slower, gentler animation
+        // Add signal animation CSS
+        var style = document.createElement('style');
+        style.innerHTML = `
+            .signal-circle {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.6;
+                animation: signalPulse 1.5s linear infinite;
+            }
+            @keyframes signalPulse {
+                0% {
+                    transform: scale(0.5);
+                    opacity: 0.7;
+                }
+                70% {
+                    transform: scale(2.5);
+                    opacity: 0.1;
+                }
+                100% {
+                    transform: scale(0.5);
+                    opacity: 0.0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
 
         earthquakes.forEach(function(eq) {
             var magnitude = isNaN(parseFloat(eq[4])) ? 1 : parseFloat(eq[4]);
-            var latlng = [eq[0], eq[1]];
-            var color = riskColors[eq[2]];
-            // Radius is now in meters and scales with the map zoom
-            var maxRadius = magnitude * 4000; 
-
+            var radius = magnitude * 2000;
             var popupContent = `<b>${eq[3]}</b><br>
                 Latitude: ${eq[0]}<br>
                 Longitude: ${eq[1]}<br>
@@ -63,61 +83,29 @@
                 Depth: ${eq[5]}<br>
                 Risk: ${eq[2].charAt(0).toUpperCase() + eq[2].slice(1)}`;
 
-            for (let i = 0; i < 3; i++) {
-                const circle = L.circle(latlng, {
-                    color: color,
-                    fillOpacity: 0, // This makes it a ring, not a solid circle
-                    radius: 0,
-                    weight: 3,
-                    opacity: 0
-                }).addTo(map);
+            // Main circle
+            var marker = L.circle([eq[0], eq[1]], {
+                color: riskColors[eq[2]],
+                fillColor: riskColors[eq[2]],
+                fillOpacity: 0.5,
+                radius: radius
+            }).addTo(map)
+            .bindPopup(popupContent);
 
-                allRings.push({
-                    circle: circle,
-                    maxRadius: maxRadius,
-                    delay: i * 1000 // 1s delay between each ring
-                });
-            }
+            // Animated signal circle
+            var signalDiv = L.DomUtil.create('div', 'signal-circle');
+            signalDiv.style.width = (magnitude * 20) + 'px';
+            signalDiv.style.height = (magnitude * 20) + 'px';
+            signalDiv.style.background = riskColors[eq[2]];
 
-            // An invisible marker is kept to handle the popup functionality
-            L.marker(latlng, {
-                opacity: 0,
-                icon: L.divIcon({className: '', iconSize: [10, 10]})
-            }).addTo(map).bindPopup(popupContent);
-        });
-
-        let animationStartTime;
-
-        function animateRings(timestamp) {
-            if (animationStartTime === undefined) {
-                animationStartTime = timestamp;
-            }
-            const elapsedTime = timestamp - animationStartTime;
-
-            allRings.forEach(ring => {
-                const timeInAnimation = elapsedTime - ring.delay;
-                if (timeInAnimation < 0) return; // Ring's animation hasn't started yet
-
-                const cycleTime = timeInAnimation % animationDuration;
-                const progress = cycleTime / animationDuration;
-
-                // A gentle ease-out function for a smoother animation
-                const easedProgress = 1 - Math.pow(1 - progress, 2);
-
-                const radius = ring.maxRadius * easedProgress;
-                const opacity = 0.8 * (1 - progress); // Fade out effect
-
-                ring.circle.setRadius(radius);
-                ring.circle.setStyle({ 
-                    weight: 3 - (progress * 2), // Ring thins out as it expands
-                    opacity: opacity 
-                });
+            var signalIcon = L.divIcon({
+                className: '',
+                html: signalDiv,
+                iconSize: [magnitude * 20, magnitude * 20],
+                iconAnchor: [magnitude * 10, magnitude * 10]
             });
-
-            requestAnimationFrame(animateRings);
-        }
-
-        requestAnimationFrame(animateRings);
+            L.marker([eq[0], eq[1]], {icon: signalIcon, interactive: false}).addTo(map);
+        });
     </script>
 </body>
 </html>
