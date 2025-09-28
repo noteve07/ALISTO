@@ -1,15 +1,30 @@
 # app/main.py
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api.v1.routes import api_router
+from app.services.scheduler import earthquake_scheduler
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("🚀 Starting ALISTO API...")
+    await earthquake_scheduler.start_scheduler()
+    
+    yield  # App is running
+    
+    # Shutdown
+    print("🔄 Shutting down ALISTO API...")
+    await earthquake_scheduler.stop_scheduler()
 
 # create FastAPI app
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description=settings.PROJECT_DESCRIPTION,
-    version=settings.VERSION
+    version=settings.VERSION,
+    lifespan=lifespan
 )
 
 # add CORS middleware

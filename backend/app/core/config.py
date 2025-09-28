@@ -29,6 +29,7 @@ class Settings:
 
     # Web Scraping Configuration
     SCRAPE_INTERVAL: float = 5
+    SCRAPE_INTERVAL_MINUTES: int = 3  # Scheduler interval in minutes
 
 
 # Global settings instance
