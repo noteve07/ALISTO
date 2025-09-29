@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philippines Municipalities and Cities Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        #map {
+            flex: 1;
+            height: 100%;
+            position: relative;
+        }
+        
+        .status-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 500;
+        }
+        
+        .sidebar {
+            width: 350px;
+            background: #f8f9fa;
+            border-left: 1px solid #dee2e6;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            padding: 15px;
+            background: #343a40;
+            color: white;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .filter-section {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .filter-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        .filter-section select, .filter-section input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .details-section {
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .details-header {
+            margin-bottom: 15px;
+        }
+        
+        .details-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #343a40;
+        }
+        
+        .details-header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .detail-card {
+            background: white;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .detail-item {
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 3px;
+        }
+        
+        .detail-value {
+            font-size: 1rem;
+            color: #212529;
+        }
+        
+        .province-highlight {
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .stats-section {
+            padding: 10px 15px;
+            border-top: 1px solid #dee2e6;
+            font-size: 0.8rem;
+            color: #6c757d;
+            background: #e9ecef;
+        }
+        
+        .info {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            margin-right: 8px;
+        }
+        
+        .no-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #6c757d;
+        }
+        
+        .no-selection i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-message">Loading data...</div>
+    </div>
+    
+    <div class="container">
+        <div id="map">
+            <div class="status-indicator" id="status-indicator">Ready</div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="header">
+                <h1>Municipalities & Cities</h1>
+                <p>Philippines Interactive Map</p>
+            </div>
+            
+            <div class="filter-section">
+                <label for="province-filter">Filter by Province:</label>
+                <select id="province-filter">
+                    <option value="all">All Provinces</option>
+                    <!-- Provinces will be populated here -->
+                </select>
+                
+                <label for="search-input">Search Municipality/City:</label>
+                <input type="text" id="search-input" placeholder="Enter name...">
+            </div>
+            
+            <div class="details-section">
+                <div class="no-selection">
+                    <i>👈</i>
+                    <p>Select a municipality or city on the map</p>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <span id="stats-text">Loading data...</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <script>
+        // Global variables
+        let map;
+        let provincesData = [];
+        let municitiesData = [];
+        let provinceLayerGroups = {};
+        let municitiesLayers = {};
+        let selectedMunicity = null;
+        
+        // Initialize map
+        function initMap() {
+            map = L.map('map').setView([12.8797, 121.7740], 6); // Center on Philippines
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Add info control
+            const info = L.control();
+            
+            info.onAdd = function() {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            
+            info.update = function(props) {
+                this._div.innerHTML = props ? 
+                    `<b>${props.name}</b><br>${props.province}` : 
+                    'Hover over a municipality/city';
+            };
+            
+            info.addTo(map);
+            
+            // Add legend
+            const legend = L.control({position: 'bottomright'});
+            
+            legend.onAdd = function() {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+                    <h4>Legend</h4>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3388ff"></div>
+                        <span>Municipality/City</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ff7800"></div>
+                        <span>Selected</span>
+                    </div>
+                `;
+                return div;
+            };
+            
+            legend.addTo(map);
+            
+            return info;
+        }
+        
+        // Load province and municities data
+        async function loadData() {
+            try {
+                // Load provinces data
+                const provincesResponse = await fetch('../province/province_table_test.json');
+                if (!provincesResponse.ok) {
+                    throw new Error(`Failed to load provinces data: ${provincesResponse.status} ${provincesResponse.statusText}`);
+                }
+                provincesData = await provincesResponse.json();
+                console.log(`Loaded ${provincesData.length} provinces`);
+                
+                // Load municities data
+                const municitiesResponse = await fetch('./municities_table_test.json');
+                if (!municitiesResponse.ok) {
+                    throw new Error(`Failed to load municities data: ${municitiesResponse.status} ${municitiesResponse.statusText}`);
+                }
+                municitiesData = await municitiesResponse.json();
+                console.log(`Loaded ${municitiesData.length} municipalities/cities`);
+                
+                return { provinces: provincesData, municities: municitiesData };
+            } catch (error) {
+                console.error('Error loading data:', error);
+                const errorMessage = error.message.includes('404') 
+                    ? `<span style="color: #dc3545">Error: JSON file not found. Please run 'python fetch_municities_data.py' first to generate the file.</span>`
+                    : `<span style="color: #dc3545">Error loading data: ${error.message}</span>`;
+                
+                document.querySelector('.stats-section').innerHTML = errorMessage;
+                document.querySelector('.details-section').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #dc3545;">
+                        <h3>⚠️ Data Loading Error</h3>
+                        <p>${error.message}</p>
+                        <div style="margin-top: 20px; padding: 15px; background: #f8d7da; border-radius: 5px;">
+                            <strong>How to fix:</strong>
+                            <ol style="text-align: left; margin-top: 10px;">
+                                <li>Make sure you've run <code>python fetch_municities_data.py</code> to generate the JSON file</li>
+                                <li>Ensure the JSON file is in the same directory as this HTML file</li>
+                                <li>Check that the file is properly formatted JSON</li>
+                            </ol>
+                        </div>
+                    </div>
+                `;
+                return null;
+            }
+        }
+        
+        // Populate province filter
+        function populateProvinceFilter(provinces) {
+            const provinceFilter = document.getElementById('province-filter');
+            const uniqueProvinces = [...new Set(provinces.map(p => p.name))].sort();
+            
+            uniqueProvinces.forEach(provinceName => {
+                const option = document.createElement('option');
+                option.value = provinceName;
+                option.textContent = provinceName;
+                provinceFilter.appendChild(option);
+            });
+            
+            provinceFilter.addEventListener('change', filterMunicities);
+        }
+        
+        // Filter municities by province
+        function filterMunicities() {
+            const provinceFilter = document.getElementById('province-filter').value;
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+            
+            // Hide all province layer groups
+            Object.values(provinceLayerGroups).forEach(group => {
+                map.removeLayer(group);
+            });
+            
+            if (provinceFilter === 'all') {
+                // Show all provinces
+                Object.values(provinceLayerGroups).forEach(group => {
+                    map.addLayer(group);
+                });
+            } else {
+                // Show only selected province
+                if (provinceLayerGroups[provinceFilter]) {
+                    map.addLayer(provinceLayerGroups[provinceFilter]);
+                }
+            }
+            
+            // Apply search filter if any
+            if (searchInput) {
+                Object.entries(municitiesLayers).forEach(([name, layer]) => {
+                    const isVisible = name.toLowerCase().includes(searchInput);
+                    if (isVisible) {
+                        if (!layer._map) {
+                            map.addLayer(layer);
+                        }
+                    } else {
+                        if (layer._map) {
+                            map.removeLayer(layer);
+                        }
+                    }
+                });
+            }
+            
+            updateStats();
+        }
+        
+        // Setup search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', filterMunicities);
+        }
+        
+        // Add municities to map
+        async function addMunicitiesToMap(municities, provinces, info) {
+            // Create a mapping of province_id to province_name
+            const provinceMap = {};
+            provinces.forEach(province => {
+                provinceMap[province.province_id] = province.name;
+            });
+            
+            // Group municities by province
+            const provinceGroups = {};
+            
+            municities.forEach(municity => {
+                const provinceName = provinceMap[municity.province_id];
+                if (!provinceName) {
+                    console.warn(`Province ID ${municity.province_id} not found for ${municity.name}`);
+                    return;
+                }
+                
+                if (!provinceGroups[provinceName]) {
+                    provinceGroups[provinceName] = [];
+                }
+                
+                provinceGroups[provinceName].push(municity);
+            });
+            
+            // Calculate total items for progress tracking
+            const totalProvinces = Object.keys(provinceGroups).length;
+            let currentProvinceIndex = 0;
+            let totalMunicities = Object.values(provinceGroups).reduce((sum, arr) => sum + arr.length, 0);
+            let renderCount = 0;
+            
+            // Create layer groups for each province - using for...of with async
+            for (const [provinceName, provinceMunicities] of Object.entries(provinceGroups)) {
+                currentProvinceIndex++;
+                updateStatus(`Rendering province ${currentProvinceIndex}/${totalProvinces}: ${provinceName} (${renderCount}/${totalMunicities} municities)`);
+                
+                // Use setTimeout to allow UI updates between provinces
+                await new Promise(resolve => setTimeout(resolve, 0));
+                
+                const layerGroup = L.layerGroup();
+                
+                // Use for...of instead of forEach to allow await
+                for (const municity of provinceMunicities) {
+                    if (!municity.boundaries) continue;
+                    
+                    const layer = L.geoJSON(municity.boundaries, {
+                        style: {
+                            fillColor: '#3388ff',
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            dashArray: '3',
+                            fillOpacity: 0.3
+                        }
+                    });
+                    
+                    // Add hover effect
+                    layer.on('mouseover', function(e) {
+                        if (selectedMunicity !== municity) {
+                            layer.setStyle({
+                                weight: 2,
+                                color: '#666',
+                                dashArray: '',
+                                fillOpacity: 0.5
+                            });
+                        }
+                        
+                        info.update({
+                            name: municity.name,
+                            province: provinceName
+                        });
+                    });
+                    
+                    layer.on('mouseout', function(e) {
+                        if (selectedMunicity !== municity) {
+                            layer.setStyle({
+                                fillColor: '#3388ff',
+                                weight: 1,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.3
+                            });
+                        }
+                        
+                        info.update();
+                    });
+                    
+                    // Add click event
+                    layer.on('click', function() {
+                        selectMunicity(municity, provinceName, layer);
+                    });
+                    
+                    layerGroup.addLayer(layer);
+                    municitiesLayers[municity.name] = layer;
+                    
+                    // Update the render count
+                    renderCount++;
+                    if (renderCount % 100 === 0) {
+                        updateStatus(`Rendering province ${currentProvinceIndex}/${totalProvinces}: ${provinceName} (${renderCount}/${totalMunicities} municities)`);
+                        // Allow UI to update periodically
+                        await new Promise(resolve => setTimeout(resolve, 0));
+                    }
+                }
+                
+                provinceLayerGroups[provinceName] = layerGroup;
+                layerGroup.addTo(map);
+            }
+            
+            updateStats();
+        }
+        
+        // Select a municity
+        function selectMunicity(municity, provinceName, layer) {
+            // Reset previous selection
+            if (selectedMunicity && municitiesLayers[selectedMunicity.name]) {
+                municitiesLayers[selectedMunicity.name].setStyle({
+                    fillColor: '#3388ff',
+                    weight: 1,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.3
+                });
+            }
+            
+            // Set new selection
+            selectedMunicity = municity;
+            
+            if (layer) {
+                layer.setStyle({
+                    weight: 2,
+                    color: '#ff7800',
+                    dashArray: '',
+                    fillOpacity: 0.7,
+                    fillColor: '#ff7800'
+                });
+                layer.bringToFront();
+            }
+            
+            // Show details
+            showMunicityDetails(municity, provinceName);
+        }
+        
+        // Show municity details in the sidebar
+        function showMunicityDetails(municity, provinceName) {
+            const detailsSection = document.querySelector('.details-section');
+            
+            // Format date
+            const createdDate = municity.created_at ? new Date(municity.created_at).toLocaleDateString() : 'N/A';
+            
+            detailsSection.innerHTML = `
+                <div class="details-header">
+                    <h2>${municity.name}</h2>
+                    <p>ID: ${municity.municity_id}</p>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-item">
+                        <div class="detail-label">Name</div>
+                        <div class="detail-value">${municity.name}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Province</div>
+                        <div class="detail-value province-highlight">${provinceName}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Geometry Type</div>
+                        <div class="detail-value">${municity.boundaries ? municity.boundaries.type : 'N/A'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Has Centroid</div>
+                        <div class="detail-value">${municity.centroid ? 'Yes' : 'No'}</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="detail-label">Created</div>
+                        <div class="detail-value">${createdDate}</div>
+                    </div>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-label">Actions</div>
+                    <div class="detail-value">
+                        <button id="zoom-to-btn" style="padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Zoom to Boundaries</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add zoom button functionality
+            document.getElementById('zoom-to-btn').addEventListener('click', function() {
+                if (municitiesLayers[municity.name]) {
+                    map.fitBounds(municitiesLayers[municity.name].getBounds());
+                }
+            });
+        }
+        
+        // Update stats in the footer
+        function updateStats() {
+            const provinceFilter = document.getElementById('province-filter').value;
+            const statsText = document.getElementById('stats-text');
+            
+            let visibleCount = 0;
+            
+            if (provinceFilter === 'all') {
+                visibleCount = municitiesData.length;
+                statsText.textContent = `Showing all ${visibleCount} municipalities/cities across ${provincesData.length} provinces`;
+            } else {
+                const provinceMunicities = municitiesData.filter(m => {
+                    const province = provincesData.find(p => p.province_id === m.province_id);
+                    return province && province.name === provinceFilter;
+                });
+                
+                visibleCount = provinceMunicities.length;
+                statsText.textContent = `Showing ${visibleCount} municipalities/cities in ${provinceFilter}`;
+            }
+        }
+        
+        // Update loading status
+        function updateStatus(message) {
+            const statusIndicator = document.getElementById('status-indicator');
+            statusIndicator.textContent = message;
+        }
+        
+        // Show/hide loading overlay
+        function setLoading(isLoading, message = 'Loading data...') {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const loadingMessage = document.getElementById('loading-message');
+            
+            if (isLoading) {
+                loadingMessage.textContent = message;
+                loadingOverlay.style.display = 'flex';
+            } else {
+                loadingOverlay.style.display = 'none';
+            }
+        }
+        
+        // Initialize the application
+        async function init() {
+            setLoading(true, 'Initializing map...');
+            const info = initMap();
+            setupSearch();
+            
+            updateStatus('Loading data...');
+            setLoading(true, 'Loading province and municipality data...');
+            
+            const data = await loadData();
+            if (data) {
+                updateStatus(`Loaded ${data.municities.length} municipalities/cities`);
+                setLoading(true, 'Preparing map data...');
+                
+                populateProvinceFilter(data.provinces);
+                
+                setLoading(true, 'Rendering map...');
+                await addMunicitiesToMap(data.municities, data.provinces, info);
+                
+                updateStatus(`Ready - ${data.municities.length} municipalities loaded`);
+                setLoading(false);
+            } else {
+                updateStatus('Error loading data');
+                setLoading(false);
+            }
+        }
+        
+        // Start the application when the page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

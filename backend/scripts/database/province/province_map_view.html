@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Philippine Provinces Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            width: 75%;
+            height: 100vh;
+            float: left;
+        }
+        .info {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        #details-panel {
+            width: 25%;
+            height: 100vh;
+            float: right;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-left: 1px solid #dee2e6;
+        }
+        .details-header {
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .details-header h2 {
+            margin: 0;
+            color: #343a40;
+        }
+        .details-header p {
+            margin: 5px 0 0;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .detail-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        .detail-value {
+            color: #212529;
+        }
+        .selected-province {
+            border: 3px solid #ff7800 !important;
+            fill-opacity: 0.7 !important;
+        }
+        .no-selection {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            flex-direction: column;
+        }
+        .no-selection i {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #adb5bd;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="details-panel">
+        <div class="no-selection">
+            <i>⬅️</i>
+            <p>Click on a province to view details</p>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+            
+    <script>
+        // Global variable to track selected province
+        let selectedProvince = null;
+        let provinceLayers = {};
+
+        // Initialize map
+        const map = L.map('map').setView([12.8797, 121.7740], 6); // Center on Philippines
+
+        // Add tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Info box for province name
+        const info = L.control();
+        
+        info.onAdd = function() {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        
+        info.update = function(props) {
+            this._div.innerHTML = props ? 
+                '<h4>' + props.name + '</h4>' : 
+                'Hover over a province';
+        };
+        
+        info.addTo(map);
+
+        // Function to display province details
+        function showProvinceDetails(province) {
+            const detailsPanel = document.getElementById('details-panel');
+            
+            // Format date
+            const createdDate = province.created_at ? new Date(province.created_at).toLocaleDateString() : 'N/A';
+            
+            detailsPanel.innerHTML = `
+                <div class="details-header">
+                    <h2>${province.name}</h2>
+                    <p>Province ID: ${province.id || province.province_id}</p>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Province Name</div>
+                    <div class="detail-value">${province.name}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Geometry Type</div>
+                    <div class="detail-value">${province.boundaries ? province.boundaries.type : 'N/A'}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Has Centroid</div>
+                    <div class="detail-value">${province.centroid ? 'Yes' : 'No'}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Created</div>
+                    <div class="detail-value">${createdDate}</div>
+                </div>
+            `;
+        }
+        
+        // Function to select a province
+        function selectProvince(province, layer) {
+            // Reset previous selection
+            if (selectedProvince && provinceLayers[selectedProvince.id || selectedProvince.province_id]) {
+                provinceLayers[selectedProvince.id || selectedProvince.province_id].setStyle({
+                    fillColor: '#3388ff',
+                    weight: 1,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.3
+                });
+            }
+            
+            // Set new selection
+            selectedProvince = province;
+            
+            if (layer) {
+                layer.setStyle({
+                    weight: 3,
+                    color: '#ff7800',
+                    dashArray: '',
+                    fillOpacity: 0.7,
+                    fillColor: '#ff7800'
+                });
+                layer.bringToFront();
+            }
+            
+            showProvinceDetails(province);
+        }
+
+        // Load the provinces data
+        fetch('./province_table_test.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log(`Loaded ${data.length} provinces`);
+                
+                // Add each province to the map
+                data.forEach(province => {
+                    if (!province.boundaries) return;
+                    
+                    // Create GeoJSON layer
+                    const layer = L.geoJSON(province.boundaries, {
+                        style: {
+                            fillColor: '#3388ff',
+                            weight: 1,
+                            opacity: 1,
+                            color: 'white',
+                            dashArray: '3',
+                            fillOpacity: 0.3
+                        }
+                    }).addTo(map);
+                    
+                    // Store reference to layer
+                    provinceLayers[province.id || province.province_id] = layer;
+                    
+                    // Add simple hover effect
+                    layer.on('mouseover', function(e) {
+                        const layer = e.target;
+                        
+                        // Only apply hover style if not selected
+                        if (!selectedProvince || (selectedProvince.id || selectedProvince.province_id) !== (province.id || province.province_id)) {
+                            layer.setStyle({
+                                weight: 3,
+                                color: 'black',
+                                dashArray: '',
+                                fillOpacity: 0.5
+                            });
+                        }
+                        info.update(province);
+                    });
+                    
+                    // Reset style on mouseout
+                    layer.on('mouseout', function(e) {
+                        const layer = e.target;
+                        
+                        // Only reset style if not selected
+                        if (!selectedProvince || (selectedProvince.id || selectedProvince.province_id) !== (province.id || province.province_id)) {
+                            layer.setStyle({
+                                fillColor: '#3388ff',
+                                weight: 1,
+                                opacity: 1,
+                                color: 'white',
+                                dashArray: '3',
+                                fillOpacity: 0.3
+                            });
+                        }
+                        info.update();
+                    });
+                    
+                    // Add click handler for selection
+                    layer.on('click', function(e) {
+                        selectProvince(province, layer);
+                    });
+                });
+            })
+            .catch(error => console.error('Error loading provinces data:', error));
+    </script>
+</body>
+</html>

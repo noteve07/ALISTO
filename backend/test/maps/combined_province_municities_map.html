@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Provinces and Municipalities Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #map {
+            width: 75%;
+            height: 100vh;
+            float: left;
+        }
+        
+        .info {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        /* No extra controls needed */
+        
+        .legend-color {
+            width: 20px;
+            height: 10px;
+            margin-right: 8px;
+        }
+        
+        #details-panel {
+            width: 25%;
+            height: 100vh;
+            float: right;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-left: 1px solid #dee2e6;
+        }
+        
+        .details-header {
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .details-header h2 {
+            margin: 0;
+            color: #343a40;
+        }
+        
+        .details-header p {
+            margin: 5px 0 0;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        .detail-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        
+        .detail-value {
+            color: #212529;
+        }
+        
+        .no-selection {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            flex-direction: column;
+        }
+        
+        .no-selection i {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #adb5bd;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+        
+        .btn:hover {
+            background: #0056b3;
+        }
+        
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .status-bar {
+            background: #e9ecef;
+            padding: 10px 15px;
+            font-size: 0.8em;
+            color: #495057;
+            border-top: 1px solid #dee2e6;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        
+        .municities-count {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <div id="loading-message">Loading data...</div>
+    </div>
+
+    <div id="map"></div>
+    <div id="details-panel">
+        <div class="controls">
+            <button id="reset-btn" class="btn" onclick="resetToProvinces()">Reset to Provinces</button>
+            <button id="zoom-selected-btn" class="btn" onclick="zoomToSelected()" disabled>Zoom to Selected</button>
+        </div>
+        
+        <div class="no-selection" id="default-content">
+            <i>🗺️</i>
+            <p>Hover over provinces to see details</p>
+            <p>Click on a province to view its municipalities</p>
+        </div>
+        
+        <div class="status-bar">
+            <span id="status-text">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+            
+    <script>
+        // Global variables
+        let map;
+        let provincesData = [];
+        let municitiesData = [];
+        let provinceLayerGroup = L.layerGroup();
+        let municipalityLayerGroup = L.layerGroup();
+        let selectedProvince = null;
+        let selectedMunicipality = null;
+        let currentMode = 'provinces'; // 'provinces' or 'municipalities'
+        let info;
+        
+        // Initialize map
+        function initMap() {
+            map = L.map('map').setView([12.8797, 121.7740], 6);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Add a click handler for the map background
+            map.on('click', function(e) {
+                resetToProvinces();
+            });
+            
+            // Info control
+            info = L.control();
+            info.onAdd = function() {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            
+            info.update = function(props, type) {
+                if (props) {
+                    if (type === 'province') {
+                        this._div.innerHTML = `<h4>${props.name}</h4><p>Province (Click to view municipalities)</p>`;
+                    } else {
+                        this._div.innerHTML = `<h4>${props.name}</h4><p>Municipality/City in ${props.province}</p>`;
+                    }
+                } else {
+                    this._div.innerHTML = currentMode === 'provinces' ? 
+                        'Hover over a province' : 
+                        'Hover over a municipality/city';
+                }
+            };
+            
+            info.addTo(map);
+            
+            // Legend
+            const legend = L.control({position: 'bottomright'});
+            legend.onAdd = function() {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+                    <h4>Legend</h4>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #3388ff;"></div>
+                        <span>Provinces</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #1e40af;"></div>
+                        <span>Selected Province</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #60a5fa;"></div>
+                        <span>Municipality Borders</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #3b82f6;"></div>
+                        <span>Selected Municipality</span>
+                    </div>
+                `;
+                return div;
+            };
+            legend.addTo(map);
+        }
+        
+        // Load data files
+        async function loadData() {
+            try {
+                setLoading(true, 'Loading provinces data...');
+                
+                // Load provinces
+                const provincesResponse = await fetch('../../scripts/database/province/province_table_test.json');
+                if (!provincesResponse.ok) throw new Error(`Failed to load provinces: ${provincesResponse.status}`);
+                provincesData = await provincesResponse.json();
+                console.log(`Loaded ${provincesData.length} provinces`);
+                
+                setLoading(true, 'Loading municipalities data...');
+                
+                // Load municipalities
+                const municitiesResponse = await fetch('../../scripts/database/municities/municities_table_test.json');
+                if (!municitiesResponse.ok) throw new Error(`Failed to load municipalities: ${municitiesResponse.status}`);
+                municitiesData = await municitiesResponse.json();
+                console.log(`Loaded ${municitiesData.length} municipalities/cities`);
+                
+                return true;
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('status-text').innerHTML = 
+                    `<span style="color: #dc3545">Error: ${error.message}</span>`;
+                return false;
+            }
+        }
+        
+        // Create province layers
+        function createProvinceLayers() {
+            provinceLayerGroup.clearLayers();
+            
+            provincesData.forEach(province => {
+                if (!province.boundaries) return;
+                
+                const layer = L.geoJSON(province.boundaries, {
+                    style: {
+                        fillColor: '#3388ff',
+                        weight: 2,
+                        opacity: 1,
+                        color: 'white',
+                        dashArray: '3',
+                        fillOpacity: 0.4
+                    },
+                    // Add direct click handler to the GeoJSON options
+                    onEachFeature: function(feature, layer) {
+                        layer.on({
+                            mouseover: function(e) {
+                                if (!selectedProvince || selectedProvince.province_id !== province.province_id) {
+                                    layer.setStyle({
+                                        weight: 3,
+                                        color: '#666',
+                                        dashArray: '',
+                                        fillOpacity: 0.6
+                                    });
+                                }
+                                info.update(province, 'province');
+                            },
+                            mouseout: function(e) {
+                                if (!selectedProvince || selectedProvince.province_id !== province.province_id) {
+                                    layer.setStyle({
+                                        fillColor: '#3388ff',
+                                        weight: 2,
+                                        opacity: 1,
+                                        color: 'white',
+                                        dashArray: '3',
+                                        fillOpacity: 0.4
+                                    });
+                                }
+                                info.update();
+                            },
+                            click: function(e) {
+                                L.DomEvent.stopPropagation(e); // Stop click from reaching map
+                                selectProvince(province, layer);
+                            }
+                        });
+                    }
+                });
+                
+                provinceLayerGroup.addLayer(layer);
+            });
+            
+            // Make sure province layer is visible
+            if (!map.hasLayer(provinceLayerGroup)) {
+                provinceLayerGroup.addTo(map);
+            }
+        }
+        
+        // Select a province and show its municipalities
+        function selectProvince(province, layer) {
+            // Reset all province styles first
+            provinceLayerGroup.eachLayer(function(l) {
+                l.setStyle({
+                    fillColor: '#3388ff',
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.4
+                });
+            });
+            
+            selectedProvince = province;
+            selectedMunicipality = null;
+            currentMode = 'municipalities';
+            
+            // Style selected province
+            layer.setStyle({
+                weight: 4,
+                color: '#1e40af',
+                dashArray: '',
+                fillOpacity: 0.7,
+                fillColor: '#1e40af'
+            });
+            
+            // Show province details
+            showProvinceDetails(province);
+            
+            // Create and display municipality layers
+            createMunicipalityLayers(province);
+            
+            // Enable zoom button
+            document.getElementById('zoom-selected-btn').disabled = false;
+            
+            // Update status
+            const municitiesInProvince = municitiesData.filter(m => 
+                m.province_id === province.province_id
+            );
+            document.getElementById('status-text').textContent = 
+                `Showing ${municitiesInProvince.length} municipalities in ${province.name} (Province ID: ${province.province_id})`;
+        }
+        
+        // Create municipality layers for selected province
+        function createMunicipalityLayers(province) {
+            // Clear previous municipality layers
+            municipalityLayerGroup.clearLayers();
+            
+            // Filter municipalities for this province
+            const provinceMunicipalities = municitiesData.filter(m => 
+                m.province_id === province.province_id
+            );
+            
+            provinceMunicipalities.forEach(municipality => {
+                if (!municipality.boundaries) return;
+                
+                const layer = L.geoJSON(municipality.boundaries, {
+                    style: {
+                        fillColor: 'transparent',
+                        weight: 2,
+                        opacity: 1,
+                        color: '#60a5fa',
+                        dashArray: '1',
+                        fillOpacity: 0
+                    },
+                    onEachFeature: function(feature, layer) {
+                        layer.on({
+                            mouseover: function(e) {
+                                const isSameMunicipality = selectedMunicipality && 
+                                    selectedMunicipality.municity_id === municipality.municity_id;
+                                
+                                if (!selectedMunicipality || !isSameMunicipality) {
+                                    layer.setStyle({
+                                        weight: 3,
+                                        color: '#2563eb',
+                                        dashArray: '',
+                                        fillOpacity: 0.3,
+                                        fillColor: '#60a5fa'
+                                    });
+                                }
+                                info.update({...municipality, province: province.name}, 'municipality');
+                            },
+                            mouseout: function(e) {
+                                if (!selectedMunicipality || selectedMunicipality.municity_id !== municipality.municity_id) {
+                                    layer.setStyle({
+                                        fillColor: 'transparent',
+                                        weight: 2,
+                                        opacity: 1,
+                                        color: '#60a5fa',
+                                        dashArray: '1',
+                                        fillOpacity: 0
+                                    });
+                                }
+                                info.update();
+                            },
+                            click: function(e) {
+                                L.DomEvent.stopPropagation(e); // Stop click from reaching map
+                                selectMunicipality(municipality, province, layer);
+                            }
+                        });
+                    }
+                });
+                
+                municipalityLayerGroup.addLayer(layer);
+            });
+            
+            // Add municipality layer to map
+            municipalityLayerGroup.addTo(map);
+            
+            // Zoom to province bounds
+            if (province.boundaries) {
+                const bounds = L.geoJSON(province.boundaries).getBounds();
+                map.fitBounds(bounds, { padding: [20, 20] });
+            }
+        }
+        
+        // Select a municipality
+        function selectMunicipality(municipality, province, layer) {
+            // Reset previous municipality selection
+            municipalityLayerGroup.eachLayer(function(l) {
+                l.setStyle({
+                    fillColor: 'transparent',
+                    weight: 2,
+                    opacity: 1,
+                    color: '#60a5fa',
+                    dashArray: '1',
+                    fillOpacity: 0
+                });
+            });
+            
+            // Store the municipality with its municity_id for proper identification
+            selectedMunicipality = municipality;
+            
+            // Style selected municipality
+            layer.setStyle({
+                weight: 3,
+                color: '#1d4ed8',
+                dashArray: '',
+                fillOpacity: 0.5,
+                fillColor: '#3b82f6'
+            });
+            layer.bringToFront();
+            
+            // Show municipality details
+            showMunicipalityDetails(municipality, province);
+        }
+        
+        // Show province details
+        function showProvinceDetails(province) {
+            const detailsPanel = document.getElementById('details-panel');
+            const municitiesCount = municitiesData.filter(m => m.province_id === province.province_id).length;
+            
+            detailsPanel.querySelector('.controls').innerHTML = `
+                <button id="reset-btn" class="btn" onclick="resetToProvinces()">Clear Selection</button>
+                <button id="zoom-selected-btn" class="btn" onclick="zoomToSelected()">Zoom to Province</button>
+            `;
+            
+            const createdDate = province.created_at ? new Date(province.created_at).toLocaleDateString() : 'N/A';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.innerHTML = `
+                <div class="details-header">
+                    <h2>${province.name}</h2>
+                    <p>Province (showing municipalities)</p>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Province Name</div>
+                    <div class="detail-value">${province.name}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Province ID</div>
+                    <div class="detail-value">${province.province_id}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Municipalities/Cities</div>
+                    <div class="detail-value municities-count">${municitiesCount} municipalities/cities</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Geometry Type</div>
+                    <div class="detail-value">${province.boundaries ? province.boundaries.type : 'N/A'}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Created</div>
+                    <div class="detail-value">${createdDate}</div>
+                </div>
+            `;
+            
+            // Remove default content and add details
+            const defaultContent = detailsPanel.querySelector('#default-content');
+            if (defaultContent) defaultContent.remove();
+            
+            const existingContent = detailsPanel.querySelector('.details-content');
+            if (existingContent) existingContent.remove();
+            
+            contentDiv.className = 'details-content';
+            detailsPanel.insertBefore(contentDiv, detailsPanel.querySelector('.status-bar'));
+        }
+        
+        // Show municipality details
+        function showMunicipalityDetails(municipality, province) {
+            const detailsPanel = document.getElementById('details-panel');
+            
+            detailsPanel.querySelector('.controls').innerHTML = `
+                <button id="reset-btn" class="btn" onclick="resetToProvinces()">Clear Selection</button>
+                <button id="zoom-selected-btn" class="btn" onclick="zoomToSelected()">Zoom to Municipality</button>
+            `;
+            
+            const createdDate = municipality.created_at ? new Date(municipality.created_at).toLocaleDateString() : 'N/A';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.innerHTML = `
+                <div class="details-header">
+                    <h2>${municipality.name}</h2>
+                    <p>Municipality/City in ${province.name}</p>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Municipality/City Name</div>
+                    <div class="detail-value">${municipality.name}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Province</div>
+                    <div class="detail-value">${province.name}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Municipality ID</div>
+                    <div class="detail-value">${municipality.municity_id || 'N/A'}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Province ID</div>
+                    <div class="detail-value">${municipality.province_id}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Unique Identifier</div>
+                    <div class="detail-value">${municipality.name}-${municipality.province_id}-${municipality.municity_id || 'no_id'}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Geometry Type</div>
+                    <div class="detail-value">${municipality.boundaries ? municipality.boundaries.type : 'N/A'}</div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Created</div>
+                    <div class="detail-value">${createdDate}</div>
+                </div>
+            `;
+            
+            // Remove existing content and add details
+            const existingContent = detailsPanel.querySelector('.details-content');
+            if (existingContent) existingContent.remove();
+            
+            contentDiv.className = 'details-content';
+            detailsPanel.insertBefore(contentDiv, detailsPanel.querySelector('.status-bar'));
+        }
+        
+        // Reset to provinces view
+        function resetToProvinces() {
+            currentMode = 'provinces';
+            selectedProvince = null;
+            selectedMunicipality = null;
+            
+            // Remove municipality layers
+            if (map.hasLayer(municipalityLayerGroup)) {
+                map.removeLayer(municipalityLayerGroup);
+            }
+            municipalityLayerGroup.clearLayers();
+            
+            // Reset all province styles
+            provinceLayerGroup.eachLayer(function(l) {
+                l.setStyle({
+                    fillColor: '#3388ff',
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.4
+                });
+            });
+            
+            // Reset zoom
+            map.setView([12.8797, 121.7740], 6);
+            
+            // Reset details panel
+            const detailsPanel = document.getElementById('details-panel');
+            detailsPanel.querySelector('.controls').innerHTML = `
+                <button id="reset-btn" class="btn" onclick="resetToProvinces()">Reset to Provinces</button>
+                <button id="zoom-selected-btn" class="btn" onclick="zoomToSelected()" disabled>Zoom to Selected</button>
+            `;
+            
+            const existingContent = detailsPanel.querySelector('.details-content');
+            if (existingContent) existingContent.remove();
+            
+            if (!detailsPanel.querySelector('#default-content')) {
+                const defaultContent = document.createElement('div');
+                defaultContent.className = 'no-selection';
+                defaultContent.id = 'default-content';
+                defaultContent.innerHTML = `
+                    <i>🗺️</i>
+                    <p>Hover over provinces to see details</p>
+                    <p>Click on a province to view its municipalities</p>
+                `;
+                detailsPanel.insertBefore(defaultContent, detailsPanel.querySelector('.status-bar'));
+            }
+            
+            // Update status
+            document.getElementById('status-text').textContent = 
+                `Showing ${provincesData.length} provinces`;
+        }
+        
+        // Zoom to selected area
+        function zoomToSelected() {
+            if (currentMode === 'provinces' && selectedProvince && selectedProvince.boundaries) {
+                const bounds = L.geoJSON(selectedProvince.boundaries).getBounds();
+                map.fitBounds(bounds, { padding: [20, 20] });
+            } else if (currentMode === 'municipalities' && selectedMunicipality && selectedMunicipality.boundaries) {
+                const bounds = L.geoJSON(selectedMunicipality.boundaries).getBounds();
+                map.fitBounds(bounds, { padding: [20, 20] });
+            }
+        }
+        
+        // Loading overlay functions
+        function setLoading(isLoading, message = 'Loading...') {
+            const overlay = document.getElementById('loading-overlay');
+            const messageEl = document.getElementById('loading-message');
+            
+            if (isLoading) {
+                messageEl.textContent = message;
+                overlay.style.display = 'flex';
+            } else {
+                overlay.style.display = 'none';
+            }
+        }
+        
+        // Initialize the application
+        async function init() {
+            setLoading(true, 'Initializing map...');
+            initMap();
+            
+            const dataLoaded = await loadData();
+            if (dataLoaded) {
+                setLoading(true, 'Creating province boundaries...');
+                createProvinceLayers();
+                
+                document.getElementById('status-text').textContent = 
+                    `Showing ${provincesData.length} provinces`;
+                
+                setLoading(false);
+            } else {
+                setLoading(false);
+            }
+        }
+        
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
