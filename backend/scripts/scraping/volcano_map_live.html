@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALISTO - PHIVOLCS Live Volcano Bulletin Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+    crossorigin=""/>
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+    }
+    
+    .header {
+      background-color: #e25822;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+    
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+    
+    .refresh-button {
+      background-color: white;
+      color: #e25822;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      margin-left: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .refresh-button:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .main-container {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+    
+    #map { 
+      flex: 1;
+      height: 100%;
+    }
+    
+    .sidebar {
+      width: 350px;
+      background-color: white;
+      overflow-y: auto;
+      box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+      padding: 15px;
+    }
+    
+    .bulletin-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .bulletin-item {
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+    
+    .bulletin-item:hover {
+      background-color: #f0f0f0;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    
+    .bulletin-item.active {
+      background-color: #fff2ec;
+      border-left: 4px solid #e25822;
+    }
+    
+    .bulletin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .bulletin-name {
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .bulletin-date {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .alert-level {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
+      margin-top: 5px;
+    }
+    
+    .alert-0 { background-color: #28a745; } /* Normal */
+    .alert-1 { background-color: #ffc107; color: #333; } /* Level 1 */
+    .alert-2 { background-color: #fd7e14; } /* Level 2 */
+    .alert-3, .alert-4, .alert-5 { background-color: #dc3545; } /* Level 3+ */
+    
+    .bulletin-preview {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .volcano-popup {
+      min-width: 200px;
+      max-width: 300px;
+    }
+    
+    .volcano-popup h3 {
+      margin: 0 0 8px;
+      color: #e25822;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    
+    .volcano-popup .alert-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      margin: 5px 0;
+      border-radius: 12px;
+      font-weight: bold;
+      color: white;
+    }
+    
+    /* Iframe tooltip styles */
+    .leaflet-tooltip {
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    
+    .iframe-container {
+      width: 300px;
+      height: 160px;
+      overflow: hidden;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    
+    .bulletin-iframe {
+      width: 300px;
+      height: 350px;
+      border: none;
+      margin-top: -35px; /* Show only header part */
+      pointer-events: none; /* Prevent iframe from capturing mouse events */
+    }
+    
+    .bulletin-header-only {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 160px;
+      z-index: 2;
+    }
+    
+    .volcano-popup p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+    
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .loading-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 6px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #e25822;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      margin: 0 auto 15px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .offline-notice {
+      padding: 10px;
+      background-color: #fff3cd;
+      color: #856404;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    #last-updated {
+      font-size: 0.8rem;
+      color: white;
+      opacity: 0.8;
+    }
+    
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      
+      #map {
+        height: 60%;
+      }
+      
+      .sidebar {
+        width: 100%;
+        height: 40%;
+        box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading" class="loading">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Loading volcano bulletin data...</p>
+    </div>
+  </div>
+  
+  <div class="header">
+    <h1>ALISTO Philippine Volcanoes Bulletin Map</h1>
+    <div class="header-right">
+      <span id="last-updated">Last updated: Loading...</span>
+      <button id="refreshButton" class="refresh-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+  </div>
+  
+  <div class="main-container">
+    <div id="map"></div>
+    
+    <div class="sidebar">
+      <div id="offline-notice" class="offline-notice hidden">
+        You are viewing cached volcano data. Connect to the internet for live updates.
+      </div>
+      <ul id="bulletinList" class="bulletin-list">
+        <li>Loading bulletin data...</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+    crossorigin=""></script>
+  <script>
+    // Global variables
+    const map = L.map('map').setView([12.8797, 121.7740], 6);
+    let markers = {};
+    let bulletinData = null;
+    
+    // Initialize map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }).addTo(map);
+    
+    // Map of volcano names to coordinates (hardcoded from init_volcanoes_data.py)
+    const volcanoCoordinates = {
+      'Babuyan': [19.52408, 121.95005],  // Babuyan Claro
+      'Banahaw': [14.06038, 121.48803],
+      'Biliran': [11.63268, 124.47162],  // Biliran (Anas)
+      'Bud': [6.01295, 121.05772],      // Bud Dajo
+      'Bulusan': [12.76853, 124.05445],
+      'Cabalian': [10.27986, 125.21598],
+      'Cagua': [18.22116, 122.1163],
+      'Camiguin': [18.83037, 121.86280], // Camiguin de Babuyanes
+      'Didicas': [19.07533, 122.20147],
+      'Hibok': [9.20427, 124.67115],    // Hibok-hibok
+      'Iraya': [20.46669, 122.01078],
+      'Iriga': [13.45606, 123.45479],
+      'Isarog': [13.65685, 123.38087],
+      'Kanlaon': [10.41129, 123.13243],
+      'Leonard': [7.39359, 126.06418],  // Leonard Kniaseff
+      'Kniaseff': [7.39359, 126.06418], // Leonard Kniaseff (alt)
+      'Makaturing': [7.64371, 124.31718],
+      'Matutum': [6.36111, 125.07603],
+      'Mayon': [13.25519, 123.68615],
+      'Musuan': [7.87680, 125.06985],   // Musuan (Calayo)
+      'Calayo': [7.87680, 125.06985],   // Musuan (Calayo) (alt)
+      'Parker': [6.10274, 124.88879],
+      'Pinatubo': [15.14162, 120.35084],
+      'Ragang': [7.69066, 124.50639],
+      'Smith': [19.53915, 121.91367],
+      'Taal': [14.01024, 120.99812]
+    };
+    
+    // Function to get alert level class
+    function getAlertClass(alertLevel) {
+      if (!alertLevel) return 'alert-0';
+      
+      const level = parseInt(alertLevel.match(/\d+/)) || 0;
+      return `alert-${Math.min(level, 5)}`;
+    }
+    
+    // Function to get marker color based on alert level
+    function getAlertColor(alertLevel) {
+      if (!alertLevel) return '#28a745'; // Green for normal
+      
+      const level = parseInt(alertLevel.match(/\d+/)) || 0;
+      
+      if (level === 0) return '#28a745';  // Green
+      if (level === 1) return '#ffc107';  // Yellow
+      if (level === 2) return '#fd7e14';  // Orange
+      return '#dc3545';                   // Red (level 3+)
+    }
+    
+    // Function to check if user is on mobile
+    function isMobileDevice() {
+      return window.innerWidth <= 768 || 
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
+    // Function to generate iframe HTML for bulletin
+    function generateBulletinIframe(bulletinId) {
+      // For mobile devices, we'll show a simpler version to avoid performance issues
+      if (isMobileDevice()) {
+        return `
+          <div class="iframe-container" style="background-color: #f9f9f9; text-align: center; display: flex; align-items: center; justify-content: center;">
+            <div style="padding: 15px;">
+              <h4 style="margin: 0; color: #e25822;">Bulletin Available</h4>
+              <p style="margin: 5px 0 0;">Tap to view details</p>
+            </div>
+          </div>
+        `;
+      }
+      
+      return `
+        <div class="iframe-container">
+          <iframe 
+            src="https://wovodat.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=${bulletinId}&lang=en" 
+            class="bulletin-iframe" 
+            scrolling="no" 
+            title="Volcano Bulletin"
+            frameborder="0"
+            loading="lazy">
+          </iframe>
+        </div>
+      `;
+    }
+    
+    // Function to load bulletin data
+    async function loadBulletinData() {
+      try {
+        // Show loading indicator
+        document.getElementById('loading').classList.remove('hidden');
+        
+        // Attempt to fetch from local json file first
+        const response = await fetch('volcano_bulletin_data.json');
+        if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+        
+        bulletinData = await response.json();
+        
+        document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleString();
+        document.getElementById('offline-notice').classList.add('hidden');
+        
+        // Process and display the data
+        displayBulletinData(bulletinData);
+      } catch (error) {
+        console.error('Error loading bulletin data:', error);
+        document.getElementById('offline-notice').classList.remove('hidden');
+        
+        // Try to load hardcoded demo data
+        bulletinData = loadDemoData();
+        displayBulletinData(bulletinData);
+      } finally {
+        // Hide loading indicator
+        document.getElementById('loading').classList.add('hidden');
+      }
+    }
+    
+    // Function to display bulletin data
+    function displayBulletinData(data) {
+      // Clear existing markers
+      clearMarkers();
+      
+      // Update bulletin list
+      const bulletinList = document.getElementById('bulletinList');
+      bulletinList.innerHTML = '';
+      
+      if (!data || data.length === 0) {
+        bulletinList.innerHTML = '<li>No bulletin data available</li>';
+        return;
+      }
+      
+      // Process each bulletin
+      data.forEach((bulletin, index) => {
+        // Create list item
+        const listItem = document.createElement('li');
+        listItem.className = 'bulletin-item';
+        listItem.dataset.index = index;
+        listItem.onclick = () => selectBulletin(index);
+        
+        const alertClass = getAlertClass(bulletin.alert_level);
+        
+        listItem.innerHTML = `
+          <div class="bulletin-header">
+            <span class="bulletin-name">${bulletin.volcano_name || 'Unknown Volcano'}</span>
+            <span class="bulletin-date">${bulletin.issue_date || 'No date'}</span>
+          </div>
+          <div>
+            <span class="alert-level ${alertClass}">${bulletin.alert_level || 'No Alert'}</span>
+          </div>
+          <div class="bulletin-preview">${bulletin.content || 'No content available'}</div>
+        `;
+        
+        bulletinList.appendChild(listItem);
+        
+        // Add marker to map if coordinates are available
+        addMarkerForVolcano(bulletin, index);
+      });
+    }
+    
+    // Function to add marker for a volcano
+    function addMarkerForVolcano(bulletin, index) {
+      const name = bulletin.volcano_name;
+      if (!name) return;
+      
+      // Find coordinates based on volcano name
+      let coords = null;
+      
+      // Check for exact match
+      if (volcanoCoordinates[name]) {
+        coords = volcanoCoordinates[name];
+      } else {
+        // Try to find partial match (e.g., "Taal Volcano" matches "Taal")
+        for (const [key, value] of Object.entries(volcanoCoordinates)) {
+          if (name.includes(key)) {
+            coords = value;
+            break;
+          }
+        }
+      }
+      
+      if (!coords) {
+        console.warn(`No coordinates found for volcano: ${name}`);
+        return;
+      }
+      
+      const alertColor = getAlertColor(bulletin.alert_level);
+      
+      // Create marker
+      const marker = L.circleMarker(coords, {
+        radius: 8,
+        fillColor: alertColor,
+        color: '#fff',
+        weight: 1.5,
+        opacity: 1,
+        fillOpacity: 0.9
+      }).addTo(map);
+      
+      // Create popup content
+      const popupContent = `
+        <div class="volcano-popup">
+          <h3>${bulletin.volcano_name || 'Unknown Volcano'}</h3>
+          <span class="alert-badge" style="background-color: ${alertColor}">
+            ${bulletin.alert_level || 'No Alert'}
+          </span>
+          <p><strong>Date:</strong> ${bulletin.issue_date || 'N/A'}</p>
+          <p>${bulletin.content ? bulletin.content.substring(0, 150) + '...' : 'No content available'}</p>
+        </div>
+      `;
+      
+      // Bind popup and click event
+      marker.bindPopup(popupContent);
+      marker.on('click', () => selectBulletin(index));
+      
+      // Add bulletin iframe tooltip on hover if bulletin_id is available
+      if (bulletin.bulletin_id) {
+        // Create tooltip with bulletin iframe
+        const bulletinTooltip = L.tooltip({
+          permanent: false,
+          direction: 'top',
+          offset: [0, -30],
+          opacity: 1,
+          className: 'bulletin-tooltip'
+        });
+        
+        const iframeHTML = generateBulletinIframe(bulletin.bulletin_id);
+        bulletinTooltip.setContent(iframeHTML);
+        
+        // Show tooltip on hover
+        marker.on('mouseover', function() {
+          this.unbindTooltip();
+          this.bindTooltip(bulletinTooltip).openTooltip();
+        });
+        
+        // Hide tooltip when mouse leaves
+        marker.on('mouseout', function() {
+          this.closeTooltip();
+          this.unbindTooltip();
+        });
+      }
+      
+      // Store marker reference
+      markers[index] = marker;
+    }
+    
+    // Function to clear all markers
+    function clearMarkers() {
+      for (const index in markers) {
+        if (markers[index]) {
+          map.removeLayer(markers[index]);
+        }
+      }
+      markers = {};
+    }
+    
+    // Function to select a bulletin
+    function selectBulletin(index) {
+      // Update UI selection
+      const items = document.querySelectorAll('.bulletin-item');
+      items.forEach(item => item.classList.remove('active'));
+      
+      const selectedItem = document.querySelector(`.bulletin-item[data-index="${index}"]`);
+      if (selectedItem) {
+        selectedItem.classList.add('active');
+        selectedItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      
+      // Open marker popup
+      const marker = markers[index];
+      if (marker) {
+        map.setView(marker.getLatLng(), 9);
+        marker.openPopup();
+      }
+    }
+    
+    // Function to load demo data in case fetch fails
+    function loadDemoData() {
+      return [
+        {
+          "volcano_name": "Taal",
+          "issue_date": "1 October 2025",
+          "alert_level": "Alert Level 2",
+          "content": "Taal Volcano remains at Alert Level 2 (Increased Unrest). DOST-PHIVOLCS reminds the public that entry into TVI, Taal's Permanent Danger Zone or PDZ, is prohibited.",
+          "bulletin_id": "56774" // Added bulletin_id for demo
+        },
+        {
+          "volcano_name": "Mayon",
+          "issue_date": "30 September 2025",
+          "alert_level": "Alert Level 3",
+          "content": "Mayon Volcano's current condition is characterized by a relatively high level of unrest due to magma at the shallow part of the edifice. Alert Level 3 is maintained.",
+          "bulletin_id": "56767" // Added bulletin_id for demo
+        },
+        {
+          "volcano_name": "Kanlaon",
+          "issue_date": "29 September 2025",
+          "alert_level": "Alert Level 1",
+          "content": "Kanlaon Volcano's monitoring network recorded 5 volcanic earthquakes during the 24-hour observation period. Alert Level 1 (Abnormal) status prevails over Kanlaon Volcano.",
+          "bulletin_id": "56776" // Added bulletin_id for demo
+        },
+        {
+          "volcano_name": "Bulusan",
+          "issue_date": "28 September 2025",
+          "alert_level": "Alert Level 0",
+          "content": "Bulusan Volcano's monitoring network did not detect any volcanic earthquake during the 24-hour observation period. Alert Level 0 (Normal) status prevails over Bulusan Volcano.",
+          "bulletin_id": "56677" // Added bulletin_id for demo
+        }
+      ];
+    }
+    
+    // Add Philippines outline
+    fetch('https://raw.githubusercontent.com/macoymejia/geojsonph/master/Philippines.json')
+      .then(response => response.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: {
+            color: '#2c3e50',
+            weight: 1,
+            opacity: 0.7,
+            fillColor: '#ecf0f1',
+            fillOpacity: 0.15
+          }
+        }).addTo(map);
+      })
+      .catch(error => console.error('Error loading Philippines GeoJSON:', error));
+    
+    // Refresh button handler
+    document.getElementById('refreshButton').addEventListener('click', loadBulletinData);
+    
+    // Initialize
+    loadBulletinData();
+  </script>
+</body>
+</html>

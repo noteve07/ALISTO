@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHIVOLCS Volcano Bulletin Iframe</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    h1 {
+      color: #e25822;
+      margin-top: 0;
+    }
+    .iframe-container {
+      width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      border: none;
+      height: 400px;
+    }
+    .info {
+      background-color: #f8f9fa;
+      border-left: 4px solid #e25822;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    .code-block {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: monospace;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #e25822;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    button:hover {
+      background-color: #c24d1d;
+    }
+    .bulletin-id-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PHIVOLCS Volcano Bulletin Iframe Viewer</h1>
+    
+    <div class="info">
+      <p>This page shows the direct bulletin iframe from PHIVOLCS. The iframes are loaded directly from the PHIVOLCS website.</p>
+    </div>
+    
+    <div class="bulletin-id-input">
+      <label for="bulletinId">Bulletin ID:</label>
+      <input type="text" id="bulletinId" value="12460">
+      <button onclick="loadBulletin()">Load Bulletin</button>
+    </div>
+    
+    <div class="code-block" id="iframeCode">
+      &lt;iframe src="https://wovodat.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=12460&amp;lang=en" class="iframe-thumb" scrolling="no" title="Volcano Bulletin"&gt;&lt;/iframe&gt;
+    </div>
+    
+    <div class="iframe-container">
+      <iframe id="volcanoIframe" src="https://wovodat.phivolcs.dost.gov.ph/bulletin/activity-mvo?bid=12460&lang=en" scrolling="no" title="Volcano Bulletin"></iframe>
+    </div>
+    
+    <h2>How to use:</h2>
+    <ol>
+      <li>Enter a bulletin ID in the input field (try IDs between 12460-12480)</li>
+      <li>Click "Load Bulletin" to update the iframe</li>
+      <li>Copy the iframe code for use in your application</li>
+    </ol>
+    
+    <div class="info">
+      <p><strong>Note:</strong> The bulletins are hosted on PHIVOLCS servers. For a production app, you should store and serve this data locally to avoid dependencies on external services.</p>
+    </div>
+  </div>
+
+  <script>
+    function loadBulletin() {
+      const bulletinId = document.getElementById('bulletinId').value.trim();
+      if (!bulletinId) return;
+      
+      const baseUrl = "https://wovodat.phivolcs.dost.gov.ph/bulletin/activity-mvo";
+      const iframeUrl = `${baseUrl}?bid=${bulletinId}&lang=en`;
+      
+      // Update iframe
+      const iframe = document.getElementById('volcanoIframe');
+      iframe.src = iframeUrl;
+      
+      // Update code block
+      const codeBlock = document.getElementById('iframeCode');
+      codeBlock.textContent = `<iframe src="${iframeUrl}" class="iframe-thumb" scrolling="no" title="Volcano Bulletin"></iframe>`;
+      
+      console.log(`Loaded bulletin ID: ${bulletinId}`);
+    }
+  </script>
+</body>
+</html>
