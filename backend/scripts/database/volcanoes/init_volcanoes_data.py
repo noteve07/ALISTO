@@ -1,5 +1,3 @@
-ayo so im now inserting to volcanoes table 
-
 # scripts/database/init_volcanoes_data.py
 """
 Script to populate volcanoes table with Philippine volcanoes data
@@ -198,5 +196,3 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-    is this correct
