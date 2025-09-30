@@ -41,7 +41,7 @@ class VolcanoSeeder:
             ('Kanlaon', 10.41129, 123.13243, 'Negros Oriental'),
             ('Leonard Kniaseff', 7.39359, 126.06418, 'Davao del Norte'),
             ('Makaturing', 7.64371, 124.31718, 'Lanao del Sur'),
-            ('Matutum', 6.36111, 125.07603, 'Cotabato'),
+            ('Matutum', 6.36111, 125.07603, 'South Cotabato'),
             ('Mayon', 13.25519, 123.68615, 'Albay'),
             ('Musuan (Calayo)', 7.87680, 125.06985, 'Bukidnon'),
             ('Parker', 6.10274, 124.88879, 'South Cotabato'),
