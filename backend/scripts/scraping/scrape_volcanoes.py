@@ -65,18 +65,40 @@ def scrape_volcano_data(url=None):
             base_url = 'https://wovodat.phivolcs.dost.gov.ph'
             full_url = urljoin(base_url + '/', href)
             volcano_data['iframe_link'] = full_url
+            
+            # Extract bulletin ID from URL if present
+            bid_match = re.search(r'bid=(\d+)', full_url)
+            if bid_match:
+                volcano_data['bulletin_id'] = bid_match.group(1)
 
             # Try fetching the target page to extract the alert level
             try:
                 resp = requests.get(full_url, timeout=15, verify=False)
                 if resp.ok:
                     iframe_soup = BeautifulSoup(resp.text, 'html.parser')
+                    # Extract alert level number
                     circle_div = iframe_soup.find('div', class_='circle')
+                    raw_alert_level = 'Not found'
                     if circle_div:
-                        alert_text = circle_div.get_text(strip=True)
-                        volcano_data['alert_level'] = alert_text
+                        raw_alert_level = circle_div.get_text(strip=True)
+                        volcano_data['raw_alert_level'] = raw_alert_level
                     else:
-                        volcano_data['alert_level'] = 'Not found'
+                        volcano_data['raw_alert_level'] = 'Not found'
+                    
+                    # Extract alert status text (e.g., "Low-level unrest")
+                    status_p = iframe_soup.find('p', class_='txt-status')
+                    status_text = 'Not found'
+                    if status_p:
+                        status_text = status_p.get_text(strip=True).strip('()')  # Remove parentheses
+                        volcano_data['alert_status'] = status_text
+                    else:
+                        volcano_data['alert_status'] = 'Not found'
+                        
+                    # Combine alert level and status into formatted field
+                    if raw_alert_level != 'Not found':
+                        volcano_data['alert_level'] = f"Alert Level {raw_alert_level}"
+                    else:
+                        volcano_data['alert_level'] = 'No Alert'
                 else:
                     volcano_data['alert_level'] = f'HTTP {resp.status_code}'
             except requests.RequestException as e:
@@ -87,18 +109,40 @@ def scrape_volcano_data(url=None):
             if iframe and iframe.get('src'):
                 iframe_src = iframe.get('src')
                 volcano_data['iframe_link'] = iframe_src
+                
+                # Extract bulletin ID from iframe source if present
+                bid_match = re.search(r'bid=(\d+)', iframe_src)
+                if bid_match:
+                    volcano_data['bulletin_id'] = bid_match.group(1)
                 # Since we're scraping from web, we'll try to follow the iframe source if it's a URL
                 if iframe_src.startswith('http'):
                     try:
                         iframe_resp = requests.get(iframe_src, timeout=15, verify=False)
                         if iframe_resp.ok:
                             iframe_soup = BeautifulSoup(iframe_resp.text, 'html.parser')
+                            # Extract alert level number
                             circle_div = iframe_soup.find('div', class_='circle')
+                            raw_alert_level = 'Not found'
                             if circle_div:
-                                alert_text = circle_div.get_text(strip=True)
-                                volcano_data['alert_level'] = alert_text
+                                raw_alert_level = circle_div.get_text(strip=True)
+                                volcano_data['raw_alert_level'] = raw_alert_level
                             else:
-                                volcano_data['alert_level'] = 'Alert level not found in iframe'
+                                volcano_data['raw_alert_level'] = 'Not found'
+                                
+                            # Extract alert status text (e.g., "Low-level unrest")
+                            status_p = iframe_soup.find('p', class_='txt-status')
+                            status_text = 'Not found'
+                            if status_p:
+                                status_text = status_p.get_text(strip=True).strip('()')  # Remove parentheses
+                                volcano_data['alert_status'] = status_text
+                            else:
+                                volcano_data['alert_status'] = 'Status not found in iframe'
+                                
+                            # Combine alert level and status into formatted field
+                            if raw_alert_level != 'Not found':
+                                volcano_data['alert_level'] = f"Alert Level {raw_alert_level}"
+                            else:
+                                volcano_data['alert_level'] = 'No Alert'
                         else:
                             volcano_data['alert_level'] = f'HTTP {iframe_resp.status_code}'
                     except requests.RequestException as e:
@@ -126,7 +170,9 @@ def print_volcano_data(volcano_data_list):
         print(f"Volcano Name:  {data.get('volcano_name', 'N/A')}")
         print(f"Date:          {data.get('date', 'N/A')}")
         print(f"Iframe Link:   {data.get('iframe_link', 'N/A')}")
+        print(f"Bulletin ID:   {data.get('bulletin_id', 'N/A')}")
         print(f"Alert Level:   {data.get('alert_level', 'N/A')}")
+        print(f"Alert Status:  {data.get('alert_status', 'N/A')}")
     
     print(f"\n{'='*80}")
     print(f"Total volcanoes found: {len(volcano_data_list)}")
@@ -144,5 +190,9 @@ if __name__ == "__main__":
     # Print the results
     print_volcano_data(volcano_data)
     
-    # Optionally, we could save the data to a file or database here
+    print("\n📝 This scraper now extracts additional data:")
+    print("   - Alert Level Number (raw_alert_level)")
+    print("   - Alert Status Text (alert_status) - e.g., 'Low-level unrest'")
+    print("   - Bulletin ID (bulletin_id) - for iframe embedding")
+    
     print("\n💾 To save this data to database, run init_volcanoes_data.py with the updated data")
