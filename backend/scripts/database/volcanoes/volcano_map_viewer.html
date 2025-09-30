@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Philippine Volcanoes Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+    crossorigin=""/>
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    #map { 
+      width: 100%; 
+      height: 100vh; 
+    }
+    .marker-tooltip {
+      font-size: 14px;
+      padding: 4px 8px;
+    }
+    .volcano-name {
+      font-weight: bold;
+      font-size: 15px;
+      color: #e25822;
+    }
+    .leaflet-popup-content {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+    crossorigin=""></script>
+  <script>
+    // Initialize map centered on the Philippines
+    const map = L.map('map').setView([12.8797, 121.7740], 6);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Volcano data from init_volcanoes_data.py
+    const volcanoes = [
+      {name: 'Babuyan Claro', lat: 19.52408, lon: 121.95005, province: 'Cagayan'},
+      {name: 'Banahaw', lat: 14.06038, lon: 121.48803, province: 'Laguna'},
+      {name: 'Biliran (Anas)', lat: 11.63268, lon: 124.47162, province: 'Leyte'},
+      {name: 'Bud Dajo', lat: 6.01295, lon: 121.05772, province: 'Sulu'},
+      {name: 'Bulusan', lat: 12.76853, lon: 124.05445, province: 'Sorsogon'},
+      {name: 'Cabalian', lat: 10.27986, lon: 125.21598, province: 'Southern Leyte'},
+      {name: 'Cagua', lat: 18.22116, lon: 122.1163, province: 'Cagayan'},
+      {name: 'Camiguin de Babuyanes', lat: 18.83037, lon: 121.86280, province: 'Cagayan'},
+      {name: 'Didicas', lat: 19.07533, lon: 122.20147, province: 'Cagayan'},
+      {name: 'Hibok-hibok', lat: 9.20427, lon: 124.67115, province: 'Camiguin'},
+      {name: 'Iraya', lat: 20.46669, lon: 122.01078, province: 'Batanes'},
+      {name: 'Iriga', lat: 13.45606, lon: 123.45479, province: 'Camarines Sur'},
+      {name: 'Isarog', lat: 13.65685, lon: 123.38087, province: 'Camarines Sur'},
+      {name: 'Kanlaon', lat: 10.41129, lon: 123.13243, province: 'Negros Oriental'},
+      {name: 'Leonard Kniaseff', lat: 7.39359, lon: 126.06418, province: 'Davao del Norte'},
+      {name: 'Makaturing', lat: 7.64371, lon: 124.31718, province: 'Lanao del Sur'},
+      {name: 'Matutum', lat: 6.36111, lon: 125.07603, province: 'Cotabato'},
+      {name: 'Mayon', lat: 13.25519, lon: 123.68615, province: 'Albay'},
+      {name: 'Musuan (Calayo)', lat: 7.87680, lon: 125.06985, province: 'Bukidnon'},
+      {name: 'Parker', lat: 6.10274, lon: 124.88879, province: 'South Cotabato'},
+      {name: 'Pinatubo', lat: 15.14162, lon: 120.35084, province: 'Pampanga'},
+      {name: 'Ragang', lat: 7.69066, lon: 124.50639, province: 'Lanao del Sur'},
+      {name: 'Smith', lat: 19.53915, lon: 121.91367, province: 'Cagayan'},
+      {name: 'Taal', lat: 14.01024, lon: 120.99812, province: 'Batangas'}
+    ];
+
+    // Custom volcano icon
+    const volcanoIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    // Add each volcano as a marker with tooltip
+    volcanoes.forEach(volcano => {
+      const marker = L.marker([volcano.lat, volcano.lon], {icon: volcanoIcon}).addTo(map);
+      
+      // Bind tooltip for hover
+      marker.bindTooltip(`
+        <div class="marker-tooltip">
+          <div class="volcano-name">${volcano.name}</div>
+          <div>Province: ${volcano.province}</div>
+        </div>
+      `, {
+        direction: 'top',
+        sticky: true,
+        opacity: 0.9
+      });
+      
+      // Bind popup for click
+      marker.bindPopup(`
+        <div>
+          <h3>${volcano.name}</h3>
+          <p><strong>Province:</strong> ${volcano.province}</p>
+          <p><strong>Location:</strong> ${volcano.lat.toFixed(5)}, ${volcano.lon.toFixed(5)}</p>
+        </div>
+      `);
+    });
+
+    // Add Philippines outline (simplified GeoJSON)
+    fetch('https://raw.githubusercontent.com/macoymejia/geojsonph/master/Philippines.json')
+      .then(response => response.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: {
+            color: '#2c3e50',
+            weight: 1,
+            opacity: 0.5,
+            fillColor: '#ecf0f1',
+            fillOpacity: 0.1
+          }
+        }).addTo(map);
+      })
+      .catch(error => console.error('Error loading Philippines GeoJSON:', error));
+  </script>
+</body>
+</html>
