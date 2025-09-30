@@ -4,18 +4,34 @@ import re
 import requests
 import urllib3
 from urllib.parse import urljoin
+import time
 
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def scrape_volcano_data(html_file_path):
+def scrape_volcano_data(url=None):
     """
-    Scrapes volcano data from PHIVOLCS HTML file
+    Scrapes volcano data from PHIVOLCS website or HTML file
     Returns list of volcano data including name, date, iframe link, and alert level
     """
-    # Read the main HTML file
-    with open(html_file_path, 'r', encoding='utf-8') as file:
-        html_content = file.read()
+    if url:
+        # Fetch the HTML content from the URL
+        print(f"Fetching volcano data from URL: {url}")
+        try:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Accept-Language': 'en-US,en;q=0.9',
+            }
+            response = requests.get(url, headers=headers, timeout=30, verify=False)
+            response.raise_for_status()  # Raise exception for HTTP errors
+            html_content = response.text
+            print(f"✅ Successfully fetched data from PHIVOLCS website ({len(html_content)} bytes)")
+        except requests.RequestException as e:
+            print(f"❌ Error fetching PHIVOLCS website: {str(e)}")
+            return []
+    else:
+        print("❌ No URL or file path provided")
+        return []
     
     soup = BeautifulSoup(html_content, 'html.parser')
     
@@ -66,26 +82,29 @@ def scrape_volcano_data(html_file_path):
             except requests.RequestException as e:
                 volcano_data['alert_level'] = f'Network error: {str(e)}'
         else:
-            # Fallback to iframe src on local file (offline mode)
+            # Fallback to iframe src
             iframe = column.find('iframe')
             if iframe and iframe.get('src'):
                 iframe_src = iframe.get('src')
                 volcano_data['iframe_link'] = iframe_src
-                iframe_file_path = os.path.join(os.path.dirname(html_file_path), iframe_src.replace('./', ''))
-                try:
-                    with open(iframe_file_path, 'r', encoding='utf-8') as iframe_file:
-                        iframe_content = iframe_file.read()
-                    iframe_soup = BeautifulSoup(iframe_content, 'html.parser')
-                    circle_div = iframe_soup.find('div', class_='circle')
-                    if circle_div:
-                        alert_text = circle_div.get_text(strip=True)
-                        volcano_data['alert_level'] = alert_text
-                    else:
-                        volcano_data['alert_level'] = 'Not found'
-                except FileNotFoundError:
-                    volcano_data['alert_level'] = 'Iframe file not found'
-                except Exception as e:
-                    volcano_data['alert_level'] = f'Error reading iframe: {str(e)}'
+                # Since we're scraping from web, we'll try to follow the iframe source if it's a URL
+                if iframe_src.startswith('http'):
+                    try:
+                        iframe_resp = requests.get(iframe_src, timeout=15, verify=False)
+                        if iframe_resp.ok:
+                            iframe_soup = BeautifulSoup(iframe_resp.text, 'html.parser')
+                            circle_div = iframe_soup.find('div', class_='circle')
+                            if circle_div:
+                                alert_text = circle_div.get_text(strip=True)
+                                volcano_data['alert_level'] = alert_text
+                            else:
+                                volcano_data['alert_level'] = 'Alert level not found in iframe'
+                        else:
+                            volcano_data['alert_level'] = f'HTTP {iframe_resp.status_code}'
+                    except requests.RequestException as e:
+                        volcano_data['alert_level'] = f'Iframe fetch error: {str(e)}'
+                else:
+                    volcano_data['alert_level'] = 'Cannot fetch relative iframe src'
         
         volcano_data_list.append(volcano_data)
     
@@ -115,14 +134,15 @@ def print_volcano_data(volcano_data_list):
 
 
 if __name__ == "__main__":
-    # Path to the HTML file
-    html_file = os.path.join(
-        os.path.dirname(__file__),
-        'PHIVOLCS-LAVA_ Show of Bulletin.html'
-    )
+    # PHIVOLCS bulletin URL - using the correct URL
+    phivolcs_url = "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin"
     
-    # Scrape the data
-    volcano_data = scrape_volcano_data(html_file)
+    # Scrape the data directly from the PHIVOLCS website
+    print("🌋 Starting Philippine Volcanoes Scraper...")
+    volcano_data = scrape_volcano_data(phivolcs_url)
     
     # Print the results
     print_volcano_data(volcano_data)
+    
+    # Optionally, we could save the data to a file or database here
+    print("\n💾 To save this data to database, run init_volcanoes_data.py with the updated data")
