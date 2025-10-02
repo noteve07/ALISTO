@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        #map {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
+        .pulse {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            left: -15px;
+            top: -15px;
+            opacity: 0.7;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            70% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body> 
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([12.8797, 121.7740], 6);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA'
+        }).addTo(map);
+
+        var earthquakes = [
+            [14.5995, 120.9842, 'high', 'Manila', 'N/A', 'N/A'],
+            [10.3157, 123.8854, 'medium', 'Cebu', 'N/A', 'N/A'],
+            [7.1907, 125.4553, 'low', 'Davao', 'N/A', 'N/A'],
+            [14.6745, 120.4703, 'low', 'Balanga City, Bataan', '3.2', '10km']
+        ];
+
+        var riskColors = {
+            high: 'red',
+            medium: 'orange',
+            low: 'yellow'
+        };
+
+        earthquakes.forEach(function(eq) {
+            var color = riskColors[eq[2]];
+            var popupContent = `<b>${eq[3]}</b><br>
+            Latitude: ${eq[0]}<br>
+            Longitude: ${eq[1]}<br>
+            Magnitude: ${eq[4]}<br>
+            Depth: ${eq[5]}<br>
+            Risk: ${eq[2].charAt(0).toUpperCase() + eq[2].slice(1)}`;
+
+            var icon = L.divIcon({
+                className: '',
+                html: `<div class="pulse" style="background:${color};"></div>`,
+                iconSize: [30, 30]
+            });
+
+            L.marker([eq[0], eq[1]], {icon: icon})
+                .addTo(map)
+                .bindPopup(popupContent);
+        });
+    </script>
+</body>
+</html>

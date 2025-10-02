@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        #map {position: absolute; top: 0; bottom: 0; right: 0; left: 0;}
+    </style>
+</head>
+<body> 
+    <div id="map"></div>
+    <script>
+        // Philippines bounding box
+        var philBounds = L.latLngBounds(
+            L.latLng(4.5, 116.5), // Southwest
+            L.latLng(21.5, 127.0) // Northeast
+        );
+
+        var map = L.map('map', {
+            minZoom: 5,
+            maxZoom: 12,
+            maxBounds: philBounds,
+            maxBoundsViscosity: 1.0
+        }).setView([12.8797, 121.7740], 6);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 12,
+            minZoom: 5,
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA'
+        }).addTo(map);
+
+        // Example earthquake data: [latitude, longitude, riskLevel, location, magnitude, depth]
+        var earthquakes = [
+            [14.5995, 120.9842, 'high', 'Manila', 'N/A', 'N/A'],
+            [10.3157, 123.8854, 'medium', 'Cebu', 'N/A', 'N/A'],
+            [7.1907, 125.4553, 'low', 'Davao', 'N/A', 'N/A'],
+            [14.6745, 120.4703, 'low', 'Balanga City, Bataan', '3.2', '10km']
+        ];
+
+        // Risk color mapping
+        var riskColors = {
+            high: 'red',
+            medium: 'orange',
+            low: 'yellow'
+        };
+
+        // Add signal animation CSS
+        var style = document.createElement('style');
+        style.innerHTML = `
+            .signal-circle {
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                opacity: 0.6;
+                animation: signalPulse 1.5s linear infinite;
+            }
+            @keyframes signalPulse {
+                0% {
+                    transform: scale(0.5);
+                    opacity: 0.7;
+                }
+                70% {
+                    transform: scale(2.5);
+                    opacity: 0.1;
+                }
+                100% {
+                    transform: scale(0.5);
+                    opacity: 0.0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        earthquakes.forEach(function(eq) {
+            var magnitude = isNaN(parseFloat(eq[4])) ? 1 : parseFloat(eq[4]);
+            var radius = magnitude * 2000;
+            var popupContent = `<b>${eq[3]}</b><br>
+                Latitude: ${eq[0]}<br>
+                Longitude: ${eq[1]}<br>
+                Magnitude: ${eq[4]}<br>
+                Depth: ${eq[5]}<br>
+                Risk: ${eq[2].charAt(0).toUpperCase() + eq[2].slice(1)}`;
+
+            // Main circle
+            var marker = L.circle([eq[0], eq[1]], {
+                color: riskColors[eq[2]],
+                fillColor: riskColors[eq[2]],
+                fillOpacity: 0.5,
+                radius: radius
+            }).addTo(map)
+            .bindPopup(popupContent);
+
+            // Animated signal circle
+            var signalDiv = L.DomUtil.create('div', 'signal-circle');
+            signalDiv.style.width = (magnitude * 20) + 'px';
+            signalDiv.style.height = (magnitude * 20) + 'px';
+            signalDiv.style.background = riskColors[eq[2]];
+
+            var signalIcon = L.divIcon({
+                className: '',
+                html: signalDiv,
+                iconSize: [magnitude * 20, magnitude * 20],
+                iconAnchor: [magnitude * 10, magnitude * 10]
+            });
+            L.marker([eq[0], eq[1]], {icon: signalIcon, interactive: false}).addTo(map);
+        });
+    </script>
+</body>
+</html>
