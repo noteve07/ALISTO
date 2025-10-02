@@ -1,0 +1,740 @@
+[
+  {
+    "province_id": 1,
+    "name": "Abra",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.67889681172292, 17.506177561278864]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 2,
+    "name": "Agusan del Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.44236249103942, 9.096151301523298]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 3,
+    "name": "Agusan del Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.68238826443203, 8.407536182495344]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 4,
+    "name": "Aklan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.43473032857143, 11.59889342857143]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 5,
+    "name": "Albay",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.2872356153846, 13.050046153846154]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 6,
+    "name": "Antique",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.91973968085105, 10.417792340425532]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 7,
+    "name": "Apayao",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.20457747142858, 18.03421127142857]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 8,
+    "name": "Aurora",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.57361131578948, 15.59720947368421]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 9,
+    "name": "Basilan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.96766513333334, 6.283502]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 10,
+    "name": "Bataan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.619283515625, 14.36668703125]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 11,
+    "name": "Batanes",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.80753789308176, 20.317934094339623]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 12,
+    "name": "Batangas",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.07064169275361, 13.552536782608694]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 13,
+    "name": "Benguet",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.65787944621513, 16.605834135458167]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 14,
+    "name": "Biliran",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.26562311695906, 11.56860111111111]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 15,
+    "name": "Bohol",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.92315885964913, 9.49332298245614]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 16,
+    "name": "Bukidnon",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.89751683549784, 7.912823490259741]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 17,
+    "name": "Bulacan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.00220946153846, 14.737385846153845]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 18,
+    "name": "Cagayan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.32742342105261, 18.247271684210528]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 19,
+    "name": "Camarines Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.10478576744185, 14.039198604651164]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 20,
+    "name": "Camarines Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.05775515384616, 13.491775384615384]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 21,
+    "name": "Camiguin",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.7218893584288, 9.1671440801964]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 22,
+    "name": "Capiz",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.88295640909091, 11.445908636363637]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 23,
+    "name": "Catanduanes",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.33566828571429, 13.561678095238094]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 24,
+    "name": "Cavite",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.6144965, 14.267567173913044]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 25,
+    "name": "Cebu",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.38900458695652, 9.431665217391304]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 26,
+    "name": "Compostela Valley",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.83171914285715, 7.277426071428572]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 27,
+    "name": "Davao del Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.69457498518518, 6.926252370370371]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 28,
+    "name": "Davao del Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.38816705384616, 5.397231634615385]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 29,
+    "name": "Davao Oriental",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [126.06725804, 6.627822800000001]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 30,
+    "name": "Dinagat Islands",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.64108162790697, 9.922791627906976]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 31,
+    "name": "Eastern Samar",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.95340040104168, 10.762589739583333]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 32,
+    "name": "Guimaras",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.59866636000001, 10.3305548]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 33,
+    "name": "Ifugao",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.28119160150376, 16.76910997744361]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 34,
+    "name": "Ilocos Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.41401711666666, 17.91977508333333]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 35,
+    "name": "Ilocos Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.389951, 17.49884825]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 36,
+    "name": "Iloilo",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.77210333333333, 10.938898]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 37,
+    "name": "Isabela",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.46825100000001, 16.920354181818183]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 38,
+    "name": "Kalinga",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.359193143617, 17.52862420212766]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 39,
+    "name": "La Union",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.37228637395144, 16.584909745695363]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 40,
+    "name": "Laguna",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.15505832508975, 14.390167414439569]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 41,
+    "name": "Lanao del Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.62200924999999, 7.8286575]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 42,
+    "name": "Lanao del Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.01448369387755, 7.63247693877551]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 43,
+    "name": "Leyte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.75000296153847, 10.248456153846153]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 44,
+    "name": "Maguindanao",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.22943540000001, 7.173588]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 45,
+    "name": "Marinduque",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.99955503571428, 13.191492499999999]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 46,
+    "name": "Masbate",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.98369745454546, 11.713073636363635]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 47,
+    "name": "Metropolitan Manila",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.97603797297297, 14.488479891891892]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 48,
+    "name": "Misamis Occidental",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.77760473333333, 8.06672]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 49,
+    "name": "Misamis Oriental",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.64647841666665, 8.49395875]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 50,
+    "name": "Mountain Province",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.13138719736841, 17.071461881578948]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 51,
+    "name": "Negros Occidental",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.43595226, 9.648759]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 52,
+    "name": "Negros Oriental",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.27084694594595, 9.078333513513513]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 53,
+    "name": "North Cotabato",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.81577091190007, 7.214042680473373]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 54,
+    "name": "Northern Samar",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.09974613615023, 12.274994131455399]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 55,
+    "name": "Nueva Ecija",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.84867798568507, 15.483074615541923]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 56,
+    "name": "Nueva Vizcaya",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.23513244657534, 16.50704623561644]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 57,
+    "name": "Occidental Mindoro",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.02062779699247, 12.196358045112783]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 58,
+    "name": "Oriental Mindoro",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.42984352777778, 12.201877222222222]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 59,
+    "name": "Palawan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [117.312339075, 7.51078525]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 60,
+    "name": "Pampanga",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.61640372727274, 14.801084545454547]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 61,
+    "name": "Pangasinan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [119.86539852173912, 15.813263913043476]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 62,
+    "name": "Quezon",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.71904626760563, 13.341329366197183]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 63,
+    "name": "Quirino",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.62315929770993, 16.37493638167939]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 64,
+    "name": "Rizal",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.25316, 14.305608181818183]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 65,
+    "name": "Romblon",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [121.9385694325069, 12.062904586776858]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 66,
+    "name": "Samar",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.19094376923076, 11.126176153846153]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 67,
+    "name": "Sarangani",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.6871432881029, 5.974232532475884]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 68,
+    "name": "Shariff Kabunsuan",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.19611906060607, 7.191371515151515]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 69,
+    "name": "Siquijor",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [123.58887516495957, 9.188538129380053]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 70,
+    "name": "Sorsogon",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.08889589473684, 12.546227368421052]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 71,
+    "name": "South Cotabato",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.02745654545454, 6.186233493150685]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 72,
+    "name": "Southern Leyte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.22231571212122, 10.42993090909091]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 73,
+    "name": "Sultan Kudarat",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [124.22566546197875, 6.451372352820932]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 74,
+    "name": "Sulu",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.7967548125, 5.4565715]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 75,
+    "name": "Surigao del Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [125.86881842857144, 9.540588857142858]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 76,
+    "name": "Surigao del Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [126.41724821875, 7.9614584375]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 77,
+    "name": "Tarlac",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.65154503356644, 15.468258055944055]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 78,
+    "name": "Tawi-Tawi",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [119.46796653571428, 4.589543214285714]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 79,
+    "name": "Zambales",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [120.08354454999998, 14.7514445]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 80,
+    "name": "Zamboanga del Norte",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.09421847368422, 7.530813684210527]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 81,
+    "name": "Zamboanga del Sur",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.06153952197802, 6.865808791208791]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  },
+  {
+    "province_id": 82,
+    "name": "Zamboanga Sibugay",
+    "region": null,
+    "centroid_raw": "{'type': 'Point', 'coordinates': [122.84209674193549, 7.278145483870968]}",
+    "centroid_parsed": {
+      "error": "Unknown centroid format: <class 'dict'>"
+    }
+  }
+]

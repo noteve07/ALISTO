@@ -12,8 +12,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 # start date of dataset (adjust if necessary)
-START_MONTH = "January"
-START_YEAR = "2018"
+START_MONTH = "October"
+START_YEAR = "2025"
 
 # current date (to determine end of dataset)
 NOW = datetime.now()

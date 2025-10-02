@@ -1,0 +1,740 @@
+[
+  {
+    "province_id": 1,
+    "name": "Abra",
+    "region": null,
+    "centroid": {
+      "latitude": 17.506177561278864,
+      "longitude": 120.67889681172292
+    }
+  },
+  {
+    "province_id": 2,
+    "name": "Agusan del Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 9.096151301523298,
+      "longitude": 125.44236249103942
+    }
+  },
+  {
+    "province_id": 3,
+    "name": "Agusan del Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 8.407536182495344,
+      "longitude": 125.68238826443203
+    }
+  },
+  {
+    "province_id": 4,
+    "name": "Aklan",
+    "region": null,
+    "centroid": {
+      "latitude": 11.59889342857143,
+      "longitude": 122.43473032857143
+    }
+  },
+  {
+    "province_id": 5,
+    "name": "Albay",
+    "region": null,
+    "centroid": {
+      "latitude": 13.050046153846154,
+      "longitude": 123.2872356153846
+    }
+  },
+  {
+    "province_id": 6,
+    "name": "Antique",
+    "region": null,
+    "centroid": {
+      "latitude": 10.417792340425532,
+      "longitude": 121.91973968085105
+    }
+  },
+  {
+    "province_id": 7,
+    "name": "Apayao",
+    "region": null,
+    "centroid": {
+      "latitude": 18.03421127142857,
+      "longitude": 121.20457747142858
+    }
+  },
+  {
+    "province_id": 8,
+    "name": "Aurora",
+    "region": null,
+    "centroid": {
+      "latitude": 15.59720947368421,
+      "longitude": 121.57361131578948
+    }
+  },
+  {
+    "province_id": 9,
+    "name": "Basilan",
+    "region": null,
+    "centroid": {
+      "latitude": 6.283502,
+      "longitude": 121.96766513333334
+    }
+  },
+  {
+    "province_id": 10,
+    "name": "Bataan",
+    "region": null,
+    "centroid": {
+      "latitude": 14.36668703125,
+      "longitude": 120.619283515625
+    }
+  },
+  {
+    "province_id": 11,
+    "name": "Batanes",
+    "region": null,
+    "centroid": {
+      "latitude": 20.317934094339623,
+      "longitude": 121.80753789308176
+    }
+  },
+  {
+    "province_id": 12,
+    "name": "Batangas",
+    "region": null,
+    "centroid": {
+      "latitude": 13.552536782608694,
+      "longitude": 121.07064169275361
+    }
+  },
+  {
+    "province_id": 13,
+    "name": "Benguet",
+    "region": null,
+    "centroid": {
+      "latitude": 16.605834135458167,
+      "longitude": 120.65787944621513
+    }
+  },
+  {
+    "province_id": 14,
+    "name": "Biliran",
+    "region": null,
+    "centroid": {
+      "latitude": 11.56860111111111,
+      "longitude": 124.26562311695906
+    }
+  },
+  {
+    "province_id": 15,
+    "name": "Bohol",
+    "region": null,
+    "centroid": {
+      "latitude": 9.49332298245614,
+      "longitude": 123.92315885964913
+    }
+  },
+  {
+    "province_id": 16,
+    "name": "Bukidnon",
+    "region": null,
+    "centroid": {
+      "latitude": 7.912823490259741,
+      "longitude": 124.89751683549784
+    }
+  },
+  {
+    "province_id": 17,
+    "name": "Bulacan",
+    "region": null,
+    "centroid": {
+      "latitude": 14.737385846153845,
+      "longitude": 121.00220946153846
+    }
+  },
+  {
+    "province_id": 18,
+    "name": "Cagayan",
+    "region": null,
+    "centroid": {
+      "latitude": 18.247271684210528,
+      "longitude": 122.32742342105261
+    }
+  },
+  {
+    "province_id": 19,
+    "name": "Camarines Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 14.039198604651164,
+      "longitude": 123.10478576744185
+    }
+  },
+  {
+    "province_id": 20,
+    "name": "Camarines Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 13.491775384615384,
+      "longitude": 123.05775515384616
+    }
+  },
+  {
+    "province_id": 21,
+    "name": "Camiguin",
+    "region": null,
+    "centroid": {
+      "latitude": 9.1671440801964,
+      "longitude": 124.7218893584288
+    }
+  },
+  {
+    "province_id": 22,
+    "name": "Capiz",
+    "region": null,
+    "centroid": {
+      "latitude": 11.445908636363637,
+      "longitude": 122.88295640909091
+    }
+  },
+  {
+    "province_id": 23,
+    "name": "Catanduanes",
+    "region": null,
+    "centroid": {
+      "latitude": 13.561678095238094,
+      "longitude": 124.33566828571429
+    }
+  },
+  {
+    "province_id": 24,
+    "name": "Cavite",
+    "region": null,
+    "centroid": {
+      "latitude": 14.267567173913044,
+      "longitude": 120.6144965
+    }
+  },
+  {
+    "province_id": 25,
+    "name": "Cebu",
+    "region": null,
+    "centroid": {
+      "latitude": 9.431665217391304,
+      "longitude": 123.38900458695652
+    }
+  },
+  {
+    "province_id": 26,
+    "name": "Compostela Valley",
+    "region": null,
+    "centroid": {
+      "latitude": 7.277426071428572,
+      "longitude": 125.83171914285715
+    }
+  },
+  {
+    "province_id": 27,
+    "name": "Davao del Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 6.926252370370371,
+      "longitude": 125.69457498518518
+    }
+  },
+  {
+    "province_id": 28,
+    "name": "Davao del Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 5.397231634615385,
+      "longitude": 125.38816705384616
+    }
+  },
+  {
+    "province_id": 29,
+    "name": "Davao Oriental",
+    "region": null,
+    "centroid": {
+      "latitude": 6.627822800000001,
+      "longitude": 126.06725804
+    }
+  },
+  {
+    "province_id": 30,
+    "name": "Dinagat Islands",
+    "region": null,
+    "centroid": {
+      "latitude": 9.922791627906976,
+      "longitude": 125.64108162790697
+    }
+  },
+  {
+    "province_id": 31,
+    "name": "Eastern Samar",
+    "region": null,
+    "centroid": {
+      "latitude": 10.762589739583333,
+      "longitude": 125.95340040104168
+    }
+  },
+  {
+    "province_id": 32,
+    "name": "Guimaras",
+    "region": null,
+    "centroid": {
+      "latitude": 10.3305548,
+      "longitude": 122.59866636000001
+    }
+  },
+  {
+    "province_id": 33,
+    "name": "Ifugao",
+    "region": null,
+    "centroid": {
+      "latitude": 16.76910997744361,
+      "longitude": 121.28119160150376
+    }
+  },
+  {
+    "province_id": 34,
+    "name": "Ilocos Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 17.91977508333333,
+      "longitude": 120.41401711666666
+    }
+  },
+  {
+    "province_id": 35,
+    "name": "Ilocos Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 17.49884825,
+      "longitude": 120.389951
+    }
+  },
+  {
+    "province_id": 36,
+    "name": "Iloilo",
+    "region": null,
+    "centroid": {
+      "latitude": 10.938898,
+      "longitude": 122.77210333333333
+    }
+  },
+  {
+    "province_id": 37,
+    "name": "Isabela",
+    "region": null,
+    "centroid": {
+      "latitude": 16.920354181818183,
+      "longitude": 122.46825100000001
+    }
+  },
+  {
+    "province_id": 38,
+    "name": "Kalinga",
+    "region": null,
+    "centroid": {
+      "latitude": 17.52862420212766,
+      "longitude": 121.359193143617
+    }
+  },
+  {
+    "province_id": 39,
+    "name": "La Union",
+    "region": null,
+    "centroid": {
+      "latitude": 16.584909745695363,
+      "longitude": 120.37228637395144
+    }
+  },
+  {
+    "province_id": 40,
+    "name": "Laguna",
+    "region": null,
+    "centroid": {
+      "latitude": 14.390167414439569,
+      "longitude": 121.15505832508975
+    }
+  },
+  {
+    "province_id": 41,
+    "name": "Lanao del Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 7.8286575,
+      "longitude": 123.62200924999999
+    }
+  },
+  {
+    "province_id": 42,
+    "name": "Lanao del Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 7.63247693877551,
+      "longitude": 124.01448369387755
+    }
+  },
+  {
+    "province_id": 43,
+    "name": "Leyte",
+    "region": null,
+    "centroid": {
+      "latitude": 10.248456153846153,
+      "longitude": 124.75000296153847
+    }
+  },
+  {
+    "province_id": 44,
+    "name": "Maguindanao",
+    "region": null,
+    "centroid": {
+      "latitude": 7.173588,
+      "longitude": 124.22943540000001
+    }
+  },
+  {
+    "province_id": 45,
+    "name": "Marinduque",
+    "region": null,
+    "centroid": {
+      "latitude": 13.191492499999999,
+      "longitude": 121.99955503571428
+    }
+  },
+  {
+    "province_id": 46,
+    "name": "Masbate",
+    "region": null,
+    "centroid": {
+      "latitude": 11.713073636363635,
+      "longitude": 122.98369745454546
+    }
+  },
+  {
+    "province_id": 47,
+    "name": "Metropolitan Manila",
+    "region": null,
+    "centroid": {
+      "latitude": 14.488479891891892,
+      "longitude": 120.97603797297297
+    }
+  },
+  {
+    "province_id": 48,
+    "name": "Misamis Occidental",
+    "region": null,
+    "centroid": {
+      "latitude": 8.06672,
+      "longitude": 123.77760473333333
+    }
+  },
+  {
+    "province_id": 49,
+    "name": "Misamis Oriental",
+    "region": null,
+    "centroid": {
+      "latitude": 8.49395875,
+      "longitude": 124.64647841666665
+    }
+  },
+  {
+    "province_id": 50,
+    "name": "Mountain Province",
+    "region": null,
+    "centroid": {
+      "latitude": 17.071461881578948,
+      "longitude": 121.13138719736841
+    }
+  },
+  {
+    "province_id": 51,
+    "name": "Negros Occidental",
+    "region": null,
+    "centroid": {
+      "latitude": 9.648759,
+      "longitude": 122.43595226
+    }
+  },
+  {
+    "province_id": 52,
+    "name": "Negros Oriental",
+    "region": null,
+    "centroid": {
+      "latitude": 9.078333513513513,
+      "longitude": 123.27084694594595
+    }
+  },
+  {
+    "province_id": 53,
+    "name": "North Cotabato",
+    "region": null,
+    "centroid": {
+      "latitude": 7.214042680473373,
+      "longitude": 124.81577091190007
+    }
+  },
+  {
+    "province_id": 54,
+    "name": "Northern Samar",
+    "region": null,
+    "centroid": {
+      "latitude": 12.274994131455399,
+      "longitude": 124.09974613615023
+    }
+  },
+  {
+    "province_id": 55,
+    "name": "Nueva Ecija",
+    "region": null,
+    "centroid": {
+      "latitude": 15.483074615541923,
+      "longitude": 120.84867798568507
+    }
+  },
+  {
+    "province_id": 56,
+    "name": "Nueva Vizcaya",
+    "region": null,
+    "centroid": {
+      "latitude": 16.50704623561644,
+      "longitude": 121.23513244657534
+    }
+  },
+  {
+    "province_id": 57,
+    "name": "Occidental Mindoro",
+    "region": null,
+    "centroid": {
+      "latitude": 12.196358045112783,
+      "longitude": 121.02062779699247
+    }
+  },
+  {
+    "province_id": 58,
+    "name": "Oriental Mindoro",
+    "region": null,
+    "centroid": {
+      "latitude": 12.201877222222222,
+      "longitude": 121.42984352777778
+    }
+  },
+  {
+    "province_id": 59,
+    "name": "Palawan",
+    "region": null,
+    "centroid": {
+      "latitude": 7.51078525,
+      "longitude": 117.312339075
+    }
+  },
+  {
+    "province_id": 60,
+    "name": "Pampanga",
+    "region": null,
+    "centroid": {
+      "latitude": 14.801084545454547,
+      "longitude": 120.61640372727274
+    }
+  },
+  {
+    "province_id": 61,
+    "name": "Pangasinan",
+    "region": null,
+    "centroid": {
+      "latitude": 15.813263913043476,
+      "longitude": 119.86539852173912
+    }
+  },
+  {
+    "province_id": 62,
+    "name": "Quezon",
+    "region": null,
+    "centroid": {
+      "latitude": 13.341329366197183,
+      "longitude": 122.71904626760563
+    }
+  },
+  {
+    "province_id": 63,
+    "name": "Quirino",
+    "region": null,
+    "centroid": {
+      "latitude": 16.37493638167939,
+      "longitude": 121.62315929770993
+    }
+  },
+  {
+    "province_id": 64,
+    "name": "Rizal",
+    "region": null,
+    "centroid": {
+      "latitude": 14.305608181818183,
+      "longitude": 121.25316
+    }
+  },
+  {
+    "province_id": 65,
+    "name": "Romblon",
+    "region": null,
+    "centroid": {
+      "latitude": 12.062904586776858,
+      "longitude": 121.9385694325069
+    }
+  },
+  {
+    "province_id": 66,
+    "name": "Samar",
+    "region": null,
+    "centroid": {
+      "latitude": 11.126176153846153,
+      "longitude": 125.19094376923076
+    }
+  },
+  {
+    "province_id": 67,
+    "name": "Sarangani",
+    "region": null,
+    "centroid": {
+      "latitude": 5.974232532475884,
+      "longitude": 124.6871432881029
+    }
+  },
+  {
+    "province_id": 68,
+    "name": "Shariff Kabunsuan",
+    "region": null,
+    "centroid": {
+      "latitude": 7.191371515151515,
+      "longitude": 124.19611906060607
+    }
+  },
+  {
+    "province_id": 69,
+    "name": "Siquijor",
+    "region": null,
+    "centroid": {
+      "latitude": 9.188538129380053,
+      "longitude": 123.58887516495957
+    }
+  },
+  {
+    "province_id": 70,
+    "name": "Sorsogon",
+    "region": null,
+    "centroid": {
+      "latitude": 12.546227368421052,
+      "longitude": 124.08889589473684
+    }
+  },
+  {
+    "province_id": 71,
+    "name": "South Cotabato",
+    "region": null,
+    "centroid": {
+      "latitude": 6.186233493150685,
+      "longitude": 125.02745654545454
+    }
+  },
+  {
+    "province_id": 72,
+    "name": "Southern Leyte",
+    "region": null,
+    "centroid": {
+      "latitude": 10.42993090909091,
+      "longitude": 125.22231571212122
+    }
+  },
+  {
+    "province_id": 73,
+    "name": "Sultan Kudarat",
+    "region": null,
+    "centroid": {
+      "latitude": 6.451372352820932,
+      "longitude": 124.22566546197875
+    }
+  },
+  {
+    "province_id": 74,
+    "name": "Sulu",
+    "region": null,
+    "centroid": {
+      "latitude": 5.4565715,
+      "longitude": 120.7967548125
+    }
+  },
+  {
+    "province_id": 75,
+    "name": "Surigao del Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 9.540588857142858,
+      "longitude": 125.86881842857144
+    }
+  },
+  {
+    "province_id": 76,
+    "name": "Surigao del Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 7.9614584375,
+      "longitude": 126.41724821875
+    }
+  },
+  {
+    "province_id": 77,
+    "name": "Tarlac",
+    "region": null,
+    "centroid": {
+      "latitude": 15.468258055944055,
+      "longitude": 120.65154503356644
+    }
+  },
+  {
+    "province_id": 78,
+    "name": "Tawi-Tawi",
+    "region": null,
+    "centroid": {
+      "latitude": 4.589543214285714,
+      "longitude": 119.46796653571428
+    }
+  },
+  {
+    "province_id": 79,
+    "name": "Zambales",
+    "region": null,
+    "centroid": {
+      "latitude": 14.7514445,
+      "longitude": 120.08354454999998
+    }
+  },
+  {
+    "province_id": 80,
+    "name": "Zamboanga del Norte",
+    "region": null,
+    "centroid": {
+      "latitude": 7.530813684210527,
+      "longitude": 122.09421847368422
+    }
+  },
+  {
+    "province_id": 81,
+    "name": "Zamboanga del Sur",
+    "region": null,
+    "centroid": {
+      "latitude": 6.865808791208791,
+      "longitude": 122.06153952197802
+    }
+  },
+  {
+    "province_id": 82,
+    "name": "Zamboanga Sibugay",
+    "region": null,
+    "centroid": {
+      "latitude": 7.278145483870968,
+      "longitude": 122.84209674193549
+    }
+  }
+]

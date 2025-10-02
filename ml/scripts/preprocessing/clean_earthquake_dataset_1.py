@@ -9,9 +9,15 @@ import pandas as pd
 import re
 import os
 
-input_path = os.path.join('ml', 'dataset', 'earthquake', 'raw', 'all_raw_eq_data_2018_to_2025.csv')
-output_dir = os.path.join('ml', 'dataset', 'earthquake', 'interim')
-output_path = os.path.join(output_dir, 'cleaned_v1_eq_data.csv')
+VERSION = 2    # change accordingly
+
+# Get the absolute path to the project root directory
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+
+# Use project root to construct absolute paths
+input_path = os.path.join(project_root, 'ml', 'dataset', 'earthquake', 'raw', 'all_raw_eq_data_2018_to_2025.csv')
+output_dir = os.path.join(project_root, 'ml', 'dataset', 'earthquake', 'interim')
+output_path = os.path.join(output_dir, f'cleaned_v{VERSION}_eq_data.csv')
 
 # Create interim directory if it doesn't exist
 os.makedirs(output_dir, exist_ok=True)

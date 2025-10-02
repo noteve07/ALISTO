@@ -1,0 +1,17 @@
+    def save_skipped_records(self, skipped_records: List[Dict]) -> None:
+        """
+        Save skipped records to a JSON file for later analysis
+        """
+        if not skipped_records:
+            return
+            
+        try:
+            output_file = Path(__file__).parent / "skipped_earthquake_records.json"
+            
+            with open(output_file, "w", encoding="utf-8") as f:
+                json.dump(skipped_records, f, indent=2, ensure_ascii=False)
+                
+            print(f"\n✅ Saved {len(skipped_records)} skipped records to {output_file}")
+            
+        except Exception as e:
+            print(f"❌ Error saving skipped records: {e}")
