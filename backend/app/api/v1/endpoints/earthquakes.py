@@ -8,7 +8,7 @@ from app.core.config import settings
 router = APIRouter()
 
 @router.get("/live")
-async def get_live_earthquakes(last: int = Query(10)):
+async def get_live_earthquakes(last: int = Query(250)):
     """
     Get the latest earthquake data from DOST-PHIVOLCS
     
