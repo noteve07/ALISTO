@@ -1,28 +1,104 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const MapOverview = () => {
-  return (
-    <div className="mt-6 w-full aspect-[16/9] rounded-lg border border-gray-300 bg-slate-200 bg-cover bg-center relative overflow-hidden">
-      {/* Placeholder map background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-300"></div>
+  const mapRef = useRef(null)
+
+  useEffect(() => {
+    // Check if Leaflet is available
+    if (typeof window !== 'undefined' && window.L) {
+      // Initialize map with ALL interactions disabled
+      const map = window.L.map(mapRef.current, {
+        center: [12.8797, 121.7740], // Philippines center
+        zoom: 6,
+        minZoom: 6,             // Lock minimum zoom
+        maxZoom: 6,             // Lock maximum zoom  
+        dragging: false,        // Disable dragging/panning
+        touchZoom: false,       // Disable touch zoom
+        doubleClickZoom: false, // Disable double click zoom
+        scrollWheelZoom: false, // Disable scroll wheel zoom
+        boxZoom: false,         // Disable box zoom
+        keyboard: false,        // Disable keyboard navigation
+        zoomControl: false,     // Remove zoom controls
+        attributionControl: true, // Keep attribution
+        tap: false,             // Disable tap interactions
+        bounceAtZoomLimits: false, // Disable zoom bounce
+        wheelPxPerZoomLevel: 0,    // Disable wheel zoom completely
+        zoomSnap: 0,            // Disable zoom snapping
+        zoomDelta: 0            // Disable zoom delta
+      })
       
-      {/* Philippines map outline placeholder */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      // Additional disabling after map creation
+      map.touchZoom.disable()
+      map.doubleClickZoom.disable()
+      map.scrollWheelZoom.disable()
+      map.boxZoom.disable()
+      map.keyboard.disable()
+      if (map.tap) map.tap.disable()
+
+      // Add OpenStreetMap tiles
+      window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map)
+
+      // Add some sample earthquake markers
+      const earthquakeData = [
+        { lat: 14.5995, lng: 120.9842, magnitude: 5.2, location: 'Manila' },
+        { lat: 10.3157, lng: 123.8854, magnitude: 4.8, location: 'Cebu' },
+        { lat: 7.0731, lng: 125.6128, magnitude: 6.1, location: 'Davao' },
+        { lat: 16.4023, lng: 120.5960, magnitude: 4.5, location: 'Baguio' }
+      ]
+
+      earthquakeData.forEach(eq => {
+        const color = eq.magnitude >= 6 ? '#ef4444' : eq.magnitude >= 5 ? '#f97316' : '#eab308'
+        const size = Math.max(8, eq.magnitude * 2)
+        
+        window.L.circleMarker([eq.lat, eq.lng], {
+          color: color,
+          fillColor: color,
+          fillOpacity: 0.7,
+          radius: size,
+          weight: 2
+        })
+        .addTo(map)
+        .bindPopup(`<strong>${eq.location}</strong><br>Magnitude: ${eq.magnitude}`)
+      })
+
+      return () => {
+        map.remove()
+      }
+    }
+  }, [])
+
+  return (
+    <div className="mt-6 w-full aspect-[16/9] rounded-lg border border-gray-300 overflow-hidden relative bg-slate-200">
+      <div 
+        ref={mapRef} 
+        className="w-full h-full pointer-events-none"
+        style={{ 
+          minHeight: '400px',
+          cursor: 'default'
+        }}
+      />
+      {/* Re-enable pointer events only for markers */}
+      <style jsx>{`
+        .leaflet-marker-icon,
+        .leaflet-marker-shadow,
+        .leaflet-popup {
+          pointer-events: auto !important;
+        }
+        .leaflet-control-container {
+          pointer-events: none !important;
+        }
+      `}</style>
+      
+      {/* Loading fallback */}
+      <div className="absolute inset-0 bg-slate-200 flex items-center justify-center" style={{ zIndex: -1 }}>
         <div className="text-center text-gray-600">
-          <svg className="w-24 h-24 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-          <p className="text-lg font-semibold text-gray-500">Interactive Seismic Map</p>
-          <p className="text-sm text-gray-400 mt-1">Philippines Live Data Visualization</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-lg font-semibold text-gray-500">Loading Philippine Map...</p>
+          <p className="text-sm text-gray-400 mt-1">Powered by OpenStreetMap</p>
         </div>
       </div>
-
-      {/* Sample data points */}
-      <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-      <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-yellow-500 rounded-full animate-pulse delay-300"></div>
-      <div className="absolute bottom-1/3 right-1/3 w-2 h-2 bg-orange-500 rounded-full animate-pulse delay-700"></div>
-      <div className="absolute top-2/3 left-1/4 w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse delay-1000"></div>
     </div>
   )
 }
