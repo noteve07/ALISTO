@@ -1,9 +1,9 @@
 import React from 'react'
 
-const RiskEvaluation = () => {
+const RiskEvaluationPage = () => {
   return (
-    <div>RiskEvaluation</div>
+    <div>RiskEvaluationPage</div>
   )
 }
 
-export default RiskEvaluation
+export default RiskEvaluationPage

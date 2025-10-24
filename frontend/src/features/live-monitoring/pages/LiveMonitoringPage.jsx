@@ -1,9 +1,9 @@
 import React from 'react'
 
-const LiveMonitoring = () => {
+const LiveMonitoringPage = () => {
   return (
-    <div>LiveMonitoring</div>
+    <div>LiveMonitoringPage</div>
   )
 }
 
-export default LiveMonitoring
+export default LiveMonitoringPage
