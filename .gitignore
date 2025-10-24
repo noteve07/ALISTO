@@ -1,13 +1,42 @@
-backend/.env
-.vscode/settings.json
+# Byte-code files
+*.pyc
+__pycache__/
 
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Database files 
+*.sqlite3
+*.db
+
+# Environment variables and sensitive data
+.env
+.env.local
+
+# Build artifacts
+dist/
+build/
+
+# Test reports
+.pytest_cache/
+.coverage
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Large files
 backend/scripts/database/municities/municities_table_test.json
 backend/scripts/database/province/province_table_test.json
-backend/app/core/__pycache__/config.cpython-313.pyc
-backend/app/core/__pycache__/database.cpython-313.pyc
-backend/scripts/scraping/__pycache__/volcano_detail_scraper.cpython-313.pyc
-*.pyc
-*.pyc
-*.pyc
-backend/app/core/__pycache__/config.cpython-313.pyc
-backend/app/core/__pycache__/database.cpython-313.pyc
