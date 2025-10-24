@@ -40,3 +40,6 @@ build/
 # Large files
 backend/scripts/database/municities/municities_table_test.json
 backend/scripts/database/province/province_table_test.json
+*.pyc
+/backend/app/__pycache__
+/backend/app/api/__pycache__
