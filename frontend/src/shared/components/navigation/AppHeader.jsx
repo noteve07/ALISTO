@@ -16,17 +16,6 @@ const AppHeader = () => {
     return 'ALISTO'
   }
 
-  const getPageDescription = () => {
-    const path = location.pathname
-    if (path === '/app' || path === '/app/dashboard') return 'Monitor and manage your disaster response operations'
-    if (path === '/app/live-monitoring') return 'Real-time monitoring of seismic and volcanic activity'
-    if (path === '/app/risk-evaluation') return 'Assess and evaluate potential disaster risks'
-    if (path === '/app/analytics') return 'Data insights and reporting for better decision making'
-    if (path === '/app/chatbot') return 'Get help and insights from your AI assistant'
-    if (path === '/app/account') return 'Manage your account settings and preferences'
-    return 'Advanced Land Information System for Territorial Operations'
-  }
-
   return (
     <header className="bg-white shadow-2xs border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">

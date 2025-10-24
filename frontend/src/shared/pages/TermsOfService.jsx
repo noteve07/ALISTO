@@ -5,7 +5,7 @@ import Footer from '../../features/landing/components/Footer'
 
 const TermsOfService = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return (
