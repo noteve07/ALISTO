@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Data Privacy Notice - ALISTO</title>
+
+  <!-- Fonts / Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind configuration -->
+  <script src="./assets/js/tailwind-config.js"></script>
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Define CSS variables -->
+  <style>
+    :root {
+      --primary-color: #ec7c13;
+      --text-dark: #1A2B48;
+      --hero-start: #DB7235;
+      --hero-end: #B2660A;
+    }
+  </style>
+
+  <!-- Landing page styles -->
+  <link rel="stylesheet" href="./assets/css/landing-page.css" />
+
+  <style>
+    .privacy-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .privacy-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    .privacy-header h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #1A2B48;
+      margin-bottom: 0.5rem;
+    }
+
+    .privacy-header .subtitle {
+      font-size: 1.125rem;
+      color: #6C757D;
+      font-weight: 500;
+    }
+
+    .privacy-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .privacy-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #C85A2D;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .privacy-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1A2B48;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .privacy-section p {
+      color: #1A2B48;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      text-align: justify;
+    }
+
+    .privacy-section ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1rem;
+    }
+
+    .privacy-section ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #1A2B48;
+      line-height: 1.8;
+    }
+
+    .privacy-section ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #C85A2D;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .data-table thead {
+      background: linear-gradient(135deg, #DB7235 0%, #B2660A 100%);
+      color: white;
+    }
+
+    .data-table th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+    }
+
+    .data-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      color: #1A2B48;
+      line-height: 1.6;
+    }
+
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tbody tr:hover {
+      background: #FFF3E0;
+    }
+
+    .important-notice {
+      background: #FFF3E0;
+      border-left: 4px solid #ec7c13;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0.5rem;
+    }
+
+    .important-notice h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #C85A2D;
+      margin-bottom: 0.75rem;
+      margin-top: 0;
+    }
+
+    .important-notice p {
+      color: #1A2B48;
+      margin-bottom: 0.5rem;
+    }
+
+    .important-notice p:last-child {
+      margin-bottom: 0;
+    }
+
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .right-card {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .right-card:hover {
+      border-color: #ec7c13;
+      box-shadow: 0 4px 12px rgba(236, 124, 19, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .right-card h4 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #C85A2D;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .right-card .icon {
+      color: #ec7c13;
+      font-size: 1.5rem;
+    }
+
+    .right-card p {
+      color: #1A2B48;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+      text-align: left;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ec7c13;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 2rem;
+    }
+
+    .back-button:hover {
+      background: #d86f0f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(236, 124, 19, 0.3);
+    }
+
+    .last-updated {
+      text-align: center;
+      color: #6C757D;
+      font-size: 0.875rem;
+      font-style: italic;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-white">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white text-[#C85A2D] border-b border-gray-200 shadow-md">
+      <div class="layout-container flex flex-col">
+        <div class="layout-content-container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between py-4">
+            <a href="./landingpage.html" class="alisto-logo alisto-logo--header" style="text-decoration: none;">
+              <div class="alisto-logo__icon" aria-hidden="true">
+                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h1 class="alisto-logo__text">ALISTO</h1>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8" aria-label="Primary navigation">
+              <div class="flex items-center gap-9">
+                <a class="nav-link" href="./landingpage.html">Home</a>
+                <a class="nav-link" href="./landingpage.html#about">About</a>
+                <a class="nav-link" href="./landingpage.html#core-capabilities">Features</a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 bg-gray-50">
+      <div class="privacy-content">
+        <div class="privacy-header">
+          <h1>Data Privacy Notice</h1>
+          <p class="subtitle">Automated Live Information for Seismic Tracking and Observation (ALISTO)</p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>General Statement</h2>
+          <p>The ALISTO web and mobile application (the "App") is developed and maintained by the Researchers and Developers (the "App Owner") to enhance disaster preparedness and public safety regarding seismic and volcanic activity in the Philippines.</p>
+          <p>The App Owner recognizes the critical nature of the data you share, especially in disaster-related applications. We are committed to protecting your personal data and ensuring strict compliance with the Data Privacy Act of 2012 (RA 10173), its Implementing Rules and Regulations, and issuances by the National Privacy Commission.</p>
+          <p>This Privacy Notice explains what information we collect, how it is processed, and why, specifically for the purpose of providing real-time seismic information, risk analysis, and location-based alerts. We may update this notice to reflect changes in our policy or legal requirements; we encourage you to check for updates if notified.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>What Data We Collect and Why</h2>
+          <p>We collect and process only the information necessary to fulfill the App's objectives: providing real-time earthquake monitoring, risk prediction, and personalized alerts. The information collected may include Personal Information (PI) and Sensitive Personal Information (SPI) as defined by the DPA.</p>
+
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Data Category</th>
+                <th>Specific Data Collected</th>
+                <th>Purpose of Collection</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Registration & Contact</strong></td>
+                <td>Mobile Number, Email Address, User Credentials (username/password/PIN)</td>
+                <td>To create and secure your user account, verify your identity, and enable essential communications (e.g., account recovery, alert follow-up).</td>
+              </tr>
+              <tr>
+                <td><strong>Alert Customization</strong></td>
+                <td>Geolocation (real-time or last known), Permanent Address, Preferred Notification Settings</td>
+                <td>Crucial for the App's core function: To accurately determine seismic and volcanic risk levels specific to your area and send timely, location-based alerts and notifications.</td>
+              </tr>
+              <tr>
+                <td><strong>KYC/Verification</strong></td>
+                <td>Full Name, Date of Birth, Liveness Detection/Verification</td>
+                <td>To authenticate user identity, ensuring data accuracy and preventing the misuse of the alert system.</td>
+              </tr>
+              <tr>
+                <td><strong>Device & Usage</strong></td>
+                <td>Cookie information, Device details (type, OS), IP Address</td>
+                <td>To ensure the App's functional suitability, reliability, and maintainability; to optimize the interactive web map display; and for security audit logs.</td>
+              </tr>
+              <tr>
+                <td><strong>AI Chatbot Interaction</strong></td>
+                <td>Conversational input/text entered into the AI chatbot</td>
+                <td>To provide you with conversational support on earthquake updates, risk levels, and preparedness.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="privacy-section">
+          <h2>How Your Personal Data is Collected</h2>
+          <p>We collect your Personal Data when you:</p>
+          <ul>
+            <li>Register in the App and create your user profile.</li>
+            <li>Explicitly enable location services on your device to receive geolocation-based alerts.</li>
+            <li>Update your profile and complete the necessary identity verification (KYC).</li>
+            <li>Interact with the App's features, such as the interactive map and the AI-powered chatbot.</li>
+            <li>Disclose your information through formal communication channels with the App Owner's authorized representatives.</li>
+          </ul>
+
+          <div class="important-notice">
+            <h3>Consent is Paramount</h3>
+            <p>No information will be collected until you have given your express consent. During the registration process, clicking the checkbox signifies that you have read and agree to the General Terms and this Data Privacy Notice.</p>
+          </div>
+        </div>
+
+        <div class="privacy-section">
+          <h2>How We Use and Share Your Personal Data</h2>
+          <p>We will only use your Personal Data to operate the ALISTO App and deliver its intended services. We may not process or use your information without your express consent.</p>
+
+          <h3>Primary Use</h3>
+          <p>To perform real-time risk analysis and classification by pairing seismic data from official sources (e.g., DOST-PHIVOLCS) with your specified geolocation, ensuring alerts are relevant to your potential exposure.</p>
+
+          <h3>Data Sharing</h3>
+          <p>Your data, particularly your location (if an alert is issued), may be shared with authorized emergency response units, DOST-PHIVOLCS, and relevant Local Government Units (LGUs) for the sole purpose of immediate disaster coordination, validation, and response.</p>
+
+          <h3>Secondary Use</h3>
+          <p>For system testing, improvement, and generating anonymized statistics to enhance disaster preparedness strategies (e.g., analyzing alert distribution effectiveness).</p>
+
+          <h3>Legal Compliance</h3>
+          <p>When required by law or a valid court order, we may disclose necessary data to legal and regulatory bodies.</p>
+        </div>
+
+        <div class="privacy-section">
+          <h2>Your Rights as a Data Subject</h2>
+          <p>As a user of ALISTO, you are entitled to the following data privacy rights under the DPA:</p>
+
+          <div class="rights-grid">
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">info</span>
+                Right to Be Informed
+              </h4>
+              <p>To be informed whether your Personal Information is being, has been, or shall be processed.</p>
+            </div>
+
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">visibility</span>
+                Right to Access
+              </h4>
+              <p>To reasonably access any Personal Information collected and processed by ALISTO.</p>
+            </div>
+
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">block</span>
+                Right to Object
+              </h4>
+              <p>To object or withhold consent with regard to the collection and processing of your Personal Data.</p>
+            </div>
+
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">delete</span>
+                Right to Erasure or Blocking
+              </h4>
+              <p>To suspend, withdraw, or order the blocking, removal, or destruction of Personal Data from the App's filing system.</p>
+            </div>
+
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">edit</span>
+                Right to Rectification
+              </h4>
+              <p>To dispute the inaccuracy or error in Personal Data, which the App Owner shall correct immediately upon request (unless the request is vexatious or otherwise unreasonable).</p>
+            </div>
+
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">cloud_download</span>
+                Right to Data Portability
+              </h4>
+              <p>To obtain a copy of the data in an electronic or structured format that is commonly used and allows for further use by the Data Subject.</p>
+            </div>
+
+            <div class="right-card">
+              <h4>
+                <span class="material-symbols-outlined icon">gavel</span>
+                Right to Indemnified Damages
+              </h4>
+              <p>To be indemnified for any damages sustained pursuant to the provisions of the Data Privacy Act.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="./landingpage.html" class="back-button">
+            <span class="material-symbols-outlined" style="font-size: 1.25rem;">arrow_back</span>
+            Back to Home
+          </a>
+        </div>
+
+        <div class="last-updated">
+          Last Updated: October 2025
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1A2B48] text-white" role="contentinfo">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div class="md:col-span-2">
+            <div class="alisto-logo alisto-logo--footer">
+              <div class="alisto-logo__icon" aria-hidden="true">
+                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <h4 class="alisto-logo__text">ALISTO</h4>
+            </div>
+
+            <p class="mt-4 text-sm text-gray-300 max-w-sm">
+              Building a resilient Philippines through technology and real-time data for enhanced preparedness against seismic events.
+            </p>
+
+            <div class="mt-6">
+              <p class="text-xs text-gray-400">In partnership with:</p>
+              <a href="https://www.phivolcs.dost.gov.ph" target="_blank" rel="noopener noreferrer" class="font-semibold text-gray-200 hover:text-white transition-colors duration-200">DOST-PHIVOLCS</a>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="font-semibold text-gray-100">Quick Links</h5>
+            <ul class="mt-4 space-y-2 text-sm text-gray-300">
+              <li><a class="hover:text-white" href="./landingpage.html#about">About</a></li>
+              <li><a class="hover:text-white" href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="font-semibold text-gray-100">Legal</h5>
+            <ul class="mt-4 space-y-2 text-sm text-gray-300">
+              <li><a class="hover:text-white" href="./terms.html">Terms of Service</a></li>
+              <li><a class="hover:text-white" href="./privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+          <p>© 2025 Automated Live Information for Seismic Tracking and Observation (ALISTO)</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -5,7 +5,7 @@ const Overview = () => {
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div id="about" className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Project Overview
           </h2>
@@ -15,7 +15,7 @@ const Overview = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div id="features" className="grid md:grid-cols-3 gap-8 mb-16">
           <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,7 +76,7 @@ const Overview = () => {
         </div>
 
         {/* Developers Section */}
-        <div className="text-center">
+        <div id="developers" className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Meet Our Team
           </h2>

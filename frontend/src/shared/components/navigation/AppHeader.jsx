@@ -28,12 +28,11 @@ const AppHeader = () => {
   }
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+    <header className="bg-white shadow-2xs border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
-        {/* Page Title and Description */}
+        {/* Page Title */}
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-gray-900">{getPageTitle()}</h1>
-          <p className="text-sm text-gray-600 mt-1">{getPageDescription()}</p>
+          <h1 className="text-xl font-bold text-gray-900">{getPageTitle()}</h1>
         </div>
 
         {/* Right Side Actions */}

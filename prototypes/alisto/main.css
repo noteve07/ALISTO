@@ -1,0 +1,355 @@
+/* ========================================= */
+/* CSS VARIABLES */
+/* ========================================= */
+:root {
+  /* Colors */
+  --primary-color-orange: #ec7c13;
+  --accent-color-red: #C85A2D;
+  --text-dark-blue: #1A2B48;
+  --text-gray: #6C757D;
+  --text-light-gray: #555;
+  --border-color-light: #e5e7eb;
+  --bg-light-gray: #f8f8f8;
+  --white: #fff;
+  --black: #000;
+  
+  /* Spacing */
+  --spacing-xs: 0.05rem;
+  --spacing-sm: 0.1rem;
+  --spacing-md: 0.25rem;
+  --spacing-base: 0.4rem;
+  --spacing-lg: 0.6rem;
+  --spacing-xl: 0.7rem;
+  --spacing-2xl: 0.75rem;
+  --spacing-3xl: 1.25rem;
+  --spacing-4xl: 1.5rem;
+  
+  /* Container - Critical sizing variable */
+  --container-max-width: 480px;
+  --container-padding-vertical: 1.25rem;
+  --container-padding-horizontal: 1.5rem;
+  
+  /* Border Radius */
+  --border-radius-sm: 0.4rem;
+  --border-radius-md: 1rem;
+  
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-base: 0.3s;
+}
+
+/* ========================================= */
+/* GLOBAL RESETS & BASE STYLES */
+/* ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-light-gray);
+}
+
+/* ========================================= */
+/* MODAL OVERLAY */
+/* ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity var(--transition-base) ease-in-out;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.modal-overlay.visible {
+  display: flex;
+  opacity: 1;
+}
+
+/* ========================================= */
+/* MODAL CONTAINER */
+/* Main container for both signup and login modals */
+/* Fixed width ensures identical sizing across both pages */
+/* ========================================= */
+.modal-container {
+  max-width: var(--container-max-width);
+  width: var(--container-max-width);
+  margin: 48px auto;
+  background: var(--white);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 16px 64px rgba(0, 0, 0, 0.4);
+  padding: var(--container-padding-vertical) var(--container-padding-horizontal);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  position: relative;
+  transform: translateY(-50px);
+  opacity: 0;
+  transition: transform var(--transition-base) ease-in-out, 
+              opacity var(--transition-base) ease-in-out;
+}
+
+.modal-overlay.visible .modal-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ========================================= */
+/* CLOSE BUTTON */
+/* ========================================= */
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-gray);
+  cursor: pointer;
+  line-height: 1;
+  padding: 5px;
+  transition: color var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  color: var(--primary-color-orange);
+}
+
+/* ========================================= */
+/* ALISTO BRANDING */
+/* Logo and name display (header section) */
+/* Consistent across both signup and login pages */
+/* ========================================= */
+.alisto-branding {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2xl);
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.alisto-branding__icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary-color-orange);
+  flex-shrink: 0;
+}
+
+.alisto-branding__text {
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--primary-color-orange);
+  letter-spacing: 1px;
+}
+
+/* ========================================= */
+/* TAGLINE & TITLE */
+/* ========================================= */
+.modal-tagline {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-light-gray);
+  margin: var(--spacing-xs) 0 var(--spacing-base) 0;
+  line-height: 1.25;
+}
+
+.modal-form-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-dark-blue);
+}
+
+/* ========================================= */
+/* FORM STRUCTURE */
+/* ========================================= */
+#signupModalForm,
+#loginModalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.modal-form-body {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.modal-form-body > * {
+  width: 100%;
+}
+
+/* ========================================= */
+/* FORM FIELDS */
+/* ========================================= */
+.form-field {
+  width: 100%;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-dark-blue);
+  display: block;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color-light);
+  font-size: 0.9rem;
+  background: var(--bg-light-gray);
+  transition: border-color var(--transition-fast);
+  font-family: inherit;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: var(--primary-color-orange);
+  background: var(--white);
+}
+
+/* ========================================= */
+/* NAME ROW (Side-by-side fields) */
+/* ========================================= */
+.modal-name-row {
+  display: flex;
+  gap: var(--spacing-2xl);
+}
+
+.modal-name-row > .form-field {
+  flex: 1;
+}
+
+/* ========================================= */
+/* FORM SPACER (for height consistency) */
+/* ========================================= */
+.form-spacer {
+  height: var(--spacing-xl);
+}
+
+/* ========================================= */
+/* BUTTONS */
+/* ========================================= */
+
+/* Primary Action Button (Sign Up / Log In) */
+.modal-primary-btn {
+  width: 100%;
+  background: var(--primary-color-orange);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 0.6rem 0;
+  cursor: pointer;
+  transition: background var(--transition-fast), 
+              box-shadow var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(236, 124, 19, 0.08);
+  opacity: 0.7;
+  font-family: inherit;
+}
+
+.modal-primary-btn.enabled {
+  opacity: 1;
+  box-shadow: 0 4px 16px rgba(236, 124, 19, 0.12);
+}
+
+.modal-primary-btn:hover.enabled {
+  background: #d86f0f;
+}
+
+.modal-primary-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Google Sign-In Button */
+.modal-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2xl);
+  background: var(--white);
+  color: #444;
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55rem 0;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), 
+              border-color var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  font-family: inherit;
+}
+
+.modal-google-btn:hover {
+  border-color: var(--primary-color-orange);
+  box-shadow: 0 4px 16px rgba(236, 124, 19, 0.10);
+}
+
+.modal-google-logo {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ========================================= */
+/* FOOTER */
+/* ========================================= */
+.modal-form-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: var(--spacing-base);
+  color: var(--text-gray);
+}
+
+.modal-form-footer a {
+  color: var(--accent-color-red);
+  font-weight: 600;
+  text-decoration: none;
+  transition: text-decoration var(--transition-fast);
+}
+
+.modal-form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ========================================= */
+/* RESPONSIVE DESIGN */
+/* ========================================= */
+@media (max-width: 600px) {
+  .modal-container {
+    padding: 1.5rem 1rem;
+    margin: 0;
+    width: 95%;
+    max-width: 95%;
+  }
+  
+  .modal-name-row {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+}

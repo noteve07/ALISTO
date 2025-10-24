@@ -1,0 +1,278 @@
+/* CSS variables (theme) */
+:root {
+  --primary-color: #ec7c13;
+  --text-dark: #1A2B48;
+  --hero-start: #DB7235;
+  --hero-end: #B2660A;
+}
+
+/* Hero Section */
+.hero-bg {
+  background: linear-gradient(135deg, var(--hero-start), var(--hero-end));
+}
+
+/* Live map background image */
+.live-map-bg {
+  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWPDdweDK82T5cTKSS6VIiHZLDbZISd1pcAgyWo2e4V-Wm6MUfNFc1sY7eKISQvqrW7T2EhLDvV0P-Z247eO6SMewvEaFutZqmsqL5M3Wj-hVgOcc-Ol6F5Zi2Hh9p1OmMiZkoFOw0uQ-mBiEkAHk7gJkEu290PWyQuvl97Wx2zDRNDu2GsmAb2kjtPVlrY0eRqT40Fk1NaFrrv6XrhTsSWuXOMk7IQLloC2GU0c5lLwTprrUY_m1vr1aa61345dEBc72IyGAwY8s');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Essential Base Styles */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Layout Containers */
+.layout-container {
+  max-width: 100%;
+}
+
+.layout-content-container {
+  width: 100%;
+}
+
+/* Feature Cards */
+.feature-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.feature-card .icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background-color: rgba(236, 124, 19, 0.1);
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .icon-wrapper {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.feature-card .title {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
+}
+
+.feature-card:hover .title {
+  color: var(--primary-color);
+}
+
+.feature-card .description {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-dark);
+  opacity: 0.8;
+}
+
+/* Carousel Animation */
+.carousel-slide {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.carousel-slide.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
+.carousel-slide.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Logo and Icons */
+.alisto-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Logo variants */
+.alisto-logo--header {
+  color: var(--primary-color);
+}
+
+.alisto-logo--footer {
+  color: white;
+}
+
+.alisto-logo__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.alisto-logo__text {
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: 1px;
+}
+
+/* Feature icons */
+.feature-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* Icons within icon wrapper */
+.icon-wrapper .feature-icon {
+  display: block;
+}
+
+/* Main navigation */
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+/* Buttons */
+.btn-login {
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #C85A2D;
+  background-color: transparent;
+  color: #C85A2D;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(200, 90, 45, 0);
+}
+
+.btn-login:hover {
+  background-color: #C85A2D;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 90, 45, 0.2);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(200, 90, 45, 0.1);
+}
+
+.btn-signup {
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  background-color: #C85A2D;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(200, 90, 45, 0.15);
+}
+
+.btn-signup:hover {
+  background-color: #B24E27;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(200, 90, 45, 0.3);
+}
+
+.btn-signup:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(200, 90, 45, 0.15);
+}
+
+.btn-signup:hover {
+  background-color: rgba(200, 90, 45, 0.9);
+}
+
+/* Start monitoring button */
+.btn-start-monitoring {
+  height: 3rem;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #C85A2D;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(200, 90, 45, 0.15);
+}
+
+.btn-start-monitoring:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(200, 90, 45, 0.25);
+  background-color: #ffffff;
+}
+
+.btn-start-monitoring:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(200, 90, 45, 0.15);
+}
+
+/* Download paper button */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  padding: 0 2rem;
+  border-radius: 0.5rem;
+  background-color: #C85A2D;
+  color: white;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(200, 90, 45, 0.2);
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 90, 45, 0.3);
+  background-color: #B24E27;
+}
+
+.btn-download:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(200, 90, 45, 0.2);
+}
+
+.btn-download svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+/* Paper cover image */
+.paper-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.paper-cover:hover {
+  transform: scale(1.05);
+}
