@@ -41,7 +41,15 @@ const HeroLeft = () => {
           </span>
         </button>
         
-        <button className="border-2 border-blue-200/80 text-blue-100 px-10 py-4 rounded-2xl font-bold text-lg hover:bg-blue-100/10 hover:border-blue-100 transition-all duration-300 backdrop-blur-sm">
+        <button 
+          onClick={() => {
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+              aboutSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="border-2 border-blue-200/80 text-blue-100 px-10 py-4 rounded-2xl font-bold text-lg hover:bg-blue-100/10 hover:border-blue-100 transition-all duration-300 backdrop-blur-sm"
+        >
           Learn More
         </button>
       </div>
