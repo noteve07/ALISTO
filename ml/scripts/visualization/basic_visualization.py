@@ -5,11 +5,11 @@ import os
 import numpy as np
 
 # load earthquake data
-input_path = os.path.join('ml', 'dataset', 'earthquake', 'interim', 'cleaned_v1_eq_data.csv')
+input_path = r"C:\Users\ADMIN\Documents\GitHub\ALISTO\ml\dataset\earthquake\interim\cleaned_v1_eq_data.csv"
 df = pd.read_csv(input_path, encoding='utf-8')
 
 # filter magnitude > 4
-df = df[df['magnitude'] > 5].copy()
+df = df[df['magnitude'] > 4].copy()
 
 # convert date_time to datetime
 df['date_time'] = pd.to_datetime(df['date_time'], errors='coerce')
@@ -23,7 +23,7 @@ date_max = df['date_time'].max()
 df['opacity'] = 0.3 + 0.7 * ((df['date_time'] - date_min) / (date_max - date_min)).clip(0, 1)
 
 # load Philippines map (GeoJSON)
-geojson_path = os.path.join('ml', 'dataset', 'gis_data', 'country.0.1.json')
+geojson_path = r"C:\Users\ADMIN\Documents\GitHub\ALISTO\ml\dataset\gis_data\country.0.1.json"
 ph_map = gpd.read_file(geojson_path)
 
 # plot
