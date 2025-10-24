@@ -20,8 +20,6 @@ import AccountPage from './features/account/pages/AccountPage'
 
 // Shared Pages
 import ErrorPage from './shared/pages/ErrorPage'
-import TermsOfService from './shared/pages/TermsOfService'
-import PrivacyPolicy from './shared/pages/PrivacyPolicy'
 
 
 
@@ -34,19 +32,8 @@ const App = () => {
       children: [
         { index: true, element: <LandingPage /> },
         { path: "login", element: <LoginPage /> },
-        { path: "signup", element: <SignupPage /> },
-        { path: "*", element: <ErrorPage />}
+        { path: "signup", element: <SignupPage /> }
       ]
-    },
-
-    // Legal Pages (standalone)
-    {
-      path: "/terms",
-      element: <TermsOfService />
-    },
-    {
-      path: "/privacy",
-      element: <PrivacyPolicy />
     },
 
     // App Routes
