@@ -16,6 +16,10 @@ import LiveMonitoringPage from './features/live-monitoring/pages/LiveMonitoringP
 import RiskEvaluationPage from './features/risk-evaluation/pages/RiskEvaluationPage'
 import AnalyticsPage from './features/analytics/pages/AnalyticsPage'
 import ChatbotPage from './features/chatbot/pages/ChatbotPage'
+import AccountPage from './features/account/pages/AccountPage'
+
+// Shared Pages
+import ErrorPage from './shared/pages/ErrorPage'
 
 
 
@@ -43,6 +47,8 @@ const App = () => {
         { path: "risk-evaluation", element: <RiskEvaluationPage /> },
         { path: "analytics", element: <AnalyticsPage /> },
         { path: "chatbot", element: <ChatbotPage /> },
+        { path: "account", element: <AccountPage /> },
+        { path: "*", element: <ErrorPage /> },
       ]
     }
   ]);
