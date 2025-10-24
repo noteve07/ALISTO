@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../../features/landing/components/Header'
 import Footer from '../../features/landing/components/Footer'
 
 const TermsOfService = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="relative flex min-h-screen w-full flex-col bg-white">
       <Header />

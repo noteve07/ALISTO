@@ -1,18 +1,24 @@
 import React from 'react'
 import Header from '../components/Header'
 import Hero from '../components/Hero'
-import Overview from '../components/Overview'
+import About from '../components/About'
+import Features from '../components/Features'
+import RealTimeOverview from '../components/RealTimeOverview'
+import Paper from '../components/Paper'
+import Developer from '../components/Developer'
 import Footer from '../components/Footer'
-
 
 const LandingPage = () => {
   return (
-    <div className="text-center">
-        
-        <Header />
-        <Hero />
-        <Overview /> 
-        <Footer />
+    <div>
+      <Header />
+      <Hero />
+      <About />
+      <Features />
+      <RealTimeOverview />
+      <Developer />
+      <Paper />
+      <Footer />
     </div>
   )
 }
