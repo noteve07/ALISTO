@@ -25,17 +25,32 @@ const App = () => {
     {
       path: '/',
       element: <PublicLayout />,
-      childre: [
+      children: [
         { index: true, element: <LandingPage /> },
         { path: "login", element: <LoginPage /> },
         { path: "signup", element: <SignupPage /> }
       ]
+    },
 
+    // App Routes
+    {
+      path: "/app",
+      element: <AppLayout />,
+      children: [
+        { index: true, element: <DashboardPage /> },
+        { path: "dashboard", element: <DashboardPage /> },
+        { path: "live-monitoring", element: <LiveMonitoringPage /> },
+        { path: "risk-evaluation", element: <RiskEvaluationPage /> },
+        { path: "analytics", element: <AnalyticsPage /> },
+        { path: "chatbot", element: <ChatbotPage /> },
+      ]
     }
   ]);
+
   return (
     <RouterProvider router={router} />
   )
 }
+
 
 export default App
