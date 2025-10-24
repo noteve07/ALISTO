@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - ALISTO</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <!-- ============================================ -->
+  <!-- SIGN-UP MODAL -->
+  <!-- ============================================ -->
+  <div class="modal-overlay visible" id="signupModal">
+    <div class="modal-container">
+      <!-- Close Button -->
+      <button class="modal-close-btn" id="closeModalBtn" aria-label="Close Sign Up form">&times;</button>
+      
+      <!-- ALISTO Branding -->
+      <div class="alisto-branding">
+        <div class="alisto-branding__icon" aria-hidden="true">
+          <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="alisto-branding__text">ALISTO</span>
+      </div>
+
+      <!-- Tagline -->
+      <p class="modal-tagline">Smart tech for a prepared Philippines</p>
+
+      <!-- Form Title -->
+      <h1 class="modal-form-title">Create Your Account</h1>
+      
+      <!-- Sign-Up Form -->
+      <form id="signupModalForm" autocomplete="off" novalidate>
+        <div class="modal-form-body">
+          <!-- Name Row -->
+          <div class="modal-name-row">
+            <div class="form-field">
+              <label for="modalFirstName">First Name</label>
+              <input type="text" id="modalFirstName" name="firstName" required aria-required="true">
+            </div>
+            <div class="form-field">
+              <label for="modalLastName">Last Name</label>
+              <input type="text" id="modalLastName" name="lastName" required aria-required="true">
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-field">
+            <label for="modalEmail">Email Address</label>
+            <input type="email" id="modalEmail" name="email" required aria-required="true">
+          </div>
+
+          <!-- Password -->
+          <div class="form-field">
+            <label for="modalPassword">Password</label>
+            <input type="password" id="modalPassword" name="password" minlength="8" required aria-required="true">
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-field">
+            <label for="modalConfirmPassword">Confirm Password</label>
+            <input type="password" id="modalConfirmPassword" name="confirmPassword" minlength="8" required aria-required="true">
+          </div>
+
+          <!-- Sign Up Button -->
+          <button type="submit" class="modal-primary-btn" id="modalSignupBtn" disabled>Sign Up</button>
+
+          <!-- Google Sign Up Button -->
+          <button type="button" class="modal-google-btn" id="modalGoogleSignUp" aria-label="Sign up with Google">
+            <span class="modal-google-logo" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" role="img" focusable="false">
+                <path fill="#EA4335" d="M533.5 278.4c0-18.5-1.5-37-4.6-55H272v104.2h147.3c-6.4 34.7-26.2 64.1-55.9 83.7v69.4h90.2c52.8-48.6 80.9-120.4 80.9-202.3z"/>
+                <path fill="#34A853" d="M272 544.3c73.4 0 135.2-24.3 180.3-65.9l-90.2-69.4c-25.1 16.8-57.2 26.6-90.1 26.6-69 0-127.6-46.6-148.5-109.2H31.9v68.6C76.8 488.8 168.8 544.3 272 544.3z"/>
+                <path fill="#4285F4" d="M123.5 326.4c-10.2-30.5-10.2-63.7 0-94.2V163.6H31.9c-42.1 83.7-42.1 183.4 0 267.1l91.6-68.6z"/>
+                <path fill="#FBBC04" d="M272 106.1c37.1-.6 72.8 13.4 100 39.4l74.6-74.6C407.3 25.5 340.9-.1 272 0 168.8 0 76.8 55.5 31.9 138.9l91.6 68.6C144.4 152.7 203 106.1 272 106.1z"/>
+              </svg>
+            </span>
+            <span class="modal-google-label">Sign Up with Google</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Footer -->
+      <div class="modal-form-footer">
+        Already have an account? <a href="./alisto-login.html">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./app.js"></script>
+  <script>
+    // Initialize Sign-Up modal
+    initializeSignUpModal();
+  </script>
+</body>
+</html>

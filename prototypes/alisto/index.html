@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALISTO - Seismic Tracking and Observation</title>
+  
+  <!-- Fonts / Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #DB7235 0%, #B2660A 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .container {
+      text-align: center;
+      color: white;
+    }
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .tagline {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn-signup {
+      background: white;
+      color: #ec7c13;
+    }
+    
+    .btn-login {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .footer {
+      margin-top: 3rem;
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+    
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .tagline {
+        font-size: 1rem;
+      }
+      
+      .button-group {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ALISTO Logo -->
+    <svg class="logo" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"/>
+    </svg>
+    
+    <!-- Title -->
+    <h1>ALISTO</h1>
+    
+    <!-- Tagline -->
+    <p class="tagline">Smart tech for a prepared Philippines</p>
+    
+    <!-- Call-to-action buttons -->
+    <div class="button-group">
+      <a href="./alisto-signup.html" class="btn btn-signup">Create Account</a>
+      <a href="./alisto-login.html" class="btn btn-login">Log In</a>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p>Seismic Tracking and Observation System</p>
+    </div>
+  </div>
+</body>
+</html>

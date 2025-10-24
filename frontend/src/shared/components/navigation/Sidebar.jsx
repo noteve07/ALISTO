@@ -96,14 +96,14 @@ const Sidebar = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Logo Section */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="px-4 py-5">
         <div className="flex items-center">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-white font-bold text-sm">A</span>
+          <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+            <span className="text-white font-bold text-base">A</span>
           </div>
           {isHovered && (
             <div className="ml-3 overflow-hidden">
-              <h2 className="text-lg font-bold text-gray-900 whitespace-nowrap">ALISTO</h2>
+              <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">ALISTO</h2>
             </div>
           )}
         </div>
