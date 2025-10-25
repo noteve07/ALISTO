@@ -3,7 +3,16 @@ from pydantic import BaseModel
 from typing import List
 
 class EarthquakeData(BaseModel):
-    date_time: str
+    datetime: str
+    latitude: float
+    longitude: float
+    depth: int
+    magnitude: float
+    location: str
+    province: str
+
+class EarthquakeDataRaw(BaseModel):
+    datetime: str
     latitude: float
     longitude: float
     depth: int
