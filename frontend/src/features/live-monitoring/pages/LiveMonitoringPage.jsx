@@ -1,12 +1,15 @@
 import React from 'react'
+import useEarthquakeData from '../hooks/useEarthquakeData'
+import MapView from '../components/MapView'
+import LoadingOverlay from '../components/LoadingOverlay'
 
 const LiveMonitoringPage = () => {
+  const { earthquakeData, loading } = useEarthquakeData()
+
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Live Monitoring Page</h1>
-        <p className="text-gray-600">Content will be implemented later</p>
-      </div>
+    <div className="h-full relative">
+      {loading && <LoadingOverlay />}
+      <MapView earthquakeData={earthquakeData} />
     </div>
   )
 }

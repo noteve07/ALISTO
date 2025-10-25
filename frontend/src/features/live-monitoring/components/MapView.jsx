@@ -1,0 +1,37 @@
+import React from 'react'
+import { MapContainer, TileLayer } from 'react-leaflet'
+import EarthquakeMarker from './EarthquakeMarker'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+
+// fix leaflet default marker
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+})
+
+const MapView = ({ earthquakeData }) => (
+  <MapContainer
+    center={[12.8797, 121.7740]}
+    zoom={6}
+    scrollWheelZoom
+    style={{ width: '100%', height: '100%' }}
+    minZoom={5}
+    maxZoom={12}
+    maxBounds={[[4.5, 116.0], [21.5, 127.5]]}
+    maxBoundsViscosity={1.0}
+  >
+    <TileLayer
+      attribution='&copy; OpenStreetMap contributors'
+      url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      noWrap
+    />
+    {earthquakeData.map((event, i) => (
+      <EarthquakeMarker key={event.id} event={event} isLatest={i === 0} />
+    ))}
+  </MapContainer>
+)
+
+export default MapView
