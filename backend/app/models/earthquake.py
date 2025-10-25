@@ -17,7 +17,7 @@ class EarthquakeRawData(BaseModel):
 class EarthquakeData(BaseModel):
     """Processed data ready for database"""
     eq_id: str
-    datetime: datetime
+    datetime: str
     latitude: float
     longitude: float
     depth: int

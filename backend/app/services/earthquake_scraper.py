@@ -1,16 +1,17 @@
 # app/services/scraper.py
-import requests
-from bs4 import BeautifulSoup
+from app.models.earthquake import EarthquakeRawData
+from app.core.config import settings
+
 from typing import List
 from fastapi import HTTPException
-import urllib3
+from datetime import datetime
 
-from app.models.earthquake import EarthquakeDataRaw
-from app.core.config import settings
+import requests
+import urllib3
+from bs4 import BeautifulSoup
 
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 
 
 class EarthquakeScrapingService:
@@ -20,10 +21,12 @@ class EarthquakeScrapingService:
         self.base_url = settings.phivolcs_url
         self.timeout = settings.request_timeout
     
-    async def scrape_latest_earthquakes(self, limit: int = 10) -> List[EarthquakeDataRaw]:
+    async def scrape_latest_earthquakes(self, limit: int = 10) -> List[EarthquakeRawData]:
         """Scrape latest earthquakes from DOST-PHIVOLCS website"""
         
         try:
+            print(f"🌐 Scraping earthquakes at {datetime.now()}")     
+
             # Fetch webpage - scraping starts here
             response = requests.get(self.base_url, verify=False, timeout=self.timeout)
             if response.status_code != 200:
@@ -42,13 +45,13 @@ class EarthquakeScrapingService:
                 raise HTTPException(status_code=404, detail="No earthquake data found")            
 
             
-            # Convert to EarthquakeDataRaw objects
+            # Convert to EarthquakeRawData objects
             earthquakes = []
             for row in data_rows[:limit]:
                 cells = [td.get_text(strip=True) for td in row.find_all("td")]
-                
+          
                 try:
-                    earthquake = EarthquakeDataRaw(
+                    earthquake = EarthquakeRawData(
                         datetime=cells[0],
                         latitude=float(cells[1]),
                         longitude=float(cells[2]),
@@ -59,7 +62,8 @@ class EarthquakeScrapingService:
                     earthquakes.append(earthquake)
                 except (ValueError, IndexError):
                     continue  # skip invalid data
-
+                
+            print(f"✅ Scraped {len(earthquakes)} raw earthquake data")
             return earthquakes
 
         except requests.RequestException as e:

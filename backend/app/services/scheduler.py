@@ -9,6 +9,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
 from app.services.earthquake_scraper import scraper_service
+from app.models.earthquake import EarthquakeRawData
+from app.models.earthquake import EarthquakeData
 from app.core.database import supabase
 from app.core.config import settings
 
@@ -63,7 +65,7 @@ class EarthquakeScheduler:
 
     async def earthquake_sync_job(self):
         """
-        Main scheduled job: Scrape -> Check -> Add/Skip
+        Main scheduled job: Scrape -> Process -> Check -> Add/Skip
         """
         try:
             print(f"\n🚀 Starting earthquake sync job at {datetime.now()}")
@@ -71,21 +73,27 @@ class EarthquakeScheduler:
             
             # Step 1: Scrape earthquake data
             start_time = time.time()
-            scraped_earthquakes = await self.scrape_earthquakes()
+            scraped_earthquakes = await scraper_service.scrape_latest_earthquakes(50)
             end_time = time.time()
             print(f"[1: Scrape] Execution time: {end_time - start_time:.6f} seconds")
 
-            # Step 2: Check for new ones
+            # Step 2: Process earthquake data
             start_time = time.time()
-            new_earthquakes = await self.check_for_new_earthquakes(scraped_earthquakes)
+            processed_earthquakes = await self.process_earthquakes(scraped_earthquakes)
             end_time = time.time()
-            print(f"[2: Check] Execution time: {end_time - start_time:.6f} seconds")
+            print(f"[2: Process] Execution time: {end_time - start_time:.6f} seconds")
+
+            # Step 3: Check for new ones
+            start_time = time.time()
+            new_earthquakes = await self.check_for_new_earthquakes(processed_earthquakes)
+            end_time = time.time()
+            print(f"[3: Check] Execution time: {end_time - start_time:.6f} seconds")
             
-            # Step 3: Add to database or Skip
+            # Step 4: Add to database or Skip
             start_time = time.time()
             success = await self.add_or_skip_earthquakes(new_earthquakes)
             end_time = time.time()
-            print(f"[3: Add/Skip] Execution time: {end_time - start_time:.6f} seconds")
+            print(f"[4: Add/Skip] Execution time: {end_time - start_time:.6f} seconds")
             
             if success:
                 print(f"✅ Sync job completed successfully at {datetime.now()}\n")
@@ -96,72 +104,79 @@ class EarthquakeScheduler:
             print(f"💥 Sync job crashed: {e}\n")
 
         
-    async def scrape_earthquakes(self) -> List[Dict[str, Any]]:
+
+    async def process_earthquakes(self, raw_earthquakes: List[EarthquakeRawData]) -> List[EarthquakeData]:
         """
-        Process earthquake row data for eq_id, province 
+        Process earthquake row data for datetime, eq_id and province_id
         """
         try:
-            print(f"🔄 Scraping earthquakes at {datetime.now()}")
-            
-            # call the earthquake_scraper.py service
-            raw_earthquakes = await scraper_service.scrape_latest_earthquakes(50)  
-            
-            start_time = time.time()
-            # convert to dict and add eq_hash
-            earthquakes_with_hash = []
+            print(f"🔄 Processing earthquakes data...")
+
+            # process datetime format, eq_id and province_id
+            processed_earthquake_row = []
             for eq in raw_earthquakes:
+                # convert datetime to ISO format
+                datetime_iso = self.parse_datetime_string(eq.datetime)
+                if datetime_iso is None:
+                    print(f"⚠️ Skipping earthquake due to invalid datetime: {eq.datetime}")
+                    return None
+
+                # extract the province from location
+                province_name = await self.extract_province(eq.location)
+
+                # get the province_id from the province name
+                province_id = await self.get_province_id(province_name)
+
+                # compile all changes in a dictionary
                 eq_dict = {
-                    "datetime": eq.datetime,
+                    # Ensure datetime is an ISO string for DB insertion
+                    "datetime": datetime_iso,
                     "latitude": eq.latitude,
                     "longitude": eq.longitude,
+                    "coordinates": "SRID=4326;POINT(120.984222 14.599512)",
                     "depth": eq.depth,
                     "magnitude": eq.magnitude,
                     "location": eq.location,
+                    "province_id": province_id,
                 }
 
-                # extract the province from location
-                province_name = await self.extract_province(eq_dict["location"])
-
-                # get the province_id from the province name
-                eq_dict["province_id"] = await self.get_province_id(province_name)
-                
-                # get the eq_id using hashing
+                # generate the eq_id using hashing
                 eq_dict["eq_id"] = await self.generate_eq_hash(eq_dict)
 
-                
-
-                earthquakes_with_hash.append(eq_dict)
+                processed_earthquake_row.append(eq_dict)
 
 
-            end_time = time.time()
-            print(f"[1: Scrape (Hash/Province)] Execution time: {end_time - start_time:.6f} seconds")
-            
-
-            print(f"✅ Scraped {len(earthquakes_with_hash)} earthquakes with hashes")
-            return earthquakes_with_hash
+            print(f"✅ Processed {len(processed_earthquake_row)} earthquakes with hashes")
+            return processed_earthquake_row
             
         except Exception as e:
             print(f"❌ Scraping failed: {e}")
             return []
+        
     
 
-    async def generate_eq_hash(self, earthquake: Dict[str, Any]) -> str:
+    def parse_datetime_string(self, date_string: str) -> str | None:
         """
-        Generate unique hash for earthquake using timestamp + magnitude + province
+        Parse PHIVOLCS datetime string to ISO format string
+        Format: "25 October 2025 - 07:29 PM" → "2025-10-25T19:29:00"
         """
-        # Extract values for hash
-        timestamp = str(earthquake.get('datetime', ''))
-        magnitude = str(earthquake.get('magnitude', ''))
-        location = str(earthquake.get('location', ''))
-        
-        # Create combined string
-        combined = f"{timestamp}_{magnitude}_{location}"
-        
-        # Generate MD5 hash
-        eq_hash = hashlib.md5(combined.encode()).hexdigest()
-        return eq_hash
+        try:
+            # handle the format with " - " separator
+            if ' - ' in date_string:
+                date_part, time_part = date_string.split(' - ')
+                dt_format = "%d %B %Y %I:%M %p"
+                dt_obj = datetime.strptime(f"{date_part} {time_part}", dt_format)
+                return dt_obj.isoformat()
+            else:
+                # try other possible formats
+                dt_obj = datetime.fromisoformat(date_string.replace('Z', '+00:00'))
+                return dt_obj.isoformat()
+        except Exception as e:
+            print(f"❌ Failed to parse datetime: {date_string}, error: {e}")
+            return None
     
     
+
     async def extract_province(self, location: str) -> str:
         """
         Extract province name from location for each earthquake data
@@ -175,26 +190,49 @@ class EarthquakeScheduler:
             return matches[-1]
         
 
+
     async def get_province_id(self, province_name: str) -> int:
         """
-        Look up province id from province name. Returns None if not found.
+        Look up province id from province name using local provinces_id.json. Returns None if not found.
         """
         if not province_name:
             return None
-        
         try:
-            result = supabase.table('provinces')\
-                .select('province_id')\
-                .ilike('name', f'%{province_name}%')\
-                .execute()
-            
-            return result.data[0]['province_id'] if result.data else None
+            import json
+            import os
+            # load provinces_id.json once and cache it
+            if not hasattr(self, '_province_id_map'):
+                json_path = os.path.join(os.path.dirname(__file__), '../src/provinces_id.json')
+                with open(json_path, 'r', encoding='utf-8') as f:
+                    self._province_id_map = json.load(f)
+            # normalize province name for lookup
+            key = province_name.strip().lower()
+            return self._province_id_map.get(key, None)
         except Exception as e:
-            print(f"❌ Province lookup failed for {province_name}: {e}")        
+            print(f"❌ Province lookup failed for {province_name}: {e}")
             return None
 
+
+
+    async def generate_eq_hash(self, earthquake: Dict[str, Any]) -> str:
+        """
+        Generate unique hash for earthquake using timestamp + magnitude + province
+        """
+        # extract values for hash
+        timestamp = str(earthquake.get('datetime', ''))
+        magnitude = str(earthquake.get('magnitude', ''))
+        location = str(earthquake.get('location', ''))
+        
+        # create combined string
+        combined = f"{timestamp}_{magnitude}_{location}"
+        
+        # generate MD5 hash
+        eq_hash = hashlib.md5(combined.encode()).hexdigest()
+        return eq_hash
     
-    async def check_for_new_earthquakes(self, scraped_earthquakes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+
+
+    async def check_for_new_earthquakes(self, scraped_earthquakes: List[EarthquakeData]) -> List[EarthquakeData]:
         """
         Check which earthquakes are new by comparing eq_hash with database
         Returns list of new earthquakes to add
@@ -248,6 +286,7 @@ class EarthquakeScheduler:
             return []
     
 
+
     async def add_or_skip_earthquakes(self, new_earthquakes: List[Dict[str, Any]]) -> bool:
         """
         Add new earthquakes to database or skip if none
@@ -257,14 +296,14 @@ class EarthquakeScheduler:
             return True
         
         try:
-            # Add new earthquakes to database
+            # add new earthquakes to database
             result = supabase.table('latest_earthquakes')\
                 .insert(new_earthquakes)\
                 .execute()
             
             print(f"✅ Successfully added {len(result.data)} new earthquakes to database")
             
-            # Optional: Clean up old records (keep only last 1000)
+            # clean up old records (keep only last 10000)
             await self.cleanup_old_records()
             
             return True
@@ -274,12 +313,13 @@ class EarthquakeScheduler:
             return False
         
     
-    async def cleanup_old_records(self, keep_count: int = 1000):
+
+    async def cleanup_old_records(self, keep_count: int = 10_000):
         """
         Keep only the most recent earthquakes in database
         """
         try:
-            # Get total count
+            # get total count
             count_result = supabase.table('latest_earthquakes')\
                 .select("*", count='exact')\
                 .execute()
@@ -287,7 +327,7 @@ class EarthquakeScheduler:
             total_count = count_result.count
             
             if total_count > keep_count:
-                # Get IDs of old records to delete
+                # get IDs of old records to delete
                 old_records = supabase.table('latest_earthquakes')\
                     .select("id")\
                     .order('datetime', desc=False)\
@@ -297,7 +337,7 @@ class EarthquakeScheduler:
                 if old_records.data:
                     old_ids = [record['id'] for record in old_records.data]
                     
-                    # Delete old records
+                    # delete old records
                     supabase.table('latest_earthquakes')\
                         .delete()\
                         .in_('id', old_ids)\
