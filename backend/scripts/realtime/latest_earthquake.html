@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earthquake Test</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .eq { border: 1px solid #ccc; margin: 5px 0; padding: 10px; }
+        .mag { font-weight: bold; font-size: 18px; }
+        .new { background: yellow; }
+    </style>
+</head>
+<body>
+    <h1>Earthquakes</h1>
+    <div>Status: <span id="status">Loading...</span></div>
+    <button onclick="loadQuakes()">Refresh</button>
+    
+    <div id="list"></div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        const supabase = window.supabase.createClient(
+            'https://dytpdauebmnajgnenxbh.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5dHBkYXVlYm1uYWpnbmVueGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg5NDk0MTYsImV4cCI6MjA3NDUyNTQxNn0.12IgybgnYcdL3vG38755NLrby_yfHyy_VnKxtVkrwjM'
+        );
+
+        function renderQuake(quake, isNew = false) {
+            const div = document.createElement('div');
+            div.className = `eq ${isNew ? 'new' : ''}`;
+            div.innerHTML = `
+                <span class="mag">${quake.magnitude}</span> 
+                ${quake.location} 
+                (${new Date(quake.datetime).toLocaleString()})
+            `;
+            
+            if (isNew) {
+                document.getElementById('list').prepend(div);
+            } else {
+                document.getElementById('list').appendChild(div);
+            }
+        }
+
+        async function loadQuakes() {
+            const { data, error } = await supabase
+                .from('latest_earthquakes')
+                .select('*')
+                .order('datetime', { ascending: false })
+                .limit(20);
+
+            if (error) {
+                document.getElementById('status').textContent = 'Error: ' + error.message;
+                return;
+            }
+
+            document.getElementById('list').innerHTML = '';
+            data.forEach(quake => renderQuake(quake));
+            document.getElementById('status').textContent = `Loaded ${data.length} quakes`;
+        }
+
+        // Real-time
+        supabase
+        .channel('earthquakes')
+        .on('postgres_changes', { 
+            event: '*',  // 🎯 ALL events (INSERT, UPDATE, DELETE)
+            schema: 'public', 
+            table: 'latest_earthquakes' 
+        }, (payload) => {
+            console.log('Change detected:', payload);
+            
+            if (payload.eventType === 'INSERT') {
+                console.log('New quake:', payload.new);
+                renderQuake(payload.new, true);
+                document.getElementById('status').textContent = 'NEW QUAKE!';
+                
+                setTimeout(() => {
+                    document.querySelector('.new')?.classList.remove('new');
+                }, 3000);
+            }
+            else if (payload.eventType === 'DELETE') {
+                console.log('Deleted quake:', payload.old);
+                // Remove from UI
+                const elem = document.querySelector(`[data-eq-id="${payload.old.eq_id}"]`);
+                if (elem) elem.remove();
+                document.getElementById('status').textContent = 'QUAKE DELETED!';
+            }
+        })
+        .subscribe();
+
+        loadQuakes();
+    </script>
+</body>
+</html>
