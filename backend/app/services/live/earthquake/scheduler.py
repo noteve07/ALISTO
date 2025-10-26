@@ -9,7 +9,7 @@ from typing import List, Dict, Any
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
-from app.services.earthquake_scraper import scraper_service
+from app.services.live.earthquake.earthquake_scraper import scraper_service
 from app.models.earthquake import EarthquakeRawData
 from app.models.earthquake import EarthquakeData
 from app.core.database import supabase

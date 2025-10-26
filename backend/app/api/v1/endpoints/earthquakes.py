@@ -2,8 +2,9 @@
 from fastapi import APIRouter, Query
 from datetime import datetime
 
-from app.services.earthquake_scraper import scraper_service
 from app.core.config import settings
+from app.services.live.earthquake.earthquake_scraper import scraper_service
+
 
 router = APIRouter()
 
