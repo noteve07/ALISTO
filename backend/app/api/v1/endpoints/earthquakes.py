@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Query
 from datetime import datetime
 
-from app.core.config import settings
+from app.core.database import supabase
 from app.services.live.earthquakes.earthquake_scraper import earthquake_scraper
 
 
@@ -47,3 +47,32 @@ async def test_earthquake_scraping():
             "status": "error",
             "message": str(e)
         }
+    
+
+@router.get("/latest-earthquakes")
+async def get_latest_earthquakes(count: int = Query(50, description="Number of latest earthquakes to return")):
+    """
+    Get the latest earthquakes from the database
+    - **count**: Number of recent earthquakes to return (default: 50)
+    """
+    try:
+        result = supabase.table('latest_earthquakes')\
+            .select('*')\
+            .order('datetime', desc=True)\
+            .limit(count)\
+            .execute()
+        earthquakes = result.data if result.data else []
+        return {
+            "success": True,
+            "count": len(earthquakes),
+            "data": earthquakes,
+            "source": "database",
+            "fetched_at": datetime.now().isoformat(),
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "data": [],
+        }
+    
