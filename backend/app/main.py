@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api.v1.routes import api_router
-from app.services.live.earthquake.scheduler import earthquake_scheduler
+from app.services.live.earthquakes.earthquake_scheduler import earthquake_scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

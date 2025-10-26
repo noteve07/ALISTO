@@ -3,7 +3,7 @@ from fastapi import APIRouter, Query
 from datetime import datetime
 
 from app.core.config import settings
-from app.services.live.earthquake.earthquake_scraper import scraper_service
+from app.services.live.earthquakes.earthquake_scraper import earthquake_scraper
 
 
 router = APIRouter()
@@ -15,7 +15,7 @@ async def get_live_earthquakes(last: int = Query(250)):
     
     - **last**: Number of recent earthquakes to return
     """
-    earthquakes = await scraper_service.scrape_latest_earthquakes(last)
+    earthquakes = await earthquake_scraper.scrape_latest_earthquakes(last)
 
     return {
         "success": True,
@@ -33,7 +33,7 @@ async def test_earthquake_scraping():
     Returns a lightweight response for health checking
     """
     try:
-        earthquakes = await scraper_service.scrape_latest_earthquakes(3)
+        earthquakes = await earthquake_scraper.scrape_latest_earthquakes(3)
         
         return {
             "status": "success",
