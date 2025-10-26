@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.api.v1.routes import api_router
 from app.services.live.earthquakes.earthquake_scheduler import earthquake_scheduler
+from app.api.v1.routes import api_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -46,8 +46,12 @@ app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 def root():
     return {
         "message": "ALISTO API is running!",
+        "version": settings.VERSION,
+        "docs": "/docs",
         "endpoints": {
-            "Live Earthquakes": f"GET {settings.API_V1_PREFIX}/earthquakes/live",
-            "Test Scraping": f"GET {settings.API_V1_PREFIX}/earthquakes/test",
-        }
+            "api_root": settings.API_V1_PREFIX,
+            "health": f"GET {settings.API_V1_PREFIX}/health",
+            "health_scraper": f"GET {settings.API_V1_PREFIX}/health/scraper",
+            "earthquakes_latest": f"GET {settings.API_V1_PREFIX}/earthquakes/latest",
+        },
     }
