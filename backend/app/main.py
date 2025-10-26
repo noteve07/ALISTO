@@ -9,15 +9,16 @@ from app.services.scheduler import earthquake_scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup
+    # start earthquake scheduler
     print("🚀 Starting ALISTO API...")
     await earthquake_scheduler.start_scheduler()
     
     yield  # App is running
     
-    # Shutdown
+    # shutdown earthquake scheduler
     print("🔄 Shutting down ALISTO API...")
     await earthquake_scheduler.stop_scheduler()
+
 
 # create FastAPI app
 app = FastAPI(
