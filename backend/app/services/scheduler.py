@@ -2,6 +2,7 @@
 import re
 import time
 import hashlib
+import asyncio
 from datetime import datetime
 from typing import List, Dict, Any
 
@@ -63,47 +64,67 @@ class EarthquakeScheduler:
             print("📅 Earthquake scheduler stopped")
 
 
-    async def earthquake_sync_job(self):
+
+    async def earthquake_sync_job(self, retry_count: int = 0):
         """
-        Main scheduled job: Scrape -> Process -> Check -> Add/Skip
+        Main scheduled job with automatic retry capability.
+        Handles temporary failures by retrying once after 15 seconds.
         """
+
         try:
             print(f"\n🚀 Starting earthquake sync job at {datetime.now()}")
-            
-            
-            # Step 1: Scrape earthquake data
-            start_time = time.time()
-            scraped_earthquakes = await scraper_service.scrape_latest_earthquakes(50)
-            end_time = time.time()
-            print(f"[1: Scrape] Execution time: {end_time - start_time:.6f} seconds")
-
-            # Step 2: Process earthquake data
-            start_time = time.time()
-            processed_earthquakes = await self.process_earthquakes(scraped_earthquakes)
-            end_time = time.time()
-            print(f"[2: Process] Execution time: {end_time - start_time:.6f} seconds")
-
-            # Step 3: Check for new ones
-            start_time = time.time()
-            new_earthquakes = await self.check_for_new_earthquakes(processed_earthquakes)
-            end_time = time.time()
-            print(f"[3: Check] Execution time: {end_time - start_time:.6f} seconds")
-            
-            # Step 4: Add to database or Skip
-            start_time = time.time()
-            success = await self.add_or_skip_earthquakes(new_earthquakes)
-            end_time = time.time()
-            print(f"[4: Add/Skip] Execution time: {end_time - start_time:.6f} seconds")
-            
-            if success:
-                print(f"✅ Sync job completed successfully at {datetime.now()}\n")
-            else:
-                print(f"❌ Sync job failed at {datetime.now()}\n")
+            await self._execute_sync_job()
                 
         except Exception as e:
-            print(f"💥 Sync job crashed: {e}\n")
+            print(f"💥 Sync job crashed: {e}")
+            print("🔄 Retrying in 15 seconds...")
+            
+            try:
+                await asyncio.sleep(15)
+                await self._execute_sync_job()
+                print("✅ Retry successful!")
+            except Exception as retry_error:
+                print(f"💥 Retry also failed: {retry_error}")
+                print("❌ Giving up until next scheduled run.")
 
         
+
+    async def _execute_sync_job(self):
+        """
+        Execute the earthquake synchronization workflow:
+        Scrape → Process → Check → Add/Skip
+        """
+
+        # Step 1: Scrape earthquake data from PHIVOLCS
+        start_time = time.time()
+        scraped_earthquakes = await scraper_service.scrape_latest_earthquakes(100)
+        end_time = time.time()
+        print(f"[1: Scrape] Execution time: {end_time - start_time:.6f} seconds")
+
+        # Step 2: Process and transform raw earthquake data
+        start_time = time.time()
+        processed_earthquakes = await self.process_earthquakes(scraped_earthquakes)
+        end_time = time.time()
+        print(f"[2: Process] Execution time: {end_time - start_time:.6f} seconds")
+
+        # Step 3: Check for new earthquakes not in database
+        start_time = time.time()
+        new_earthquakes = await self.check_for_new_earthquakes(processed_earthquakes)
+        end_time = time.time()
+        print(f"[3: Check] Execution time: {end_time - start_time:.6f} seconds")
+        
+        # Step 4: Add new earthquakes to database or skip if none
+        start_time = time.time()
+        success = await self.add_or_skip_earthquakes(new_earthquakes)
+        end_time = time.time()
+        print(f"[4: Add/Skip] Execution time: {end_time - start_time:.6f} seconds")
+        
+        if success:
+            print(f"✅ Sync job completed successfully at {datetime.now()}\n")
+        else:
+            print(f"❌ Sync job failed at {datetime.now()}\n")
+
+
 
     async def process_earthquakes(self, raw_earthquakes: List[EarthquakeRawData]) -> List[EarthquakeData]:
         """
@@ -112,7 +133,7 @@ class EarthquakeScheduler:
         try:
             print(f"🔄 Processing earthquakes data...")
 
-            # process datetime format, eq_id and province_id
+            seen_eq_ids = set()
             processed_earthquake_row = []
             for eq in raw_earthquakes:
                 # convert datetime to ISO format
@@ -141,8 +162,15 @@ class EarthquakeScheduler:
                 }
 
                 # generate the eq_id using hashing
-                eq_dict["eq_id"] = await self.generate_eq_hash(eq_dict)
+                eq_id = await self.generate_eq_hash(eq_dict)
 
+
+                # check if duplicate
+                if eq_id in seen_eq_ids:
+                    continue
+
+                seen_eq_ids.add(eq_id)
+                eq_dict["eq_id"] = eq_id
                 processed_earthquake_row.append(eq_dict)
 
 
@@ -277,7 +305,7 @@ class EarthquakeScheduler:
                 else:
                     # found existing earthquake, stop checking
                     break
-            
+                
             print(f"🆕 Found {len(new_earthquakes)} new earthquakes")
             return new_earthquakes
             
