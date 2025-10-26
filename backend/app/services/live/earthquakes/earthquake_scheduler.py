@@ -9,11 +9,12 @@ from typing import List, Dict, Any
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
-from app.services.earthquake_scraper import scraper_service
 from app.models.earthquake import EarthquakeRawData
 from app.models.earthquake import EarthquakeData
 from app.core.database import supabase
 from app.core.config import settings
+
+from app.services.live.earthquakes.earthquake_scraper import earthquake_scraper
 
 
 class EarthquakeScheduler:
@@ -97,7 +98,7 @@ class EarthquakeScheduler:
 
         # Step 1: Scrape earthquake data from PHIVOLCS
         start_time = time.time()
-        scraped_earthquakes = await scraper_service.scrape_latest_earthquakes(100)
+        scraped_earthquakes = await earthquake_scraper.scrape_latest_earthquakes(100)
         end_time = time.time()
         print(f"[1: Scrape] Execution time: {end_time - start_time:.6f} seconds")
 
@@ -230,7 +231,9 @@ class EarthquakeScheduler:
             import os
             # load provinces_id.json once and cache it
             if not hasattr(self, '_province_id_map'):
-                json_path = os.path.join(os.path.dirname(__file__), '../src/provinces_id.json')
+                # Go up two levels from live/earthquakes to app/src
+                json_path = os.path.join(os.path.dirname(__file__), '../../../src/provinces_id.json')
+                json_path = os.path.abspath(json_path)
                 with open(json_path, 'r', encoding='utf-8') as f:
                     self._province_id_map = json.load(f)
             # normalize province name for lookup

@@ -72,4 +72,4 @@ class EarthquakeScrapingService:
             raise HTTPException(status_code=500, detail=f"Scraping error: {str(e)}")
 
 # Singleton instance
-scraper_service = EarthquakeScrapingService()
+earthquake_scraper = EarthquakeScrapingService()
