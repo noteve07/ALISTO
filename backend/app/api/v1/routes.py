@@ -6,6 +6,7 @@ from app.core.config import settings
 
 from .endpoints import earthquakes
 from .endpoints import health
+from .endpoints import volcanoes
 
 
 api_router = APIRouter()
@@ -26,6 +27,7 @@ async def api_v1_root():
             "earthquakes_latest": "/api/v1/earthquakes/latest",
             "health": "/api/v1/health",
             "health_scraper": "/api/v1/health/scraper",
+            "volcanic_advisories": "/api/v1/volcanoes/advisories",
         },
         "timestamp": now,
     }
@@ -33,3 +35,4 @@ async def api_v1_root():
 
 api_router.include_router(earthquakes.router)
 api_router.include_router(health.router)
+api_router.include_router(volcanoes.router)

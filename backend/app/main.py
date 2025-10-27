@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.services.live.earthquakes.earthquake_scheduler import earthquake_scheduler
+from app.services.live.volcanoes.volcano_scheduler import volcano_scheduler
 from app.api.v1.routes import api_router
 
 @asynccontextmanager
@@ -12,12 +13,14 @@ async def lifespan(app: FastAPI):
     # start earthquake scheduler
     print("🚀 Starting ALISTO API...")
     await earthquake_scheduler.start_scheduler()
+    await volcano_scheduler.start_scheduler()
     
     yield  # App is running
     
     # shutdown earthquake scheduler
     print("🔄 Shutting down ALISTO API...")
     await earthquake_scheduler.stop_scheduler()
+    await volcano_scheduler.stop_scheduler()
 
 
 # create FastAPI app
