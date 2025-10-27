@@ -80,35 +80,29 @@ class VolcanoScheduler:
     async def _execute_sync_job(self) -> None:
         """Full volcano advisory workflow: scrape → process → update."""
 
+        # Step 1: Scrape volcano advisory data from PHIVOLCS
         start_time = time.time()
         raw_advisories = await volcano_scraper.scrape_latest_advisories()
         end_time = time.time()
-        print(
-            f"[1: Scrape Volcano] Execution time: {end_time - start_time:.6f} seconds"
-        )
+        print(f"[1: Scrape Volcano] Execution time: {end_time - start_time:.6f} seconds")
 
+        # Step 2: Process and transform raw volcano advisory data
         start_time = time.time()
         processed_advisories = await volcano_processor.process_advisories(raw_advisories)
         end_time = time.time()
-        print(
-            f"[2: Process Volcano] Execution time: {end_time - start_time:.6f} seconds"
-        )
+        print(f"[2: Process Volcano] Execution time: {end_time - start_time:.6f} seconds")
 
+        # Step 3: Compare processed volcano advisory data with database
         start_time = time.time()
-        advisories_to_update = await volcano_comparator.select_latest(
-            processed_advisories
-        )
+        advisories_to_update = await volcano_comparator.select_latest(processed_advisories)
         end_time = time.time()
-        print(
-            f"[3: Compare Volcano] Execution time: {end_time - start_time:.6f} seconds"
-        )
+        print(f"[3: Compare Volcano] Execution time: {end_time - start_time:.6f} seconds")
 
+        # Step 4: Update volcano advisory data in database
         start_time = time.time()
         success = await volcano_updater.apply_updates(advisories_to_update)
         end_time = time.time()
-        print(
-            f"[4: Update Volcano] Execution time: {end_time - start_time:.6f} seconds"
-        )
+        print(f"[4: Update Volcano] Execution time: {end_time - start_time:.6f} seconds")
 
         if success:
             print(f"✅ Volcano sync job completed successfully at {datetime.now()}\n")

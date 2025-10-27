@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import List
 
 from app.core.database import supabase
@@ -51,7 +52,7 @@ class VolcanoUpdaterService:
                         "issuance_date": None,
                         "bulletin_link": None,
                         "alert_status": None,
-                        "updated_at": None,
+                        "updated_at": datetime.now(timezone.utc).replace(tzinfo=None).isoformat(),
                     }
                 )
                 .neq("volcano_id", 0)
