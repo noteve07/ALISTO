@@ -99,6 +99,8 @@ class EarthquakeProcessorService:
                 with open(json_path, "r", encoding="utf-8") as f:
                     self._province_id_map = json.load(f)
             key = province_name.strip().lower()
+            if self._province_id_map.get(key, None) == None:
+                print(f"[No Province Lookup] -> {province_name}")
             return self._province_id_map.get(key, None)
         except Exception as e:
             print(f"❌ Province lookup failed for {province_name}: {e}")

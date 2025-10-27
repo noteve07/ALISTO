@@ -10,20 +10,20 @@ from app.services.live.earthquakes.earthquake_scheduler import earthquake_schedu
 from app.services.live.volcanoes.volcano_scheduler import volcano_scheduler
 from app.api.v1.routes import api_router
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # start earthquake scheduler
-    print("🚀 Starting ALISTO API...")
-    await earthquake_scheduler.start_scheduler()
-    await asyncio.sleep(settings.VOLCANO_STARTUP_DELAY_SECONDS)
-    await volcano_scheduler.start_scheduler()
+# COMMENTEDF FOR TESTING ENDPOINTS (To Fix: services blocking endpoint calls, make this pure async)
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+
+#     # start schedulers concurrently
+#     asyncio.create_task(earthquake_scheduler.start_scheduler())
+#     await asyncio.sleep(settings.VOLCANO_STARTUP_DELAY_SECONDS)
+#     asyncio.create_task(volcano_scheduler.start_scheduler())
     
-    yield  # App is running
-    
-    # shutdown earthquake scheduler
-    print("🔄 Shutting down ALISTO API...")
-    await volcano_scheduler.stop_scheduler()
-    await earthquake_scheduler.stop_scheduler()
+#     yield  # app runs here
+
+#     print("🔄 Shutting down ALISTO API...")
+#     await volcano_scheduler.stop_scheduler()
+#     await earthquake_scheduler.stop_scheduler()
 
 
 # create FastAPI app
@@ -31,7 +31,7 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     description=settings.PROJECT_DESCRIPTION,
     version=settings.VERSION,
-    lifespan=lifespan
+    # lifespan=lifespan
 )
 
 # add CORS middleware
