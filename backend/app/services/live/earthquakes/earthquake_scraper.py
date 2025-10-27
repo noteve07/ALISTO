@@ -25,7 +25,7 @@ class EarthquakeScraperService:
         """Scrape latest earthquakes from DOST-PHIVOLCS website"""
         
         try:
-            print(f"🌐 Scraping earthquakes at {datetime.now()}")     
+            print(f"🌐 Scraping earthquakes at {datetime.now()}")
 
             # Fetch webpage - scraping starts here
             response = requests.get(self.base_url, verify=False, timeout=self.timeout)
@@ -40,13 +40,12 @@ class EarthquakeScraperService:
             rows = soup.select('table tr')
             data_rows = [r for r in rows if len(r.find_all("td")) == 6]
 
-
             if not data_rows:
-                raise HTTPException(status_code=404, detail="No earthquake data found")            
+                raise HTTPException(status_code=404, detail="No earthquake data found")
 
             # if limit is None, get all rows
             target_rows = data_rows if limit is None else data_rows[:limit]
-            
+
             # convert to EarthquakeRawData objects
             earthquakes = []
             for row in target_rows:

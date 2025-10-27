@@ -24,12 +24,17 @@ class Settings:
 
     # PHIVOLCS Settings
     phivolcs_url: str = "https://earthquake.phivolcs.dost.gov.ph/"
+    VOLCANO_BASE_URL: str = "https://wovodat.phivolcs.dost.gov.ph"
+    VOLCANO_BULLETIN_URL: str = "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin"
+    
     request_timeout: int = 10
-    max_earthquake_limit: int = 50
+    max_earthquake_limit: int = 100
 
     # Web Scraping Configuration
     SCRAPE_INTERVAL: float = 5
     SCRAPE_INTERVAL_MINUTES: int = 3  # Scheduler interval in minutes
+    VOLCANO_SCRAPE_INTERVAL_MINUTES: int = 30
+    VOLCANO_STARTUP_DELAY_SECONDS: int = 5
 
 
 # Global settings instance

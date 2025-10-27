@@ -1,5 +1,6 @@
 # app/models/__init__.py
 from .earthquake import EarthquakeData
+from .volcano import VolcanoAdvisoryData, VolcanoRawAdvisory
 from .province import (
     Province, 
     ProvinceCreate, 
@@ -16,5 +17,7 @@ __all__ = [
     "ProvinceUpdate", 
     "ProvinceInDB",
     "ProvinceSimple",
-    "ProvinceWithStats"
+    "ProvinceWithStats",
+    "VolcanoAdvisoryData",
+    "VolcanoRawAdvisory",
 ]
