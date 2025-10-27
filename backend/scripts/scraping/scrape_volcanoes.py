@@ -9,6 +9,8 @@ import time
 # Disable SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+
+
 def scrape_volcano_data(url=None):
     """
     Scrapes volcano data from PHIVOLCS website or HTML file
@@ -33,40 +35,45 @@ def scrape_volcano_data(url=None):
         print("❌ No URL or file path provided")
         return []
     
+    
+    # parse the raw scraped html
     soup = BeautifulSoup(html_content, 'html.parser')
     
-    # Find all second-column divs (English versions)
-    second_columns = soup.find_all('div', class_='col-sm-6 second-column')
     
+    # find all second-column divs (English versions)
+    second_columns = soup.find_all('div', class_='col-sm-6 second-column')    
     volcano_data_list = []
-    
+
     for column in second_columns:
         volcano_data = {}
         
-        # Get the text content
+        # get the text content
         text_p = column.find('p', style=lambda x: x and 'font-size:18px' in x)
         if text_p:
             full_text = text_p.get_text(strip=True)
             
-            # Extract volcano name (first word before "Volcano")
+            # extract volcano name (first word before "Volcano")
             volcano_match = re.match(r'(\w+)\s+Volcano', full_text)
             if volcano_match:
                 volcano_data['volcano_name'] = volcano_match.group(1)
             
-            # Extract date (pattern: DD Month YYYY)
+            # extract date (pattern: DD Month YYYY)
             date_match = re.search(r'(\d{1,2}\s+\w+\s+\d{4})', full_text)
             if date_match:
                 volcano_data['date'] = date_match.group(1)
         
-        # Prefer the <a> href (absolute URL) so we can fetch live alert level
+        # extract the iframe link to get bulletin_id, alert level, 
         anchor = column.find('a', href=True)
+        
         if anchor:
+            
             href = anchor['href']
             base_url = 'https://wovodat.phivolcs.dost.gov.ph'
             full_url = urljoin(base_url + '/', href)
             volcano_data['iframe_link'] = full_url
+            print('\033[36m', href, '\033[0m')
             
-            # Extract bulletin ID from URL if present
+            # extract bulletin ID from URL if present
             bid_match = re.search(r'bid=(\d+)', full_url)
             if bid_match:
                 volcano_data['bulletin_id'] = bid_match.group(1)
@@ -76,29 +83,29 @@ def scrape_volcano_data(url=None):
                 resp = requests.get(full_url, timeout=15, verify=False)
                 if resp.ok:
                     iframe_soup = BeautifulSoup(resp.text, 'html.parser')
-                    # Extract alert level number
+                    # extract alert level number
                     circle_div = iframe_soup.find('div', class_='circle')
                     raw_alert_level = 'Not found'
                     if circle_div:
                         raw_alert_level = circle_div.get_text(strip=True)
-                        volcano_data['raw_alert_level'] = raw_alert_level
+                        volcano_data['alert_level'] = raw_alert_level
                     else:
-                        volcano_data['raw_alert_level'] = 'Not found'
+                        volcano_data['alert_level'] = 'Not found'
                     
-                    # Extract alert status text (e.g., "Low-level unrest")
+                    # extract alert status text (e.g., "Low-level unrest")
                     status_p = iframe_soup.find('p', class_='txt-status')
                     status_text = 'Not found'
                     if status_p:
-                        status_text = status_p.get_text(strip=True).strip('()')  # Remove parentheses
+                        status_text = status_p.get_text(strip=True).strip('()')  # remove parentheses
                         volcano_data['alert_status'] = status_text
                     else:
                         volcano_data['alert_status'] = 'Not found'
                         
-                    # Combine alert level and status into formatted field
-                    if raw_alert_level != 'Not found':
-                        volcano_data['alert_level'] = f"Alert Level {raw_alert_level}"
-                    else:
-                        volcano_data['alert_level'] = 'No Alert'
+                    # # combine alert level and status into formatted field
+                    # if raw_alert_level != 'Not found':
+                    #     volcano_data['alert_level'] = f"Alert Level {raw_alert_level}"
+                    # else:
+                    #     volcano_data['alert_level'] = 'No Alert'
                 else:
                     volcano_data['alert_level'] = f'HTTP {resp.status_code}'
             except requests.RequestException as e:
@@ -155,6 +162,8 @@ def scrape_volcano_data(url=None):
     return volcano_data_list
 
 
+
+
 def print_volcano_data(volcano_data_list):
     """
     Pretty print the volcano data
@@ -177,6 +186,10 @@ def print_volcano_data(volcano_data_list):
     print(f"\n{'='*80}")
     print(f"Total volcanoes found: {len(volcano_data_list)}")
     print("=" * 80)
+
+
+
+
 
 
 if __name__ == "__main__":
