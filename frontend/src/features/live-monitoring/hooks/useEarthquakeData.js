@@ -8,7 +8,7 @@ const useEarthquakeData = () => {
     const fetchEarthquakes = async () => {
       try {
         setLoading(true)
-        const res = await fetch('/api/v1/live')
+        const res = await fetch('/api/v1/earthquakes/latest?hours=24')
         if (!res.ok) throw new Error(`status ${res.status}`)
 
         const data = await res.json()

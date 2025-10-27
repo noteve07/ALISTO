@@ -232,7 +232,8 @@ class EarthquakeScheduler:
             # load provinces_id.json once and cache it
             if not hasattr(self, '_province_id_map'):
                 # Go up two levels from live/earthquakes to app/src
-                json_path = os.path.join(os.path.dirname(__file__), '../../../src/provinces_id.json')
+                json_path = os.path.join(os.path.dirname(__file__), '../../../src/lookup/provinces_id'
+                '.json')
                 json_path = os.path.abspath(json_path)
                 with open(json_path, 'r', encoding='utf-8') as f:
                     self._province_id_map = json.load(f)
