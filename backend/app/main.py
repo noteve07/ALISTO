@@ -1,5 +1,7 @@
 # app/main.py
 from contextlib import asynccontextmanager
+import asyncio
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,14 +15,15 @@ async def lifespan(app: FastAPI):
     # start earthquake scheduler
     print("🚀 Starting ALISTO API...")
     await earthquake_scheduler.start_scheduler()
+    await asyncio.sleep(settings.VOLCANO_STARTUP_DELAY_SECONDS)
     await volcano_scheduler.start_scheduler()
     
     yield  # App is running
     
     # shutdown earthquake scheduler
     print("🔄 Shutting down ALISTO API...")
-    await earthquake_scheduler.stop_scheduler()
     await volcano_scheduler.stop_scheduler()
+    await earthquake_scheduler.stop_scheduler()
 
 
 # create FastAPI app
