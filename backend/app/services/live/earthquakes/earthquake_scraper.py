@@ -14,14 +14,14 @@ from bs4 import BeautifulSoup
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-class EarthquakeScrapingService:
-    """Service for scraping earthquake data from PHIVOLCS"""
+class EarthquakeScraperService:
+    """Scrape recent earthquake data from PHIVOLCS."""
     
     def __init__(self):
         self.base_url = settings.phivolcs_url
         self.timeout = settings.request_timeout
     
-    async def scrape_latest_earthquakes(self, limit: int = 10) -> List[EarthquakeRawData]:
+    async def scrape_latest_earthquakes(self, limit: int | None = None) -> List[EarthquakeRawData]:
         """Scrape latest earthquakes from DOST-PHIVOLCS website"""
         
         try:
@@ -44,10 +44,12 @@ class EarthquakeScrapingService:
             if not data_rows:
                 raise HTTPException(status_code=404, detail="No earthquake data found")            
 
+            # if limit is None, get all rows
+            target_rows = data_rows if limit is None else data_rows[:limit]
             
-            # Convert to EarthquakeRawData objects
+            # convert to EarthquakeRawData objects
             earthquakes = []
-            for row in data_rows[:limit]:
+            for row in target_rows:
                 cells = [td.get_text(strip=True) for td in row.find_all("td")]
           
                 try:
@@ -72,4 +74,4 @@ class EarthquakeScrapingService:
             raise HTTPException(status_code=500, detail=f"Scraping error: {str(e)}")
 
 # Singleton instance
-earthquake_scraper = EarthquakeScrapingService()
+earthquake_scraper = EarthquakeScraperService()
