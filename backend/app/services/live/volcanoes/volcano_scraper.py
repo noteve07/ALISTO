@@ -5,15 +5,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
-import requests
-import urllib3
+import httpx
 from bs4 import BeautifulSoup
 from fastapi import HTTPException
 
 from app.core.config import settings
 from app.models.volcano import VolcanoRawAdvisory
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class VolcanoScraperService:
@@ -29,13 +26,14 @@ class VolcanoScraperService:
         try:
             print(f"🌋 Scraping volcano advisories at {datetime.now()}")
 
-            response = requests.get(self.base_url, verify=False, timeout=self.timeout)
+            async with httpx.AsyncClient(verify=False, timeout=self.timeout) as client:
+                response = await client.get(self.base_url)
 
-            if response.status_code != 200:
-                raise HTTPException(
-                    status_code=500,
-                    detail=f"Failed to fetch volcano data. Status: {response.status_code}",
-                )
+                if response.status_code != 200:
+                    raise HTTPException(
+                        status_code=500,
+                        detail=f"Failed to fetch volcano data. Status: {response.status_code}",
+                    )
 
             soup = BeautifulSoup(response.content, "html.parser")
             second_columns = soup.find_all("div", class_="col-sm-6 second-column")
@@ -46,19 +44,19 @@ class VolcanoScraperService:
             advisories: List[VolcanoRawAdvisory] = []
 
             for column in second_columns:
-                advisory = self._parse_column(column)
+                advisory = await self._parse_column(column)
                 if advisory:
                     advisories.append(advisory)
 
             print(f"✅ Scraped {len(advisories)} volcano advisories")
             return advisories
 
-        except requests.RequestException as exc:
+        except httpx.RequestError as exc:
             raise HTTPException(status_code=500, detail=f"Network error: {exc}") from exc
         except Exception as exc:  # noqa: BLE001
             raise HTTPException(status_code=500, detail=f"Scraping error: {exc}") from exc
 
-    def _parse_column(self, column) -> Optional[VolcanoRawAdvisory]:  # type: ignore[override]
+    async def _parse_column(self, column) -> Optional[VolcanoRawAdvisory]:  # type: ignore[override]
         """Parse a PHIVOLCS bulletin column into a raw advisory."""
 
         text_p = column.find("p", style=lambda x: x and "font-size:18px" in x)
@@ -106,17 +104,18 @@ class VolcanoScraperService:
         alert_status = "Not found"
 
         try:
-            target_resp = requests.get(full_url, timeout=15, verify=False)
-            if target_resp.ok:
-                iframe_soup = BeautifulSoup(target_resp.text, "html.parser")
-                circle_div = iframe_soup.find("div", class_="circle")
-                if circle_div:
-                    alert_level = circle_div.get_text(strip=True)
+            async with httpx.AsyncClient(timeout=15, verify=False) as client:
+                target_resp = await client.get(full_url)
+                if target_resp.status_code == 200:
+                    iframe_soup = BeautifulSoup(target_resp.text, "html.parser")
+                    circle_div = iframe_soup.find("div", class_="circle")
+                    if circle_div:
+                        alert_level = circle_div.get_text(strip=True)
 
-                status_p = iframe_soup.find("p", class_="txt-status")
-                if status_p:
-                    alert_status = status_p.get_text(strip=True).strip("()")
-        except requests.RequestException:
+                    status_p = iframe_soup.find("p", class_="txt-status")
+                    if status_p:
+                        alert_status = status_p.get_text(strip=True).strip("()")
+        except httpx.RequestError:
             pass
 
         return VolcanoRawAdvisory(

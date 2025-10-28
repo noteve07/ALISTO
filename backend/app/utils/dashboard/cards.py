@@ -12,7 +12,7 @@ from app.core.database import supabase
 DEFAULT_LATITUDE = 14.6799
 DEFAULT_LONGITUDE = 120.5421
 
-
+    
 async def get_todays_earthquakes() -> Dict[str, int]:
     """Return only today's earthquake count."""
 

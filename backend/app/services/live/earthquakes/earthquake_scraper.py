@@ -6,12 +6,8 @@ from typing import List
 from fastapi import HTTPException
 from datetime import datetime
 
-import requests
-import urllib3
+import httpx
 from bs4 import BeautifulSoup
-
-# Disable SSL warnings
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class EarthquakeScraperService:
@@ -28,12 +24,13 @@ class EarthquakeScraperService:
             print(f"🌐 Scraping earthquakes at {datetime.now()}")
 
             # Fetch webpage - scraping starts here
-            response = requests.get(self.base_url, verify=False, timeout=self.timeout)
-            if response.status_code != 200:
-                raise HTTPException(
-                    status_code=500, 
-                    detail=f"Failed to fetch data from PHIVOLCS. Status: {response.status_code}"
-                )
+            async with httpx.AsyncClient(verify=False, timeout=self.timeout) as client:
+                response = await client.get(self.base_url)
+                if response.status_code != 200:
+                    raise HTTPException(
+                        status_code=500, 
+                        detail=f"Failed to fetch data from PHIVOLCS. Status: {response.status_code}"
+                    )
 
             # Parse HTML content
             soup = BeautifulSoup(response.content, 'html.parser')
@@ -67,7 +64,7 @@ class EarthquakeScraperService:
             print(f"✅ Scraped {len(earthquakes)} raw earthquake data")
             return earthquakes
 
-        except requests.RequestException as e:
+        except httpx.RequestError as e:
             raise HTTPException(status_code=500, detail=f"Network error: {str(e)}")
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Scraping error: {str(e)}")
