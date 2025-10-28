@@ -18,14 +18,15 @@ const MapView = ({ earthquakeData }) => (
     zoom={6}
     scrollWheelZoom
     style={{ width: '100%', height: '100%' }}
-    minZoom={5}
-    maxZoom={12}
+    minZoom={6}
+    maxZoom={10}
     maxBounds={[[4.5, 116.0], [21.5, 127.5]]}
     maxBoundsViscosity={1.0}
   >
     <TileLayer
       attribution='&copy; OpenStreetMap contributors'
-      url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+
       noWrap
     />
     {earthquakeData.map((event, i) => (
