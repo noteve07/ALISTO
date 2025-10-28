@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
-import { getMagnitudeColor, calculateEarthquakeRadius, getMagnitudeDescription } from '../utils/earthquakeUtils'
+import { getMagnitudeColor, calculateEarthquakeRadius, getMagnitudeOpacity } from '../utils/earthquakeUtils'
 
 const EarthquakeMarker = ({event, isLatest}) => {
   const map = useMap()
@@ -11,20 +11,21 @@ const EarthquakeMarker = ({event, isLatest}) => {
 
     const color = getMagnitudeColor(event.magnitude)
     const radius = calculateEarthquakeRadius(event.magnitude)
-    const magnitudeDesc = getMagnitudeDescription(event.magnitude)
+    const opacity = getMagnitudeOpacity(event.magnitude)
     
     // For all earthquakes, add a circle marker
     const circle = L.circle([event.latitude, event.longitude], {
       color: color,
       fillColor: color,
-      fillOpacity: 0.5,
+      fillOpacity: opacity,
+      weight: 0, // Remove border
       radius: radius
     }).addTo(map)
 
     // Add popup to the circle marker
     const popupContent = `
       <div class="earthquake-popup">
-        <h3 class="font-bold text-lg mb-2">Magnitude ${event.magnitude} (${magnitudeDesc})</h3>
+        <h3 class="font-bold text-lg mb-2">Magnitude ${event.magnitude}</h3>
         <p class="mb-1"><strong>Time:</strong> ${event.dateTime}</p>
         <p class="mb-1"><strong>Depth:</strong> ${event.depth}km</p>
         <p class="mb-1"><strong>Location:</strong> ${event.location}</p>
@@ -35,39 +36,84 @@ const EarthquakeMarker = ({event, isLatest}) => {
     circle.bindPopup(popupContent)
     
     // Only add animation for the latest earthquake
-    if (isLatest) {
-      // Create signal animation
-      const signalDiv = L.DomUtil.create('div')
-      signalDiv.className = 'signal-circle'
-      signalDiv.style.cssText = `
-        width: ${event.magnitude * 20}px;
-        height: ${event.magnitude * 20}px;
-        background: ${color};
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-      `
+    let cleanup = () => {
+      map.removeLayer(circle)
+    }
 
-      const signalIcon = L.divIcon({
-        className: '',
-        html: signalDiv,
-        iconSize: [event.magnitude * 20, event.magnitude * 20],
-        iconAnchor: [event.magnitude * 10, event.magnitude * 10]
-      })
-      
-      const signalMarker = L.marker([event.latitude, event.longitude], {
-        icon: signalIcon, 
-        interactive: false
-      }).addTo(map)
-      
-      return () => {
-        map.removeLayer(circle)
-        map.removeLayer(signalMarker)
+    if (isLatest) {
+      const pulseLayers = []
+      const cancelAnimations = []
+      const duration = 3000
+      const maxScale = 2.8
+      const delays = [0, 600, 1200]
+
+      const startPulseAnimation = (layer, baseRadius, layerColor, delay = 0) => {
+        let frameId
+        let cancelled = false
+        const startTime = performance.now() + delay
+
+        const step = () => {
+          if (cancelled) return
+
+          const now = performance.now()
+
+          if (now < startTime) {
+            frameId = requestAnimationFrame(step)
+            return
+          }
+
+          const elapsed = (now - startTime) % duration
+          const progress = elapsed / duration
+
+          const scale = 1 + (maxScale - 1) * progress
+          const currentRadius = baseRadius * scale
+          const fade = Math.max(0, 0.45 * (1 - progress))
+
+          layer.setRadius(currentRadius)
+          layer.setStyle({
+            color: layerColor,
+            fillColor: layerColor,
+            fillOpacity: fade,
+            opacity: fade,
+            weight: 0
+          })
+
+          frameId = requestAnimationFrame(step)
+        }
+
+        frameId = requestAnimationFrame(step)
+
+        return () => {
+          cancelled = true
+          if (frameId) cancelAnimationFrame(frameId)
+        }
       }
-    } else {
-      return () => {
+
+      const createPulseLayer = (delay) => {
+        const pulseLayer = L.circle([event.latitude, event.longitude], {
+          color: color,
+          fillColor: color,
+          fillOpacity: 0,
+          opacity: 0,
+          weight: 0,
+          interactive: false,
+          radius
+        }).addTo(map)
+
+        pulseLayers.push(pulseLayer)
+        cancelAnimations.push(startPulseAnimation(pulseLayer, radius, color, delay))
+      }
+
+      delays.forEach(createPulseLayer)
+
+      cleanup = () => {
+        cancelAnimations.forEach(cancel => cancel && cancel())
+        pulseLayers.forEach(layer => map.removeLayer(layer))
         map.removeLayer(circle)
       }
     }
+
+    return cleanup
   }, [map, event, isLatest])
 
   return null
