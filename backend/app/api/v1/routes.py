@@ -8,6 +8,7 @@ from .endpoints import earthquakes
 from .endpoints import health
 from .endpoints import volcanoes
 from .endpoints import dashboard
+from .endpoints import risk_evaluations
 
 
 api_router = APIRouter()
@@ -39,3 +40,4 @@ api_router.include_router(dashboard.router)
 api_router.include_router(health.router)
 api_router.include_router(earthquakes.router)
 api_router.include_router(volcanoes.router)
+api_router.include_router(risk_evaluations.router)
