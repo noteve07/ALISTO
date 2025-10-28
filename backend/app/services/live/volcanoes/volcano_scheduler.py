@@ -38,12 +38,8 @@ class VolcanoScheduler:
                 replace_existing=True,
             )
 
-            self.scheduler.add_job(
-                self.run_sync,
-                trigger="date",
-                run_date=datetime.now(),
-                id="volcano_sync_startup",
-            )
+            # Note: Removed immediate startup job to prevent blocking the lifespan function
+            # The first sync will happen after the scheduled interval
 
             self.scheduler.start()
             print(

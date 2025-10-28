@@ -10,20 +10,32 @@ from app.services.live.earthquakes.earthquake_scheduler import earthquake_schedu
 from app.services.live.volcanoes.volcano_scheduler import volcano_scheduler
 from app.api.v1.routes import api_router
 
-# COMMENTEDF FOR TESTING ENDPOINTS (To Fix: services blocking endpoint calls, make this pure async)
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-
-#     # start schedulers concurrently
-#     asyncio.create_task(earthquake_scheduler.start_scheduler())
-#     await asyncio.sleep(settings.VOLCANO_STARTUP_DELAY_SECONDS)
-#     asyncio.create_task(volcano_scheduler.start_scheduler())
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("🚀 Starting ALISTO API...")
     
-#     yield  # app runs here
-
-#     print("🔄 Shutting down ALISTO API...")
-#     await volcano_scheduler.stop_scheduler()
-#     await earthquake_scheduler.stop_scheduler()
+    # Start earthquake scheduler immediately (non-blocking)
+    asyncio.create_task(earthquake_scheduler.start_scheduler())
+    
+    # Start volcano scheduler after delay (non-blocking)
+    async def start_volcano_scheduler():
+        await asyncio.sleep(settings.VOLCANO_STARTUP_DELAY_SECONDS)
+        await volcano_scheduler.start_scheduler()
+    
+    asyncio.create_task(start_volcano_scheduler())
+    
+    # Optional: Trigger first earthquake sync immediately but non-blocking
+    async def trigger_first_earthquake_sync():
+        await asyncio.sleep(2)  # Small delay to ensure scheduler is ready
+        await earthquake_scheduler.earthquake_sync_job()
+    
+    asyncio.create_task(trigger_first_earthquake_sync())
+    
+    yield  # App is running
+    
+    print("🔄 Shutting down ALISTO API...")
+    await volcano_scheduler.stop_scheduler()
+    await earthquake_scheduler.stop_scheduler()
 
 
 # create FastAPI app
@@ -31,7 +43,7 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     description=settings.PROJECT_DESCRIPTION,
     version=settings.VERSION,
-    # lifespan=lifespan
+    lifespan=lifespan
 )
 
 # add CORS middleware

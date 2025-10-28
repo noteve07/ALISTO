@@ -39,13 +39,8 @@ class EarthquakeScheduler:
                 replace_existing=True
             )
             
-            # run immediately on startup
-            self.scheduler.add_job(
-                self.earthquake_sync_job,
-                trigger='date',
-                run_date=datetime.now(),
-                id='earthquake_sync_startup'
-            )
+            # Note: Removed immediate startup job to prevent blocking the lifespan function
+            # The first sync will happen after the scheduled interval
             
             self.scheduler.start()
             print(f"📅 Earthquake scheduler started - syncing every {interval_minutes} minutes")
