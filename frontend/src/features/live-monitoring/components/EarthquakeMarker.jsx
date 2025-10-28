@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
+import { getMagnitudeColor, calculateEarthquakeRadius, getMagnitudeDescription } from '../utils/earthquakeUtils'
 
 const EarthquakeMarker = ({event, isLatest}) => {
   const map = useMap()
@@ -8,19 +9,9 @@ const EarthquakeMarker = ({event, isLatest}) => {
   useEffect(() => {
     if (!map) return
 
-    // Color based purely on magnitude (red->yellow->green scale)
-    const getMagColor = (mag) => {
-      if (mag >= 5) return '#B91C1C' // Deep red for high magnitude
-      if (mag >= 4) return '#EA580C' // Vibrant orange for medium-high magnitude
-      if (mag >= 3) return '#FACC15' // Warm yellow for medium magnitude
-      if (mag >= 2) return '#10B981' // Green for low-medium magnitude
-      return '#6B7280' // Gray for very low magnitude
-    }
-
-    const color = getMagColor(event.magnitude)
-    
-    // Calculate radius based on magnitude - larger for higher magnitudes
-    const radius = event.magnitude * 2500
+    const color = getMagnitudeColor(event.magnitude)
+    const radius = calculateEarthquakeRadius(event.magnitude)
+    const magnitudeDesc = getMagnitudeDescription(event.magnitude)
     
     // For all earthquakes, add a circle marker
     const circle = L.circle([event.latitude, event.longitude], {
@@ -33,11 +24,12 @@ const EarthquakeMarker = ({event, isLatest}) => {
     // Add popup to the circle marker
     const popupContent = `
       <div class="earthquake-popup">
-        <h3 class="font-bold text-lg mb-2">Magnitude ${event.magnitude}</h3>
+        <h3 class="font-bold text-lg mb-2">Magnitude ${event.magnitude} (${magnitudeDesc})</h3>
         <p class="mb-1"><strong>Time:</strong> ${event.dateTime}</p>
         <p class="mb-1"><strong>Depth:</strong> ${event.depth}km</p>
         <p class="mb-1"><strong>Location:</strong> ${event.location}</p>
         <p><strong>Coordinates:</strong> ${event.latitude.toFixed(4)}, ${event.longitude.toFixed(4)}</p>
+        ${isLatest ? '<div class="mt-2 text-red-600 font-semibold">🔴 Latest Earthquake</div>' : ''}
       </div>
     `
     circle.bindPopup(popupContent)
