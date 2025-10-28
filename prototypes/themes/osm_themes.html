@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map Theme Switcher</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .map-container {
+            flex: 1;
+            min-width: 300px;
+            height: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .controls {
+            flex: 0 0 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .theme-selector {
+            margin-bottom: 25px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+        }
+        
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+        }
+        
+        .theme-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .theme-option.active {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #4dabf7;
+            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.4);
+        }
+        
+        .theme-name {
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .theme-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 5px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .info-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .info-panel h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .info-panel p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        
+        .attribution {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .controls {
+                flex: 1;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Map Theme Switcher</h1>
+            <p class="subtitle">Explore different map styles and themes. Click on any theme to change the map appearance instantly.</p>
+        </header>
+        
+        <div class="content">
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+            
+            <div class="controls">
+                <div class="theme-selector">
+                    <h2>Select Map Theme</h2>
+                    <div class="theme-grid" id="themeGrid">
+                        <!-- Theme options will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="info-panel">
+                    <h3>About This Demo</h3>
+                    <p>This interactive map demonstrates various tile layers from different providers. Each theme offers a unique visual style suitable for different use cases.</p>
+                </div>
+                
+                <div class="attribution">
+                    <p>Map data &copy; OpenStreetMap contributors & various providers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Define map themes with name, URL, attribution, and preview color
+        const mapThemes = [
+            {
+                id: 'osm-standard',
+                name: 'OSM Standard',
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #e8e8e8, #a8d8e8)'
+            },
+            {
+                id: 'osm-humanitarian',
+                name: 'Humanitarian',
+                url: 'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                attribution: '&copy; OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team',
+                preview: 'linear-gradient(135deg, #f5f5dc, #d4e6f1)'
+            },
+            {
+                id: 'carto-dark',
+                name: 'Carto Dark',
+                url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                preview: 'linear-gradient(135deg, #2c3e50, #34495e)'
+            },
+            {
+                id: 'carto-light',
+                name: 'Carto Light',
+                url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                preview: 'linear-gradient(135deg, #f8f9fa, #e9ecef)'
+            },
+            {
+                id: 'stamen-terrain',
+                name: 'Stamen Terrain',
+                url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png',
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #556B2F, #8FBC8F)'
+            },
+            {
+                id: 'stamen-toner',
+                name: 'Stamen Toner',
+                url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png',
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #2c3e50, #1a1a1a)'
+            },
+            {
+                id: 'esri-satellite',
+                name: 'ESRI Satellite',
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+                preview: 'linear-gradient(135deg, #228B22, #32CD32)'
+            },
+            {
+                id: 'esri-topo',
+                name: 'ESRI Topographic',
+                url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+                attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+                preview: 'linear-gradient(135deg, #8B4513, #D2691E)'
+            },
+            {
+                id: 'opentopomap',
+                name: 'OpenTopoMap',
+                url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+                attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
+                preview: 'linear-gradient(135deg, #556B2F, #8FBC8F)'
+            },
+            {
+                id: 'stadia-alidade',
+                name: 'Stadia Alidade',
+                url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #e8e8e8, #a8d8e8)'
+            },
+            {
+                id: 'stadia-dark',
+                name: 'Stadia Dark',
+                url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #2c3e50, #34495e)'
+            },
+            {
+                id: 'cyclosm',
+                name: 'Cycle OSM',
+                url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
+                attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - OpenStreetMap bicycle oriented render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #e8f4f8, #b3e0f2)'
+            },
+            {
+                id: 'transport',
+                name: 'Transport',
+                url: 'https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey=your-api-key',
+                attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #f0f0f0, #d0e0f0)'
+            },
+            {
+                id: 'voyager',
+                name: 'Carto Voyager',
+                url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                preview: 'linear-gradient(135deg, #f8f9fa, #e9ecef)'
+            },
+            {
+                id: 'watercolor',
+                name: 'Watercolor',
+                url: 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #f5e6d3, #e6d3b3)'
+            },
+            {
+                id: 'wikimedia',
+                name: 'Wikimedia',
+                url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
+                attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a> | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                preview: 'linear-gradient(135deg, #f8f9fa, #e9ecef)'
+            }
+        ];
+
+        // Initialize the map
+        const map = L.map('map').setView([14.5995, 120.9842], 11); // Manila coordinates
+
+        // Create the initial tile layer
+        let currentTileLayer = L.tileLayer(mapThemes[0].url, {
+            attribution: mapThemes[0].attribution,
+            noWrap: true
+        }).addTo(map);
+
+        // Function to change the map theme
+        function changeMapTheme(themeId) {
+            const theme = mapThemes.find(t => t.id === themeId);
+            
+            if (theme) {
+                // Remove the current tile layer
+                map.removeLayer(currentTileLayer);
+                
+                // Add the new tile layer
+                currentTileLayer = L.tileLayer(theme.url, {
+                    attribution: theme.attribution,
+                    noWrap: true
+                }).addTo(map);
+                
+                // Update active theme in UI
+                document.querySelectorAll('.theme-option').forEach(option => {
+                    option.classList.remove('active');
+                });
+                document.getElementById(`theme-${themeId}`).classList.add('active');
+            }
+        }
+
+        // Populate theme grid
+        const themeGrid = document.getElementById('themeGrid');
+        
+        mapThemes.forEach(theme => {
+            const themeElement = document.createElement('div');
+            themeElement.className = 'theme-option';
+            themeElement.id = `theme-${theme.id}`;
+            
+            if (theme.id === 'osm-standard') {
+                themeElement.classList.add('active');
+            }
+            
+            themeElement.innerHTML = `
+                <div class="theme-preview" style="background: ${theme.preview}"></div>
+                <div class="theme-name">${theme.name}</div>
+            `;
+            
+            themeElement.addEventListener('click', () => changeMapTheme(theme.id));
+            themeGrid.appendChild(themeElement);
+        });
+
+        // Add some sample markers to the map
+        const markers = [
+            { lat: 14.5995, lng: 120.9842, title: "Manila" },
+            { lat: 14.5547, lng: 121.0244, title: "Makati" },
+            { lat: 14.6760, lng: 120.9842, title: "Quezon City" },
+            { lat: 14.5378, lng: 121.0014, title: "Pasay" },
+            { lat: 14.4500, lng: 120.9500, title: "Cavite" }
+        ];
+
+        markers.forEach(marker => {
+            L.marker([marker.lat, marker.lng])
+                .addTo(map)
+                .bindPopup(`<b>${marker.title}</b><br>A sample location in the Philippines`);
+        });
+    </script>
+</body>
+</html>
