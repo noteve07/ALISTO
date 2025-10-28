@@ -28,7 +28,7 @@ class Settings:
     VOLCANO_BULLETIN_URL: str = "https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin"
     
     request_timeout: int = 10
-    max_earthquake_limit: int = 100
+    max_earthquake_limit: int = 1000
 
     # Web Scraping Configuration
     SCRAPE_INTERVAL: float = 5

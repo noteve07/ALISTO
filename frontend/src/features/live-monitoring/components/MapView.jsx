@@ -20,8 +20,8 @@ const MapView = ({ earthquakeData }) => (
     style={{ width: '100%', height: '100%' }}
     minZoom={6}
     maxZoom={10}
-    maxBounds={[[4.5, 116.0], [21.5, 127.5]]}
-    maxBoundsViscosity={1.0}
+    maxBounds={[[5.5, 116.0], [19.0, 127.5]]}
+    maxBoundsViscosity={0.7}
   >
     <TileLayer
       attribution='&copy; OpenStreetMap contributors'
