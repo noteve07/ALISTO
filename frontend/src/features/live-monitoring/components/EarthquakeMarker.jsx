@@ -44,8 +44,8 @@ const EarthquakeMarker = ({event, isLatest}) => {
       const pulseLayers = []
       const cancelAnimations = []
       const duration = 3000
-      const maxScale = 2.8
-      const delays = [0, 600, 1200]
+      const maxScale = 15.0           // radius of the animation
+      const delays = [0, 900, 1500]
 
       const startPulseAnimation = (layer, baseRadius, layerColor, delay = 0) => {
         let frameId
