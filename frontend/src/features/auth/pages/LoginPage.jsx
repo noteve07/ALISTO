@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authService } from "../services/authService";
 
 const LoginPage = () => {
-
-  // useNavigate hook for redirects
-  const navigate = useNavigate();
-
-  // user credentials input
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   // handle input change
   const handleInputChange = (e) => {
@@ -21,17 +21,27 @@ const LoginPage = () => {
     }));
   };
 
-
-
-  const handleLogin = (e) => {
+  // handle signin button
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // For now, just navigate to app without actual auth
+    setLoading(true);
+    setError("");
 
-    // TODO: Implement login hook
-    navigate("/app");
+    try {
+      const result = await authService.signInWithPassword(
+        formData.email,
+        formData.password
+      );
+
+      if (result.success) {
+        navigate("/app");
+      }
+    } catch (err) {
+      setError("An error occured");
+    } finally {
+      setLoading(false);
+    }
   };
-
-  
 
   // redirect to sign up page
   const handleSignupRedirect = () => {
@@ -134,6 +144,7 @@ const LoginPage = () => {
             <div>
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
               >
                 Sign in

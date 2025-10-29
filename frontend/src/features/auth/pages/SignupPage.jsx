@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { authService } from "../services/authService";
 
 const SignupPage = () => {
-  // useNavigate hook for redirects
-  const navigate = useNavigate();
-
-  // credentials
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   // handle input change
   const handleInputChange = (e) => {
@@ -22,15 +23,37 @@ const SignupPage = () => {
     }));
   };
 
-  // handleSignup
-  const handleSignup = (e) => {
+  // handle sign up
+  const handleSignup = async (e) => {
     e.preventDefault();
-    // For now, just navigate to app without actual auth
+    setError(""); // Clear previous errors
+    
+    // No validation - just try to sign up
+    console.log("handleSignup start");
+    setLoading(true);
+    try {
+      const result = await authService.signUp(
+        formData.email,
+        formData.password
+      );
 
-    // TODO: confirm if password is the same
+      console.log("Signup result:", result);
 
-    // TODO: call signup hook
-    navigate("/app");
+      if (result.success) {
+        // Skip email confirmation - just go straight to app
+        console.log("Signup successful, navigating to app");
+        navigate("/app");
+        return;
+      } else {
+        console.log("Signup failed:", result.error);
+        setError(result.error || "Signup failed");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // handleLogin
@@ -56,6 +79,19 @@ const SignupPage = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         {/* Form card */}
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
+          {/* Error message */}
+          {error && (
+            <div className="rounded-md bg-red-50 p-4 mb-6">
+              <div className="flex">
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-red-800">
+                    {error}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          )}
+          
           {/* Form inputs */}
           <form className="space-y-6" onSubmit={handleSignup}>
             {/* Input for full name */}
@@ -153,9 +189,10 @@ const SignupPage = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
+                disabled={loading}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Create Account
+                {loading ? "Creating Account..." : "Create Account"}
               </button>
             </div>
           </form>
