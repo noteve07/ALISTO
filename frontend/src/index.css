@@ -3,3 +3,30 @@
 @theme {
   --color-primary: #c27930;
 }
+
+.leaflet-tooltip.risk-tooltip {
+  background-color: rgba(15, 23, 42, 0.92);
+  border: none;
+  box-shadow: 0 8px 16px -8px rgba(15, 23, 42, 0.45);
+  color: #f8fafc;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.leaflet-tooltip.risk-tooltip::before {
+  border-top-color: rgba(15, 23, 42, 0.92);
+}
+
+.leaflet-popup.risk-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 16px 40px -20px rgba(15, 23, 42, 0.45);
+  padding: 16px 18px;
+}
+
+.leaflet-popup.risk-popup .leaflet-popup-content {
+  margin: 0;
+}
+
+.leaflet-popup.risk-popup .leaflet-popup-tip {
+  background: white;
+}
