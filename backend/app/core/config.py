@@ -12,6 +12,7 @@ class Settings:
     # TODO: supabase configuration
     SUPABASE_URL: Optional[str] = os.environ.get("SUPABASE_URL")
     SUPABASE_KEY: Optional[str] = os.environ.get("SUPABASE_KEY")
+    SUPABASE_JWT: Optional[str] = os.environ.get("SUPABASE_JWT")
 
     # API Configuration
     API_V1_PREFIX: str = "/api/v1"
