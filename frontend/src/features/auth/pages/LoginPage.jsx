@@ -1,47 +1,67 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const navigate = useNavigate()
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
 
+  // useNavigate hook for redirects
+  const navigate = useNavigate();
+
+  // user credentials input
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  // handle input change
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
+    const { name, value } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
+
+
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // For now, just navigate to app without actual auth
-    navigate('/app')
-  }
 
+    // TODO: Implement login hook
+    navigate("/app");
+  };
+
+  
+
+  // redirect to sign up page
   const handleSignupRedirect = () => {
-    navigate('/signup')
-  }
+    navigate("/signup");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {/* Form title */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Sign in to your account</h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Welcome back to ALISTO
-          </p>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Sign in to your account
+          </h2>
+          <p className="mt-2 text-sm text-gray-600">Welcome back to ALISTO</p>
         </div>
       </div>
 
+      {/* Form container */}
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        {/* Form card*/}
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
+          {/* Form inputs */}
           <form className="space-y-6" onSubmit={handleLogin}>
+            {/* Input for email*/}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <div className="mt-1">
@@ -59,8 +79,12 @@ const LoginPage = () => {
               </div>
             </div>
 
+            {/* Input for password*/}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="mt-1">
@@ -79,6 +103,7 @@ const LoginPage = () => {
             </div>
 
             <div className="flex items-center justify-between">
+              {/* Remember me checkbox */}
               <div className="flex items-center">
                 <input
                   id="remember-me"
@@ -86,18 +111,26 @@ const LoginPage = () => {
                   type="checkbox"
                   className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Remember me
                 </label>
               </div>
 
+              {/* Forgot your password? */}
               <div className="text-sm">
-                <button type="button" className="font-medium text-primary hover:text-primary/80">
+                <button
+                  type="button"
+                  className="font-medium text-primary hover:text-primary/80"
+                >
                   Forgot your password?
                 </button>
               </div>
             </div>
 
+            {/* Sign in button */}
             <div>
               <button
                 type="submit"
@@ -108,16 +141,20 @@ const LoginPage = () => {
             </div>
           </form>
 
+          {/* Don't have an account? */}
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Don't have an account?</span>
+                <span className="px-2 bg-white text-gray-500">
+                  Don't have an account?
+                </span>
               </div>
             </div>
 
+            {/* Create new account button */}
             <div className="mt-6">
               <button
                 onClick={handleSignupRedirect}
@@ -130,7 +167,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

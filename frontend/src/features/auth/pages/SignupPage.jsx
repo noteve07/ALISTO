@@ -1,49 +1,69 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
-  const navigate = useNavigate()
+  // useNavigate hook for redirects
+  const navigate = useNavigate();
+
+  // credentials
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
+  // handle input change
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
+    const { name, value } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
+  // handleSignup
   const handleSignup = (e) => {
-    e.preventDefault()
-    // For now, just navigate to app without actual auth  
-    navigate('/app')
-  }
+    e.preventDefault();
+    // For now, just navigate to app without actual auth
 
+    // TODO: confirm if password is the same
+
+    // TODO: call signup hook
+    navigate("/app");
+  };
+
+  // handleLogin
   const handleLoginRedirect = () => {
-    navigate('/login')
-  }
+    navigate("/login");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {/* Form title */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Create your account</h2>
+          <h2 className="text-3xl font-bold text-gray-900">
+            Create your account
+          </h2>
           <p className="mt-2 text-sm text-gray-600">
             Join ALISTO for comprehensive disaster monitoring
           </p>
         </div>
       </div>
 
+      {/* Form container  */}
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        {/* Form card */}
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
+          {/* Form inputs */}
           <form className="space-y-6" onSubmit={handleSignup}>
+            {/* Input for full name */}
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="fullName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Full Name
               </label>
               <div className="mt-1">
@@ -60,8 +80,12 @@ const SignupPage = () => {
               </div>
             </div>
 
+            {/* Input for email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email address
               </label>
               <div className="mt-1">
@@ -79,8 +103,12 @@ const SignupPage = () => {
               </div>
             </div>
 
+            {/* Input for password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <div className="mt-1">
@@ -98,8 +126,12 @@ const SignupPage = () => {
               </div>
             </div>
 
+            {/* Input for confirm password */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Confirm Password
               </label>
               <div className="mt-1">
@@ -117,6 +149,7 @@ const SignupPage = () => {
               </div>
             </div>
 
+            {/* Create account button */}
             <div>
               <button
                 type="submit"
@@ -127,16 +160,20 @@ const SignupPage = () => {
             </div>
           </form>
 
+          {/* Already have an account? */}
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Already have an account?</span>
+                <span className="px-2 bg-white text-gray-500">
+                  Already have an account?
+                </span>
               </div>
             </div>
 
+            {/* Sign in to your acccount button */}
             <div className="mt-6">
               <button
                 onClick={handleLoginRedirect}
@@ -149,7 +186,7 @@ const SignupPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignupPage
+export default SignupPage;
