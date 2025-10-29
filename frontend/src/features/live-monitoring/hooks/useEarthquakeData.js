@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import { supabase } from '../../../shared/utils/supabaseClient'
+import { supabase } from '../../../lib/supabaseClient'
 import useRealtimeEarthquakes from './useRealtimeEarthquakes'
 
 const useEarthquakeData = () => {

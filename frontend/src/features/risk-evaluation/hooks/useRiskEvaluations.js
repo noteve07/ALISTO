@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { supabase } from '../../../shared/utils/supabaseClient'
+import { supabase } from '../../../lib/supabaseClient'
 
 const formatRiskRecord = (record) => ({
   provinceId: record.province_id,

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { supabase } from '../../../shared/utils/supabaseClient'
+import { supabase } from '../../../lib/supabaseClient'
 
 /**
  * Hook for subscribing to real-time earthquake updates from Supabase
