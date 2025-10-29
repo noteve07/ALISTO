@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState( true )
   const navigate = useNavigate()
 
   const navItems = [
@@ -93,7 +93,7 @@ const Sidebar = () => {
         isHovered ? 'w-64' : 'w-16'
       } h-screen flex flex-col`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => setIsHovered( true )}
     >
       {/* Logo Section */}
       <div className="px-4 py-5">
