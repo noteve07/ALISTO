@@ -24,26 +24,28 @@ export const formatEarthquakeDateTime = (datetime) => {
  * @returns {string} Color hex code
  */
 export const getMagnitudeColor = (magnitude) => {
-  if (magnitude >= 5) return '#B91C1C' // Deep red for high magnitude
-  if (magnitude >= 4) return '#EA580C' // Vibrant orange for medium-high magnitude
-  if (magnitude >= 3) return '#FACC15' // Warm yellow for medium magnitude
-  if (magnitude >= 2) return '#10B981' // Green for low-medium magnitude
-  return '#6B7280' // Gray for very low magnitude
+  if (magnitude >= 7) return '#DC2626' // Deep red for major earthquakes
+  if (magnitude >= 6) return '#EF4444' // Red for strong earthquakes
+  if (magnitude >= 5) return '#F97316' // Orange for moderate earthquakes
+  if (magnitude >= 4) return '#F59E0B' // Amber for light earthquakes
+  if (magnitude >= 3) return '#EAB308' // Yellow for minor earthquakes
+  if (magnitude >= 2.5) return '#84CC16' // Lime for micro earthquakes
+  if (magnitude >= 2) return '#22C55E' // Green for very minor earthquakes
+  if (magnitude >= 1.5) return '#16A34A' // Medium green
+  if (magnitude >= 1) return '#22C55E' // Light-medium green
+  return '#4ADE80' // Light green for very low magnitude
 }
 
+
 /**
- * Get magnitude description based on earthquake magnitude
+ * Get magnitude-based opacity for earthquake markers
  * @param {number} magnitude - Earthquake magnitude
- * @returns {string} Magnitude description
+ * @returns {number} Opacity value between 0.2 and 0.8
  */
-export const getMagnitudeDescription = (magnitude) => {
-  if (magnitude >= 7) return 'Major'
-  if (magnitude >= 6) return 'Strong'
-  if (magnitude >= 5) return 'Moderate'
-  if (magnitude >= 4) return 'Light'
-  if (magnitude >= 3) return 'Minor'
-  if (magnitude >= 2) return 'Micro'
-  return 'Very Minor'
+export const getMagnitudeOpacity = (magnitude) => {
+  // Higher magnitude = higher opacity, lower magnitude = lower opacity
+  const baseOpacity = Math.max(magnitude * 0.15, 0.2)
+  return Math.min(baseOpacity, 0.8)
 }
 
 /**
@@ -52,7 +54,10 @@ export const getMagnitudeDescription = (magnitude) => {
  * @returns {number} Radius in meters
  */
 export const calculateEarthquakeRadius = (magnitude) => {
-  return magnitude * 2500
+  // Base radius with minimum size for visibility
+  const baseRadius = Math.max(magnitude * 6000, 3000)
+  // Cap maximum radius to prevent overly large circles
+  return Math.min(baseRadius, 50000)
 }
 
 /**
