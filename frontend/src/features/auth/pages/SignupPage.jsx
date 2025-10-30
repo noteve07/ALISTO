@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
 import { userService } from "../services/userService";
+import LocationStepPage from "../components/LocationStepPage";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showLocationStep, setShowLocationStep] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -105,14 +107,14 @@ const SignupPage = () => {
         );
         
         if (profileResult.success) {
-          console.log("Profile updated successfully, navigating to app");
-          navigate("/app");
+          console.log("Profile updated successfully, showing location step");
+          setShowLocationStep(true);
           return;
         } else {
           console.warn("Profile update failed:", profileResult.error);
-          // Still navigate to app even if profile update fails
+          // Still show location step even if profile update fails
           // User can update their profile later
-          navigate("/app");
+          setShowLocationStep(true);
           return;
         }
       } else {
@@ -145,6 +147,29 @@ const SignupPage = () => {
   const handleLoginRedirect = () => {
     navigate("/login");
   };
+
+  // Handle location step events
+  const handleLocationSet = (locationData) => {
+    console.log("Location set successfully:", locationData);
+    // Navigate to app after location is set
+    navigate("/app");
+  };
+
+  const handleLocationSkip = () => {
+    console.log("Location step skipped, navigating to app");
+    // Navigate to app even if user skips location setup
+    navigate("/app");
+  };
+
+  // If location step is active, show location page instead of signup form
+  if (showLocationStep) {
+    return (
+      <LocationStepPage
+        onLocationSet={handleLocationSet}
+        onSkip={handleLocationSkip}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

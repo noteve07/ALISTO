@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
+import { userService } from "../services/userService";
+import LocationStepPage from "../components/LocationStepPage";
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showLocationStep, setShowLocationStep] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,6 +37,26 @@ const LoginPage = () => {
       );
 
       if (result.success) {
+        console.log("Login successful, checking user profile...");
+        
+        // Check user profile to see if location is enabled
+        const profileResult = await userService.getProfile();
+        
+        if (profileResult.success) {
+          const userProfile = profileResult.data;
+          console.log("User profile:", userProfile);
+          
+          // If location is not enabled, show location step
+          if (!userProfile.location_enabled || (!userProfile.user_lat && !userProfile.user_lon)) {
+            console.log("Location not enabled, showing location step");
+            setShowLocationStep(true);
+            return;
+          }
+        } else {
+          console.warn("Failed to get user profile, skipping location check:", profileResult.error);
+        }
+        
+        // Navigate to app if location is already enabled or profile check failed
         navigate("/app");
       } else {
         // Provide more meaningful error messages
@@ -62,6 +85,29 @@ const LoginPage = () => {
   const handleSignupRedirect = () => {
     navigate("/signup");
   };
+
+  // Handle location step events
+  const handleLocationSet = (locationData) => {
+    console.log("Location set successfully:", locationData);
+    // Navigate to app after location is set
+    navigate("/app");
+  };
+
+  const handleLocationSkip = () => {
+    console.log("Location step skipped, navigating to app");
+    // Navigate to app even if user skips location setup
+    navigate("/app");
+  };
+
+  // If location step is active, show location page instead of login form
+  if (showLocationStep) {
+    return (
+      <LocationStepPage
+        onLocationSet={handleLocationSet}
+        onSkip={handleLocationSkip}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
