@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PH Fault Lines - Nearest Finder</title>
+
+  <!-- leaflet css -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 100vh;
+      width: 100vw;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- leaflet js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- turf js for spatial calculations -->
+  <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+
+  <script>
+    // create map centered on philippines
+    const map = L.map("map").setView([12.8797, 121.7740], 6);
+
+    // add basemap
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "© OpenStreetMap",
+    }).addTo(map);
+
+    let faultLayer; // to store the geojson
+    let nearestLine; // drawn line between point and nearest fault
+
+    // load the local fault line geojson
+    fetch("fault_lines.geojson")
+      .then((res) => res.json())
+      .then((data) => {
+        // store as leaflet layer
+        faultLayer = L.geoJSON(data, {
+          style: {
+            color: "#ff4c42",
+            weight: 2,
+          },
+          onEachFeature: (feature, layer) => {
+            if (feature.properties && feature.properties.NAME) {
+              layer.bindPopup(`<b>${feature.properties.NAME}</b>`);
+            }
+          },
+        }).addTo(map);
+      })
+      .catch((err) => console.error("Error loading GeoJSON:", err));
+
+    // handle map click
+    map.on("click", (e) => {
+      if (!faultLayer) {
+        alert("Fault data not loaded yet.");
+        return;
+      }
+
+      const clickPoint = turf.point([e.latlng.lng, e.latlng.lat]);
+      const allFeatures = faultLayer.toGeoJSON();
+
+      // find nearest fault segment using turf
+      let nearestDist = Infinity;
+      let nearestFeature = null;
+      let nearestPointOnLine = null;
+
+      allFeatures.features.forEach((feature) => {
+        const line = turf.lineString(feature.geometry.coordinates);
+        const snapped = turf.nearestPointOnLine(line, clickPoint);
+        const dist = snapped.properties.dist; // in degrees
+        const distKm = turf.distance(clickPoint, snapped, { units: "kilometers" });
+
+        if (distKm < nearestDist) {
+          nearestDist = distKm;
+          nearestFeature = feature;
+          nearestPointOnLine = snapped;
+        }
+      });
+
+      if (nearestFeature && nearestPointOnLine) {
+        // clear previous line if any
+        if (nearestLine) map.removeLayer(nearestLine);
+
+        // draw point where user clicked
+        const userMarker = L.circleMarker(e.latlng, {
+          radius: 6,
+          color: "#3388ff",
+          fillColor: "#3388ff",
+          fillOpacity: 0.8,
+        }).addTo(map);
+
+        // draw line to nearest fault
+        const faultLatLng = [
+          nearestPointOnLine.geometry.coordinates[1],
+          nearestPointOnLine.geometry.coordinates[0],
+        ];
+        nearestLine = L.polyline([e.latlng, faultLatLng], {
+          color: "#00b894",
+          dashArray: "6, 6",
+          weight: 2,
+        }).addTo(map);
+
+        // popup showing distance
+        const distanceText = `Nearest Fault: <b>${
+          nearestFeature.properties.NAME || "Unknown"
+        }</b><br>Distance: <b>${nearestDist.toFixed(2)} km</b>`;
+        nearestLine.bindPopup(distanceText).openPopup();
+      }
+    });
+  </script>
+</body>
+</html>
