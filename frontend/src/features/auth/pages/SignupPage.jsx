@@ -1,18 +1,69 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/authService";
+import { userService } from "../services/userService";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
   const navigate = useNavigate();
+
+  // Validation functions
+  const validateForm = () => {
+    // Reset error
+    setError("");
+
+    // Check if all fields are filled
+    if (!formData.firstName.trim()) {
+      setError("First name is required");
+      return false;
+    }
+    if (!formData.lastName.trim()) {
+      setError("Last name is required");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setError("Email is required");
+      return false;
+    }
+    if (!formData.password) {
+      setError("Password is required");
+      return false;
+    }
+    if (!formData.confirmPassword) {
+      setError("Please confirm your password");
+      return false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError("Please enter a valid email address");
+      return false;
+    }
+
+    // Password validation
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return false;
+    }
+
+    // Confirm password validation
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return false;
+    }
+
+    return true;
+  };
 
   // handle input change
   const handleInputChange = (e) => {
@@ -21,14 +72,19 @@ const SignupPage = () => {
       ...prev,
       [name]: value,
     }));
+    // Clear error when user starts typing
+    if (error) setError("");
   };
 
   // handle sign up
   const handleSignup = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
     
-    // No validation - just try to sign up
+    // Validate form first
+    if (!validateForm()) {
+      return;
+    }
+    
     console.log("handleSignup start");
     setLoading(true);
     try {
@@ -40,13 +96,42 @@ const SignupPage = () => {
       console.log("Signup result:", result);
 
       if (result.success) {
-        // Skip email confirmation - just go straight to app
-        console.log("Signup successful, navigating to app");
-        navigate("/app");
-        return;
+        console.log("Signup successful, now updating user profile");
+        
+        // Update user profile with first name and last name
+        const profileResult = await userService.updateProfile(
+          formData.firstName,
+          formData.lastName
+        );
+        
+        if (profileResult.success) {
+          console.log("Profile updated successfully, navigating to app");
+          navigate("/app");
+          return;
+        } else {
+          console.warn("Profile update failed:", profileResult.error);
+          // Still navigate to app even if profile update fails
+          // User can update their profile later
+          navigate("/app");
+          return;
+        }
       } else {
         console.log("Signup failed:", result.error);
-        setError(result.error || "Signup failed");
+        // Provide more meaningful error messages
+        let errorMessage = result.error || "Signup failed";
+        
+        // Handle common Supabase auth errors
+        if (errorMessage.includes("User already registered")) {
+          errorMessage = "An account with this email already exists. Please sign in instead.";
+        } else if (errorMessage.includes("Password")) {
+          errorMessage = "Password does not meet requirements. Please try a stronger password.";
+        } else if (errorMessage.includes("Email")) {
+          errorMessage = "Please enter a valid email address.";
+        } else if (errorMessage.includes("weak")) {
+          errorMessage = "Password is too weak. Please use at least 6 characters.";
+        }
+        
+        setError(errorMessage);
       }
     } catch (err) {
       console.error("Signup error:", err);
@@ -94,24 +179,46 @@ const SignupPage = () => {
           
           {/* Form inputs */}
           <form className="space-y-6" onSubmit={handleSignup}>
-            {/* Input for full name */}
+            {/* Input for first name */}
             <div>
               <label
-                htmlFor="fullName"
+                htmlFor="firstName"
                 className="block text-sm font-medium text-gray-700"
               >
-                Full Name
+                First Name
               </label>
               <div className="mt-1">
                 <input
-                  id="fullName"
-                  name="fullName"
+                  id="firstName"
+                  name="firstName"
                   type="text"
                   required
-                  value={formData.fullName}
+                  value={formData.firstName}
                   onChange={handleInputChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary"
-                  placeholder="Enter your full name"
+                  placeholder="Enter your first name"
+                />
+              </div>
+            </div>
+
+            {/* Input for last name */}
+            <div>
+              <label
+                htmlFor="lastName"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Last Name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  required
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your last name"
                 />
               </div>
             </div>

@@ -35,9 +35,24 @@ const LoginPage = () => {
 
       if (result.success) {
         navigate("/app");
+      } else {
+        // Provide more meaningful error messages
+        let errorMessage = result.error || "Login failed";
+        
+        // Handle common Supabase auth errors
+        if (errorMessage.includes("Invalid login credentials")) {
+          errorMessage = "Invalid email or password. Please check your credentials and try again.";
+        } else if (errorMessage.includes("Email not confirmed")) {
+          errorMessage = "Please check your email and confirm your account before signing in.";
+        } else if (errorMessage.includes("Too many requests")) {
+          errorMessage = "Too many login attempts. Please wait a moment before trying again.";
+        }
+        
+        setError(errorMessage);
       }
     } catch (err) {
-      setError("An error occured");
+      console.error("Login error:", err);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -64,6 +79,19 @@ const LoginPage = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         {/* Form card*/}
         <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10">
+          {/* Error message */}
+          {error && (
+            <div className="rounded-md bg-red-50 p-4 mb-6">
+              <div className="flex">
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-red-800">
+                    {error}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          )}
+          
           {/* Form inputs */}
           <form className="space-y-6" onSubmit={handleLogin}>
             {/* Input for email*/}
