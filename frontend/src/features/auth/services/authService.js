@@ -9,9 +9,9 @@ export const authService = {
       password: password,
     };
     
-    console.log("Sending to Supabase:", { ...signUpData, password: "***" });
+    console.log("Sending to Supabase:", { ...signUpData });
     
-    const { data, error } = await supabase.auth.signUp(signUpData);
+    const { data, error } = await supabase.auth.signUp({ email: email, password: password });
     
     console.log("Supabase response:", { data, error });
     
