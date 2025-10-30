@@ -9,6 +9,7 @@ from .endpoints import health
 from .endpoints import volcanoes
 from .endpoints import dashboard
 from .endpoints import risk_evaluations
+from .endpoints import users
 
 
 api_router = APIRouter()
@@ -31,6 +32,7 @@ async def api_v1_root():
             "health_scraper": "/api/v1/health/scraper",
             "volcanic_advisories": "/api/v1/volcanoes/advisories",
             "dashboard": "/api/v1/dashboard",
+            "users_profile": "/api/v1/users/profile",
         },
         "timestamp": now,
     }
@@ -41,3 +43,4 @@ api_router.include_router(health.router)
 api_router.include_router(earthquakes.router)
 api_router.include_router(volcanoes.router)
 api_router.include_router(risk_evaluations.router)
+api_router.include_router(users.router)
