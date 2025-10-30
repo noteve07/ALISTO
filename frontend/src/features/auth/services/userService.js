@@ -90,4 +90,53 @@ export const userService = {
       };
     }
   },
+
+  /**
+   * Update user location
+   * @param {number} latitude - User's latitude
+   * @param {number} longitude - User's longitude
+   * @param {boolean} locationEnabled - Whether location services are enabled
+   * @returns {Promise<{success: boolean, data?: any, error?: string}>}
+   */
+  updateLocation: async (latitude, longitude, locationEnabled = true) => {
+    try {
+      // Get current session to get the JWT token
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError || !session) {
+        return { success: false, error: "User not authenticated" };
+      }
+
+      const response = await fetch(`${API_BASE_URL}/api/v1/users/location`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({
+          user_lat: latitude,
+          user_lon: longitude,
+          location_enabled: locationEnabled,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return { 
+          success: false, 
+          error: errorData.detail || `HTTP error! status: ${response.status}` 
+        };
+      }
+
+      const data = await response.json();
+      return { success: true, data };
+
+    } catch (error) {
+      console.error("Error updating user location:", error);
+      return { 
+        success: false, 
+        error: error.message || "Failed to update user location" 
+      };
+    }
+  },
 };

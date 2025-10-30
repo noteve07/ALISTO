@@ -33,6 +33,7 @@ async def api_v1_root():
             "volcanic_advisories": "/api/v1/volcanoes/advisories",
             "dashboard": "/api/v1/dashboard",
             "users_profile": "/api/v1/users/profile",
+            "users_location": "/api/v1/users/location",
         },
         "timestamp": now,
     }
