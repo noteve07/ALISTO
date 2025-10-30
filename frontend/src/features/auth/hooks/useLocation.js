@@ -79,34 +79,6 @@ export const useLocation = (autoRequest = false) => {
     }
   };
 
-  /**
-   * Reset location state
-   */
-  const resetLocation = () => {
-    setLocationData(null);
-    setError(null);
-    setPermissionStatus(null);
-  };
-
-  /**
-   * Get location info for current coordinates
-   */
-  const getLocationInfo = async () => {
-    if (!locationData) {
-      return { success: false, error: "No location data available" };
-    }
-
-    try {
-      const result = await userService.getLocationInfo(
-        locationData.latitude,
-        locationData.longitude
-      );
-      return result;
-    } catch (err) {
-      return { success: false, error: err.message };
-    }
-  };
-
   // Auto-request location on mount if specified
   useEffect(() => {
     if (autoRequest) {
@@ -123,8 +95,6 @@ export const useLocation = (autoRequest = false) => {
     
     // Actions
     requestLocation,
-    resetLocation,
-    getLocationInfo,
     
     // Computed
     hasLocation: !!locationData,

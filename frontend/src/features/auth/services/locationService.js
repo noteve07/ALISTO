@@ -103,13 +103,5 @@ export const locationService = {
         }
       };
     }
-  },
-
-  /**
-   * Get fallback location data
-   * @returns {{latitude: number, longitude: number, city: string, province: string}}
-   */
-  getFallbackLocation: () => {
-    return { ...FALLBACK_LOCATION };
   }
 };

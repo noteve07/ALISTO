@@ -32,14 +32,3 @@ class UserProfileResponse(BaseModel):
     home_municipality_id: Optional[int] = Field(None, description="User's home municipality ID")
     home_province_id: Optional[int] = Field(None, description="User's home province ID")
     created_at: Optional[str] = Field(None, description="Account creation timestamp")
-
-
-class LocationInfo(BaseModel):
-    """Model for location information response."""
-    
-    municipality_id: Optional[int] = Field(None, description="Municipality ID")
-    municipality_name: Optional[str] = Field(None, description="Municipality name")
-    province_id: Optional[int] = Field(None, description="Province ID")
-    province_name: Optional[str] = Field(None, description="Province name")
-    latitude: float = Field(..., description="Latitude")
-    longitude: float = Field(..., description="Longitude")

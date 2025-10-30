@@ -5,7 +5,7 @@ from typing import Optional
 from supabase import create_client
 
 from app.core.config import settings
-from app.models.user import UserProfileUpdate, UserProfileResponse, UserLocationUpdate, LocationInfo
+from app.models.user import UserProfileUpdate, UserProfileResponse, UserLocationUpdate
 from app.utils.location import get_location_from_coords
 
 
@@ -192,32 +192,3 @@ async def update_user_location(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to update user location: {str(e)}")
 
-
-@router.get("/location/{latitude}/{longitude}", response_model=LocationInfo)
-async def get_location_info(
-    latitude: float,
-    longitude: float,
-    authorization: Optional[str] = Header(None)
-):
-    """Get municipality and province information for given coordinates."""
-    
-    # Get authenticated Supabase client and user_id
-    supabase_client, _, _, _ = get_authenticated_supabase_client(authorization)
-    
-    try:
-        # Get location information using SQL function
-        location_info = get_location_from_coords(supabase_client, latitude, longitude)
-        
-        return LocationInfo(
-            municipality_id=location_info.get("municipality_id"),
-            municipality_name=location_info.get("municipality_name"),
-            province_id=location_info.get("province_id"),
-            province_name=location_info.get("province_name"),
-            latitude=latitude,
-            longitude=longitude
-        )
-        
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get location info: {str(e)}")

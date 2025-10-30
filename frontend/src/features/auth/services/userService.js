@@ -139,46 +139,4 @@ export const userService = {
       };
     }
   },
-
-  /**
-   * Get location information for coordinates
-   * @param {number} latitude - Latitude coordinate
-   * @param {number} longitude - Longitude coordinate
-   * @returns {Promise<{success: boolean, data?: any, error?: string}>}
-   */
-  getLocationInfo: async (latitude, longitude) => {
-    try {
-      // Get current session to get the JWT token
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-      
-      if (sessionError || !session) {
-        return { success: false, error: "User not authenticated" };
-      }
-
-      const response = await fetch(`${API_BASE_URL}/api/v1/users/location/${latitude}/${longitude}`, {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${session.access_token}`,
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return { 
-          success: false, 
-          error: errorData.detail || `HTTP error! status: ${response.status}` 
-        };
-      }
-
-      const data = await response.json();
-      return { success: true, data };
-
-    } catch (error) {
-      console.error("Error getting location info:", error);
-      return { 
-        success: false, 
-        error: error.message || "Failed to get location info" 
-      };
-    }
-  },
 };
