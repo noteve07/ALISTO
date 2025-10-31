@@ -1,0 +1,87 @@
+RISK EVALUATION SUMMARY:
+Total Provinces: 82 | High Risk: 8 | Medium Risk: 34 | Low Risk: 40
+Updated: 2025-11-01 01:25:42
+
+RISK LEVELS:
+Apayao: Low
+Iloilo: Medium
+Sulu: Medium
+Southern Leyte: Medium
+Siquijor: Low
+Tarlac: Low
+Surigao Del Norte: Medium
+Batanes: High
+Capiz: High
+Bukidnon: Low
+Cebu: Low
+Romblon: Medium
+Cagayan: Medium
+Rizal: Low
+Northern Samar: High
+Ilocos Sur: Medium
+Camarines Sur: Medium
+North Cotabato: Medium
+Compostela Valley: Low
+Quezon: Low
+Mountain Province: High
+Sarangani: Medium
+Camarines Norte: Low
+Davao De Oro: Low
+Maguindanao Del Norte: Medium
+Bataan: Low
+Nueva Vizcaya: Low
+Cavite: Low
+Isabela: Medium
+Ifugao: Low
+Leyte: Medium
+Cotabato: Medium
+Metropolitan Manila: Low
+Ilocos Norte: Medium
+Agusan Del Sur: Low
+Zamboanga Sibugay: High
+Camiguin: Low
+Laguna: Medium
+La Union: Low
+Masbate: Low
+Batangas: Medium
+Palawan: Low
+Marinduque: Medium
+Bohol: Medium
+Sultan Kudarat: Low
+Zamboanga Del Norte: Medium
+Samar: Medium
+Negros Oriental: High
+Albay: Low
+Nueva Ecija: Low
+Negros Occidental: Medium
+Basilan: Low
+Tawi-Tawi: Medium
+Kalinga: Low
+Surigao Del Sur: Low
+Guimaras: Low
+Agusan Del Norte: Medium
+Lanao Del Sur: Low
+Aklan: Medium
+Davao Occidental: High
+Benguet: Low
+Davao Del Norte: Low
+Pangasinan: Low
+Catanduanes: Medium
+Biliran: Low
+Aurora: Medium
+Misamis Oriental: Medium
+Shariff Kabunsuan: Low
+Abra: Low
+Zambales: Medium
+Dinagat Islands: High
+Lanao Del Norte: Low
+Oriental Mindoro: Medium
+Pampanga: Low
+Sorsogon: Low
+Misamis Occidental: Low
+Eastern Samar: Medium
+Antique: Low
+Quirino: Medium
+Occidental Mindoro: Low
+Zamboanga Del Sur: Medium
+Bulacan: Medium
