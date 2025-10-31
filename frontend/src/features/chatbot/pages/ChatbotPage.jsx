@@ -3,17 +3,101 @@ import React, { useEffect, useRef, useState } from "react";
 const AssistantIcon = ({ className = "h-9 w-9" }) => (
   <svg
     className={className}
-    viewBox="0 0 24 24"
-    fill="currentColor"
+    viewBox="0 0 200 200"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M12 2a7 7 0 0 0-7 7v2a4 4 0 0 0-3 4v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a4 4 0 0 0-3-4V9a7 7 0 0 0-7-7Zm-4 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+    {/* Yellow chatbot body */}
+    <rect
+      x="50"
+      y="70"
+      width="100"
+      height="80"
+      rx="15"
+      fill="#FDE047"
+      stroke="#000"
+      strokeWidth="4"
+    />
+    {/* Head antenna */}
+    <line
+      x1="100"
+      y1="40"
+      x2="100"
+      y2="70"
+      stroke="#000"
+      strokeWidth="4"
+      strokeLinecap="round"
+    />
+    <circle
+      cx="100"
+      cy="35"
+      r="8"
+      fill="#60A5FA"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    {/* Left ear/side panel */}
+    <rect
+      x="35"
+      y="95"
+      width="15"
+      height="30"
+      rx="7"
+      fill="#6B7280"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    {/* Right ear/side panel */}
+    <rect
+      x="150"
+      y="95"
+      width="15"
+      height="30"
+      rx="7"
+      fill="#6B7280"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    {/* Left eye */}
+    <circle
+      cx="75"
+      cy="100"
+      r="10"
+      fill="#60A5FA"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    {/* Right eye */}
+    <circle
+      cx="125"
+      cy="100"
+      r="10"
+      fill="#60A5FA"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    {/* Smile */}
+    <path
+      d="M 80 125 Q 100 135 120 125"
+      stroke="#000"
+      strokeWidth="4"
+      fill="none"
+      strokeLinecap="round"
+    />
+    {/* Speech bubble tail */}
+    <path
+      d="M 70 150 L 60 170 L 80 155 Z"
+      fill="#FDE047"
+      stroke="#000"
+      strokeWidth="3"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
 // Component to render formatted message with markdown-like styling
 const FormattedMessage = ({ content }) => {
-  const lines = content.split('\n');
+  const lines = content.split("\n");
 
   // helper to render inline bold within a line
   const renderInline = (line, keyPrefix) => {
@@ -30,7 +114,10 @@ const FormattedMessage = ({ content }) => {
         );
       }
       parts.push(
-        <strong key={`${keyPrefix}-bold-${match.index}`} className="font-semibold text-slate-900">
+        <strong
+          key={`${keyPrefix}-bold-${match.index}`}
+          className="font-semibold text-slate-900"
+        >
           {match[1]}
         </strong>
       );
@@ -38,7 +125,9 @@ const FormattedMessage = ({ content }) => {
     }
     if (lastIndex < line.length) {
       parts.push(
-        <span key={`${keyPrefix}-text-${lastIndex}`}>{line.substring(lastIndex)}</span>
+        <span key={`${keyPrefix}-text-${lastIndex}`}>
+          {line.substring(lastIndex)}
+        </span>
       );
     }
     return parts.length > 0 ? parts : line;
@@ -88,7 +177,7 @@ const FormattedMessage = ({ content }) => {
   });
 
   // flush if content ended with a list
-  flushList('end');
+  flushList("end");
 
   return <div className="space-y-2">{elements}</div>;
 };
@@ -125,16 +214,7 @@ const ChatbotPage = () => {
     };
 
     setMessages((prev) => {
-      if (!prev.length) {
-        const greetingMessage = {
-          id: Date.now() - 1,
-          author: "isa",
-          content:
-            "Hello! I'm ISA, your seismic assistant. Ask about recent earthquakes, risk levels, or volcano advisories.",
-          timestamp: new Date(),
-        };
-        return [greetingMessage, userMessage];
-      }
+      // Always add the user message to existing messages
       return [...prev, userMessage];
     });
 
@@ -196,7 +276,7 @@ const ChatbotPage = () => {
     try {
       // Call your FastAPI endpoint
       const botResponse = await sendToChatbot(userMessage.content);
-      
+
       // Start typing animation
       animateTyping(botResponse, Date.now() + 1);
     } catch (error) {
@@ -223,32 +303,38 @@ const ChatbotPage = () => {
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-b from-white via-slate-50 to-slate-100 shadow-xl">
-      <div className="flex-1 overflow-y-auto px-6 py-8 sm:px-10 sm:py-10">
-        {!messages.length && !isTyping ? (
-          <div className="flex h-full flex-col items-center justify-center gap-8 text-center">
-            <div className="relative">
-              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 via-orange-300 to-orange-400 shadow-[0_25px_50px_-20px_rgba(249,115,22,0.45)]">
-                <AssistantIcon className="h-12 w-12 text-slate-900" />
-              </div>
-              <span className="absolute -bottom-1.5 -right-1.5 inline-flex h-6 w-6 items-center justify-center rounded-full border-4 border-white bg-emerald-400" />
+      <div
+        className={`flex-1 overflow-y-auto px-6 py-8 sm:px-10 sm:py-10 ${
+          messages.length === 0 ? "flex items-center justify-center" : ""
+        }`}
+      >
+        {/* Welcome Section */}
+        <div className={`text-center ${messages.length > 0 ? "mb-8" : ""}`}>
+          <div className="relative mb-6">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 via-orange-300 to-orange-400 shadow-lg">
+              <AssistantIcon className="h-16 w-16" />
             </div>
-            <div className="space-y-4">
-              <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
-                Hi! I'm ISA
-              </h1>
-              <p className="mx-auto max-w-2xl text-lg text-slate-600">
-                Welcome to ALISTO&apos;s Intelligent Seismic Assistant. I can
-                help you explore live quake data, volcano advisories, and risk
-                levels across the Philippines.
-              </p>
-              <div className="mx-auto max-w-xl rounded-2xl border border-slate-200 bg-white/70 px-5 py-4 text-sm text-slate-500 shadow-sm">
-                Try asking me about: recent quakes near your city, active
-                volcano alert levels, or province risk status.
-              </div>
+            <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 translate-y-1/2 inline-flex h-5 w-5 items-center justify-center rounded-full border-3 border-white bg-emerald-400" />
+          </div>
+          <div className="space-y-3">
+            <h1 className="text-4xl font-bold tracking-tight text-slate-900 font-sans">
+              Hi! I'm ISA
+            </h1>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 font-sans">
+              Welcome to ALISTO&apos;s Intelligent Seismic Assistant. I can help
+              you explore live quake data, volcano advisories, and risk levels
+              across the Philippines.
+            </p>
+            <div className="mx-auto max-w-xl rounded-xl border border-slate-200 bg-white/80 px-5 py-3 text-sm text-slate-500 shadow-sm backdrop-blur-sm font-sans">
+              Try asking me about: recent quakes near your city, active volcano
+              alert levels, or province risk status.
             </div>
           </div>
-        ) : (
-          <div className="space-y-6">
+        </div>
+
+        {/* Messages Section */}
+        {messages.length > 0 && (
+          <div className="space-y-6 pt-6">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -259,16 +345,16 @@ const ChatbotPage = () => {
                 }
               >
                 {message.author === "isa" && (
-                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner">
-                    <AssistantIcon className="h-6 w-6 text-slate-900" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner">
+                    <AssistantIcon className="h-9 w-9" />
                   </div>
                 )}
 
                 <div
                   className={
                     message.author === "isa"
-                      ? "max-w-[70%] rounded-3xl rounded-tl-xl border border-orange-100 bg-orange-50 px-6 py-4 text-sm text-slate-700 shadow-sm"
-                      : "max-w-[70%] rounded-3xl rounded-tr-xl border border-slate-200 bg-white px-6 py-4 text-sm text-slate-800 shadow-lg"
+                      ? "max-w-[75%] rounded-3xl rounded-tl-xl border border-orange-100 bg-orange-50 px-6 py-4 text-base text-slate-700 shadow-sm font-sans"
+                      : "max-w-[75%] rounded-3xl rounded-tr-xl border border-slate-200 bg-white px-6 py-4 text-base text-slate-800 shadow-lg font-sans"
                   }
                 >
                   {message.author === "isa" ? (
@@ -276,7 +362,7 @@ const ChatbotPage = () => {
                   ) : (
                     <p className="leading-relaxed">{message.content}</p>
                   )}
-                  <span className="mt-3 block text-xs font-medium text-slate-400">
+                  <span className="mt-3 block text-xs font-medium text-slate-400 font-sans">
                     {message.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
@@ -285,9 +371,9 @@ const ChatbotPage = () => {
                 </div>
 
                 {message.author !== "isa" && (
-                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-slate-300 text-slate-700 shadow-inner">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate-300 text-slate-700 shadow-inner">
                     <svg
-                      className="h-6 w-6"
+                      className="h-7 w-7"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -305,17 +391,17 @@ const ChatbotPage = () => {
             {isTyping && (
               <div className="flex items-start gap-4">
                 <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner">
-                  <AssistantIcon className="h-6 w-6 text-slate-900" />
+                  <AssistantIcon className="h-9 w-9" />
                 </div>
                 {typingMessage ? (
-                  <div className="max-w-[70%] rounded-3xl rounded-tl-xl border border-orange-100 bg-orange-50 px-6 py-4 text-sm text-slate-700 shadow-sm">
+                  <div className="max-w-[75%] rounded-3xl rounded-tl-xl border border-orange-100 bg-orange-50 px-6 py-4 text-base text-slate-700 shadow-sm font-sans">
                     <FormattedMessage content={typingMessage} />
                   </div>
                 ) : (
-                  <div className="flex items-center gap-1 rounded-3xl rounded-tl-xl border border-orange-100 bg-orange-50 px-6 py-3">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-orange-300" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-orange-300 [animation-delay:120ms]" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-orange-300 [animation-delay:240ms]" />
+                  <div className="flex items-center gap-1 rounded-3xl rounded-tl-xl border border-orange-100 bg-orange-50 px-6 py-4">
+                    <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-orange-400" />
+                    <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-orange-400 [animation-delay:120ms]" />
+                    <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-orange-400 [animation-delay:240ms]" />
                   </div>
                 )}
               </div>
@@ -326,7 +412,7 @@ const ChatbotPage = () => {
         )}
       </div>
 
-      <div className="border-t border-slate-200 bg-white px-6 py-5 shadow-inner sm:px-10">
+      <div className="border-t border-slate-200 bg-white px-6 py-6 shadow-inner sm:px-10">
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -341,18 +427,32 @@ const ChatbotPage = () => {
               onKeyDown={handleKeyDown}
               rows={1}
               placeholder="Ask ISA about recent quakes, risk levels, or volcano advisories..."
-              className="w-full min-h-[64px] resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 pr-24 text-sm text-slate-700 placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-200"
+              className="w-full min-h-12 resize-none rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 pr-32 text-sm text-slate-700 placeholder:text-slate-400 focus:border-orange-300 focus:bg-white focus:outline-none focus:ring-2 focus:ring-orange-200 font-sans"
             />
-            <span className="pointer-events-none absolute bottom-3 right-4 text-[11px] text-slate-300">
+            <span className="pointer-events-none absolute bottom-2.5 right-3 text-xs text-slate-300 font-medium font-sans">
               Press Enter to send
             </span>
           </div>
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className="inline-flex h-12 items-center justify-center rounded-2xl bg-gradient-to-r from-orange-400 to-orange-500 px-6 text-sm font-semibold text-white shadow-lg shadow-orange-400/30 transition hover:from-orange-500 hover:to-orange-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-400 to-orange-500 px-6 text-sm font-semibold text-white shadow-lg shadow-orange-400/30 transition-all duration-200 hover:from-orange-500 hover:to-orange-600 hover:shadow-xl hover:shadow-orange-400/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-lg font-sans"
           >
             Send
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+              />
+            </svg>
           </button>
         </form>
       </div>

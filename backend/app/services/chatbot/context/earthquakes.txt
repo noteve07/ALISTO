@@ -1,31 +1,30 @@
 EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 104 | Minor (<3.0): 81 | Major (>=3.0): 23
-Average Magnitude: 2.35 | Highest: 4.4
-Updated: 2025-11-01 01:25:41
+Total: 101 | Minor (<3.0): 79 | Major (>=3.0): 22
+Average Magnitude: 2.34 | Highest: 4.4
+Updated: 2025-11-01 02:27:51
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
-2025-11-01T00:07:00 | 3.5 | 15km | Unknown
-2025-11-01T00:02:00 | 3.1 | 11km | Unknown
-2025-10-31T23:57:00 | 3.9 | 4km | Unknown
-2025-10-31T23:45:00 | 3 | 3km | Unknown
-2025-10-31T23:30:00 | 3.2 | 18km | Unknown
-2025-10-31T23:14:00 | 3.3 | 5km | Unknown
-2025-10-31T22:26:00 | 3.2 | 13km | Unknown
-2025-10-31T21:56:00 | 3.5 | 12km | Unknown
-2025-10-31T21:13:00 | 3.8 | 13km | Unknown
-2025-10-31T18:14:00 | 4 | 10km | Unknown
-2025-10-31T17:28:00 | 3.1 | 24km | Unknown
-2025-10-31T17:00:00 | 4.4 | 10km | Unknown
-2025-10-31T17:00:00 | 3.3 | 11km | Unknown
-2025-10-31T16:03:00 | 3 | 49km | Unknown
-2025-10-31T15:37:00 | 3.2 | 29km | Unknown
-2025-10-31T12:06:00 | 4.3 | 37km | Unknown
-2025-10-31T12:06:00 | 3.1 | 2km | Unknown
-2025-10-31T10:08:00 | 3.2 | 31km | Unknown
-2025-10-31T09:27:00 | 3.6 | 14km | Unknown
-2025-10-31T06:14:00 | 3.5 | 110km | Unknown
-2025-10-31T04:11:00 | 4.1 | 145km | Unknown
-2025-10-31T03:09:00 | 3.1 | 101km | Unknown
-2025-10-31T01:33:00 | 3.2 | 1km | Unknown
+2025-11-01T00:07:00 | 3.5 | 15km | Davao De Oro
+2025-11-01T00:02:00 | 3.1 | 11km | Davao De Oro
+2025-10-31T23:57:00 | 3.9 | 4km | Cebu
+2025-10-31T23:45:00 | 3 | 3km | Cebu
+2025-10-31T23:30:00 | 3.2 | 18km | Surigao Del Norte
+2025-10-31T23:14:00 | 3.3 | 5km | Davao De Oro
+2025-10-31T22:26:00 | 3.2 | 13km | Davao De Oro
+2025-10-31T21:56:00 | 3.5 | 12km | Eastern Samar
+2025-10-31T21:13:00 | 3.8 | 13km | Davao De Oro
+2025-10-31T18:14:00 | 4 | 10km | Maguindanao Del Norte
+2025-10-31T17:28:00 | 3.1 | 24km | Davao De Oro
+2025-10-31T17:00:00 | 4.4 | 10km | Eastern Samar
+2025-10-31T17:00:00 | 3.3 | 11km | Eastern Samar
+2025-10-31T16:03:00 | 3 | 49km | Davao De Oro
+2025-10-31T15:37:00 | 3.2 | 29km | Surigao Del Norte
+2025-10-31T12:06:00 | 4.3 | 37km | Davao Occidental
+2025-10-31T12:06:00 | 3.1 | 2km | Cebu
+2025-10-31T10:08:00 | 3.2 | 31km | Surigao Del Sur
+2025-10-31T09:27:00 | 3.6 | 14km | Davao De Oro
+2025-10-31T06:14:00 | 3.5 | 110km | Davao Occidental
+2025-10-31T04:11:00 | 4.1 | 145km | Davao Occidental
+2025-10-31T03:09:00 | 3.1 | 101km | Davao De Oro

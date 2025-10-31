@@ -19,10 +19,11 @@ class EarthquakeContextUpdater:
         try:
             lookup_file_path = os.path.join(
                 os.path.dirname(__file__), 
-                "../../src/lookup/provinces_id.json"
+                "../../../src/lookup/provinces_id.json"
             )
             with open(lookup_file_path, 'r') as f:
-                return json.load(f)
+                data = json.load(f)
+                return data
         except Exception as e:
             print(f"Error loading provinces lookup: {e}")
             return {}
@@ -55,12 +56,12 @@ class EarthquakeContextUpdater:
                 magnitude = eq.get('magnitude', 0)
                 province_id = eq.get('province_id')
                 
-                # Find province name by ID
+                # Find province name by ID (case-insensitive lookup)
                 province_name = "Unknown"
-                for prov_name, prov_id in self.provinces_lookup.items():
-                    if prov_id == province_id:
-                        province_name = prov_name.title()
-                        break
+                if province_id:
+                    province_name = self.province_id_to_name.get(province_id, "Unknown")
+                    if province_name != "Unknown":
+                        province_name = province_name.title()
                 
                 if magnitude < 3.0:
                     minor_count += 1
