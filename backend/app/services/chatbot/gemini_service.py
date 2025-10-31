@@ -1,39 +1,24 @@
 # app/services/gemini_service.py
-from google import genai
-import os
 from app.core.gemini import gemini
+from app.services.chatbot.context_manager import context_manager
 
 
 class GeminiService:
     def __init__(self):
-        # Your earthquake context
-        self.CONTEXT = """
-        Magnitude 4.4 is the strongest for the last 24 hour
-        Magnitude 6.2 is the strongest for the last 7 days
-        """
-
-        # Initialize chat session (shared for all users)
-        self.chat = gemini.chats.create(
-            model="gemini-2.0-flash",
-            history=[
-                {
-                    "role": "user", 
-                    "parts": [{"text": self.CONTEXT + " Use this as context for all questions."}]
-                },
-                {
-                    "role": "model", 
-                    "parts": [{"text": "I understand the earthquake data. I'm ready to answer questions about seismic activity. Your name is ISA (Intelligent Seismic Assistant), an assistant chatbot for ALISTO (Automated Live Information for Seismic Tracking and Observation). You will assist user in information dissemination, alerts, awareness and disaster response and preparedness."}]
-                }
-            ]
-        )
-        
-
+        pass
 
     async def get_chat_response(self, user_message: str, user_id: str | None = None) -> str:
-        """Get response from Gemini chatbot"""
+        """Get response from Gemini chatbot with master context"""
         try:
-            print(dir(self.chat))
-            response = self.chat.send_message(user_message)
+            # Get master context (compiled from all context files)
+            context = context_manager.get_master_context()
+            
+            # Generate response using generate_content
+            response = gemini.models.generate_content(
+                model="gemini-2.0-flash",
+                contents=f"{context}\n\nUSER: {user_message}"
+            )
+            
             return response.text
         except Exception as e:
             return f"Sorry, I encountered an error: {str(e)}"
