@@ -17,8 +17,8 @@ const HeroGraphics = () => {
             {/* Main Luzon */}
             <path
               d="M180 80 L200 60 L220 70 L240 60 L250 80 L260 100 L270 140 L260 180 L250 200 L240 210 L220 200 L200 210 L180 200 L170 180 L160 140 L170 100 Z"
-              fill="#FF8C42"
-              stroke="#FF6B35"
+              fill="#D2691E"
+              stroke="#B8551C"
               strokeWidth="2"
               className="animate-pulse"
             />
@@ -26,16 +26,16 @@ const HeroGraphics = () => {
             {/* Visayas */}
             <path
               d="M190 230 L210 220 L230 225 L235 240 L230 255 L210 260 L190 255 Z"
-              fill="#FF8C42"
-              stroke="#FF6B35"
+              fill="#D2691E"
+              stroke="#B8551C"
               strokeWidth="2"
               className="animate-pulse"
               style={{ animationDelay: "0.3s" }}
             />
             <path
               d="M245 235 L265 228 L280 240 L285 260 L275 275 L260 270 L250 260 Z"
-              fill="#FF8C42"
-              stroke="#FF6B35"
+              fill="#D2691E"
+              stroke="#B8551C"
               strokeWidth="2"
               className="animate-pulse"
               style={{ animationDelay: "0.5s" }}
@@ -44,8 +44,8 @@ const HeroGraphics = () => {
             {/* Mindanao */}
             <path
               d="M200 290 L240 285 L270 300 L285 330 L290 370 L285 410 L275 440 L260 460 L240 470 L220 465 L200 455 L185 430 L180 395 L185 350 L190 320 Z"
-              fill="#FF8C42"
-              stroke="#FF6B35"
+              fill="#D2691E"
+              stroke="#B8551C"
               strokeWidth="2"
               className="animate-pulse"
               style={{ animationDelay: "0.7s" }}
@@ -54,8 +54,8 @@ const HeroGraphics = () => {
             {/* Palawan */}
             <path
               d="M100 200 L110 180 L120 190 L125 220 L130 260 L125 290 L115 310 L105 300 L100 270 L95 230 Z"
-              fill="#FF8C42"
-              stroke="#FF6B35"
+              fill="#D2691E"
+              stroke="#B8551C"
               strokeWidth="2"
               className="animate-pulse"
               style={{ animationDelay: "1s" }}
@@ -81,7 +81,7 @@ const HeroGraphics = () => {
                 />
                 <circle cx="12" cy="9" r="2.5" fill="white" />
               </svg>
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-400 rounded-full animate-ping"></div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary-v2 rounded-full animate-ping"></div>
             </div>
           </div>
 
@@ -123,7 +123,7 @@ const HeroGraphics = () => {
 
         {/* Floating particles */}
         <div
-          className="absolute top-20 left-10 w-2 h-2 bg-orange-400 rounded-full animate-ping"
+          className="absolute top-20 left-10 w-2 h-2 bg-primary-v2 rounded-full animate-ping"
           style={{ animationDelay: "0s" }}
         ></div>
         <div

@@ -9,27 +9,54 @@ const HeroLeft = () => {
   };
 
   return (
-    <div className="space-y-10">
-      {/* Headline - Exact from prototype */}
-      <div className="space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-v2 leading-tight">
+    <div className="space-y-12">
+      {/* Modern Headline */}
+      <div className="space-y-8">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-v2 leading-tight">
           Automated Live Information for Seismic Tracking and Observation
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl">
+        {/* Modern Subheadline */}
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl font-light">
           Advanced monitoring technology providing real-time alerts and risk
           assessment.
         </p>
       </div>
 
-      {/* Sign Up Button */}
-      <div className="pt-4">
+      {/* Modern Action Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4 pt-8">
         <button
           onClick={handleGetStarted}
-          className="bg-primary-v2 hover:bg-orange-600 text-white px-12 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+          className="group bg-primary-v2 hover:bg-orange-600 text-white px-8 py-3 rounded-xl font-bold text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
-          Sign Up
+          <span className="flex items-center justify-center">
+            Get Started
+            <svg
+              className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </span>
+        </button>
+
+        <button
+          onClick={() => {
+            const aboutSection = document.getElementById("about");
+            if (aboutSection) {
+              aboutSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="border-2 border-primary-v2/30 text-primary-v2 px-8 py-3 rounded-xl font-medium text-base hover:border-primary-v2 hover:bg-primary-v2/5 transition-all duration-300"
+        >
+          Learn More
         </button>
       </div>
     </div>
