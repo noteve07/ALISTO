@@ -6,6 +6,7 @@ import LocationStepPage from "../components/LocationStepPage";
 import AuthLayout from "../components/AuthLayout";
 import AuthBrandSection from "../components/AuthBrandSection";
 import LoginForm from "../components/LoginForm";
+import "../styles/animations.css";
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
@@ -41,39 +42,48 @@ const LoginPage = () => {
 
       if (result.success) {
         console.log("Login successful, checking user profile...");
-        
+
         // Check user profile to see if location is enabled
         const profileResult = await userService.getProfile();
-        
+
         if (profileResult.success) {
           const userProfile = profileResult.data;
           console.log("User profile:", userProfile);
-          
+
           // If location is not enabled, show location step
-          if (!userProfile.location_enabled || (!userProfile.user_lat && !userProfile.user_lon)) {
+          if (
+            !userProfile.location_enabled ||
+            (!userProfile.user_lat && !userProfile.user_lon)
+          ) {
             console.log("Location not enabled, showing location step");
             setShowLocationStep(true);
             return;
           }
         } else {
-          console.warn("Failed to get user profile, skipping location check:", profileResult.error);
+          console.warn(
+            "Failed to get user profile, skipping location check:",
+            profileResult.error
+          );
         }
-        
+
         // Navigate to app if location is already enabled or profile check failed
         navigate("/app");
       } else {
         // Provide more meaningful error messages
         let errorMessage = result.error || "Login failed";
-        
+
         // Handle common Supabase auth errors
         if (errorMessage.includes("Invalid login credentials")) {
-          errorMessage = "Invalid email or password. Please check your credentials and try again.";
+          errorMessage =
+            "Invalid email or password. Please check your credentials and try again.";
         } else if (errorMessage.includes("Email not confirmed")) {
-          errorMessage = "Please check your email and confirm your account before signing in.";
+          errorMessage =
+            "Please check your email and confirm your account before signing in.";
         } else if (errorMessage.includes("Too many requests")) {
-          errorMessage = "Too many login attempts. Please wait a moment before trying again.";
+          errorMessage =
+            "Too many login attempts. Please wait a moment before trying again.";
         }
-        
+
         setError(errorMessage);
       }
     } catch (err) {
@@ -111,7 +121,7 @@ const LoginPage = () => {
     <AuthLayout>
       {/* Brand Section - Shows on LEFT for login */}
       <AuthBrandSection type="login" />
-      
+
       {/* Login Form - Shows on RIGHT for login */}
       <div className="lg:order-2">
         <LoginForm

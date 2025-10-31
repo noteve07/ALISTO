@@ -6,6 +6,7 @@ import LocationStepPage from "../components/LocationStepPage";
 import AuthLayout from "../components/AuthLayout";
 import AuthBrandSection from "../components/AuthBrandSection";
 import SignupForm from "../components/SignupForm";
+import "../styles/animations.css";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
@@ -84,12 +85,12 @@ const SignupPage = () => {
   // handle sign up
   const handleSignup = async (e) => {
     e.preventDefault();
-    
+
     // Validate form first
     if (!validateForm()) {
       return;
     }
-    
+
     console.log("handleSignup start");
     setLoading(true);
     try {
@@ -102,13 +103,13 @@ const SignupPage = () => {
 
       if (result.success) {
         console.log("Signup successful, now updating user profile");
-        
+
         // Update user profile with first name and last name
         const profileResult = await userService.updateProfile(
           formData.firstName,
           formData.lastName
         );
-        
+
         if (profileResult.success) {
           console.log("Profile updated successfully, showing location step");
           setShowLocationStep(true);
@@ -124,18 +125,21 @@ const SignupPage = () => {
         console.log("Signup failed:", result.error);
         // Provide more meaningful error messages
         let errorMessage = result.error || "Signup failed";
-        
+
         // Handle common Supabase auth errors
         if (errorMessage.includes("User already registered")) {
-          errorMessage = "An account with this email already exists. Please sign in instead.";
+          errorMessage =
+            "An account with this email already exists. Please sign in instead.";
         } else if (errorMessage.includes("Password")) {
-          errorMessage = "Password does not meet requirements. Please try a stronger password.";
+          errorMessage =
+            "Password does not meet requirements. Please try a stronger password.";
         } else if (errorMessage.includes("Email")) {
           errorMessage = "Please enter a valid email address.";
         } else if (errorMessage.includes("weak")) {
-          errorMessage = "Password is too weak. Please use at least 6 characters.";
+          errorMessage =
+            "Password is too weak. Please use at least 6 characters.";
         }
-        
+
         setError(errorMessage);
       }
     } catch (err) {
@@ -181,7 +185,7 @@ const SignupPage = () => {
           onSubmit={handleSignup}
         />
       </div>
-      
+
       {/* Brand Section - Shows on RIGHT for signup */}
       <AuthBrandSection type="signup" />
     </AuthLayout>
