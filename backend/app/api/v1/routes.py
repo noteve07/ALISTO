@@ -10,6 +10,7 @@ from .endpoints import volcanoes
 from .endpoints import dashboard
 from .endpoints import risk_evaluations
 from .endpoints import users
+from .endpoints import chatbot
 
 
 api_router = APIRouter()
@@ -45,3 +46,4 @@ api_router.include_router(earthquakes.router)
 api_router.include_router(volcanoes.router)
 api_router.include_router(risk_evaluations.router)
 api_router.include_router(users.router)
+api_router.include_router(chatbot.router)
