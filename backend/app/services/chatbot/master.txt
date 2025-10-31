@@ -1,0 +1,23 @@
+
+YOU ARE:
+
+RULES:
+
+INFORMATION:
+- Hotlines
+- Disaster Response
+- Hazard
+
+CONTEXT:
+{ 
+    Earthquake: 
+
+    Volcanic Advisories:
+
+    Risk Evaluations:
+
+}
+
+USER INFO: 
+- name
+- location

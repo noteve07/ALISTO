@@ -1,0 +1,32 @@
+VOLCANIC ADVISORY SUMMARY:
+Total Monitored: 24 | Active Alerts: 4 | Normal: 20
+Highest Alert Level: 2
+Updated: 2025-11-01 01:25:42
+
+VOLCANIC ADVISORIES:
+Volcano | Alert Level | Status
+========================================
+Kanlaon | Level 2 | Increased Unrest
+Bulusan | Level 1 | Low-level unrest
+Mayon | Level 1 | Low-level unrest
+Taal | Level 1 | Low-level unrest
+Cagua | Level 0 | None
+Camiguin de Babuyanes | Level 0 | None
+Didicas | Level 0 | None
+Hibok-hibok | Level 0 | None
+Iraya | Level 0 | None
+Iriga | Level 0 | None
+Isarog | Level 0 | None
+Leonard Kniaseff | Level 0 | None
+Babuyan Claro | Level 0 | None
+Matutum | Level 0 | None
+Musuan (Calayo) | Level 0 | None
+Parker | Level 0 | None
+Pinatubo | Level 0 | None
+Ragang | Level 0 | None
+Smith | Level 0 | None
+Biliran (Anas) | Level 0 | None
+Makaturing | Level 0 | None
+Banahaw | Level 0 | None
+Bud Dajo | Level 0 | None
+Cabalian | Level 0 | None

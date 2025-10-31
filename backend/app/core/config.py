@@ -9,10 +9,13 @@ load_dotenv()
 class Settings:
     """Applications settings and configuration."""
 
-    # TODO: supabase configuration
+    # Supabase Configuration
     SUPABASE_URL: Optional[str] = os.environ.get("SUPABASE_URL")
     SUPABASE_KEY: Optional[str] = os.environ.get("SUPABASE_KEY")
     SUPABASE_JWT: Optional[str] = os.environ.get("SUPABASE_JWT")
+
+    # Gemini Configuration
+    GEMINI_API_KEY: Optional[str] = os.environ.get("GEMINI_API_KEY")
 
     # API Configuration
     API_V1_PREFIX: str = "/api/v1"
