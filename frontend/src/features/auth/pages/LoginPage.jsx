@@ -6,12 +6,16 @@ import LocationStepPage from "../components/LocationStepPage";
 import AuthLayout from "../components/AuthLayout";
 import AuthBrandSection from "../components/AuthBrandSection";
 import LoginForm from "../components/LoginForm";
+import AuthLoadingScreen from "../components/AuthLoadingScreen";
+import DashboardLoadingScreen from "../components/DashboardLoadingScreen";
 import "../styles/animations.css";
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showLocationStep, setShowLocationStep] = useState(false);
+  const [showAuthLoading, setShowAuthLoading] = useState(false);
+  const [showDashboardLoading, setShowDashboardLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,7 +45,11 @@ const LoginPage = () => {
       );
 
       if (result.success) {
-        console.log("Login successful, checking user profile...");
+        console.log("Login successful, showing auth loading...");
+        setShowAuthLoading(true);
+
+        // Simulate a brief loading period for better UX
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         // Check user profile to see if location is enabled
         const profileResult = await userService.getProfile();
@@ -49,6 +57,7 @@ const LoginPage = () => {
         if (profileResult.success) {
           const userProfile = profileResult.data;
           console.log("User profile:", userProfile);
+          setShowAuthLoading(false);
 
           // If location is not enabled, show location step
           if (
@@ -64,10 +73,15 @@ const LoginPage = () => {
             "Failed to get user profile, skipping location check:",
             profileResult.error
           );
+          setShowAuthLoading(false);
         }
 
-        // Navigate to app if location is already enabled or profile check failed
-        navigate("/app");
+        // Show dashboard loading before navigating to app
+        console.log("Location already enabled, showing dashboard loading...");
+        setShowDashboardLoading(true);
+        setTimeout(() => {
+          navigate("/app");
+        }, 2000);
       } else {
         // Provide more meaningful error messages
         let errorMessage = result.error || "Login failed";
@@ -89,23 +103,42 @@ const LoginPage = () => {
     } catch (err) {
       console.error("Login error:", err);
       setError("An unexpected error occurred. Please try again.");
+      setShowAuthLoading(false);
     } finally {
       setLoading(false);
     }
   };
 
   // Handle location step events
-  const handleLocationSet = (locationData) => {
-    console.log("Location set successfully:", locationData);
-    // Navigate to app after location is set
-    navigate("/app");
+  const handleLocationSet = () => {
+    console.log("Location set successfully, showing dashboard loading...");
+    // Show dashboard loading before navigating
+    setShowLocationStep(false);
+    setShowDashboardLoading(true);
+    setTimeout(() => {
+      navigate("/app");
+    }, 2000);
   };
 
   const handleLocationSkip = () => {
-    console.log("Location step skipped, navigating to app");
-    // Navigate to app even if user skips location setup
-    navigate("/app");
+    console.log("Location step skipped, showing dashboard loading...");
+    // Show dashboard loading before navigating
+    setShowLocationStep(false);
+    setShowDashboardLoading(true);
+    setTimeout(() => {
+      navigate("/app");
+    }, 2000);
   };
+
+  // Show auth loading screen
+  if (showAuthLoading) {
+    return <AuthLoadingScreen message="Signing you in..." />;
+  }
+
+  // Show dashboard loading screen
+  if (showDashboardLoading) {
+    return <DashboardLoadingScreen message="Preparing your dashboard..." />;
+  }
 
   // If location step is active, show location page instead of login form
   if (showLocationStep) {

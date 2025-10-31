@@ -1,6 +1,7 @@
 import React from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import EarthquakeMarker from './EarthquakeMarker'
+import MapLegend from './MapLegend'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -22,6 +23,7 @@ const MapView = ({ earthquakeData }) => (
     maxZoom={10}
     maxBounds={[[5.5, 116.0], [19.0, 127.5]]}
     maxBoundsViscosity={0.7}
+    zoomControl={false}
   >
     <TileLayer
       attribution='&copy; OpenStreetMap contributors'
@@ -32,6 +34,7 @@ const MapView = ({ earthquakeData }) => (
     {earthquakeData.map((event, i) => (
       <EarthquakeMarker key={event.id} event={event} isLatest={i === 0} />
     ))}
+    <MapLegend />
   </MapContainer>
 )
 

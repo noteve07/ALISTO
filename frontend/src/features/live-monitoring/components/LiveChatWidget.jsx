@@ -72,23 +72,23 @@ const LiveChatWidget = () => {
   }
 
   return (
-    <div className="pointer-events-none fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-4">
+    <div className="pointer-events-none fixed bottom-8 right-8 z-[9999] flex flex-col items-end gap-4">
       {isOpen && (
         <div className="pointer-events-auto w-[min(360px,calc(100vw-3rem))] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_30px_60px_-25px_rgba(15,23,42,0.25)]">
-          <div className="flex items-center justify-between bg-gradient-to-r from-amber-200 via-orange-200 to-orange-300 px-4 py-3 text-slate-900">
+          <div className="flex items-center justify-between bg-[#D2691E] px-4 py-3 text-white">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/70">
-                <AssistantIcon className="h-5 w-5 text-slate-900" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90">
+                <AssistantIcon className="h-5 w-5 text-[#D2691E]" />
               </div>
               <div className="leading-tight">
                 <p className="text-sm font-semibold">ISA Live Assistant</p>
-                <p className="text-[11px] font-medium text-slate-700">Ready to help · PH seismic desk</p>
+                <p className="text-[11px] font-medium text-white/80">Ready to help · PH seismic desk</p>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
-                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition hover:bg-white/60"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-white transition hover:bg-white/20"
                 title="Open full chatbot"
                 onClick={() => setIsOpen(false)}
               >
@@ -97,7 +97,7 @@ const LiveChatWidget = () => {
               <button
                 type="button"
                 onClick={handleToggle}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-700 transition hover:bg-white/60"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-white transition hover:bg-white/20"
               >
                 <span className="sr-only">Close chat</span>
                 <CloseIcon />
@@ -116,7 +116,7 @@ const LiveChatWidget = () => {
                 }
               >
                 {message.author === 'isa' && (
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-300 text-slate-900 shadow-inner">
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#D2691E] text-white shadow-inner">
                     <AssistantIcon className="h-4 w-4" />
                   </div>
                 )}
@@ -145,7 +145,7 @@ const LiveChatWidget = () => {
                   key={suggestion}
                   type="button"
                   onClick={() => handleSuggestionSelect(suggestion)}
-                  className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-medium text-slate-500 transition hover:border-orange-200 hover:bg-orange-50 hover:text-orange-600"
+                  className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-medium text-slate-500 transition hover:border-[#D2691E] hover:bg-orange-50 hover:text-[#D2691E]"
                 >
                   {suggestion}
                 </button>
@@ -164,7 +164,7 @@ const LiveChatWidget = () => {
               />
               <button
                 type="submit"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-r from-orange-400 to-orange-500 text-white shadow-md transition hover:from-orange-500 hover:to-orange-600"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#D2691E] text-white shadow-md transition hover:bg-[#B8591A]"
               >
                 <SendIcon className="h-4 w-4" />
               </button>
@@ -177,9 +177,9 @@ const LiveChatWidget = () => {
         <button
           type="button"
           onClick={handleToggle}
-          className="pointer-events-auto inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-6 py-3 text-base font-semibold text-slate-900 shadow-[0_20px_35px_-18px_rgba(249,115,22,0.75)] transition hover:scale-105 hover:from-amber-500 hover:to-amber-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300"
+          className="pointer-events-auto inline-flex items-center gap-3 rounded-full bg-[#D2691E] px-6 py-3 text-base font-semibold text-white shadow-[0_20px_35px_-18px_rgba(210,105,30,0.75)] transition hover:scale-105 hover:bg-[#B8591A] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300"
         >
-          <AssistantIcon className="h-6 w-6 text-slate-900" />
+          <AssistantIcon className="h-6 w-6 text-white" />
           <span>Ask ISA</span>
         </button>
       )}

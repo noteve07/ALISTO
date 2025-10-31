@@ -28,42 +28,42 @@ const Features = () => {
     <section 
       ref={sectionRef}
       id="core-features" 
-      className={`px-4 py-16 sm:py-24 bg-gray-50 border-y border-gray-200 transition-all duration-600 ${
+      className={`px-6 py-20 sm:py-28 bg-white transition-all duration-600 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
       }`}
     >
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <h3 className={`text-[#1A2B48] text-4xl font-bold transition-all duration-600 delay-100 ${
+        <div className="text-center mb-16">
+          <h3 className={`text-primary-v2 text-3xl md:text-4xl lg:text-5xl font-bold transition-all duration-600 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
             Core Features
           </h3>
-          <p className={`text-[#6C757D] mt-2 text-lg transition-all duration-600 delay-200 ${
+          <p className={`text-gray-600 mt-6 text-lg md:text-xl max-w-3xl mx-auto transition-all duration-600 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
             Explore the features that make ALISTO an essential tool for seismic awareness and preparedness.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <article 
               key={feature.id}
-              className={`bg-white/95 rounded-lg p-6 text-center shadow-sm transition-all duration-600 hover:transform hover:-translate-y-2 hover:shadow-xl group ${
+              className={`bg-background/50 rounded-2xl p-8 text-center shadow-sm transition-all duration-600 hover:transform hover:-translate-y-2 hover:shadow-xl group border border-gray-100 ${
                 isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
               }`}
               style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
-              <div className="inline-flex items-center justify-center p-3 rounded-full bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white mb-4">
-                <span className="material-symbols-outlined text-2xl">
+              <div className="inline-flex items-center justify-center p-4 rounded-2xl bg-primary-v2/10 text-primary-v2 transition-all duration-300 group-hover:bg-primary-v2 group-hover:text-white mb-6">
+                <span className="material-symbols-outlined text-3xl">
                   {feature.icon}
                 </span>
               </div>
-              <h4 className="text-xl font-bold text-[#1A2B48] mb-2 transition-colors duration-300 group-hover:text-primary">
+              <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 transition-colors duration-300 group-hover:text-primary-v2">
                 {feature.title}
               </h4>
-              <p className="text-base text-[#1A2B48]/80">
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                 {feature.description}
               </p>
             </article>

@@ -101,3 +101,33 @@
     background-position: 100% 50%;
   }
 }
+
+/* Spin animation for loading spinners */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bounce animation for loading dots */
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Progress bar animation */
+@keyframes slideProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

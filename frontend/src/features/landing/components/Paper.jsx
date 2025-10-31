@@ -7,19 +7,19 @@ const Paper = () => {
   return (
     <section 
       ref={ref}
-      className={`px-4 py-16 sm:py-20 bg-white transition-all duration-700 ${
+      className={`px-6 py-20 sm:py-28 bg-background transition-all duration-700 ${
         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
       }`} 
       id="latest-paper"
     >
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h3 className={`text-center text-3xl sm:text-4xl font-bold text-[#1A2B48] transition-all duration-700 delay-100 ${
+        <div className="mb-16">
+          <h3 className={`text-center text-3xl md:text-4xl lg:text-5xl font-bold text-primary-v2 transition-all duration-700 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
             Our Latest Paper
           </h3>
-          <p className={`text-center text-lg text-[#6C757D] mt-2 transition-all duration-700 delay-200 ${
+          <p className={`text-center text-lg md:text-xl text-gray-600 mt-6 max-w-3xl mx-auto transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}>
             Pioneering work from the ALISTO Dev Team.
@@ -42,18 +42,18 @@ const Paper = () => {
 
           {/* Paper text */}
           <div className="flex-grow pl-0 md:pl-8 text-left">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#1A2B48] leading-normal">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 leading-normal">
               Automated Live Information for Seismic Tracking and Observation (ALISTO)
             </h2>
-            <div className="mt-4 space-y-3 text-[#6C757D]">
-              <div className="space-y-1 text-base">
+            <div className="mt-6 space-y-3 text-gray-600">
+              <div className="space-y-1 text-base md:text-lg">
                 <p>© 2025 Nicko James E. Barata, Miguel Grant V. Bagtas,</p>
                 <p className="pl-0">Michael Joseph M. Talabo, Jealla Rose M. Waje.</p>
                 <p className="pt-2">All rights reserved by the Authors.</p>
               </div>
             </div>
-            <div className="mt-6">
-              <button className="inline-flex items-center justify-center h-12 px-8 rounded-lg bg-primary text-white font-bold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-primary/90 shadow-md">
+            <div className="mt-8">
+              <button className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-primary-v2 text-white font-bold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:bg-orange-600 shadow-md">
                 <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
