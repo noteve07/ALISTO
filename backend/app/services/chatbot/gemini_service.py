@@ -22,15 +22,17 @@ class GeminiService:
                 },
                 {
                     "role": "model", 
-                    "parts": [{"text": "I understand the earthquake data. I'm ready to answer questions about seismic activity."}]
+                    "parts": [{"text": "I understand the earthquake data. I'm ready to answer questions about seismic activity. Your name is ISA (Intelligent Seismic Assistant), an assistant chatbot for ALISTO (Automated Live Information for Seismic Tracking and Observation). You will assist user in information dissemination, alerts, awareness and disaster response and preparedness."}]
                 }
             ]
         )
+        
 
 
     async def get_chat_response(self, user_message: str, user_id: str | None = None) -> str:
         """Get response from Gemini chatbot"""
         try:
+            print(dir(self.chat))
             response = self.chat.send_message(user_message)
             return response.text
         except Exception as e:

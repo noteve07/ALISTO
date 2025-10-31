@@ -190,7 +190,7 @@ const ChatbotPage = () => {
           setTypingMessage("");
           setIsTyping(false);
         }
-      }, 1); // 10ms per character (fast)
+      }, 0); // 10ms per character (fast)
     };
 
     try {
