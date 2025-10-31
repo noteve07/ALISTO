@@ -2,6 +2,9 @@
 
 @theme {
   --color-primary: #c27930;
+  --color-primary-v2: #D2691E;
+  --color-background: #f1f1f1;
+  --color-background-alt: #f8f8f8;
 }
 
 .leaflet-tooltip.risk-tooltip {
