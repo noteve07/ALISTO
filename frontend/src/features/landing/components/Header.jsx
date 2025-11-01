@@ -43,38 +43,40 @@ const Header = () => {
     >
       {/* Logo */}
       <div
-        className="inline-flex items-center gap-4 cursor-pointer select-none"
+        className="inline-flex items-center gap-3 cursor-pointer select-none"
         onClick={() => navigate("/")}
       >
         <div className="relative">
-          {/* Circular background with concentric rings */}
-          <div className="w-12 h-12 bg-primary-v2 rounded-full flex items-center justify-center relative">
+          {/* Circular background with concentric rings - smaller size */}
+          <div className="w-10 h-10 bg-primary-v2 rounded-full flex items-center justify-center relative">
             {/* Outer ring */}
             <div className="absolute inset-0 border-2 border-primary-v2 rounded-full"></div>
             {/* Middle ring */}
-            <div className="absolute inset-1 border border-primary-v2/60 rounded-full"></div>
+            <div className="absolute inset-0.5 border border-primary-v2/60 rounded-full"></div>
             {/* Inner ring */}
-            <div className="absolute inset-2 border border-primary-v2/30 rounded-full"></div>
+            <div className="absolute inset-1 border border-primary-v2/30 rounded-full"></div>
 
-            {/* Location pin with heartbeat */}
+            {/* Location pin with zigzag earthquake heartbeat */}
             <svg
-              className="w-7 h-7 text-white relative z-10"
+              className="w-6 h-6 text-white relative z-10"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
               <circle cx="12" cy="9" r="2.5" fill="white" />
-              {/* Heartbeat line */}
+              {/* Zigzag earthquake heartbeat line inside white circle */}
               <path
-                d="M8 9h1l1-2 2 4 1-2h1"
-                stroke="currentColor"
-                strokeWidth="1"
+                d="M9.5 9h0.8l0.4-1.2 0.6 2.4 0.4-1.2h0.8"
+                stroke="#D2691E"
+                strokeWidth="1.2"
                 fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
         </div>
-        <h2 className="font-black text-xl tracking-wide text-primary-v2">
+        <h2 className="font-black text-2xl tracking-wide text-primary-v2">
           ALISTO
         </h2>
       </div>

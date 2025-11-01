@@ -1,52 +1,51 @@
-import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Layouts
-import PublicLayout from './shared/layouts/PublicLayout'
-import AppLayout from './shared/layouts/AppLayout'
+import PublicLayout from "./shared/layouts/PublicLayout";
+import AppLayout from "./shared/layouts/AppLayout";
 
 // Public Pages
-import LandingPage from './features/landing/pages/LandingPage'
-import LoginPage from './features/auth/pages/LoginPage'
-import SignupPage from './features/auth/pages/SignupPage'
+import LandingPage from "./features/landing/pages/LandingPage";
+import LoginPage from "./features/auth/pages/LoginPage";
+import SignupPage from "./features/auth/pages/SignupPage";
 
 // App Pages
-import DashboardPage from './features/dashboard/pages/DashboardPage'
-import LiveMonitoringPage from './features/live-monitoring/pages/LiveMonitoringPage'
-import RiskEvaluationPage from './features/risk-evaluation/pages/RiskEvaluationPage'
-import AnalyticsPage from './features/analytics/pages/AnalyticsPage'
-import ChatbotPage from './features/chatbot/pages/ChatbotPage'
-import AccountPage from './features/account/pages/AccountPage'
+import DashboardPage from "./features/dashboard/pages/DashboardPage";
+import LiveMonitoringPage from "./features/live-monitoring/pages/LiveMonitoringPage";
+import HazardMapsPage from "./features/hazard-maps/pages/HazardMapsPage";
+import RiskEvaluationPage from "./features/risk-evaluation/pages/RiskEvaluationPage";
+import HotlinePage from "./features/hotlines/pages/HotlinePage";
+import ChatbotPage from "./features/chatbot/pages/ChatbotPage";
+import AccountPage from "./features/account/pages/AccountPage";
 
 // Shared Pages
-import ErrorPage from './shared/pages/ErrorPage'
-import TermsOfService from './shared/pages/TermsOfService'
-import PrivacyPolicy from './shared/pages/PrivacyPolicy'
-
-
+import ErrorPage from "./shared/pages/ErrorPage";
+import TermsOfService from "./shared/pages/TermsOfService";
+import PrivacyPolicy from "./shared/pages/PrivacyPolicy";
 
 const App = () => {
   const router = createBrowserRouter([
     // Public Routes
     {
-      path: '/',
+      path: "/",
       element: <PublicLayout />,
       children: [
         { index: true, element: <LandingPage /> },
         { path: "login", element: <LoginPage /> },
         { path: "signup", element: <SignupPage /> },
-        { path: "*", element: <ErrorPage />}
-      ]
+        { path: "*", element: <ErrorPage /> },
+      ],
     },
 
     // Legal Pages (standalone)
     {
       path: "/terms",
-      element: <TermsOfService />
+      element: <TermsOfService />,
     },
     {
       path: "/privacy",
-      element: <PrivacyPolicy />
+      element: <PrivacyPolicy />,
     },
 
     // App Routes
@@ -57,19 +56,17 @@ const App = () => {
         { index: true, element: <DashboardPage /> },
         { path: "dashboard", element: <DashboardPage /> },
         { path: "live-monitoring", element: <LiveMonitoringPage /> },
+        { path: "hazard-maps", element: <HazardMapsPage /> },
         { path: "risk-evaluation", element: <RiskEvaluationPage /> },
-        { path: "analytics", element: <AnalyticsPage /> },
+        { path: "emergency-hotlines", element: <HotlinePage /> },
         { path: "chatbot", element: <ChatbotPage /> },
         { path: "account", element: <AccountPage /> },
         { path: "*", element: <ErrorPage /> },
-      ]
-    }
+      ],
+    },
   ]);
 
-  return (
-    <RouterProvider router={router} />
-  )
-}
+  return <RouterProvider router={router} />;
+};
 
-
-export default App
+export default App;

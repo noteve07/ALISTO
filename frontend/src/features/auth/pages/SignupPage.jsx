@@ -6,12 +6,16 @@ import LocationStepPage from "../components/LocationStepPage";
 import AuthLayout from "../components/AuthLayout";
 import AuthBrandSection from "../components/AuthBrandSection";
 import SignupForm from "../components/SignupForm";
+import AuthLoadingScreen from "../components/AuthLoadingScreen";
+import DashboardLoadingScreen from "../components/DashboardLoadingScreen";
 import "../styles/animations.css";
 
 const SignupPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showLocationStep, setShowLocationStep] = useState(false);
+  const [showAuthLoading, setShowAuthLoading] = useState(false);
+  const [showDashboardLoading, setShowDashboardLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -102,13 +106,19 @@ const SignupPage = () => {
       console.log("Signup result:", result);
 
       if (result.success) {
-        console.log("Signup successful, now updating user profile");
+        console.log("Signup successful, showing auth loading...");
+        setShowAuthLoading(true);
+
+        // Simulate a brief loading period for better UX
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Update user profile with first name and last name
         const profileResult = await userService.updateProfile(
           formData.firstName,
           formData.lastName
         );
+
+        setShowAuthLoading(false);
 
         if (profileResult.success) {
           console.log("Profile updated successfully, showing location step");
@@ -145,6 +155,7 @@ const SignupPage = () => {
     } catch (err) {
       console.error("Signup error:", err);
       setError("An unexpected error occurred. Please try again.");
+      setShowAuthLoading(false);
     } finally {
       setLoading(false);
     }
@@ -153,15 +164,33 @@ const SignupPage = () => {
   // Handle location step events
   const handleLocationSet = (locationData) => {
     console.log("Location set successfully:", locationData);
-    // Navigate to app after location is set
-    navigate("/app");
+    // Show dashboard loading before navigating
+    setShowLocationStep(false);
+    setShowDashboardLoading(true);
+    setTimeout(() => {
+      navigate("/app");
+    }, 2000);
   };
 
   const handleLocationSkip = () => {
-    console.log("Location step skipped, navigating to app");
-    // Navigate to app even if user skips location setup
-    navigate("/app");
+    console.log("Location step skipped, showing dashboard loading...");
+    // Show dashboard loading before navigating
+    setShowLocationStep(false);
+    setShowDashboardLoading(true);
+    setTimeout(() => {
+      navigate("/app");
+    }, 2000);
   };
+
+  // Show auth loading screen
+  if (showAuthLoading) {
+    return <AuthLoadingScreen message="Setting up your account..." />;
+  }
+
+  // Show dashboard loading screen
+  if (showDashboardLoading) {
+    return <DashboardLoadingScreen message="Preparing your dashboard..." />;
+  }
 
   // If location step is active, show location page instead of signup form
   if (showLocationStep) {
