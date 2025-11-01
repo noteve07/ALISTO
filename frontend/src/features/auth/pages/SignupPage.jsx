@@ -110,7 +110,7 @@ const SignupPage = () => {
         setShowAuthLoading(true);
 
         // Simulate a brief loading period for better UX
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Update user profile with first name and last name
         const profileResult = await userService.updateProfile(

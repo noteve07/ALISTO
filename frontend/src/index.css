@@ -3,7 +3,7 @@
 @theme {
   --color-primary: #c27930;
   --color-primary-v2: #D2691E;
-  --color-background: #f1f1f1;
+  --color-background: #faf9f7;
   --color-background-alt: #f8f8f8;
 }
 
@@ -32,4 +32,70 @@
 
 .leaflet-popup.risk-popup .leaflet-popup-tip {
   background: white;
+}
+
+/* Fault line tooltips */
+.leaflet-tooltip.fault-tooltip {
+  background-color: rgba(255, 76, 66, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 12px;
+  box-shadow: 0 4px 12px rgba(255, 76, 66, 0.4);
+}
+
+.leaflet-tooltip.fault-tooltip::before {
+  border-top-color: rgba(255, 76, 66, 0.95);
+}
+
+/* Center Leaflet attribution */
+.leaflet-bottom.leaflet-right {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.8) !important;
+  padding: 4px 12px !important;
+  border-radius: 4px 4px 0 0 !important;
+  font-size: 11px !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.leaflet-control-attribution a {
+  color: #D2691E !important;
+  text-decoration: none !important;
+}
+
+/* Hide scrollbar but keep scrolling functionality */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+/* Custom earthquake popup styling */
+.custom-earthquake-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.custom-earthquake-popup .leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.custom-earthquake-popup .leaflet-popup-tip {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }

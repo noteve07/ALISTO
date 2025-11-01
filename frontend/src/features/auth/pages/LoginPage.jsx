@@ -49,7 +49,7 @@ const LoginPage = () => {
         setShowAuthLoading(true);
 
         // Simulate a brief loading period for better UX
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Check user profile to see if location is enabled
         const profileResult = await userService.getProfile();

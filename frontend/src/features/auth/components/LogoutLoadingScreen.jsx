@@ -1,10 +1,10 @@
 import React from "react";
 
 /**
- * Modern loading screen for dashboard transition
- * Shows after location setup before redirecting to dashboard
+ * Modern loading screen for logout transition
+ * Shows when user logs out before redirecting to landing page
  */
-const DashboardLoadingScreen = ({ message = "Loading your dashboard..." }) => {
+const LogoutLoadingScreen = ({ message = "Signing you out..." }) => {
   return (
     <div className="min-h-screen bg-linear-to-br from-primary-v2 via-primary to-[#b86e2a] flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
@@ -43,31 +43,35 @@ const DashboardLoadingScreen = ({ message = "Loading your dashboard..." }) => {
             style={{ animation: "spin 1s linear infinite" }}
           ></div>
 
-          {/* Center icon */}
+          {/* Center logout icon */}
           <div className="absolute inset-0 flex items-center justify-center">
             <svg
               className="w-8 h-8 text-white"
               style={{ animation: "pulse 2s ease-in-out infinite" }}
-              fill="currentColor"
-              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              />
             </svg>
           </div>
         </div>
 
         {/* Loading Message */}
         <p className="text-xl text-white font-semibold mb-2">{message}</p>
-        <p className="text-sm text-white/80">
-          Preparing your personalized experience
-        </p>
+        <p className="text-sm text-white/80">Thank you for using ALISTO</p>
 
         {/* Progress bar */}
         <div className="mt-8 max-w-xs mx-auto">
           <div className="h-1.5 bg-white/20 rounded-full overflow-hidden">
             <div
               className="h-full bg-white rounded-full"
-              style={{ animation: "slideProgress 2s ease-in-out" }}
+              style={{ animation: "slideProgress 1.5s ease-in-out" }}
             ></div>
           </div>
         </div>
@@ -76,4 +80,4 @@ const DashboardLoadingScreen = ({ message = "Loading your dashboard..." }) => {
   );
 };
 
-export default DashboardLoadingScreen;
+export default LogoutLoadingScreen;

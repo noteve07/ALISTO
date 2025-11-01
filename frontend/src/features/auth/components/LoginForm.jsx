@@ -6,10 +6,10 @@ import React from "react";
  */
 const LoginForm = ({ formData, loading, error, onInputChange, onSubmit }) => {
   return (
-    <div 
+    <div
       className="flex flex-col justify-center p-8 lg:p-12 bg-white relative z-10"
       style={{
-        animation: 'slideFromLeft 0.5s ease-out'
+        animation: "slideFromLeft 0.5s ease-out",
       }}
     >
       {/* Header */}
