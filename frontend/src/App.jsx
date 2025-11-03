@@ -13,6 +13,7 @@ import SignupPage from "./features/auth/pages/SignupPage";
 // App Pages
 import DashboardPage from "./features/dashboard/pages/DashboardPage";
 import LiveMonitoringPage from "./features/live-monitoring/pages/LiveMonitoringPage";
+import HazardMapsPage from "./features/hazard-maps/pages/HazardMapsPage";
 import RiskEvaluationPage from "./features/risk-evaluation/pages/RiskEvaluationPage";
 import HotlinePage from "./features/hotlines/pages/HotlinePage";
 import ChatbotPage from "./features/chatbot/pages/ChatbotPage";
@@ -55,6 +56,7 @@ const App = () => {
         { index: true, element: <DashboardPage /> },
         { path: "dashboard", element: <DashboardPage /> },
         { path: "live-monitoring", element: <LiveMonitoringPage /> },
+        { path: "hazard-maps", element: <HazardMapsPage /> },
         { path: "risk-evaluation", element: <RiskEvaluationPage /> },
         { path: "emergency-hotlines", element: <HotlinePage /> },
         { path: "chatbot", element: <ChatbotPage /> },

@@ -7,21 +7,34 @@ const AppHeader = ({ onLogout }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(true);
   const notificationsRef = useRef(null);
   const userMenuRef = useRef(null);
   const { user } = useAuth();
 
-  // Fetch user profile on mount
+  // Fetch user profile on mount with minimum 2 second loading
   useEffect(() => {
     const fetchProfile = async () => {
-      const result = await userService.getProfile();
-      if (result.success) {
-        setUserProfile(result.data);
+      setIsLoadingProfile(true);
+      const startTime = Date.now();
+
+      if (user) {
+        const result = await userService.getProfile();
+        if (result.success) {
+          setUserProfile(result.data);
+        }
       }
+
+      // Ensure minimum 2 seconds loading
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, 2000 - elapsedTime);
+
+      setTimeout(() => {
+        setIsLoadingProfile(false);
+      }, remainingTime);
     };
-    if (user) {
-      fetchProfile();
-    }
+
+    fetchProfile();
   }, [user]);
 
   // Hardcoded notifications for now
@@ -71,26 +84,32 @@ const AppHeader = ({ onLogout }) => {
   }, []);
 
   // Get user display info
-  const firstName =
-    userProfile?.firstName?.trim() || user?.user_metadata?.first_name || "";
-  const lastName =
-    userProfile?.lastName?.trim() || user?.user_metadata?.last_name || "";
-  const displayNameRaw = `${firstName} ${lastName}`.trim();
-  const displayName =
-    displayNameRaw ||
-    user?.user_metadata?.full_name ||
-    user?.email?.split("@")[0] ||
-    "User";
-  const userEmail = userProfile?.email || user?.email || "Unknown email";
-  const userInitial = (displayName || userEmail || "U").charAt(0).toUpperCase();
+  const firstName = userProfile?.firstName || "User";
+  const lastName = userProfile?.lastName || "";
+  const displayName = `${firstName} ${lastName}`.trim();
+  const userEmail = user?.email || "user@alisto.com";
+  const userInitial = firstName.charAt(0).toUpperCase();
 
   return (
-    <header className="bg-white border-b border-gray-100 px-8 py-1.5 shadow-sm">
-      <div className="flex items-center justify-between max-w-[95%] mx-auto">
-        {/* App Name with Modern Accent */}
+    <header className="bg-[#213d53] px-6 py-2 shadow-md">
+      <div className="flex items-center justify-between">
+        {/* Logo and Tagline */}
         <div className="flex items-center gap-3">
-          <div className="w-1 h-8 bg-linear-to-b from-primary-v2 to-primary rounded-full"></div>
-          <p className="text-[12px] text-gray-500 font-medium tracking-wide">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary-v2 rounded-full flex items-center justify-center">
+              <svg
+                className="w-5 h-5 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" fill="white" />
+              </svg>
+            </div>
+            <h1 className="text-xl font-bold text-white">ALISTO</h1>
+          </div>
+          <div className="h-6 w-px bg-white/20"></div>
+          <p className="text-[11px] text-white/80 font-light">
             Automated Live Information for Seismic Tracking and Observation
           </p>
         </div>
@@ -98,18 +117,18 @@ const AppHeader = ({ onLogout }) => {
         {/* Right Side Actions */}
         <div className="flex items-center space-x-2">
           {/* System Status - Live Indicator */}
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 rounded-lg border border-green-100">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 rounded-lg border border-green-400/30">
             <div className="relative">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 w-2 h-2 bg-green-300 rounded-full animate-ping"></div>
             </div>
-            <span className="text-xs font-semibold text-green-700">Online</span>
+            <span className="text-xs font-semibold text-green-300">Online</span>
           </div>
           {/* Notifications */}
           <div className="relative" ref={notificationsRef}>
             <button
               onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-              className="relative p-3 text-gray-600 hover:text-primary-v2 hover:bg-gray-50 rounded-xl transition-all duration-200"
+              className="relative p-2 text-white/90 hover:bg-white/10 rounded-lg transition-all duration-200"
             >
               <span className="sr-only">View notifications</span>
               <svg
@@ -259,19 +278,34 @@ const AppHeader = ({ onLogout }) => {
           <div className="relative" ref={userMenuRef}>
             <button
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-              className="flex items-center gap-3 px-4 py-2.5 text-sm rounded-xl hover:bg-gray-50 transition-all duration-200 border border-gray-100"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-white/10 transition-all duration-200 border border-white/20"
             >
-              <div className="w-10 h-10 bg-linear-to-br from-primary-v2 to-primary rounded-xl flex items-center justify-center shadow-sm">
-                <span className="text-white font-bold">{userInitial}</span>
+              <div className="w-8 h-8 bg-primary-v2 rounded-full flex items-center justify-center">
+                {isLoadingProfile ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <span className="text-white font-bold text-sm">
+                    {userInitial}
+                  </span>
+                )}
               </div>
               <div className="hidden lg:block text-left">
-                <p className="text-sm font-semibold text-gray-900">
-                  {displayName}
-                </p>
-                <p className="text-xs text-gray-500">{userEmail}</p>
+                {isLoadingProfile ? (
+                  <>
+                    <div className="h-3 w-20 bg-white/30 rounded animate-pulse mb-1"></div>
+                    <div className="h-2 w-32 bg-white/20 rounded animate-pulse"></div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xs font-semibold text-white">
+                      {displayName}
+                    </p>
+                    <p className="text-[10px] text-white/70">{userEmail}</p>
+                  </>
+                )}
               </div>
               <svg
-                className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                className={`w-3 h-3 text-white/70 transition-transform duration-200 ${
                   isUserMenuOpen ? "rotate-180" : ""
                 }`}
                 fill="none"

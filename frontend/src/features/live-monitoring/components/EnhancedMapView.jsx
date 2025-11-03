@@ -47,53 +47,39 @@ const MapController = ({ earthquakeData, targetEarthquake }) => {
         const audioContext = new (window.AudioContext ||
           window.webkitAudioContext)();
 
-        // Create a more sophisticated earthquake alert sound with deeper frequency
+        // Create earthquake alert: 3 rounds of 3 beeps each with 2 second intervals
         const playEarthquakeAlert = () => {
-          // First tone - deep urgent alert
-          const oscillator1 = audioContext.createOscillator();
-          const gainNode1 = audioContext.createGain();
+          // Play 3 rounds of 3 beeps each with 2 second intervals
+          for (let round = 0; round < 3; round++) {
+            setTimeout(() => {
+              // Play 3 beeps per round
+              for (let beep = 0; beep < 3; beep++) {
+                setTimeout(() => {
+                  const oscillator = audioContext.createOscillator();
+                  const gainNode = audioContext.createGain();
 
-          oscillator1.connect(gainNode1);
-          gainNode1.connect(audioContext.destination);
+                  oscillator.connect(gainNode);
+                  gainNode.connect(audioContext.destination);
 
-          oscillator1.frequency.setValueAtTime(300, audioContext.currentTime);
-          oscillator1.frequency.exponentialRampToValueAtTime(
-            150,
-            audioContext.currentTime + 0.3
-          );
+                  // Earthquake alert frequency - deep and urgent
+                  oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                  oscillator.frequency.exponentialRampToValueAtTime(
+                    200,
+                    audioContext.currentTime + 0.3
+                  );
 
-          gainNode1.gain.setValueAtTime(0.3, audioContext.currentTime);
-          gainNode1.gain.exponentialRampToValueAtTime(
-            0.01,
-            audioContext.currentTime + 0.3
-          );
+                  gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                  gainNode.gain.exponentialRampToValueAtTime(
+                    0.01,
+                    audioContext.currentTime + 0.3
+                  );
 
-          oscillator1.start(audioContext.currentTime);
-          oscillator1.stop(audioContext.currentTime + 0.3);
-
-          // Second tone - deeper confirmation beep
-          setTimeout(() => {
-            const oscillator2 = audioContext.createOscillator();
-            const gainNode2 = audioContext.createGain();
-
-            oscillator2.connect(gainNode2);
-            gainNode2.connect(audioContext.destination);
-
-            oscillator2.frequency.setValueAtTime(200, audioContext.currentTime);
-            oscillator2.frequency.exponentialRampToValueAtTime(
-              100,
-              audioContext.currentTime + 0.2
-            );
-
-            gainNode2.gain.setValueAtTime(0.2, audioContext.currentTime);
-            gainNode2.gain.exponentialRampToValueAtTime(
-              0.01,
-              audioContext.currentTime + 0.2
-            );
-
-            oscillator2.start(audioContext.currentTime);
-            oscillator2.stop(audioContext.currentTime + 0.2);
-          }, 400);
+                  oscillator.start(audioContext.currentTime);
+                  oscillator.stop(audioContext.currentTime + 0.3);
+                }, beep * 400); // 400ms between beeps
+              }
+            }, round * 2000); // 2 second interval between rounds
+          }
         };
 
         playEarthquakeAlert();
@@ -220,7 +206,7 @@ const EnhancedMapView = ({ earthquakeData, targetEarthquake }) => {
       ))}
 
       {/* Map Legend */}
-      <MapLegend />
+      <MapLegend earthquakeData={earthquakeData} />
     </MapContainer>
   );
 };

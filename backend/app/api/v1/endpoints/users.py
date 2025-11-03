@@ -1,11 +1,12 @@
 # app/api/v1/endpoints/users.py
 from datetime import datetime
-from fastapi import APIRouter, HTTPException, Header
+from fastapi import APIRouter, HTTPException, Header, Query
 from typing import Optional
 from supabase import create_client
+from uuid import UUID
 
 from app.core.config import settings
-from app.models.user import UserProfileUpdate, UserProfileResponse, UserLocationUpdate
+from app.models.user import UserProfileUpdate, UserProfileResponse, UserLocationUpdate, UserLocationResponse
 from app.utils.location import get_location_from_coords
 
 
@@ -132,6 +133,84 @@ async def get_user_profile(
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get user profile: {str(e)}")
+
+
+@router.get("/location", response_model=UserLocationResponse)
+async def get_user_location(
+    user_id: UUID = Query(default="7d5a67ce-e1cb-43b7-8fc2-df741ce4e94a", description="User ID")
+):
+    """Get user location with fallback to Balanga City, Bataan."""
+    
+    # Balanga City fallback coordinates
+    BALANGA_LAT = 14.676041
+    BALANGA_LON = 120.536319
+    
+    supabase_client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+    
+    try:
+        # Get user data
+        response = supabase_client.table("users").select(
+            "user_lat, user_lon, home_municipality_id, home_province_id"
+        ).eq("id", str(user_id)).execute()
+        
+        if not response.data:
+            print(f"⚠️ User {user_id} not found - using Balanga City fallback")
+            return UserLocationResponse(
+                lat=BALANGA_LAT,
+                lon=BALANGA_LON,
+                municipality="Balanga City",
+                province="Bataan",
+                is_fallback=True
+            )
+        
+        user = response.data[0]
+        lat = user.get("user_lat")
+        lon = user.get("user_lon")
+        municipality_id = user.get("home_municipality_id")
+        province_id = user.get("home_province_id")
+        
+        # Check if user has location data
+        if not lat or not lon:
+            print(f"⚠️ User {user_id} has no location data - using Balanga City fallback")
+            return UserLocationResponse(
+                lat=BALANGA_LAT,
+                lon=BALANGA_LON,
+                municipality="Balanga City",
+                province="Bataan",
+                is_fallback=True
+            )
+        
+        # Get municipality name
+        municipality_name = "Unknown"
+        if municipality_id:
+            mun_response = supabase_client.table("municities").select("name").eq("municity_id", municipality_id).execute()
+            if mun_response.data:
+                municipality_name = mun_response.data[0]["name"]
+        
+        # Get province name
+        province_name = "Unknown"
+        if province_id:
+            prov_response = supabase_client.table("provinces").select("name").eq("province_id", province_id).execute()
+            if prov_response.data:
+                province_name = prov_response.data[0]["name"]
+        
+        return UserLocationResponse(
+            lat=lat,
+            lon=lon,
+            municipality=municipality_name,
+            province=province_name,
+            is_fallback=False
+        )
+        
+    except Exception as e:
+        print(f"⚠️ Error fetching location for user {user_id}: {str(e)} - using Balanga City fallback")
+        return UserLocationResponse(
+            lat=BALANGA_LAT,
+            lon=BALANGA_LON,
+            municipality="Balanga City",
+            province="Bataan",
+            is_fallback=True
+        )
 
 
 @router.post("/location", response_model=UserProfileResponse)

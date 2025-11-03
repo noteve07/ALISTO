@@ -1,6 +1,8 @@
 import React from "react";
+import { useMap } from "react-leaflet";
 
-const MapLegend = () => {
+const MapLegend = ({ earthquakeData }) => {
+  const map = useMap();
   const magnitudeLegend = [
     { range: "5.0+", color: "bg-red-500", size: "w-5 h-5", label: "Major" },
     {
@@ -23,9 +25,89 @@ const MapLegend = () => {
     },
   ];
 
+  // Test function to simulate the earthquake alert functionality
+  const testEarthquakeAlert = () => {
+    if (!earthquakeData.length) {
+      alert('No earthquake data available for testing');
+      return;
+    }
+
+    const latestEarthquake = earthquakeData[0];
+    
+    console.log('🧪 Testing earthquake alert for:', latestEarthquake.location);
+
+    // Play sound notification
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      
+      const playEarthquakeAlert = () => {
+        // Play 3 rounds of 3 beeps each with 2 second intervals
+        for (let round = 0; round < 3; round++) {
+          setTimeout(() => {
+            // Play 3 beeps per round
+            for (let beep = 0; beep < 3; beep++) {
+              setTimeout(() => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                // Earthquake alert frequency - deep and urgent
+                oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(
+                  200,
+                  audioContext.currentTime + 0.3
+                );
+
+                gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(
+                  0.01,
+                  audioContext.currentTime + 0.3
+                );
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+              }, beep * 400); // 400ms between beeps
+            }
+          }, round * 2000); // 2 second interval between rounds
+        }
+      };
+
+      playEarthquakeAlert();
+    } catch (error) {
+      console.log('🔇 Audio not supported or blocked:', error);
+    }
+
+    // Calculate appropriate zoom level based on magnitude
+    const getZoomLevel = (magnitude) => {
+      if (magnitude >= 6) return 9; // Major earthquakes - closer view
+      if (magnitude >= 5) return 8; // Strong earthquakes
+      if (magnitude >= 4) return 7; // Moderate earthquakes
+      return 7; // Minor earthquakes
+    };
+
+    const targetZoom = getZoomLevel(latestEarthquake.magnitude);
+
+    // Smooth pan and zoom to the latest earthquake
+    map.flyTo(
+      [latestEarthquake.latitude, latestEarthquake.longitude],
+      targetZoom,
+      {
+        duration: 2, // 2 seconds animation
+        easeLinearity: 0.25,
+      }
+    );
+
+    // Show brief notification
+    setTimeout(() => {
+      console.log('🎯 Test completed - focused on latest earthquake');
+    }, 2000);
+  };
+
   return (
   <div
-    className="absolute top-3 left-3 z-[1000] pointer-events-auto origin-top-left"
+    className="absolute top-3 left-3 z-1000 pointer-events-auto origin-top-left"
     style={{ transform: "scale(0.85)" }}
   >
       {/* Legend */}
@@ -57,10 +139,22 @@ const MapLegend = () => {
         </div>
 
         <div className="mt-3 pt-2.5 border-t border-gray-200">
-          <div className="flex items-center gap-1.5 text-xs text-gray-600">
+          <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2">
             <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse" />
             <span>Latest earthquake</span>
           </div>
+          
+          {/* Test Button */}
+          <button
+            onClick={testEarthquakeAlert}
+            className="w-full mt-2 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded transition-colors duration-200 flex items-center justify-center gap-1.5"
+            title="Test earthquake alert sound and auto-pan functionality"
+          >
+            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+            </svg>
+            Test Alert
+          </button>
         </div>
       </div>
     </div>

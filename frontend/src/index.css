@@ -23,11 +23,12 @@
 .leaflet-popup.risk-popup .leaflet-popup-content-wrapper {
   border-radius: 12px;
   box-shadow: 0 16px 40px -20px rgba(15, 23, 42, 0.45);
-  padding: 16px 18px;
+  padding: 20px 24px;
 }
 
 .leaflet-popup.risk-popup .leaflet-popup-content {
   margin: 0;
+  min-width: 280px;
 }
 
 .leaflet-popup.risk-popup .leaflet-popup-tip {
@@ -54,7 +55,7 @@
 .leaflet-bottom.leaflet-right {
   left: 50% !important;
   right: auto !important;
-  transform: translateX(-70%) !important; /* shift ~10% width further left */
+  transform: translateX(-60%) !important;
 }
 
 .leaflet-control-attribution {
@@ -64,13 +65,13 @@
   font-size: 9px !important;
   margin: 0 !important;
   white-space: nowrap !important;
-  color: rgba(15, 23, 42, 0.55) !important;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: rgba(0, 0, 0, 0.35) !important;
+  opacity: 0.25 !important;
+  transition: opacity 0.3s ease;
 }
 
 .leaflet-control-attribution:hover {
-  background: rgba(255, 255, 255, 0.32) !important;
-  color: rgba(15, 23, 42, 0.75) !important;
+  opacity: 0.6 !important;
 }
 
 .leaflet-control-attribution a {
@@ -105,4 +106,9 @@
   background: white !important;
   border: 1px solid #e5e7eb !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Remove black focus outline on clicked provinces (Leaflet vector layers) */
+.leaflet-container .leaflet-interactive:focus {
+  outline: none !important;
 }

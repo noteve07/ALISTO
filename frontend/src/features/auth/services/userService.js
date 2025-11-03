@@ -92,6 +92,42 @@ export const userService = {
   },
 
   /**
+   * Get user location
+   * @param {string} userId - User's ID
+   * @returns {Promise<{success: boolean, data?: any, error?: string}>}
+   */
+  getLocation: async (userId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/v1/users/location?user_id=${userId}`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return { 
+          success: false, 
+          error: errorData.detail || `HTTP error! status: ${response.status}` 
+        };
+      }
+
+      const data = await response.json();
+      
+      if (data.is_fallback) {
+        console.log("⚠️ Using fallback location: Balanga City, Bataan");
+      }
+      
+      return { success: true, data };
+
+    } catch (error) {
+      console.error("Error getting user location:", error);
+      return { 
+        success: false, 
+        error: error.message || "Failed to get user location" 
+      };
+    }
+  },
+
+  /**
    * Update user location
    * @param {number} latitude - User's latitude
    * @param {number} longitude - User's longitude

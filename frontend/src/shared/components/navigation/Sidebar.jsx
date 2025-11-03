@@ -90,7 +90,7 @@ const ISAIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const Sidebar = () => {
-  const [isHovered] = useState(true); // Always expanded
+  const [isHovered, setIsHovered] = useState(false);
 
   const navItems = [
     {
@@ -188,52 +188,13 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-72 bg-white shadow-lg h-screen flex flex-col border-r border-gray-100">
-      {/* Logo Section */}
-      <div className="px-5 py-2 border-b border-gray-100">
-        <button
-          onClick={() => window.open("/", "_blank")}
-          className="flex items-center gap-3 w-full hover:bg-gray-50 rounded-lg p-2 transition-colors duration-200 cursor-pointer"
-        >
-          <div className="relative">
-            {/* Circular background with concentric rings - smaller size */}
-            <div className="w-10 h-10 bg-primary-v2 rounded-full flex items-center justify-center relative">
-              {/* Outer ring */}
-              <div className="absolute inset-0 border-2 border-primary-v2 rounded-full"></div>
-              {/* Middle ring */}
-              <div className="absolute inset-0.5 border border-primary-v2/60 rounded-full"></div>
-              {/* Inner ring */}
-              <div className="absolute inset-1 border border-primary-v2/30 rounded-full"></div>
-
-              {/* Location pin with zigzag earthquake heartbeat */}
-              <svg
-                className="w-6 h-6 text-white relative z-10"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                <circle cx="12" cy="9" r="2.5" fill="white" />
-                {/* Zigzag earthquake heartbeat line inside white circle */}
-                <path
-                  d="M9.5 9h0.8l0.4-1.2 0.6 2.4 0.4-1.2h0.8"
-                  stroke="#D2691E"
-                  strokeWidth="1.2"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          </div>
-          {isHovered && (
-            <div className="overflow-hidden">
-              <h2 className="text-2xl font-bold text-primary-v2 whitespace-nowrap tracking-tight hover:text-primary-v2/80 transition-colors duration-200">
-                ALISTO
-              </h2>
-            </div>
-          )}
-        </button>
-      </div>
+    <aside
+      className={`${isHovered ? "w-72" : "w-20"} bg-white shadow-lg h-screen flex flex-col border-r border-gray-100 transition-[width] duration-200`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Thin divider to align with header (no extra top gap) */}
+      <div className="border-b border-gray-100"></div>
 
       {/* Main Navigation */}
       <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
@@ -261,8 +222,10 @@ const Sidebar = () => {
         ))}
       </nav>
 
-      {/* Footer Links */}
-      <div className="px-5 py-4 border-t border-gray-100 space-y-3">
+      {/* Footer Links - show only when expanded; sticky at bottom when scrolled */}
+      <div
+        className={`${isHovered ? "block" : "hidden"} sticky bottom-0 bg-white px-5 py-4 border-t border-gray-100 space-y-3`}
+      >
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
           <button
             onClick={() => window.open("/terms", "_blank")}
