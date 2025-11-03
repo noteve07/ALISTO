@@ -262,10 +262,10 @@ const Sidebar = () => {
             key={item.id}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center px-4 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 group relative ${
+              `flex items-center px-4 py-3.5 rounded-xl text-[13.5px] font-semibold transition-all duration-200 group relative ${
                 isActive
                   ? "text-primary-v2 bg-primary-v2/5 border-l-4 border-primary-v2"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-primary-v2 border-l-4 border-transparent"
+                  : "text-gray-700 hover:bg-gray-50 hover:text-primary-v2 border-l-4 border-transparent"
               }`
             }
           >
@@ -273,7 +273,7 @@ const Sidebar = () => {
               {item.icon}
             </div>
             {isHovered && (
-              <span className="ml-3 whitespace-nowrap overflow-hidden">
+              <span className="ml-3 whitespace-nowrap overflow-hidden tracking-wide">
                 {item.label}
               </span>
             )}
@@ -283,27 +283,27 @@ const Sidebar = () => {
 
       {/* Footer Links */}
       <div className="px-5 py-4 border-t border-gray-100 space-y-3">
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
           <button
             onClick={() => window.open("/terms", "_blank")}
-            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer"
+            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer font-medium"
           >
             Terms of Service
           </button>
           <button
             onClick={() => window.open("/privacy", "_blank")}
-            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer"
+            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer font-medium"
           >
             Privacy Policy
           </button>
           <button
             onClick={() => window.open("/data-sources", "_blank")}
-            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer"
+            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer font-medium"
           >
             Data Source
           </button>
         </div>
-        <div className="text-xs text-gray-400">© ALISTO Dev Team 2025</div>
+        <div className="text-[11px] text-gray-400 font-medium">© ALISTO Dev Team 2025</div>
       </div>
     </aside>
   );

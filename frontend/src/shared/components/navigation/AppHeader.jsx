@@ -1,11 +1,28 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { userService } from "@/features/auth/services/userService";
 
 const AppHeader = ({ onLogout }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
   const notificationsRef = useRef(null);
   const userMenuRef = useRef(null);
+  const { user } = useAuth();
+
+  // Fetch user profile on mount
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const result = await userService.getProfile();
+      if (result.success) {
+        setUserProfile(result.data);
+      }
+    };
+    if (user) {
+      fetchProfile();
+    }
+  }, [user]);
 
   // Hardcoded notifications for now
   const notifications = [
@@ -53,12 +70,26 @@ const AppHeader = ({ onLogout }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Get user display info
+  const firstName = userProfile?.firstName || "User";
+  const lastName = userProfile?.lastName || "";
+  const displayName = `${firstName} ${lastName}`.trim();
+  const userEmail = user?.email || "user@alisto.com";
+  const userInitial = firstName.charAt(0).toUpperCase();
+
   return (
     <header className="bg-white border-b border-gray-100 px-8 py-1.5 shadow-sm">
-      <div className="flex items-center justify-between">
-        {/* Tagline */}
-        <div className="flex items-center">
-          <p className="text-sm text-gray-500 font-light">
+      <div className="flex items-center justify-between max-w-[95%] mx-auto">
+        {/* App Name with Modern Accent */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-1 h-8 bg-gradient-to-b from-primary-v2 to-primary rounded-full"></div>
+            <h1 className="text-xl font-bold text-gray-900 tracking-tight">
+              ALISTO
+            </h1>
+          </div>
+          <div className="h-6 w-px bg-gray-200"></div>
+          <p className="text-[12px] text-gray-500 font-medium tracking-wide">
             Automated Live Information for Seismic Tracking and Observation
           </p>
         </div>
@@ -230,11 +261,11 @@ const AppHeader = ({ onLogout }) => {
               className="flex items-center gap-3 px-4 py-2.5 text-sm rounded-xl hover:bg-gray-50 transition-all duration-200 border border-gray-100"
             >
               <div className="w-10 h-10 bg-linear-to-br from-primary-v2 to-primary rounded-xl flex items-center justify-center shadow-sm">
-                <span className="text-white font-bold">U</span>
+                <span className="text-white font-bold">{userInitial}</span>
               </div>
               <div className="hidden lg:block text-left">
-                <p className="text-sm font-semibold text-gray-900">User Name</p>
-                <p className="text-xs text-gray-500">user@alisto.com</p>
+                <p className="text-sm font-semibold text-gray-900">{displayName}</p>
+                <p className="text-xs text-gray-500">{userEmail}</p>
               </div>
               <svg
                 className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
@@ -262,13 +293,13 @@ const AppHeader = ({ onLogout }) => {
                 <div className="p-5 bg-linear-to-r from-primary-v2/5 to-primary/5 border-b border-gray-100">
                   <div className="flex items-center gap-3">
                     <div className="w-14 h-14 bg-linear-to-br from-primary-v2 to-primary rounded-xl flex items-center justify-center shadow-md">
-                      <span className="text-white font-bold text-xl">U</span>
+                      <span className="text-white font-bold text-xl">{userInitial}</span>
                     </div>
                     <div className="flex-1">
                       <p className="text-base font-bold text-gray-900">
-                        User Name
+                        {displayName}
                       </p>
-                      <p className="text-sm text-gray-600">user@alisto.com</p>
+                      <p className="text-sm text-gray-600">{userEmail}</p>
                     </div>
                   </div>
                 </div>

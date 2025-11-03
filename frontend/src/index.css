@@ -58,16 +58,17 @@
 }
 
 .leaflet-control-attribution {
-  background: rgba(255, 255, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.3) !important;
   padding: 4px 12px !important;
   border-radius: 4px 4px 0 0 !important;
   font-size: 11px !important;
   margin: 0 !important;
   white-space: nowrap !important;
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .leaflet-control-attribution a {
-  color: #D2691E !important;
+  color: rgba(210, 105, 30, 0.6) !important;
   text-decoration: none !important;
 }
 
