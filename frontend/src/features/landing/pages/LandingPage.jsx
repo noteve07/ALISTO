@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 
 const LandingPage = () => {
   return (
-    <div>
+    <div style={{ zoom: '0.9' }}>
       <Header />
       <Hero />
       <About />

@@ -52,11 +52,11 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
 
   if (!recentEarthquakes.length) {
     return (
-      <div className="absolute top-3 right-3 z-[1000] pointer-events-auto scale-95">
-        <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden w-[420px]">
+  <div className="absolute top-3 right-3 z-[1000] pointer-events-auto scale-90 origin-top-right">
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden w-[360px]">
           {/* Header */}
-          <div className="bg-orange-50 border-b border-orange-100 px-3.5 py-2.5">
-            <h3 className="text-gray-800 font-semibold text-lg flex items-center gap-1.5">
+          <div className="bg-orange-50 border-b border-orange-100 px-3 py-2">
+            <h3 className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
               <svg
                 className="w-5 h-5 text-[#D2691E]"
                 fill="currentColor"
@@ -74,7 +74,7 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
           </div>
           
           {/* No data message */}
-          <div className="px-3.5 py-6 text-center">
+          <div className="px-3 py-4 text-center">
             <p className="text-gray-500 text-sm">No recent earthquakes to display</p>
           </div>
         </div>
@@ -83,66 +83,58 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
   }
 
   return (
-    <div className="absolute top-3 right-3 z-[1000] pointer-events-auto scale-95">
-      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden w-[420px]">
+  <div className="absolute top-3 right-3 z-[1000] pointer-events-auto scale-90 origin-top-right">
+      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden w-[360px]">
         {/* Header */}
-        <div className="bg-orange-50 border-b border-orange-100 px-3.5 py-2.5">
-          <h3 className="text-gray-800 font-semibold text-lg flex items-center gap-1.5">
-            {/* Live feed animation icon */}
-            <div className="relative">
-              <svg
-                className="w-5 h-5 text-[#D2691E]"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              {/* Pulsing animation dot */}
-              <div className="absolute -top-1 -right-1 w-3 h-3">
-                <div className="w-3 h-3 bg-red-500 rounded-full animate-ping absolute"></div>
-                <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-              </div>
-            </div>
+        <div className="bg-orange-50 border-b border-orange-100 px-3 py-2">
+          <h3 className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
+            <svg
+              className="w-5 h-5 text-[#D2691E]"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                clipRule="evenodd"
+              />
+            </svg>
             Recent Earthquakes
           </h3>
           <p className="text-gray-600 text-xs mt-0.5">Last 24 hours • Live updates</p>
         </div>
 
         {/* List - Fixed height showing 6 items */}
-        <div className="h-96 overflow-y-auto scrollbar-none">
+        <div className="h-80 overflow-y-auto scrollbar-none">
           {recentEarthquakes.map((quake, index) => (
             <div
               key={quake.id}
               onClick={() => handleEarthquakeClick(quake)}
-              className={`px-3.5 py-2.5 border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer ${
+              className={`px-3 py-2 border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer ${
                 index === 0 ? 'bg-blue-50 border-blue-100' : ''
               }`}
             >
               {/* First Line: Magnitude + Location + Intensity */}
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5 flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1.5">
+                <div className="flex items-center gap-2 flex-1 min-w-0">
                   <span
-                    className={`font-bold text-sm px-2 py-0.5 rounded ${getMagnitudeColor(
+                    className={`font-bold text-xs px-1.5 py-0.5 rounded ${getMagnitudeColor(
                       quake.magnitude
                     )} whitespace-nowrap`}
                   >
                     M {quake.magnitude}
                   </span>
-                  <span className="text-sm font-medium text-gray-900 truncate">
+                  <span className="text-xs font-medium text-gray-900 truncate">
                     {quake.location}
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1 flex-shrink-0">
                   {index === 0 && (
-                    <span className="text-xs bg-blue-600 text-white px-1.5 py-0.5 rounded-full font-medium">
+                    <span className="text-xs bg-blue-600 text-white px-1 py-0.5 rounded-full font-medium">
                       Latest
                     </span>
                   )}
-                  <span className="px-2 py-0.5 bg-gray-100 rounded-full font-medium text-xs">
+                  <span className="px-1.5 py-0.5 bg-gray-100 rounded-full font-medium text-xs whitespace-nowrap">
                     {getIntensityFromMagnitude(quake.magnitude)}
                   </span>
                 </div>
@@ -154,7 +146,7 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
                   {formatTime(quake.timestamp)} ({formatTimeAgo(quake.timestamp)})
                 </span>
                 <span className="text-gray-500">
-                  {quake.depth}km - {quake.latitude.toFixed(2)} - {quake.longitude.toFixed(2)}
+                  {quake.depth}km
                 </span>
               </div>
             </div>
@@ -162,7 +154,7 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
         </div>
 
         {/* Footer */}
-        <div className="px-3.5 py-2 bg-gray-50 border-t border-gray-200">
+        <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-200">
           <p className="text-xs text-gray-600 text-center">
             🔴 Live updates • Total: {earthquakeData.length} events
           </p>

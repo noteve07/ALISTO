@@ -180,12 +180,8 @@ const EnhancedMapView = ({ earthquakeData, targetEarthquake }) => {
       zoomControl={false}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Data Source: DOST-PHIVOLCS'
-        // Light map (original)
-        // url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        // Satellite imagery
-        // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='Imagery © <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics, and the GIS User Community | Data Source: DOST-PHIVOLCS'
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
       />
       
       {/* Map Controller for auto-pan functionality */}

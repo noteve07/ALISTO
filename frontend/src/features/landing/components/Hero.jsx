@@ -15,7 +15,7 @@ const Hero = () => {
     <section
       ref={ref}
       id="home"
-      className="relative h-[90vh] bg-gradient-to-br from-background via-background-alt to-orange-100 overflow-hidden"
+      className="relative h-[90vh] bg-gradient-to-br from-background via-background-alt to-orange-100 overflow-hidden pt-20"
     >
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-[0.05]">

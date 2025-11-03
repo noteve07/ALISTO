@@ -24,7 +24,10 @@ const MapLegend = () => {
   ];
 
   return (
-    <div className="absolute top-3 left-3 z-[1000] pointer-events-auto scale-95">
+  <div
+    className="absolute top-3 left-3 z-[1000] pointer-events-auto origin-top-left"
+    style={{ transform: "scale(0.85)" }}
+  >
       {/* Legend */}
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 w-48">
         <h4 className="font-semibold text-gray-800 text-sm mb-2.5 flex items-center gap-1.5">
