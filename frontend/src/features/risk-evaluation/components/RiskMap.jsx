@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import provincesGeoJson from '../../../assets/gis/provinces.json'
 import { formatRiskScore, formatTimestamp, getRiskColor, getRiskLevelKey } from '../utils/riskUtils'
 import RiskLegend from './RiskLegend'
+import FaultLinesOverlay from './FaultLinesOverlay'
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -138,7 +139,7 @@ const RiskMap = ({ riskByProvince }) => {
       >
         <TileLayer
           attribution='&copy; OpenStreetMap contributors'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           noWrap
         />
         <GeoJSON
@@ -148,6 +149,7 @@ const RiskMap = ({ riskByProvince }) => {
           onEachFeature={onEachFeature}
           ref={setGeoJsonRef}
         />
+        <FaultLinesOverlay />
       </MapContainer>
 
       <RiskLegend />

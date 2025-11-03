@@ -31,83 +31,100 @@ const MapController = ({ earthquakeData, targetEarthquake }) => {
 
     // Check if we have a new earthquake (different ID or timestamp)
     if (
-      prevLatest && 
-      latestEarthquake && 
-      (prevLatest.id !== latestEarthquake.id || prevLatest.timestamp !== latestEarthquake.timestamp)
+      prevLatest &&
+      latestEarthquake &&
+      (prevLatest.id !== latestEarthquake.id ||
+        prevLatest.timestamp !== latestEarthquake.timestamp)
     ) {
-      console.log('🌍 New earthquake detected! Panning to location:', latestEarthquake.location);
-      
+      console.log(
+        "🌍 New earthquake detected! Panning to location:",
+        latestEarthquake.location
+      );
+
       // Play sound notification for new earthquake
       try {
         // Create audio context for earthquake alert sound
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        
-        // Create a more sophisticated earthquake alert sound
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+
+        // Create a more sophisticated earthquake alert sound with deeper frequency
         const playEarthquakeAlert = () => {
-          // First tone - urgent alert
+          // First tone - deep urgent alert
           const oscillator1 = audioContext.createOscillator();
           const gainNode1 = audioContext.createGain();
-          
+
           oscillator1.connect(gainNode1);
           gainNode1.connect(audioContext.destination);
-          
-          oscillator1.frequency.setValueAtTime(800, audioContext.currentTime);
-          oscillator1.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.3);
-          
+
+          oscillator1.frequency.setValueAtTime(300, audioContext.currentTime);
+          oscillator1.frequency.exponentialRampToValueAtTime(
+            150,
+            audioContext.currentTime + 0.3
+          );
+
           gainNode1.gain.setValueAtTime(0.3, audioContext.currentTime);
-          gainNode1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-          
+          gainNode1.gain.exponentialRampToValueAtTime(
+            0.01,
+            audioContext.currentTime + 0.3
+          );
+
           oscillator1.start(audioContext.currentTime);
           oscillator1.stop(audioContext.currentTime + 0.3);
-          
-          // Second tone - confirmation beep
+
+          // Second tone - deeper confirmation beep
           setTimeout(() => {
             const oscillator2 = audioContext.createOscillator();
             const gainNode2 = audioContext.createGain();
-            
+
             oscillator2.connect(gainNode2);
             gainNode2.connect(audioContext.destination);
-            
-            oscillator2.frequency.setValueAtTime(600, audioContext.currentTime);
-            oscillator2.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
-            
+
+            oscillator2.frequency.setValueAtTime(200, audioContext.currentTime);
+            oscillator2.frequency.exponentialRampToValueAtTime(
+              100,
+              audioContext.currentTime + 0.2
+            );
+
             gainNode2.gain.setValueAtTime(0.2, audioContext.currentTime);
-            gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
-            
+            gainNode2.gain.exponentialRampToValueAtTime(
+              0.01,
+              audioContext.currentTime + 0.2
+            );
+
             oscillator2.start(audioContext.currentTime);
             oscillator2.stop(audioContext.currentTime + 0.2);
           }, 400);
         };
-        
+
         playEarthquakeAlert();
       } catch (error) {
-        console.log('🔇 Audio not supported or blocked:', error);
+        console.log("🔇 Audio not supported or blocked:", error);
       }
-      
+
       // Calculate appropriate zoom level based on magnitude
       const getZoomLevel = (magnitude) => {
-        if (magnitude >= 6) return 9;  // Major earthquakes - closer view
-        if (magnitude >= 5) return 8;  // Strong earthquakes
-        if (magnitude >= 4) return 7;  // Moderate earthquakes
-        return 7;  // Minor earthquakes
+        if (magnitude >= 6) return 9; // Major earthquakes - closer view
+        if (magnitude >= 5) return 8; // Strong earthquakes
+        if (magnitude >= 4) return 7; // Moderate earthquakes
+        return 7; // Minor earthquakes
       };
 
       const targetZoom = getZoomLevel(latestEarthquake.magnitude);
-      
+
       // Smooth pan and zoom to the latest earthquake
       map.flyTo(
         [latestEarthquake.latitude, latestEarthquake.longitude],
         targetZoom,
         {
           duration: 2, // 2 seconds animation
-          easeLinearity: 0.25
+          easeLinearity: 0.25,
         }
       );
 
       // Optional: Show a brief notification or highlight
       setTimeout(() => {
         // You could add a temporary highlight or popup here
-        console.log('🎯 Focused on latest earthquake');
+        console.log("🎯 Focused on latest earthquake");
       }, 2000);
     }
 
@@ -118,23 +135,25 @@ const MapController = ({ earthquakeData, targetEarthquake }) => {
   // Handle manual earthquake click (from list)
   useEffect(() => {
     if (targetEarthquake) {
-      console.log('🎯 Panning to clicked earthquake:', targetEarthquake.location);
-      
-      map.flyTo(
-        [targetEarthquake.latitude, targetEarthquake.longitude],
-        8,
-        {
-          duration: 1.5,
-          easeLinearity: 0.25
-        }
+      console.log(
+        "🎯 Panning to clicked earthquake:",
+        targetEarthquake.location
       );
+
+      map.flyTo([targetEarthquake.latitude, targetEarthquake.longitude], 8, {
+        duration: 1.5,
+        easeLinearity: 0.25,
+      });
 
       // Find and open the popup for this earthquake after pan completes
       setTimeout(() => {
         map.eachLayer((layer) => {
-          if (layer instanceof L.Circle && 
-              Math.abs(layer.getLatLng().lat - targetEarthquake.latitude) < 0.001 &&
-              Math.abs(layer.getLatLng().lng - targetEarthquake.longitude) < 0.001) {
+          if (
+            layer instanceof L.Circle &&
+            Math.abs(layer.getLatLng().lat - targetEarthquake.latitude) <
+              0.001 &&
+            Math.abs(layer.getLatLng().lng - targetEarthquake.longitude) < 0.001
+          ) {
             layer.openPopup();
           }
         });
@@ -146,17 +165,19 @@ const MapController = ({ earthquakeData, targetEarthquake }) => {
   useEffect(() => {
     const handleMapClick = (e) => {
       // Check if the click target is not a marker or popup
-      if (!e.originalEvent.target.closest('.leaflet-marker-icon') && 
-          !e.originalEvent.target.closest('.leaflet-popup')) {
+      if (
+        !e.originalEvent.target.closest(".leaflet-marker-icon") &&
+        !e.originalEvent.target.closest(".leaflet-popup")
+      ) {
         map.closePopup();
       }
     };
 
-    map.on('click', handleMapClick);
+    map.on("click", handleMapClick);
 
     // Cleanup
     return () => {
-      map.off('click', handleMapClick);
+      map.off("click", handleMapClick);
     };
   }, [map]);
 
@@ -183,18 +204,21 @@ const EnhancedMapView = ({ earthquakeData, targetEarthquake }) => {
         attribution='Imagery © <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics, and the GIS User Community | Data Source: DOST-PHIVOLCS'
         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
       />
-      
+
       {/* Map Controller for auto-pan functionality */}
-      <MapController earthquakeData={earthquakeData} targetEarthquake={targetEarthquake} />
-      
+      <MapController
+        earthquakeData={earthquakeData}
+        targetEarthquake={targetEarthquake}
+      />
+
       {/* User Location Marker */}
       <UserLocationMarker />
-      
+
       {/* Earthquake Markers */}
       {earthquakeData.map((event, i) => (
         <EarthquakeMarker key={event.id} event={event} isLatest={i === 0} />
       ))}
-      
+
       {/* Map Legend */}
       <MapLegend />
     </MapContainer>

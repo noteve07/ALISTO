@@ -54,21 +54,27 @@
 .leaflet-bottom.leaflet-right {
   left: 50% !important;
   right: auto !important;
-  transform: translateX(-60%) !important;
+  transform: translateX(-70%) !important; /* shift ~10% width further left */
 }
 
 .leaflet-control-attribution {
-  background: rgba(255, 255, 255, 0.3) !important;
-  padding: 4px 12px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  padding: 2px 8px !important;
   border-radius: 4px 4px 0 0 !important;
-  font-size: 11px !important;
+  font-size: 9px !important;
   margin: 0 !important;
   white-space: nowrap !important;
-  color: rgba(0, 0, 0, 0.5) !important;
+  color: rgba(15, 23, 42, 0.55) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.leaflet-control-attribution:hover {
+  background: rgba(255, 255, 255, 0.32) !important;
+  color: rgba(15, 23, 42, 0.75) !important;
 }
 
 .leaflet-control-attribution a {
-  color: rgba(210, 105, 30, 0.6) !important;
+  color: rgba(210, 105, 30, 0.45) !important;
   text-decoration: none !important;
 }
 
