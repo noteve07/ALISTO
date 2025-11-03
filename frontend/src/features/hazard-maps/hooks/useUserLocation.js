@@ -7,7 +7,7 @@ const useUserLocation = (map) => {
   useEffect(() => {
     if (!map) return;
 
-    const addUserLocationMarker = (latLng, label) => {
+    const addUserLocationMarker = (latLng) => {
       // Remove existing marker if it exists
       if (userMarkerRef.current) {
         try {
@@ -40,7 +40,6 @@ const useUserLocation = (map) => {
         // Add to map only if map is still valid
         if (map && map.getContainer()) {
           userMarkerRef.current.addTo(map);
-          userMarkerRef.current.bindPopup(label).openPopup();
         }
       } catch (error) {
         console.error("Error creating user location marker:", error);
@@ -53,9 +52,7 @@ const useUserLocation = (map) => {
         (position) => {
           if (map && map.getContainer()) {
             const userLatLng = [position.coords.latitude, position.coords.longitude];
-            addUserLocationMarker(userLatLng, "<b>Your Location</b>");
-            // Center map on user location
-            map.setView(userLatLng, 10);
+            addUserLocationMarker(userLatLng);
           }
         },
         (error) => {
@@ -63,7 +60,7 @@ const useUserLocation = (map) => {
           if (map && map.getContainer()) {
             // Fallback to Manila
             const manilaLatLng = [14.5995, 120.9842];
-            addUserLocationMarker(manilaLatLng, "<b>Default Location (Manila)</b>");
+            addUserLocationMarker(manilaLatLng);
           }
         }
       );
@@ -71,7 +68,7 @@ const useUserLocation = (map) => {
       if (map && map.getContainer()) {
         // Geolocation not supported, use Manila
         const manilaLatLng = [14.5995, 120.9842];
-        addUserLocationMarker(manilaLatLng, "<b>Default Location (Manila)</b>");
+        addUserLocationMarker(manilaLatLng);
       }
     }
 

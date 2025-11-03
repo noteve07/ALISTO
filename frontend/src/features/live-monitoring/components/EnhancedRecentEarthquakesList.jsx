@@ -1,6 +1,9 @@
 import React from "react";
 
-const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick }) => {
+const EnhancedRecentEarthquakesList = ({
+  earthquakeData = [],
+  onEarthquakeClick,
+}) => {
   // Take the latest 20 earthquakes for storage, show 6 visible
   const recentEarthquakes = earthquakeData.slice(0, 20);
 
@@ -25,20 +28,20 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
     const diff = now - timestamp;
     const minutes = Math.floor(diff / (1000 * 60));
     const hours = Math.floor(diff / (1000 * 60 * 60));
-    
+
     if (minutes < 1) return "Just now";
     if (minutes < 60) return `${minutes}m ago`;
     if (hours < 24) return `${hours}h ago`;
-    
+
     const days = Math.floor(hours / 24);
     return `${days}d ago`;
   };
 
   const formatTime = (timestamp) => {
-    return new Date(timestamp).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
+    return new Date(timestamp).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
     });
   };
 
@@ -72,10 +75,12 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
             </h3>
             <p className="text-gray-600 text-xs mt-0.5">Last 24 hours</p>
           </div>
-          
+
           {/* No data message */}
           <div className="px-3.5 py-6 text-center">
-            <p className="text-gray-500 text-sm">No recent earthquakes to display</p>
+            <p className="text-gray-500 text-sm">
+              No recent earthquakes to display
+            </p>
           </div>
         </div>
       </div>
@@ -109,7 +114,9 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
             </div>
             Recent Earthquakes
           </h3>
-          <p className="text-gray-600 text-xs mt-0.5">Last 24 hours • Live updates</p>
+          <p className="text-gray-600 text-xs mt-0.5">
+            Last 24 hours • Live updates
+          </p>
         </div>
 
         {/* List - Fixed height showing 6 items */}
@@ -119,7 +126,7 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
               key={quake.id}
               onClick={() => handleEarthquakeClick(quake)}
               className={`px-3.5 py-2.5 border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer ${
-                index === 0 ? 'bg-blue-50 border-blue-100' : ''
+                index === 0 ? "bg-blue-50 border-blue-100" : ""
               }`}
             >
               {/* First Line: Magnitude + Location + Intensity */}
@@ -151,10 +158,12 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
               {/* Second Line: Time + (time ago) + depth - lat - lon */}
               <div className="flex items-center justify-between mt-1 text-xs text-gray-600">
                 <span className="font-medium">
-                  {formatTime(quake.timestamp)} ({formatTimeAgo(quake.timestamp)})
+                  {formatTime(quake.timestamp)} (
+                  {formatTimeAgo(quake.timestamp)})
                 </span>
                 <span className="text-gray-500">
-                  {quake.depth}km - {quake.latitude.toFixed(2)} - {quake.longitude.toFixed(2)}
+                  {quake.depth}km - {quake.latitude.toFixed(2)} -{" "}
+                  {quake.longitude.toFixed(2)}
                 </span>
               </div>
             </div>

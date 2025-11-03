@@ -1,38 +1,24 @@
 import React, { useState } from "react";
+import useVolcanicAdvisories from "../hooks/useVolcanicAdvisories";
 
 const VolcanicAdvisories = () => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const { advisories: backendAdvisories } = useVolcanicAdvisories();
 
-  // Hardcoded volcanic advisories data
-  const advisories = [
-    {
-      id: 1,
-      volcano: "Mayon Volcano",
-      location: "Albay",
-      alertLevel: 2,
-      status: "Moderate Level of Unrest",
-      lastUpdate: "2 hours ago",
-      description: "Increased seismic activity detected",
-    },
-    {
-      id: 2,
-      volcano: "Taal Volcano",
-      location: "Batangas",
-      alertLevel: 1,
-      status: "Low Level of Unrest",
-      lastUpdate: "5 hours ago",
-      description: "Weak steam emissions observed",
-    },
-    {
-      id: 3,
-      volcano: "Kanlaon Volcano",
-      location: "Negros Island",
-      alertLevel: 1,
-      status: "Low Level of Unrest",
-      lastUpdate: "12 hours ago",
-      description: "Volcanic earthquake swarms recorded",
-    },
-  ];
+  // Always show 4 rows, fill empty ones if needed
+  const displayAdvisories = [...backendAdvisories];
+  while (displayAdvisories.length < 4) {
+    displayAdvisories.push({
+      id: `empty-${displayAdvisories.length}`,
+      volcano: "",
+      location: "",
+      alertLevel: null,
+      status: "",
+      lastUpdate: "",
+      description: "",
+      isEmpty: true,
+    });
+  }
 
   const getAlertLevelColor = (level) => {
     switch (level) {
@@ -46,13 +32,15 @@ const VolcanicAdvisories = () => {
         return "bg-yellow-500 text-white";
       case 1:
         return "bg-green-500 text-white";
+      case 0:
+        return "bg-blue-500 text-white";
       default:
         return "bg-gray-500 text-white";
     }
   };
 
   return (
-    <div className="absolute bottom-3 right-3 z-[1000] pointer-events-auto scale-95">
+    <div className="fixed bottom-4 right-3 z-[1000] pointer-events-auto scale-95">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden w-[420px]">
         {/* Header */}
         <div
@@ -60,9 +48,9 @@ const VolcanicAdvisories = () => {
           onClick={() => setIsExpanded(!isExpanded)}
         >
           <div className="flex items-center justify-between">
-            <h3 className="text-gray-800 font-semibold text-lg flex items-center gap-1.5">
+            <h3 className="text-gray-800 font-semibold text-base flex items-center gap-1.5">
               <svg
-                className="w-5 h-5 text-[#D2691E]"
+                className="w-4 h-4 text-[#D2691E]"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -76,7 +64,7 @@ const VolcanicAdvisories = () => {
             </h3>
             <button className="text-gray-600 hover:text-gray-800 transition-colors">
               <svg
-                className={`w-5 h-5 transition-transform ${
+                className={`w-4 h-4 transition-transform ${
                   isExpanded ? "rotate-180" : ""
                 }`}
                 fill="none"
@@ -92,60 +80,62 @@ const VolcanicAdvisories = () => {
               </svg>
             </button>
           </div>
-          <p className="text-gray-600 text-xs mt-0.5">
+          <p className="text-gray-600 text-[10px] mt-0.5">
             Active volcano monitoring
           </p>
         </div>
 
         {/* Content */}
         {isExpanded && (
-          <div
-            className="max-h-80 overflow-y-auto overflow-x-hidden"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            <style>
-              {`
-                .volcanic-content::-webkit-scrollbar {
-                  display: none;
-                }
-              `}
-            </style>
-            <div className="divide-y divide-gray-100 volcanic-content">
-              {advisories.map((advisory) => (
+          <div className="max-h-80 overflow-y-auto overflow-x-hidden scrollbar-none">
+            <div className="divide-y divide-gray-100">
+              {displayAdvisories.map((advisory) => (
                 <div
                   key={advisory.id}
-                  className="p-3 hover:bg-gray-50 transition-colors"
+                  className={`p-3 transition-colors ${
+                    advisory.isEmpty ? "h-12" : "hover:bg-gray-50"
+                  }`}
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-gray-900 text-sm truncate">
-                        {advisory.volcano}
-                      </h4>
-                      <p className="text-xs text-gray-600">
-                        {advisory.location}
-                      </p>
+                  {advisory.isEmpty ? (
+                    <div className="flex items-center justify-center h-full">
+                      <span className="text-xs text-gray-400">—</span>
                     </div>
-                    <div className="text-right">
-                      <span
-                        className={`px-2 py-0.5 rounded-md text-xs font-bold whitespace-nowrap ${getAlertLevelColor(
-                          advisory.alertLevel
-                        )}`}
-                      >
-                        Alert {advisory.alertLevel}
-                      </span>
-                      <p className="text-xs text-gray-700 font-medium mt-0.5">
-                        {advisory.status}
-                      </p>
-                    </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-gray-900 text-xs truncate">
+                            {advisory.volcano}
+                          </h4>
+                          <p className="text-[10px] text-gray-600">
+                            {advisory.location}
+                          </p>
+                        </div>
+                        <span
+                          className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold whitespace-nowrap ${getAlertLevelColor(
+                            advisory.alertLevel
+                          )}`}
+                        >
+                          Alert {advisory.alertLevel}
+                        </span>
+                      </div>
+
+                      <div className="mt-1.5">
+                        <p className="text-[11px] text-gray-700 font-medium">
+                          {advisory.status}
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
               ))}
             </div>
 
             {/* Footer */}
-            <div className="px-3.5 py-2 bg-gray-50 border-t border-gray-200">
-              <p className="text-xs text-gray-600 text-center">
-                Data from PHIVOLCS • {advisories.length} active advisories
+            <div className="px-3.5 py-1.5 bg-gray-50 border-t border-gray-200">
+              <p className="text-[10px] text-gray-600 text-center">
+                Data from PHIVOLCS • {backendAdvisories.length} active
+                advisories
               </p>
             </div>
           </div>

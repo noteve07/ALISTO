@@ -2,24 +2,43 @@ import React, { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+// fix leaflet default marker
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+});
+
 const FaultMapView = ({ onMapReady }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
     if (!mapRef.current && mapContainerRef.current) {
-      // Create map centered on Philippines
-      const map = L.map(mapContainerRef.current).setView([12.8797, 121.774], 6);
+      // Create map centered on Philippines with same settings as LiveMonitoring
+      const map = L.map(mapContainerRef.current, {
+        center: [12.8797, 121.774],
+        zoom: 6,
+        scrollWheelZoom: true,
+        minZoom: 5,
+        maxZoom: 12,
+        maxBounds: [
+          [3.0, 115.0],
+          [22.0, 135.0],
+        ],
+        maxBoundsViscosity: 0.1,
+        zoomControl: false,
+      });
 
-      // Add ArcGIS Satellite basemap
-      L.tileLayer(
-        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-        {
-          maxZoom: 19,
-          attribution:
-            "&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
-        }
-      ).addTo(map);
+      // Add OSM tiles (same as LiveMonitoring)
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Data Source: DOST-PHIVOLCS',
+      }).addTo(map);
 
       mapRef.current = map;
 

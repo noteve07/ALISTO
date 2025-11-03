@@ -22,21 +22,19 @@ const MapView = ({ earthquakeData }) => (
     zoom={6}
     scrollWheelZoom
     style={{ width: "100%", height: "100%" }}
-    minZoom={5}
-    maxZoom={12}
+    minZoom={6}
+    maxZoom={10}
     maxBounds={[
-      [3.0, 115.0],
-      [22.0, 135.0],
+      [6.5, 120.0],
+      [20.0, 131.5],
     ]}
-    maxBoundsViscosity={0.1}
+    maxBoundsViscosity={0.7}
     zoomControl={false}
   >
     <TileLayer
-      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Data Source: DOST-PHIVOLCS'
-      // Light map (original)
-      // url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-      // Satellite imagery
-      // url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+      attribution="&copy; OpenStreetMap contributors"
+      url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+      url="url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
     {earthquakeData.map((event, i) => (

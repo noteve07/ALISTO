@@ -2,23 +2,23 @@ import React from "react";
 
 const MapLegend = () => {
   const magnitudeLegend = [
-    { range: "5.0+", color: "bg-red-500", size: "w-5 h-5", label: "Major" },
+    { range: "5.0+", color: "bg-red-500", size: "w-4 h-4", label: "Major" },
     {
       range: "4.0-4.9",
       color: "bg-[#D2691E]",
-      size: "w-4 h-4",
+      size: "w-3.5 h-3.5",
       label: "Moderate",
     },
     {
       range: "3.0-3.9",
       color: "bg-yellow-500",
-      size: "w-3.5 h-3.5",
+      size: "w-3 h-3",
       label: "Light",
     },
     {
       range: "<3.0",
       color: "bg-green-500",
-      size: "w-3 h-3",
+      size: "w-2.5 h-2.5",
       label: "Minor",
     },
   ];
@@ -26,9 +26,9 @@ const MapLegend = () => {
   return (
     <div className="absolute top-3 left-3 z-[1000] pointer-events-auto scale-95">
       {/* Legend */}
-      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 w-48">
-        <h4 className="font-semibold text-gray-800 text-sm mb-2.5 flex items-center gap-1.5">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-2.5 w-44">
+        <h4 className="font-semibold text-gray-800 text-xs mb-2.5 flex items-center gap-1.5">
+          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
             <path
               fillRule="evenodd"
@@ -39,13 +39,13 @@ const MapLegend = () => {
           Magnitude Scale
         </h4>
 
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {magnitudeLegend.map((item, index) => (
-            <div key={index} className="flex items-center gap-2.5">
+            <div key={index} className="flex items-center gap-2">
               <div
                 className={`${item.size} ${item.color} rounded-full shadow-sm shrink-0`}
               />
-              <div className="flex items-center justify-between flex-1 text-sm">
+              <div className="flex items-center justify-between flex-1 text-[11px]">
                 <span className="font-medium text-gray-700">{item.range}</span>
                 <span className="text-gray-500">{item.label}</span>
               </div>
@@ -54,7 +54,7 @@ const MapLegend = () => {
         </div>
 
         <div className="mt-3 pt-2.5 border-t border-gray-200">
-          <div className="flex items-center gap-1.5 text-xs text-gray-600">
+          <div className="flex items-center gap-1.5 text-[10px] text-gray-600">
             <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse" />
             <span>Latest earthquake</span>
           </div>

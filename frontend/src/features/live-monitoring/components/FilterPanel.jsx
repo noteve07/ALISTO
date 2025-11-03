@@ -2,7 +2,7 @@ import React from "react";
 
 const FilterPanel = () => {
   return (
-    <div className="absolute top-3 left-1/2 translate-y-2 -translate-x-108 z-[1000] pointer-events-auto scale-95">
+    <div className="absolute top-3 left-1/2 translate-y-2 -translate-x-1/2 z-[1000] pointer-events-auto scale-95">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-5 py-2.5">
         <div className="flex items-center gap-3.5">
           {/* Magnitude Filter */}

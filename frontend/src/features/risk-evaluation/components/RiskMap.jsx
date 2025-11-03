@@ -1,62 +1,89 @@
-import React, { useMemo, useRef } from 'react'
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
-import L from 'leaflet'
-import 'leaflet/dist/leaflet.css'
+import React, { useMemo, useRef } from "react";
+import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-import provincesGeoJson from '../../../assets/gis/provinces.json'
-import { formatRiskScore, formatTimestamp, getRiskColor, getRiskLevelKey } from '../utils/riskUtils'
-import RiskLegend from './RiskLegend'
+import provincesGeoJson from "../../../assets/gis/provinces.json";
+import {
+  formatRiskScore,
+  formatTimestamp,
+  getRiskColor,
+  getRiskLevelKey,
+} from "../utils/riskUtils";
+import RiskLegend from "./RiskLegend";
 
-delete L.Icon.Default.prototype._getIconUrl
+delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png'
-})
+  iconRetinaUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+  iconUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+});
 
-const mapCenter = [12.8797, 121.774]
-const mapBounds = [[5.5, 116.0], [19.0, 127.5]]
+const mapCenter = [12.8797, 121.774];
+const mapBounds = [
+  [5.5, 116.0],
+  [19.0, 127.5],
+];
 
 const RiskMap = ({ riskByProvince }) => {
-  const geoJsonRef = useRef(null)
+  const geoJsonRef = useRef(null);
 
   const riskKey = useMemo(() => {
     const entries = Object.entries(riskByProvince)
-      .map(([provinceId, risk]) => `${provinceId}:${risk?.riskLevel ?? 'unknown'}:${risk?.dynamicRiskScore ?? 'na'}`)
-      .sort()
+      .map(
+        ([provinceId, risk]) =>
+          `${provinceId}:${risk?.riskLevel ?? "unknown"}:${
+            risk?.dynamicRiskScore ?? "na"
+          }`
+      )
+      .sort();
 
-    return entries.join('|')
-  }, [riskByProvince])
+    return entries.join("|");
+  }, [riskByProvince]);
 
   const styleFeature = (feature) => {
-    const provinceId = feature.properties?.province_id || feature.properties?.PROVINCE_ID || feature.properties?.ID_1
-    const risk = riskByProvince[provinceId]
+    const provinceId =
+      feature.properties?.province_id ||
+      feature.properties?.PROVINCE_ID ||
+      feature.properties?.ID_1;
+    const risk = riskByProvince[provinceId];
 
     return {
       weight: 1,
-      color: '#ffffff',
+      color: "#ffffff",
       fillOpacity: risk ? 0.7 : 0.35,
       fillColor: getRiskColor(risk?.riskLevel),
-      dashArray: risk ? '' : '4'
-    }
-  }
+      dashArray: risk ? "" : "4",
+    };
+  };
 
   const onEachFeature = (feature, layer) => {
-    const provinceName = feature.properties?.PROVINCE || feature.properties?.NAME_1 || 'Unknown Province'
-    const provinceId = feature.properties?.province_id || feature.properties?.PROVINCE_ID || feature.properties?.ID_1
-    const risk = riskByProvince[provinceId]
+    const provinceName =
+      feature.properties?.PROVINCE ||
+      feature.properties?.NAME_1 ||
+      "Unknown Province";
+    const provinceId =
+      feature.properties?.province_id ||
+      feature.properties?.PROVINCE_ID ||
+      feature.properties?.ID_1;
+    const risk = riskByProvince[provinceId];
 
-    const riskLevelLabel = risk?.riskLevel ? risk.riskLevel.toUpperCase() : 'NO DATA'
-    const dynamicScore = formatRiskScore(risk?.dynamicRiskScore)
-    const baseScore = formatRiskScore(risk?.baseRiskScore)
-    const lastCalculated = formatTimestamp(risk?.calculatedAt)
+    const riskLevelLabel = risk?.riskLevel
+      ? risk.riskLevel.toUpperCase()
+      : "NO DATA";
+    const dynamicScore = formatRiskScore(risk?.dynamicRiskScore);
+    const baseScore = formatRiskScore(risk?.baseRiskScore);
+    const lastCalculated = formatTimestamp(risk?.calculatedAt);
 
     const tooltipHtml = `
       <div style="font-size:12px;color:#e2e8f0;">
         <p style="margin:0;font-weight:600;font-size:13px;color:#f8fafc;">${provinceName}</p>
         <p style="margin:2px 0 0;">Risk: <strong>${riskLevelLabel}</strong></p>
       </div>
-    `
+    `;
 
     const popupHtml = `
       <div style="font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
@@ -80,49 +107,51 @@ const RiskMap = ({ riskByProvince }) => {
           </div>
         </div>
       </div>
-    `
+    `;
 
     layer.bindTooltip(tooltipHtml, {
       sticky: true,
-      direction: 'top',
+      direction: "top",
       opacity: 0.9,
-      className: `risk-tooltip risk-tooltip--${getRiskLevelKey(risk?.riskLevel)}`
-    })
+      className: `risk-tooltip risk-tooltip--${getRiskLevelKey(
+        risk?.riskLevel
+      )}`,
+    });
 
     layer.bindPopup(popupHtml, {
       maxWidth: 260,
-      className: 'risk-popup'
-    })
+      className: "risk-popup",
+    });
 
     layer.on({
       mouseover: (e) => {
-        const target = e.target
+        const target = e.target;
         target.setStyle({
           weight: 2,
-          color: '#1f2937',
-          fillOpacity: 0.85
-        })
+          color: "#1f2937",
+          fillOpacity: 0.85,
+        });
         if (!target.isPopupOpen()) {
-          target.openTooltip()
+          target.openTooltip();
         }
       },
       mouseout: (e) => {
         if (geoJsonRef.current) {
-          geoJsonRef.current.resetStyle(e.target)
+          geoJsonRef.current.resetStyle(e.target);
         }
-        e.target.closeTooltip()
+        e.target.closeTooltip();
       },
       click: () => {
-        layer.openPopup()
-      }
-    })
-  }
+        layer.openPopup();
+      },
+    });
+  };
 
   const setGeoJsonRef = (layer) => {
     if (layer) {
-      geoJsonRef.current = layer
+      geoJsonRef.current = layer;
     }
-  }
+  };
 
   return (
     <div className="relative w-full h-full">
@@ -134,11 +163,11 @@ const RiskMap = ({ riskByProvince }) => {
         maxZoom={10}
         maxBounds={mapBounds}
         maxBoundsViscosity={0.7}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: "100%", height: "100%" }}
       >
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           noWrap
         />
         <GeoJSON
@@ -152,9 +181,7 @@ const RiskMap = ({ riskByProvince }) => {
 
       <RiskLegend />
     </div>
-  )
-}
+  );
+};
 
-export default RiskMap
-
-
+export default RiskMap;

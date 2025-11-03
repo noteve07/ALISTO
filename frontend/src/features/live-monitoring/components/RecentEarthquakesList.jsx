@@ -48,6 +48,24 @@ const RecentEarthquakesList = () => {
       timeAgo: "2 hours ago",
       intensity: "Light",
     },
+    {
+      id: 6,
+      magnitude: 3.2,
+      location: "Benguet",
+      depth: 15,
+      time: "8:59 AM",
+      timeAgo: "3 hours ago",
+      intensity: "Minor",
+    },
+    {
+      id: 7,
+      magnitude: 3.5,
+      location: "Davao Oriental",
+      depth: 25,
+      time: "7:59 AM",
+      timeAgo: "4 hours ago",
+      intensity: "Minor",
+    },
   ];
 
   const getMagnitudeColor = (magnitude) => {
@@ -62,9 +80,9 @@ const RecentEarthquakesList = () => {
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden w-[420px]">
         {/* Header */}
         <div className="bg-orange-50 border-b border-orange-100 px-3.5 py-2.5">
-          <h3 className="text-gray-800 font-semibold text-lg flex items-center gap-1.5">
+          <h3 className="text-gray-800 font-semibold text-base flex items-center gap-1.5">
             <svg
-              className="w-5 h-5 text-[#D2691E]"
+              className="w-4 h-4 text-[#D2691E]"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
@@ -76,7 +94,7 @@ const RecentEarthquakesList = () => {
             </svg>
             Recent Earthquakes
           </h3>
-          <p className="text-gray-600 text-xs mt-0.5">Last 24 hours</p>
+          <p className="text-gray-600 text-[10px] mt-0.5">Last 24 hours</p>
         </div>
 
         {/* List */}
@@ -89,33 +107,31 @@ const RecentEarthquakesList = () => {
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5 flex-1 min-w-0">
                   <span
-                    className={`font-bold text-base px-2.5 py-0.5 rounded ${getMagnitudeColor(
+                    className={`font-bold text-sm px-2 py-0.5 rounded ${getMagnitudeColor(
                       quake.magnitude
                     )} whitespace-nowrap`}
                   >
                     M {quake.magnitude}
                   </span>
-                  <span className="text-sm font-medium text-gray-900 truncate">
+                  <span className="text-xs font-medium text-gray-900 truncate">
                     {quake.location}
                   </span>
                 </div>
               </div>
-              <div className="flex items-center justify-between mt-1 text-xs text-gray-600">
+              <div className="flex items-center justify-between mt-1 text-[10px] text-gray-600">
                 <span className="font-medium">{quake.time}</span>
-                <div className="flex flex-col items-end gap-0.5">
-                  <span className="px-2 py-0.5 bg-gray-100 rounded-full font-medium text-[11px]">
-                    {quake.intensity}
-                  </span>
-                  <span className="text-[11px]">{quake.timeAgo}</span>
-                </div>
+                <span className="px-2 py-0.5 bg-gray-100 rounded-full font-medium">
+                  {quake.intensity}
+                </span>
+                <span>{quake.timeAgo}</span>
               </div>
             </div>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="px-3.5 py-2 bg-gray-50 border-t border-gray-200">
-          <p className="text-xs text-gray-600 text-center">
+        <div className="px-3.5 py-1.5 bg-gray-50 border-t border-gray-200">
+          <p className="text-[10px] text-gray-600 text-center">
             🔴 Live updates • Total: {recentEarthquakes.length} events
           </p>
         </div>

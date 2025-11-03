@@ -19,7 +19,7 @@ L.Icon.Default.mergeOptions({
 
 const LiveMapOverview = () => {
   const { earthquakeData, loading } = useLandingEarthquakeData();
-  
+
   // Get accurate stats using same utils as live monitoring
   const stats = getEarthquakeStats(earthquakeData);
 
@@ -51,9 +51,7 @@ const LiveMapOverview = () => {
       {/* Accurate Earthquake Count */}
       <div className="absolute top-4 right-4 z-1000 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
         <div className="text-sm">
-          <span className="font-medium text-gray-700">
-            {stats.total}
-          </span>
+          <span className="font-medium text-gray-700">{stats.total}</span>
           <span className="text-gray-500 ml-1">earthquakes (24h)</span>
         </div>
         {stats.recentCount > 0 && (

@@ -35,9 +35,10 @@ const AppLayout = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden">
-        <AppHeader onLogout={handleLogout} />        <main className="flex-1 overflow-auto">
+        <AppHeader onLogout={handleLogout} />{" "}
+        <main className="flex-1 overflow-auto">
           <div className="h-full">
             <Outlet />
           </div>
