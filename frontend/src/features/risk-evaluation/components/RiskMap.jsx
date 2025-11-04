@@ -103,6 +103,19 @@ const RiskMap = ({
     setSelectedMunicipality(municipalityInfo.name);
   };
 
+  // Handle user location click for zooming to clean street view
+  const handleUserLocationClick = (locationInfo) => {
+    const { position, currentZoom } = locationInfo;
+    
+    if (currentZoom >= 12 && mapRef.current) {
+      console.log(`📍 Zooming to user location at street level (zoom 14)`);
+      mapRef.current.flyTo(position, 14, {
+        duration: 1.5,
+        easeLinearity: 0.25,
+      });
+    }
+  };
+
   // Filter municipalities for selected province
   const municipalitiesForProvince = useMemo(() => {
     if (!selectedProvince) return null;
@@ -398,7 +411,7 @@ const RiskMap = ({
           showVolcano={filters.showVolcanoes}
           showFault={filters.showFaultLines}
         />
-        <UserLocationMarker />
+          <UserLocationMarker onLocationClick={handleUserLocationClick} />
       </MapContainer>
 
       <RiskFilterPanel filters={filters} onFilterChange={onFilterChange} />

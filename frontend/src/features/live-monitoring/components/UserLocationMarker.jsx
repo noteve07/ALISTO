@@ -1,5 +1,5 @@
 import React from "react";
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import { useUserLocation } from "@/features/auth/context/UserLocationContext";
 
@@ -18,8 +18,9 @@ const userLocationIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
-const UserLocationMarker = () => {
+const UserLocationMarker = ({ onLocationClick }) => {
   const { location, loading } = useUserLocation();
+  const map = useMap();
 
   if (loading || !location) {
     return null; // Still loading or no location
@@ -27,8 +28,29 @@ const UserLocationMarker = () => {
 
   const { position, municipality, province } = location;
 
+  const handleMarkerClick = () => {
+    const currentZoom = map.getZoom();
+    
+    // If at zoom 12+, zoom to street level (14) for clean view
+    if (currentZoom >= 12 && onLocationClick) {
+      console.log(`📍 User location clicked at zoom ${currentZoom}, zooming to clean street view...`);
+      onLocationClick({
+        position,
+        municipality,
+        province,
+        currentZoom
+      });
+    }
+  };
+
   return (
-    <Marker position={position} icon={userLocationIcon}>
+    <Marker 
+      position={position} 
+      icon={userLocationIcon}
+      eventHandlers={{
+        click: handleMarkerClick
+      }}
+    >
       <Popup opacity={0.6}>
         <div className="text-center">
           <div className="flex items-center justify-center gap-1">
