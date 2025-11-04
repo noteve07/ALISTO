@@ -63,9 +63,9 @@ const ProvinceActivityChart = () => {
           pointStyle: "circle",
           padding: 12,
           font: {
-            size: 11,
+            size: 10,
           },
-          color: "#6b7280",
+          color: "#374151",
           generateLabels: (chart) => {
             const data = chart.data;
             if (data.labels.length && data.datasets.length) {
@@ -123,6 +123,14 @@ const ProvinceActivityChart = () => {
       <div className="h-64">
         <Doughnut data={chartData} options={options} />
       </div>
+
+      {/* Your Location Stats */}
+      {apiData.nearby_count !== null && apiData.nearby_count !== undefined && (
+        <div className="mt-3 text-sm">
+          <span className="text-gray-600">Bataan: </span>
+          <span className="font-semibold text-gray-900">{apiData.nearby_count}</span>
+        </div>
+      )}
     </div>
   );
 };

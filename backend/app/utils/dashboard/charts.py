@@ -1,6 +1,45 @@
 """Dashboard chart utilities."""
 from datetime import datetime, timedelta
+import math
 from app.core.database import supabase
+
+DEFAULT_LATITUDE = 14.6799
+DEFAULT_LONGITUDE = 120.5421
+
+
+def _haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Calculate distance between two points using Haversine formula."""
+    radius = 6371.0
+    d_lat = math.radians(lat2 - lat1)
+    d_lon = math.radians(lon2 - lon1)
+    a = (
+        math.sin(d_lat / 2) ** 2
+        + math.cos(math.radians(lat1))
+        * math.cos(math.radians(lat2))
+        * math.sin(d_lon / 2) ** 2
+    )
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return radius * c
+
+
+async def get_nearby_earthquakes_7days(province_id: int = 10) -> int:
+    """Get count of earthquakes in a province for the last 7 days. Default is Bataan (province_id=10)."""
+    try:
+        # Calculate date 8 days ago to exclude today
+        eight_days_ago = datetime.now() - timedelta(days=8)
+        eight_days_ago_str = eight_days_ago.isoformat()
+        
+        # Fetch earthquakes from last 7 days in the specified province
+        response = supabase.table("latest_earthquakes") \
+            .select("eq_id") \
+            .eq("province_id", province_id) \
+            .gte("datetime", eight_days_ago_str) \
+            .execute()
+        
+        return len(response.data) if response.data else 0
+    except Exception as e:
+        print(f"Error fetching earthquakes for province {province_id} (7 days): {e}")
+        return 0
 
 
 async def get_earthquake_frequency() -> dict:
@@ -159,11 +198,15 @@ async def get_province_activity() -> dict:
         # Calculate total for percentage
         total_count = sum([p["count"] for p in top_provinces])
         
+        # Get nearby earthquake count using default location
+        nearby_count = await get_nearby_earthquakes_7days()
+        
         return {
             "title": "Provincial Earthquake Activity",
             "subtitle": "Last 7 Days",
             "data": top_provinces,
-            "total": total_count
+            "total": total_count,
+            "nearby_count": nearby_count
         }
         
     except Exception as e:

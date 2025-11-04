@@ -232,26 +232,26 @@ const EarthquakeFrequencyChart = () => {
       <div className="grid grid-cols-3 gap-3 pt-3 border-t border-gray-200">
         <div className="bg-orange-50 rounded-lg p-3">
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-gray-700">
               {stats.total_week}
             </span>
-            <span className="text-xs text-gray-500 font-medium">total</span>
+            <span className="text-xs text-gray-600 font-medium">total</span>
           </div>
         </div>
         <div className="bg-orange-50 rounded-lg p-3">
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-gray-700">
               {stats.daily_average}
             </span>
-            <span className="text-xs text-gray-500 font-medium">avg/day</span>
+            <span className="text-xs text-gray-600 font-medium">avg/day</span>
           </div>
         </div>
         <div className="bg-orange-50 rounded-lg p-3">
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-gray-700">
               {stats.peak_day}
             </span>
-            <span className="text-xs text-gray-500 font-medium">peak</span>
+            <span className="text-xs text-gray-600 font-medium">peak</span>
           </div>
         </div>
       </div>

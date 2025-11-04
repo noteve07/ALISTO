@@ -53,18 +53,18 @@ const DashboardPage = () => {
         {/* Lists Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <RecentEarthquakesPH />
-          <HighRiskProvinces />
-        </div>
-
-        <div className="grid grid-cols-1 gap-6">
           <VolcanicAdvisories />
         </div>
 
-        {/* Emergency Section - Combined Hotlines and Evacuation Sites */}
+        <div className="grid grid-cols-1 gap-6">
+          <HighRiskProvinces />
+        </div>
+
+        {/* Emergency Section - Combined Hotlines and Evacuation Sites
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <EmergencyHotlines />
           <EvacuationSites />
-        </div>
+        </div> */}
       </div>
     </div>
   );
