@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { userService } from "../services/userService";
 
@@ -16,9 +16,16 @@ export const UserLocationProvider = ({ children }) => {
   const { user } = useAuth();
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
     const fetchLocation = async () => {
+      // Only fetch once
+      if (hasFetched.current) {
+        return;
+      }
+
+      hasFetched.current = true;
       setLoading(true);
 
       try {

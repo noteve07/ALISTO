@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Layouts
 import PublicLayout from "./shared/layouts/PublicLayout";
 import AppLayout from "./shared/layouts/AppLayout";
+import { DashboardProvider } from "./features/dashboard/context/DashboardContext";
 
 // Public Pages
 import LandingPage from "./features/landing/pages/LandingPage";
@@ -51,7 +52,11 @@ const App = () => {
     // App Routes
     {
       path: "/app",
-      element: <AppLayout />,
+      element: (
+        <DashboardProvider>
+          <AppLayout />
+        </DashboardProvider>
+      ),
       children: [
         { index: true, element: <DashboardPage /> },
         { path: "dashboard", element: <DashboardPage /> },

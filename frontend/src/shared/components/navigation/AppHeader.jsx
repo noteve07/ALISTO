@@ -10,19 +10,24 @@ const AppHeader = ({ onLogout }) => {
   const [isLoadingProfile, setIsLoadingProfile] = useState(true);
   const notificationsRef = useRef(null);
   const userMenuRef = useRef(null);
+  const hasFetchedProfile = useRef(false);
   const { user } = useAuth();
 
   // Fetch user profile on mount with minimum 2 second loading
   useEffect(() => {
     const fetchProfile = async () => {
+      // Only fetch once
+      if (hasFetchedProfile.current || !user) {
+        return;
+      }
+
+      hasFetchedProfile.current = true;
       setIsLoadingProfile(true);
       const startTime = Date.now();
 
-      if (user) {
-        const result = await userService.getProfile();
-        if (result.success) {
-          setUserProfile(result.data);
-        }
+      const result = await userService.getProfile();
+      if (result.success) {
+        setUserProfile(result.data);
       }
 
       // Ensure minimum 2 seconds loading

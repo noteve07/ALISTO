@@ -1,5 +1,5 @@
-import React, { useMemo, useRef } from "react";
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+import React, { useMemo, useRef, useEffect } from "react";
+import { MapContainer, TileLayer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -26,11 +26,30 @@ L.Icon.Default.mergeOptions({
 
 const mapCenter = [12.8797, 121.774];
 const mapBounds = [
-  [5.5, 116.0],
-  [19.0, 127.5],
+  [3.0, 111.0],
+  [22.0, 140.0],
 ];
 
-const RiskMap = ({ riskByProvince }) => {
+// Component to handle initial map view
+const MapViewController = ({ initialMapState }) => {
+  const map = useMap();
+  const hasSetInitialView = useRef(false);
+
+  useEffect(() => {
+    if (initialMapState && !hasSetInitialView.current) {
+      console.log(
+        "🎯 Setting initial map view from navigation:",
+        initialMapState
+      );
+      map.setView(initialMapState.center, initialMapState.zoom);
+      hasSetInitialView.current = true;
+    }
+  }, [initialMapState, map]);
+
+  return null;
+};
+
+const RiskMap = ({ riskByProvince, initialMapState }) => {
   const geoJsonRef = useRef(null);
 
   const darkenColor = (hex, amount = 0.15) => {
@@ -40,7 +59,10 @@ const RiskMap = ({ riskByProvince }) => {
       const g = parseInt(normalized.substring(2, 4), 16);
       const b = parseInt(normalized.substring(4, 6), 16);
       const factor = 1 - amount;
-      const toHex = (v) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0");
+      const toHex = (v) =>
+        Math.max(0, Math.min(255, Math.round(v)))
+          .toString(16)
+          .padStart(2, "0");
       return `#${toHex(r * factor)}${toHex(g * factor)}${toHex(b * factor)}`;
     } catch {
       return "#1f2937"; // fallback slate-800
@@ -156,6 +178,7 @@ const RiskMap = ({ riskByProvince }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           noWrap
         />
+        <MapViewController initialMapState={initialMapState} />
         <GeoJSON
           key={riskKey}
           data={provincesGeoJson}

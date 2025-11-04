@@ -26,7 +26,7 @@ const MapView = ({ earthquakeData }) => (
     maxZoom={12}
     maxBounds={[
       [3.0, 115.0],
-      [22.0, 135.0],
+      [22.0, 140.0],
     ]}
     maxBoundsViscosity={0.1}
     zoomControl={false}

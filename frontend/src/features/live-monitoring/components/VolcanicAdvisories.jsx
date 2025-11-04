@@ -1,78 +1,12 @@
-import React, { useEffect, useMemo, useState } from "react";
-import volcanoLookup from "../utils/volcanoLookup";
-
-const VOLCANO_ADVISORIES_URL =
-  import.meta.env.VITE_VOLCANO_ADVISORIES_URL ??
-  "http://127.0.0.1:8000/api/v1/volcanoes/advisories?include_zero_alerts=false";
+import React, { useMemo, useState } from "react";
+import { useVolcanicAdvisories } from "../hooks/useVolcanicAdvisories";
 
 const VolcanicAdvisories = () => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const [advisories, setAdvisories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { advisories, loading, error } = useVolcanicAdvisories();
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const loadAdvisories = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch(VOLCANO_ADVISORIES_URL, {
-          signal: controller.signal,
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
-        }
-
-        const payload = await response.json();
-
-        if (!payload?.success) {
-          throw new Error("API returned an unsuccessful response");
-        }
-
-        const normalized = (payload.data ?? []).map((entry) => {
-          const lookup = volcanoLookup[entry.volcano_id] ?? {};
-          const fallbackId =
-            entry.volcano_id ??
-            entry.bulletin_link ??
-            entry.issuance_date ??
-            `advisory-${Math.random().toString(36).slice(2)}`;
-
-          return {
-            id: fallbackId,
-            volcano: lookup.name ?? `Volcano ${entry.volcano_id ?? ""}`,
-            alertLevel: entry.alert_level ?? null,
-            alertStatus: entry.alert_status ?? "Status unavailable",
-            issuanceDate: entry.issuance_date ?? null,
-            bulletinLink: entry.bulletin_link ?? null,
-          };
-        });
-
-        setAdvisories(normalized);
-      } catch (err) {
-        if (!controller.signal.aborted) {
-          console.error("Failed to load volcanic advisories:", err);
-          setError("Unable to fetch advisories right now.");
-        }
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    loadAdvisories();
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  // Debug log
+  console.log("🌋 Volcanic Advisories:", { advisories, loading, error });
 
   const displayRows = useMemo(() => {
     if (loading) {

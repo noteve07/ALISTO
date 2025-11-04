@@ -1,16 +1,29 @@
-import React from 'react'
-import RiskMap from '../components/RiskMap'
-import { useRiskEvaluations } from '../hooks/useRiskEvaluations'
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import RiskMap from "../components/RiskMap";
+import { useRiskEvaluations } from "../hooks/useRiskEvaluations";
 
 const SummaryCard = ({ label, value, accent }) => (
   <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
     <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{label}</p>
     <p className={`mt-2 text-2xl font-semibold ${accent}`}>{value}</p>
   </div>
-)
+);
 
 const RiskEvaluationPage = () => {
-  const { riskByProvince, riskSummary, loading, error } = useRiskEvaluations()
+  const { riskByProvince, riskSummary, loading, error } = useRiskEvaluations();
+  const location = useLocation();
+  const [initialMapState, setInitialMapState] = useState(null);
+
+  // Check if navigation state has center and zoom
+  useEffect(() => {
+    if (location.state?.center && location.state?.zoom) {
+      setInitialMapState({
+        center: location.state.center,
+        zoom: location.state.zoom,
+      });
+    }
+  }, [location]);
 
   return (
     <div className="flex h-full flex-col gap-5">
@@ -29,23 +42,22 @@ const RiskEvaluationPage = () => {
       </div> */}
 
       <div className="relative flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        {loading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/70 backdrop-blur-sm">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-300 border-t-slate-900" />
-          </div>
-        )}
-
         {error && !loading && (
           <div className="absolute inset-4 z-10 rounded-xl border border-rose-200 bg-rose-50/90 p-4 text-rose-700 shadow-inner">
-            <p className="text-sm font-semibold">Failed to load risk evaluations.</p>
+            <p className="text-sm font-semibold">
+              Failed to load risk evaluations.
+            </p>
             <p className="text-xs text-rose-500">Please try again later.</p>
           </div>
         )}
 
-        <RiskMap riskByProvince={riskByProvince} />
+        <RiskMap
+          riskByProvince={riskByProvince}
+          initialMapState={initialMapState}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RiskEvaluationPage
+export default RiskEvaluationPage;

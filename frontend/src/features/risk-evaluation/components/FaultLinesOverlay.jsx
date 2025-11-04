@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import * as turf from "@turf/turf";
+import { useUserLocation } from "@/features/auth/context/UserLocationContext";
 
 const defaultFaultStyle = {
   color: "#f97316",
@@ -32,6 +33,7 @@ const userMarkerHtml = `
 
 const FaultLinesOverlay = () => {
   const map = useMap();
+  const { location: userLocation } = useUserLocation();
   const faultLayerRef = useRef(null);
   const nearestLineRef = useRef(null);
   const selectedFaultRef = useRef(null);
@@ -71,29 +73,18 @@ const FaultLinesOverlay = () => {
     };
 
     const locateUser = () => {
-      if (!navigator?.geolocation) {
-        console.warn(
-          "Geolocation not supported in this browser; no user marker will be shown."
-        );
+      // Use location from UserLocationContext instead of geolocation API
+      if (!userLocation) {
+        console.warn("User location not available from context");
         return;
       }
 
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          if (!isMounted || !map) return;
-          const latLng = [position.coords.latitude, position.coords.longitude];
-          addUserLocationMarker(latLng, "<b>Your Location</b>");
-          map.setView(latLng, Math.max(map.getZoom(), 8));
-        },
-        (error) => {
-          console.warn("Unable to retrieve user location:", error);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 60000,
-        }
-      );
+      if (!isMounted || !map) return;
+
+      const latLng = userLocation.position; // [lat, lon]
+      const label = `<b>${userLocation.municipality}, ${userLocation.province}</b>`;
+      addUserLocationMarker(latLng, label);
+      map.setView(latLng, Math.max(map.getZoom(), 8));
     };
 
     const clearNearestLine = () => {
@@ -275,7 +266,7 @@ const FaultLinesOverlay = () => {
       clearNearestLine();
       resetSelectedFault();
     };
-  }, [map]);
+  }, [map, userLocation]);
 
   return null;
 };

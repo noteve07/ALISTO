@@ -1,33 +1,30 @@
-import React from 'react'
+import React from "react";
 
 // Card Components
-import TodaysEarthquakes from '../components/cards/TodaysEarthquakes'
-import StrongestMagnitude from '../components/cards/StrongestMagnitude'
-import NearbyEarthquakes from '../components/cards/NearbyEarthquakes'
-import RiskLevel from '../components/cards/RiskLevel'
+import TodaysEarthquakes from "../components/cards/TodaysEarthquakes";
+import StrongestMagnitude from "../components/cards/StrongestMagnitude";
+import NearbyEarthquakes from "../components/cards/NearbyEarthquakes";
+import RiskLevel from "../components/cards/RiskLevel";
 
 // Details Components
-import UserLocation from '../components/details/UserLocation'
-import LastEarthquake from '../components/details/LastEarthquake'
-import EmergencyHotlines from '../components/details/EmergencyHotlines'
-import EvacuationSites from '../components/details/EvacuationSites'
+import UserLocation from "../components/details/UserLocation";
+import EmergencyHotlines from "../components/details/EmergencyHotlines";
+import EvacuationSites from "../components/details/EvacuationSites";
 
 // Graph Components
-import EarthquakeFrequencyChart from '../components/graphs/EarthquakeFrequencyChart'
-import MagnitudeTimeChart from '../components/graphs/MagnitudeTimeChart'
-import ProvincesPieChart from '../components/graphs/ProvincesPieChart'
+import EarthquakeFrequencyChart from "../components/graphs/EarthquakeFrequencyChart";
+import MagnitudeTimeChart from "../components/graphs/MagnitudeTimeChart";
+import ProvinceActivityChart from "../components/graphs/ProvinceActivityChart";
 
 // List Components
-import RecentEarthquakesPH from '../components/lists/RecentEarthquakesPH'
-import RecentEarthquakesNearMe from '../components/lists/RecentEarthquakesNearMe'
-import HighRiskProvinces from '../components/lists/HighRiskProvinces'
-import VolcanicAdvisories from '../components/lists/VolcanicAdvisories'
+import RecentEarthquakesPH from "../components/lists/RecentEarthquakesPH";
+import HighRiskProvinces from "../components/lists/HighRiskProvinces";
+import VolcanicAdvisories from "../components/lists/VolcanicAdvisories";
 
 const DashboardPage = () => {
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto space-y-6">
-
+    <div className="p-6 bg-stone-50 min-h-screen">
+      <div className="max-w-7xl mx-auto space-y-6 scale-90 origin-top">
         {/* Dashboard Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <TodaysEarthquakes />
@@ -41,7 +38,7 @@ const DashboardPage = () => {
           <div className="xl:col-span-2">
             <EarthquakeFrequencyChart />
           </div>
-          <ProvincesPieChart />
+          <ProvinceActivityChart />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
@@ -49,31 +46,28 @@ const DashboardPage = () => {
         </div>
 
         {/* Top Details Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <UserLocation />
-          <LastEarthquake />
         </div>
 
         {/* Lists Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <RecentEarthquakesPH />
-          <RecentEarthquakesNearMe />
+          <HighRiskProvinces />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <HighRiskProvinces />
+        <div className="grid grid-cols-1 gap-6">
           <VolcanicAdvisories />
         </div>
 
-        {/* Bottom Details Section */}
+        {/* Emergency Section - Combined Hotlines and Evacuation Sites */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <EmergencyHotlines />
           <EvacuationSites />
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardPage
+export default DashboardPage;

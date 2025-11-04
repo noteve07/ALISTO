@@ -189,7 +189,9 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`${isHovered ? "w-72" : "w-20"} bg-white shadow-lg h-screen flex flex-col border-r border-gray-100 transition-[width] duration-200`}
+      className={`${
+        isHovered ? "w-72" : "w-20"
+      } bg-white shadow-lg h-screen flex flex-col border-r border-gray-100 transition-[width] duration-200`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -224,7 +226,9 @@ const Sidebar = () => {
 
       {/* Footer Links - show only when expanded; sticky at bottom when scrolled */}
       <div
-        className={`${isHovered ? "block" : "hidden"} sticky bottom-0 bg-white px-5 py-4 border-t border-gray-100 space-y-3`}
+        className={`${
+          isHovered ? "block" : "hidden"
+        } sticky bottom-0 bg-white px-5 py-4 border-t border-gray-100 space-y-3`}
       >
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
           <button
@@ -246,7 +250,9 @@ const Sidebar = () => {
             Data Source
           </button>
         </div>
-        <div className="text-[11px] text-gray-400 font-medium">© ALISTO Dev Team 2025</div>
+        <div className="text-[11px] text-gray-400 font-medium">
+          © ALISTO Dev Team 2025
+        </div>
       </div>
     </aside>
   );

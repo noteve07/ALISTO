@@ -18,9 +18,26 @@ L.Icon.Default.mergeOptions({
 });
 
 // Component to handle map pan when new earthquake is detected
-const MapController = ({ earthquakeData, targetEarthquake }) => {
+const MapController = ({
+  earthquakeData,
+  targetEarthquake,
+  initialMapState,
+}) => {
   const map = useMap();
   const prevLatestEarthquakeRef = useRef(null);
+  const hasSetInitialView = useRef(false);
+
+  // Handle initial map state from navigation
+  useEffect(() => {
+    if (initialMapState && !hasSetInitialView.current) {
+      console.log(
+        "🎯 Setting initial map view from navigation:",
+        initialMapState
+      );
+      map.setView(initialMapState.center, initialMapState.zoom);
+      hasSetInitialView.current = true;
+    }
+  }, [initialMapState, map]);
 
   // Handle auto-pan for new earthquakes
   useEffect(() => {
@@ -62,7 +79,10 @@ const MapController = ({ earthquakeData, targetEarthquake }) => {
                   gainNode.connect(audioContext.destination);
 
                   // Earthquake alert frequency - deep and urgent
-                  oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                  oscillator.frequency.setValueAtTime(
+                    400,
+                    audioContext.currentTime
+                  );
                   oscillator.frequency.exponentialRampToValueAtTime(
                     200,
                     audioContext.currentTime + 0.3
@@ -170,9 +190,19 @@ const MapController = ({ earthquakeData, targetEarthquake }) => {
   return null; // This component doesn't render anything
 };
 
-const EnhancedMapView = ({ earthquakeData, targetEarthquake }) => {
+const EnhancedMapView = ({
+  earthquakeData,
+  targetEarthquake,
+  initialMapState,
+}) => {
+  // Create a unique key based on initialMapState to force remount on navigation
+  const mapKey = initialMapState 
+    ? `map-${initialMapState.center[0]}-${initialMapState.center[1]}-${initialMapState.zoom}`
+    : 'map-default';
+
   return (
     <MapContainer
+      key={mapKey}
       center={[12.8797, 121.774]}
       zoom={6}
       scrollWheelZoom
@@ -195,6 +225,7 @@ const EnhancedMapView = ({ earthquakeData, targetEarthquake }) => {
       <MapController
         earthquakeData={earthquakeData}
         targetEarthquake={targetEarthquake}
+        initialMapState={initialMapState}
       />
 
       {/* User Location Marker */}
