@@ -5,9 +5,9 @@ import * as turf from "@turf/turf";
 import { useUserLocation } from "@/features/auth/context/UserLocationContext";
 
 const defaultFaultStyle = {
-  color: "#f97316",
-  weight: 2,
-  opacity: 0.85,
+  color: "#fb923c",
+  weight: 2.5,
+  opacity: 0.9,
   fillOpacity: 0,
   dashArray: null,
   lineCap: "round",
@@ -16,7 +16,7 @@ const defaultFaultStyle = {
 
 const highlightedFaultStyle = {
   color: "#fb923c",
-  weight: 3,
+  weight: 3.5,
   opacity: 1,
 };
 
@@ -141,7 +141,7 @@ const FaultLinesOverlay = () => {
 
       try {
         nearestLineRef.current = L.polyline([userLatLng, faultLatLng], {
-          color: "#22c55e",
+          color: "#fb923c",
           dashArray: "6, 8",
           weight: 2.5,
         }).addTo(map);
@@ -228,9 +228,15 @@ const FaultLinesOverlay = () => {
         faultLayerRef.current = L.geoJSON(data, {
           style: () => ({ ...defaultFaultStyle }),
           onEachFeature: attachFaultInteractions,
+          pane: "overlayPane", // Ensure fault lines render above tile layers
         });
 
         faultLayerRef.current.addTo(map);
+        
+        // Bring fault lines to front to ensure they're above GeoJSON province layer
+        if (faultLayerRef.current) {
+          faultLayerRef.current.bringToFront();
+        }
       } catch (error) {
         console.error("Failed to load fault lines", error);
       }

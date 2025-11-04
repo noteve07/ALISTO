@@ -28,18 +28,19 @@ const MapLegend = ({ earthquakeData }) => {
   // Test function to simulate the earthquake alert functionality
   const testEarthquakeAlert = () => {
     if (!earthquakeData.length) {
-      alert('No earthquake data available for testing');
+      alert("No earthquake data available for testing");
       return;
     }
 
     const latestEarthquake = earthquakeData[0];
-    
-    console.log('🧪 Testing earthquake alert for:', latestEarthquake.location);
+
+    console.log("🧪 Testing earthquake alert for:", latestEarthquake.location);
 
     // Play sound notification
     try {
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      
+      const audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+
       const playEarthquakeAlert = () => {
         // Play 3 rounds of 3 beeps each with 2 second intervals
         for (let round = 0; round < 3; round++) {
@@ -54,7 +55,10 @@ const MapLegend = ({ earthquakeData }) => {
                 gainNode.connect(audioContext.destination);
 
                 // Earthquake alert frequency - deep and urgent
-                oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(
+                  400,
+                  audioContext.currentTime
+                );
                 oscillator.frequency.exponentialRampToValueAtTime(
                   200,
                   audioContext.currentTime + 0.3
@@ -76,7 +80,7 @@ const MapLegend = ({ earthquakeData }) => {
 
       playEarthquakeAlert();
     } catch (error) {
-      console.log('🔇 Audio not supported or blocked:', error);
+      console.log("🔇 Audio not supported or blocked:", error);
     }
 
     // Calculate appropriate zoom level based on magnitude
@@ -101,15 +105,15 @@ const MapLegend = ({ earthquakeData }) => {
 
     // Show brief notification
     setTimeout(() => {
-      console.log('🎯 Test completed - focused on latest earthquake');
+      console.log("🎯 Test completed - focused on latest earthquake");
     }, 2000);
   };
 
   return (
-  <div
-    className="absolute top-3 left-3 z-1000 pointer-events-auto origin-top-left"
-    style={{ transform: "scale(0.85)" }}
-  >
+    <div
+      className="absolute top-3 left-3 z-1000 pointer-events-auto origin-top-left"
+      style={{ transform: "scale(0.85)" }}
+    >
       {/* Legend */}
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 w-48">
         <h4 className="font-semibold text-gray-800 text-sm mb-2.5 flex items-center gap-1.5">
@@ -143,7 +147,25 @@ const MapLegend = ({ earthquakeData }) => {
             <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse" />
             <span>Latest earthquake</span>
           </div>
-          
+
+          <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              className="shrink-0"
+            >
+              <path
+                d="M 12 4 L 20 20 L 4 20 Z"
+                fill="#dc2626"
+                stroke="#991b1b"
+                strokeWidth="1.5"
+              />
+              <circle cx="12" cy="5" r="1.5" fill="#fbbf24" opacity="0.9" />
+            </svg>
+            <span>Active volcano</span>
+          </div>
+
           {/* Test Button */}
           <button
             onClick={testEarthquakeAlert}
@@ -151,7 +173,11 @@ const MapLegend = ({ earthquakeData }) => {
             title="Test earthquake alert sound and auto-pan functionality"
           >
             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                clipRule="evenodd"
+              />
             </svg>
             Test Alert
           </button>

@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../../../lib/supabaseClient'
 import useRealtimeEarthquakes from './useRealtimeEarthquakes'
 
-const useEarthquakeData = () => {
+const useEarthquakeData = (timeFilter = '24h') => {
   const [earthquakeData, setEarthquakeData] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -33,13 +33,22 @@ const useEarthquakeData = () => {
       try {
         setLoading(true)
         
-        // Fetch latest earthquakes from last 24 hours, ordered by datetime desc
+        // Calculate time range based on filter (default: fetch 30 days)
+        const timeRanges = {
+          '24h': 1 * 24 * 60 * 60 * 1000,
+          '7d': 7 * 24 * 60 * 60 * 1000,
+          '30d': 30 * 24 * 60 * 60 * 1000
+        }
+        
+        // Always fetch 30 days of data from database
+        const fetchRange = timeRanges['30d']
+        
+        // Fetch latest earthquakes from last 30 days, ordered by datetime desc
         const { data, error } = await supabase
           .from('latest_earthquakes')
           .select('*')
-          .gte('datetime', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+          .gte('datetime', new Date(Date.now() - fetchRange).toISOString())
           .order('datetime', { ascending: false })
-          .limit(100)
 
         if (error) {
           throw error
@@ -86,7 +95,7 @@ const useEarthquakeData = () => {
 
     fetchInitialData()
     return () => { active = false }
-  }, [formatEarthquake])
+  }, [formatEarthquake, timeFilter])
 
   // Real-time subscription handlers
   const handleInsert = useCallback((newEarthquake) => {
@@ -95,7 +104,6 @@ const useEarthquakeData = () => {
       // Add new earthquake and keep sorted by timestamp (newest first)
       const updated = [formatted, ...prev]
         .sort((a, b) => b.timestamp - a.timestamp)
-        .slice(0, 100) // Keep only latest 100 earthquakes
       return updated
     })
   }, [formatEarthquake])

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import EarthquakeMarker from "./EarthquakeMarker";
+import VolcanoMarkers from "./VolcanoMarkers";
 import MapLegend from "./MapLegend";
 import UserLocationMarker from "./UserLocationMarker";
 import L from "leaflet";
@@ -39,11 +40,11 @@ const MapController = ({
     }
   }, [initialMapState, map]);
 
-  // Handle auto-pan for new earthquakes
+  // Handle auto-pan for new earthquakes - ONLY for real latest earthquake
   useEffect(() => {
     if (!earthquakeData.length) return;
 
-    const latestEarthquake = earthquakeData[0]; // First item is latest
+    const latestEarthquake = earthquakeData[0]; // First item is latest from RAW data
     const prevLatest = prevLatestEarthquakeRef.current;
 
     // Check if we have a new earthquake (different ID or timestamp)
@@ -191,18 +192,13 @@ const MapController = ({
 };
 
 const EnhancedMapView = ({
-  earthquakeData,
+  earthquakeData, // Raw data for alert detection
+  filteredEarthquakeData, // Filtered data for displaying markers
   targetEarthquake,
   initialMapState,
 }) => {
-  // Create a unique key based on initialMapState to force remount on navigation
-  const mapKey = initialMapState 
-    ? `map-${initialMapState.center[0]}-${initialMapState.center[1]}-${initialMapState.zoom}`
-    : 'map-default';
-
   return (
     <MapContainer
-      key={mapKey}
       center={[12.8797, 121.774]}
       zoom={6}
       scrollWheelZoom
@@ -221,7 +217,7 @@ const EnhancedMapView = ({
         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
       />
 
-      {/* Map Controller for auto-pan functionality */}
+      {/* Map Controller for auto-pan functionality - uses RAW data for real latest detection */}
       <MapController
         earthquakeData={earthquakeData}
         targetEarthquake={targetEarthquake}
@@ -231,13 +227,20 @@ const EnhancedMapView = ({
       {/* User Location Marker */}
       <UserLocationMarker />
 
-      {/* Earthquake Markers */}
-      {earthquakeData.map((event, i) => (
-        <EarthquakeMarker key={event.id} event={event} isLatest={i === 0} />
+      {/* Earthquake Markers - uses FILTERED data */}
+      {filteredEarthquakeData.map((event) => (
+        <EarthquakeMarker 
+          key={event.id} 
+          event={event} 
+          isLatest={earthquakeData[0]?.id === event.id} // Check against raw data's latest
+        />
       ))}
 
-      {/* Map Legend */}
-      <MapLegend earthquakeData={earthquakeData} />
+      {/* Volcano Markers - Only with active advisories */}
+      <VolcanoMarkers />
+
+      {/* Map Legend - uses FILTERED data for stats */}
+      <MapLegend earthquakeData={filteredEarthquakeData} />
     </MapContainer>
   );
 };

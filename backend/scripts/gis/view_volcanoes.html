@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Philippine Volcanoes Map</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    .info {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div class="info" id="info">Loading volcanoes...</div>
+
+<!-- Leaflet JS with simpler CDN -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Wait for Leaflet to load
+  function initMap() {
+    // Check if Leaflet is loaded
+    if (typeof L === 'undefined') {
+      document.getElementById('info').textContent = 'Error: Leaflet library failed to load';
+      return;
+    }
+
+    // Initialize map
+    const map = L.map('map').setView([12.8797, 121.7740], 6);
+
+    // Add tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Load volcanoes data
+    fetch('volcanoes.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to load volcanoes.json');
+        return response.json();
+      })
+      .then(volcanoes => {
+        if (!Array.isArray(volcanoes) || volcanoes.length === 0) {
+          document.getElementById('info').textContent = 'No volcano data found';
+          return;
+        }
+
+        const bounds = [];
+        volcanoes.forEach(volcano => {
+          if (!volcano.latitude || !volcano.longitude) return;
+          
+          const marker = L.circleMarker([volcano.latitude, volcano.longitude], {
+            radius: 8,
+            fillColor: '#ff7800',
+            color: '#000',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+          }).addTo(map);
+          
+          marker.bindPopup(`
+            <strong>${escapeHtml(volcano.name || 'Unknown')}</strong><br/>
+            Province: ${escapeHtml(volcano.province || volcano.province_name || 'Unknown')}<br/>
+            Lat: ${Number(volcano.latitude).toFixed(4)}, Lon: ${Number(volcano.longitude).toFixed(4)}
+          `);
+          
+          bounds.push([volcano.latitude, volcano.longitude]);
+        });
+
+        if (bounds.length > 0) {
+          map.fitBounds(bounds);
+          document.getElementById('info').textContent = `Showing ${bounds.length} volcanoes`;
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('info').textContent = 'Error loading data';
+      });
+  }
+
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Initialize when page loads
+  document.addEventListener('DOMContentLoaded', initMap);
+</script>
+</body>
+</html>

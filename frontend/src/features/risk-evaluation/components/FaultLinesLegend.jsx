@@ -28,24 +28,24 @@ const FaultLinesLegend = () => {
         <div className="px-3 py-2 space-y-1.5">
           <div className="flex items-center gap-3">
             <div className="h-0.5 w-8 bg-orange-500 rounded-full"></div>
-            <span className="text-sm font-medium">Active Fault</span>
+            <span className="text-sm font-medium">Fault Line</span>
           </div>
           <div className="flex items-center gap-3">
-            <div className="h-0.5 w-8 bg-orange-400 rounded-full"></div>
-            <span className="text-sm font-medium">Selected Fault</span>
+            <div className="h-1 w-8 bg-orange-400 rounded-full"></div>
+            <span className="text-sm font-medium">Nearest Fault</span>
           </div>
           <div className="flex items-center gap-3 pt-1 border-t border-slate-200">
             <div
-              className="h-0.5 w-8 bg-green-500 rounded-full"
+              className="h-0.5 w-8 bg-orange-400 rounded-full"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(90deg, #22c55e 0, #22c55e 6px, transparent 6px, transparent 14px)",
+                  "repeating-linear-gradient(90deg, #fb923c 0, #fb923c 6px, transparent 6px, transparent 12px)",
               }}
             ></div>
             <span className="text-xs text-slate-500">Distance Line</span>
           </div>
           <div className="text-xs text-slate-500 pt-1">
-            Click a fault line to measure distance from your location
+            Nearest fault auto-highlighted. Click any fault to measure distance.
           </div>
         </div>
       </div>

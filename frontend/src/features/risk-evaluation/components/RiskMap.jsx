@@ -12,6 +12,10 @@ import {
 } from "../utils/riskUtils";
 import RiskLegend from "./RiskLegend";
 import FaultLinesOverlay from "./FaultLinesOverlay";
+import FaultLinesLegend from "./FaultLinesLegend";
+import VolcanoesOverlay from "./VolcanoesOverlay";
+import VolcanoLegend from "./VolcanoLegend";
+import NearestHazardLines from "./NearestHazardLines";
 import UserLocationMarker from "../../live-monitoring/components/UserLocationMarker";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -187,10 +191,14 @@ const RiskMap = ({ riskByProvince, initialMapState }) => {
           ref={setGeoJsonRef}
         />
         <FaultLinesOverlay />
+        <VolcanoesOverlay />
+        <NearestHazardLines />
         <UserLocationMarker />
       </MapContainer>
 
       <RiskLegend />
+      <FaultLinesLegend />
+      <VolcanoLegend />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import EarthquakeMarker from "./EarthquakeMarker";
+import VolcanoMarkers from "./VolcanoMarkers";
 import MapLegend from "./MapLegend";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -42,6 +43,7 @@ const MapView = ({ earthquakeData }) => (
     {earthquakeData.map((event, i) => (
       <EarthquakeMarker key={event.id} event={event} isLatest={i === 0} />
     ))}
+    <VolcanoMarkers />
     <MapLegend />
   </MapContainer>
 );

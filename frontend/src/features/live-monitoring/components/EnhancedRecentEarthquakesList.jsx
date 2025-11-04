@@ -1,8 +1,12 @@
 import React from "react";
 
 const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick }) => {
-  // Take the latest 20 earthquakes for storage, show 6 visible
-  const recentEarthquakes = earthquakeData.slice(0, 20);
+  // Filter earthquakes from last 24 hours
+  const now = Date.now();
+  const twentyFourHoursAgo = now - (24 * 60 * 60 * 1000);
+  const recentEarthquakes = earthquakeData.filter(
+    quake => quake.timestamp >= twentyFourHoursAgo
+  );
 
   const getMagnitudeColor = (magnitude) => {
     if (magnitude >= 5) return "text-red-600 bg-red-50";
@@ -156,7 +160,7 @@ const EnhancedRecentEarthquakesList = ({ earthquakeData = [], onEarthquakeClick 
         {/* Footer */}
         <div className="px-3 py-1.5 bg-gray-50 border-t border-gray-200">
           <p className="text-xs text-gray-600 text-center">
-            🔴 Live updates • Total: {earthquakeData.length} events
+            🔴 Live updates • {recentEarthquakes.length} events in last 24h
           </p>
         </div>
       </div>
