@@ -110,77 +110,102 @@ const MapLegend = ({ earthquakeData }) => {
   };
 
   return (
-    <div
-      className="absolute top-3 left-3 z-1000 pointer-events-auto origin-top-left"
-      style={{ transform: "scale(0.85)" }}
-    >
-      {/* Legend */}
-      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 p-3 w-48">
-        <h4 className="font-semibold text-gray-800 text-sm mb-2.5 flex items-center gap-1.5">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-            <path
-              fillRule="evenodd"
-              d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Magnitude Scale
-        </h4>
-
-        <div className="space-y-2">
-          {magnitudeLegend.map((item, index) => (
-            <div key={index} className="flex items-center gap-2.5">
-              <div
-                className={`${item.size} ${item.color} rounded-full shadow-sm shrink-0`}
-              />
-              <div className="flex items-center justify-between flex-1 text-sm">
-                <span className="font-medium text-gray-700">{item.range}</span>
-                <span className="text-gray-500">{item.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-3 pt-2.5 border-t border-gray-200">
-          <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2">
-            <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse" />
-            <span>Latest earthquake</span>
-          </div>
-
-          <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2">
+    <div className="absolute top-3 left-3 z-1000 pointer-events-auto scale-90 origin-top-left w-48">
+      <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+        {/* Header */}
+        <div className="bg-orange-50 border-b border-orange-100 px-3 py-2">
+          <h3 className="text-gray-800 font-semibold text-sm flex items-center gap-1.5">
             <svg
-              width="16"
-              height="16"
+              className="w-4 h-4 text-primary-v2"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
-              className="shrink-0"
             >
               <path
-                d="M 12 4 L 20 20 L 4 20 Z"
-                fill="#dc2626"
-                stroke="#991b1b"
-                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
               />
-              <circle cx="12" cy="5" r="1.5" fill="#fbbf24" opacity="0.9" />
             </svg>
-            <span>Active volcano</span>
+            Legend
+          </h3>
+        </div>
+
+        {/* Content */}
+        <div className="px-3 py-2 space-y-3">
+          {/* Magnitude Scale Section */}
+          <div>
+            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-1.5">
+              Magnitude Scale
+            </p>
+            <div className="space-y-2">
+              {magnitudeLegend.map((item, index) => (
+                <div key={index} className="flex items-center gap-2.5">
+                  <div
+                    className={`${item.size} ${item.color} rounded-full shadow-sm shrink-0`}
+                  />
+                  <div className="flex items-center justify-between flex-1 text-sm">
+                    <span className="font-medium text-gray-700">
+                      {item.range}
+                    </span>
+                    <span className="text-gray-500">{item.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Test Button */}
-          <button
-            onClick={testEarthquakeAlert}
-            className="w-full mt-2 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded transition-colors duration-200 flex items-center justify-center gap-1.5"
-            title="Test earthquake alert sound and auto-pan functionality"
-          >
-            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Test Alert
-          </button>
+          {/* Markers Section */}
+          <div className="pt-2 border-t border-gray-200">
+            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-1.5">
+              Markers
+            </p>
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                <div className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse" />
+                <span>Latest earthquake</span>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  className="shrink-0"
+                >
+                  <path
+                    d="M 12 4 L 20 20 L 4 20 Z"
+                    fill="#dc2626"
+                    stroke="#991b1b"
+                    strokeWidth="1.5"
+                  />
+                  <circle cx="12" cy="5" r="1.5" fill="#fbbf24" opacity="0.9" />
+                </svg>
+                <span>Active volcano</span>
+              </div>
+
+              {/* Test Button */}
+              <button
+                onClick={testEarthquakeAlert}
+                className="w-full mt-2 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded transition-colors duration-200 flex items-center justify-center gap-1.5"
+                title="Test earthquake alert sound and auto-pan functionality"
+              >
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Test Alert
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

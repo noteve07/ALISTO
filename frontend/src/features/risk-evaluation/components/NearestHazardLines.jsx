@@ -5,7 +5,7 @@ import * as turf from "@turf/turf";
 import { useUserLocation } from "@/features/auth/context/UserLocationContext";
 import volcanoes from "../../../assets/gis/volcanoes.json";
 
-const NearestHazardLines = () => {
+const NearestHazardLines = ({ showVolcano = true, showFault = true }) => {
   const map = useMap();
   const { location: userLocation } = useUserLocation();
   const nearestVolcanoLineRef = useRef(null);
@@ -273,15 +273,19 @@ const NearestHazardLines = () => {
     map.whenReady(() => {
       if (!isMounted) return;
       clearLines();
-      drawNearestVolcanoLine();
-      drawNearestFaultLine();
+      if (showVolcano) {
+        drawNearestVolcanoLine();
+      }
+      if (showFault) {
+        drawNearestFaultLine();
+      }
     });
 
     return () => {
       isMounted = false;
       clearLines();
     };
-  }, [map, userLocation]);
+  }, [map, userLocation, showVolcano, showFault]);
 
   return null;
 };

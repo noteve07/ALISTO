@@ -14,6 +14,17 @@ const RiskEvaluationPage = () => {
   const { riskByProvince, riskSummary, loading, error } = useRiskEvaluations();
   const location = useLocation();
   const [initialMapState, setInitialMapState] = useState(null);
+  const [filters, setFilters] = useState({
+    showVolcanoes: true,
+    showFaultLines: true,
+  });
+
+  const handleFilterChange = (filterType, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [filterType]: value,
+    }));
+  };
 
   // Check if navigation state has center and zoom
   useEffect(() => {
@@ -54,6 +65,8 @@ const RiskEvaluationPage = () => {
         <RiskMap
           riskByProvince={riskByProvince}
           initialMapState={initialMapState}
+          filters={filters}
+          onFilterChange={handleFilterChange}
         />
       </div>
     </div>

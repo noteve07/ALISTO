@@ -2,7 +2,7 @@ import React from "react";
 
 const VolcanoLegend = () => {
   return (
-    <div className="absolute top-3 left-3 z-[1000] pointer-events-auto scale-90 origin-top-left">
+    <div className="absolute top-[260px] left-3 z-1000 pointer-events-auto scale-90 origin-top-left w-44">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="bg-red-50 border-b border-red-100 px-3 py-2">
@@ -46,12 +46,6 @@ const VolcanoLegend = () => {
               }}
             ></div>
             <span className="text-xs text-slate-500">Nearest Volcano</span>
-          </div>
-          <div className="text-xs text-slate-500 pt-1">
-            Auto-shows distance to nearest volcano
-          </div>
-          <div className="text-xs text-slate-400 italic">
-            Data shows {24} active volcanoes
           </div>
         </div>
       </div>

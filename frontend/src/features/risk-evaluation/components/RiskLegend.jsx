@@ -5,7 +5,7 @@ const RiskLegend = () => {
   const levels = ["high", "medium", "low"];
 
   return (
-    <div className="absolute bottom-3 left-3 z-[1000] pointer-events-auto scale-90 origin-bottom-left">
+    <div className="absolute top-3 left-3 z-1000 pointer-events-auto scale-90 origin-top-left w-44">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="bg-orange-50 border-b border-orange-100 px-3 py-2">

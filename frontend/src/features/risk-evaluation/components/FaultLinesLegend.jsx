@@ -2,7 +2,7 @@ import React from "react";
 
 const FaultLinesLegend = () => {
   return (
-    <div className="absolute top-3 right-3 z-[1000] pointer-events-auto scale-90 origin-top-right">
+    <div className="absolute top-[140px] left-3 z-1000 pointer-events-auto scale-90 origin-top-left w-44">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="bg-orange-50 border-b border-orange-100 px-3 py-2">
@@ -43,9 +43,6 @@ const FaultLinesLegend = () => {
               }}
             ></div>
             <span className="text-xs text-slate-500">Distance Line</span>
-          </div>
-          <div className="text-xs text-slate-500 pt-1">
-            Nearest fault auto-highlighted. Click any fault to measure distance.
           </div>
         </div>
       </div>

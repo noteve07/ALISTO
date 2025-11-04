@@ -10,13 +10,14 @@ import {
   getRiskColor,
   getRiskLevelKey,
 } from "../utils/riskUtils";
-import RiskLegend from "./RiskLegend";
 import FaultLinesOverlay from "./FaultLinesOverlay";
-import FaultLinesLegend from "./FaultLinesLegend";
 import VolcanoesOverlay from "./VolcanoesOverlay";
-import VolcanoLegend from "./VolcanoLegend";
 import NearestHazardLines from "./NearestHazardLines";
 import UserLocationMarker from "../../live-monitoring/components/UserLocationMarker";
+import RiskFilterPanel from "./RiskFilterPanel";
+import ProvinceRiskList from "./ProvinceRiskList";
+import CombinedLegend from "./CombinedLegend";
+import LocationRiskAssessment from "./LocationRiskAssessment";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -53,8 +54,14 @@ const MapViewController = ({ initialMapState }) => {
   return null;
 };
 
-const RiskMap = ({ riskByProvince, initialMapState }) => {
+const RiskMap = ({
+  riskByProvince,
+  initialMapState,
+  filters,
+  onFilterChange,
+}) => {
   const geoJsonRef = useRef(null);
+  const mapRef = useRef(null);
 
   const darkenColor = (hex, amount = 0.15) => {
     try {
@@ -165,6 +172,16 @@ const RiskMap = ({ riskByProvince, initialMapState }) => {
     }
   };
 
+  const handleProvinceClick = (center, name) => {
+    if (mapRef.current) {
+      console.log(`🗺️ Panning to ${name} at`, center);
+      mapRef.current.flyTo(center, 8, {
+        duration: 1.5,
+        easeLinearity: 0.25,
+      });
+    }
+  };
+
   return (
     <div className="relative w-full h-full">
       <MapContainer
@@ -176,6 +193,8 @@ const RiskMap = ({ riskByProvince, initialMapState }) => {
         maxBounds={mapBounds}
         maxBoundsViscosity={0.7}
         style={{ width: "100%", height: "100%" }}
+        zoomControl={false}
+        ref={mapRef}
       >
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
@@ -191,15 +210,22 @@ const RiskMap = ({ riskByProvince, initialMapState }) => {
           ref={setGeoJsonRef}
           pane="tilePane"
         />
-        <FaultLinesOverlay />
-        <VolcanoesOverlay />
-        <NearestHazardLines />
+        {filters.showFaultLines && <FaultLinesOverlay />}
+        {filters.showVolcanoes && <VolcanoesOverlay />}
+        <NearestHazardLines
+          showVolcano={filters.showVolcanoes}
+          showFault={filters.showFaultLines}
+        />
         <UserLocationMarker />
       </MapContainer>
 
-      <RiskLegend />
-      <FaultLinesLegend />
-      <VolcanoLegend />
+      <RiskFilterPanel filters={filters} onFilterChange={onFilterChange} />
+      <ProvinceRiskList
+        riskByProvince={riskByProvince}
+        onProvinceClick={handleProvinceClick}
+      />
+      <CombinedLegend />
+      <LocationRiskAssessment />
     </div>
   );
 };
