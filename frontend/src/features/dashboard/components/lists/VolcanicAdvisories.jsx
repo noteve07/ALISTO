@@ -1,177 +1,154 @@
-import React from 'react'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useVolcanicAdvisories } from "../../../live-monitoring/hooks/useVolcanicAdvisories";
 
 const VolcanicAdvisories = () => {
-  // Hardcoded data - easily replaceable with API call
-  const advisories = [
-    {
-      id: 1,
-      volcano: 'Mayon Volcano',
-      location: 'Albay, Philippines',
-      alertLevel: 2,
-      status: 'Increased Unrest',
-      lastUpdate: '6 hours ago',
-      description: 'Increased volcanic earthquake activity and steam emissions observed',
-      recommendations: ['Stay outside 6km radius', 'Monitor official updates', 'Prepare evacuation plans'],
-      severity: 'moderate',
-      distance: '420 km from your location'
-    },
-    {
-      id: 2,
-      volcano: 'Taal Volcano',
-      location: 'Batangas, Philippines',
-      alertLevel: 1,
-      status: 'Abnormal',
-      lastUpdate: '2 hours ago',
-      description: 'Weak steam emissions and volcanic tremors detected',
-      recommendations: ['Entry to Volcano Island prohibited', 'Stay alert for updates'],
-      severity: 'low',
-      distance: '75 km from your location'
-    },
-    {
-      id: 3,
-      volcano: 'Kanlaon Volcano',
-      location: 'Negros Island, Philippines',
-      alertLevel: 1,
-      status: 'Abnormal',
-      lastUpdate: '12 hours ago',
-      description: 'Slight increase in volcanic CO2 emissions',
-      recommendations: ['4km radius restriction', 'Monitor air quality'],
-      severity: 'low',
-      distance: '612 km from your location'
-    },
-    {
-      id: 4,
-      volcano: 'Bulusan Volcano',
-      location: 'Sorsogon, Philippines',
-      alertLevel: 0,
-      status: 'Normal',
-      lastUpdate: '1 day ago',
-      description: 'Background levels of volcanic activity',
-      recommendations: ['Normal precautions', 'Stay informed'],
-      severity: 'normal',
-      distance: '385 km from your location'
-    }
-  ]
+  const navigate = useNavigate();
+  const { advisories: rawAdvisories, loading } = useVolcanicAdvisories();
+
+  // Filter out alert level 0
+  const advisories = rawAdvisories.filter(
+    (advisory) => advisory.alertLevel > 0
+  );
 
   const getAlertColor = (level) => {
     const colors = {
-      0: 'text-green-700 bg-green-100 border-green-200',
-      1: 'text-yellow-700 bg-yellow-100 border-yellow-200',
-      2: 'text-orange-700 bg-orange-100 border-orange-200',
-      3: 'text-red-700 bg-red-100 border-red-200',
-      4: 'text-purple-700 bg-purple-100 border-purple-200',
-      5: 'text-red-900 bg-red-200 border-red-300'
-    }
-    return colors[level] || colors[0]
-  }
+      0: "text-green-700 bg-green-100 border-green-200",
+      1: "text-yellow-700 bg-yellow-100 border-yellow-200",
+      2: "text-orange-700 bg-orange-100 border-orange-200",
+      3: "text-red-700 bg-red-100 border-red-200",
+      4: "text-purple-700 bg-purple-100 border-purple-200",
+      5: "text-red-900 bg-red-200 border-red-300",
+    };
+    return colors[level] || colors[0];
+  };
 
-  const getStatusIcon = (severity) => {
-    const icons = {
-      'normal': 'check_circle',
-      'low': 'warning',
-      'moderate': 'error',
-      'high': 'dangerous',
-      'critical': 'emergency'
-    }
-    return icons[severity] || icons.normal
-  }
-
-  const getSeverityColor = (severity) => {
-    const colors = {
-      'normal': 'text-green-500',
-      'low': 'text-yellow-500',
-      'moderate': 'text-orange-500',
-      'high': 'text-red-500',
-      'critical': 'text-red-700'
-    }
-    return colors[severity] || colors.normal
+  if (loading) {
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900">
+              Volcanic Advisories
+            </h3>
+            <p className="text-sm text-gray-600">
+              Active volcano monitoring • Live
+            </p>
+          </div>
+          <span className="flex items-center gap-2 text-sm text-green-600">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            </span>
+            Live
+          </span>
+        </div>
+        <div className="flex items-center justify-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">Volcanic Advisories</h3>
-          <p className="text-sm text-gray-600">Active volcano monitoring • PHIVOLCS</p>
+          <h3 className="text-xl font-semibold text-gray-900">
+            Volcanic Advisories
+          </h3>
+          <p className="text-sm text-gray-600">
+            Active volcano monitoring • Live
+          </p>
         </div>
-        <span className="material-symbols-outlined text-red-500 text-xl">
-          volcano
+        <span className="flex items-center gap-2 text-sm text-green-600">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          </span>
+          Live
         </span>
       </div>
 
-      <div className="space-y-4">
-        {advisories.map((advisory) => (
-          <div 
+      <div className="space-y-4 h-[360px] overflow-hidden">
+        {advisories.slice(0, 4).map((advisory) => (
+          <a
             key={advisory.id}
-            className="p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer border border-gray-100"
+            href={advisory.bulletinLink || "#"}
+            target={advisory.bulletinLink ? "_blank" : "_self"}
+            rel={advisory.bulletinLink ? "noopener noreferrer" : undefined}
+            onClick={(e) => {
+              if (!advisory.bulletinLink) {
+                e.preventDefault();
+                navigate("/app/live-monitoring");
+              }
+            }}
+            className="block p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer border border-gray-100"
           >
-            <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <span className={`material-symbols-outlined text-lg ${getSeverityColor(advisory.severity)}`}>
-                    {getStatusIcon(advisory.severity)}
-                  </span>
-                  <h4 className="font-semibold text-gray-900">{advisory.volcano}</h4>
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getAlertColor(advisory.alertLevel)}`}>
+                  <h4 className="font-semibold text-gray-900">
+                    {advisory.volcano}
+                  </h4>
+                  <span
+                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getAlertColor(
+                      advisory.alertLevel
+                    )}`}
+                  >
                     Alert Level {advisory.alertLevel}
                   </span>
                 </div>
-                
-                <div className="space-y-1 mb-3">
-                  <p className="text-sm font-medium text-gray-700">{advisory.status}</p>
-                  <p className="text-sm text-gray-600">{advisory.location} • {advisory.distance}</p>
-                  <p className="text-sm text-gray-600">{advisory.description}</p>
-                </div>
-                
-                <div className="flex items-center space-x-4 text-xs text-gray-500">
-                  <span>Updated {advisory.lastUpdate}</span>
-                  <span>•</span>
-                  <span>{advisory.recommendations.length} recommendations</span>
-                </div>
+
+                <p className="text-sm font-medium text-gray-700 mb-1">
+                  {advisory.alertStatus}
+                </p>
+                {advisory.issuanceDate && (
+                  <p className="text-xs text-gray-500">
+                    Updated{" "}
+                    {new Date(advisory.issuanceDate).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      }
+                    )}
+                  </p>
+                )}
               </div>
-              
+
               <button className="ml-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
                 <span className="material-symbols-outlined text-gray-400">
-                  chevron_right
+                  {advisory.bulletinLink ? "open_in_new" : "chevron_right"}
                 </span>
               </button>
             </div>
-            
-            <div className="flex flex-wrap gap-1 mt-2">
-              {advisory.recommendations.slice(0, 2).map((rec, recIndex) => (
-                <span key={recIndex} className="inline-flex items-center px-2 py-0.5 rounded text-xs bg-blue-50 text-blue-700">
-                  {rec}
-                </span>
-              ))}
-              {advisory.recommendations.length > 2 && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600">
-                  +{advisory.recommendations.length - 2} more
-                </span>
-              )}
-            </div>
-          </div>
+          </a>
         ))}
       </div>
 
-      <div className="flex items-center justify-center mt-6 pt-4 border-t border-gray-100">
-        <div className="flex space-x-4">
-          <button className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium">
-            <span>View volcano map</span>
-            <span className="material-symbols-outlined text-sm">
-              map
-            </span>
-          </button>
-          <span className="text-gray-300">|</span>
-          <button className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium">
-            <span>PHIVOLCS updates</span>
-            <span className="material-symbols-outlined text-sm">
-              open_in_new
-            </span>
-          </button>
-        </div>
+      {/* Footer Links */}
+      <div className="flex items-center justify-between text-xs mt-auto pt-4 border-t border-gray-100">
+        <button
+          onClick={() => navigate("/app/live-monitoring")}
+          className="flex items-center gap-1.5 text-gray-600 hover:text-gray-800 font-medium"
+        >
+          <span className="material-symbols-outlined text-base">map</span>
+          View Monitoring Map
+        </button>
+        <a
+          href="https://wovodat.phivolcs.dost.gov.ph/bulletin/list-of-bulletin"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-gray-600 hover:text-gray-800"
+        >
+          <span>Data Source: DOST-PHIVOLCS</span>
+          <span className="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VolcanicAdvisories
+export default VolcanicAdvisories;

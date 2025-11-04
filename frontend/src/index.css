@@ -2,6 +2,9 @@
 
 @theme {
   --color-primary: #c27930;
+  --color-primary-v2: #D2691E;
+  --color-background: #faf9f7;
+  --color-background-alt: #f8f8f8;
 }
 
 .leaflet-tooltip.risk-tooltip {
@@ -20,13 +23,229 @@
 .leaflet-popup.risk-popup .leaflet-popup-content-wrapper {
   border-radius: 12px;
   box-shadow: 0 16px 40px -20px rgba(15, 23, 42, 0.45);
-  padding: 16px 18px;
+  padding: 20px 24px;
 }
 
 .leaflet-popup.risk-popup .leaflet-popup-content {
   margin: 0;
+  min-width: 280px;
 }
 
 .leaflet-popup.risk-popup .leaflet-popup-tip {
   background: white;
+}
+
+/* Fault line tooltips */
+.leaflet-tooltip.fault-tooltip {
+  background-color: rgba(255, 76, 66, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 12px;
+  box-shadow: 0 4px 12px rgba(255, 76, 66, 0.4);
+}
+
+.leaflet-tooltip.fault-tooltip::before {
+  border-top-color: rgba(255, 76, 66, 0.95);
+}
+
+/* Offset Leaflet attribution slightly left from center */
+.leaflet-bottom.leaflet-right {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-60%) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.12) !important;
+  padding: 2px 8px !important;
+  border-radius: 4px 4px 0 0 !important;
+  font-size: 9px !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  color: rgba(0, 0, 0, 0.35) !important;
+  opacity: 0.25 !important;
+  transition: opacity 0.3s ease;
+}
+
+.leaflet-control-attribution:hover {
+  opacity: 0.6 !important;
+}
+
+.leaflet-control-attribution a {
+  color: rgba(210, 105, 30, 0.45) !important;
+  text-decoration: none !important;
+}
+
+/* Hide scrollbar but keep scrolling functionality */
+.scrollbar-none {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+/* Custom earthquake popup styling */
+.custom-earthquake-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.custom-earthquake-popup .leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.custom-earthquake-popup .leaflet-popup-tip {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Remove black focus outline on clicked provinces (Leaflet vector layers) */
+.leaflet-container .leaflet-interactive:focus {
+  outline: none !important;
+}
+
+/* Volcano marker styles */
+.volcano-marker {
+  background: transparent !important;
+  border: none !important;
+  transition: transform 0.2s ease;
+}
+
+.volcano-marker:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+  z-index: 1000 !important;
+}
+
+/* Volcano popup styling */
+.leaflet-popup.volcano-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 12px 32px -12px rgba(220, 38, 38, 0.3);
+  padding: 16px 20px;
+  border: 2px solid rgba(220, 38, 38, 0.2);
+}
+
+.leaflet-popup.volcano-popup .leaflet-popup-content {
+  margin: 0;
+  min-width: 220px;
+}
+
+.leaflet-popup.volcano-popup .leaflet-popup-tip {
+  background: white;
+  border: 2px solid rgba(220, 38, 38, 0.2);
+}
+
+/* Live monitoring volcano marker styles */
+.volcano-marker-live {
+  background: transparent !important;
+  border: none !important;
+  transition: transform 0.2s ease;
+}
+
+.volcano-marker-live:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  z-index: 1000 !important;
+}
+
+/* Live monitoring volcano popup styling */
+.leaflet-popup.volcano-popup-live .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 12px 32px -12px rgba(220, 38, 38, 0.35);
+  padding: 18px 22px;
+  border: 2px solid rgba(220, 38, 38, 0.25);
+  background: white;
+}
+
+.leaflet-popup.volcano-popup-live .leaflet-popup-content {
+  margin: 0;
+  min-width: 240px;
+  max-width: 300px;
+}
+
+.leaflet-popup.volcano-popup-live .leaflet-popup-tip {
+  background: white;
+  border: 2px solid rgba(220, 38, 38, 0.25);
+}
+
+/* Distance line popup styling */
+.leaflet-popup.volcano-distance-popup .leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  box-shadow: 0 8px 24px -8px rgba(220, 38, 38, 0.3);
+  padding: 12px 16px;
+  border: 1.5px solid rgba(220, 38, 38, 0.2);
+  background: white;
+}
+
+.leaflet-popup.volcano-distance-popup .leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+.leaflet-popup.volcano-distance-popup .leaflet-popup-tip {
+  background: white;
+  border: 1.5px solid rgba(220, 38, 38, 0.2);
+}
+
+.leaflet-popup.fault-distance-popup .leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  box-shadow: 0 8px 24px -8px rgba(249, 115, 22, 0.3);
+  padding: 12px 16px;
+  border: 1.5px solid rgba(249, 115, 22, 0.2);
+  background: white;
+}
+
+.leaflet-popup.fault-distance-popup .leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+.leaflet-popup.fault-distance-popup .leaflet-popup-tip {
+  background: white;
+  border: 1.5px solid rgba(249, 115, 22, 0.2);
+}
+
+/* Nearest fault highlight styling */
+.nearest-fault-highlight {
+  z-index: 650 !important;
+}
+
+/* Distance tooltips on lines */
+.leaflet-tooltip.distance-tooltip-volcano {
+  background: rgba(220, 38, 38, 0.95);
+  color: white;
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.leaflet-tooltip.distance-tooltip-volcano::before {
+  display: none;
+}
+
+.leaflet-tooltip.distance-tooltip-fault {
+  background: rgba(249, 115, 22, 0.95);
+  color: white;
+  border: 2px solid white;
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.leaflet-tooltip.distance-tooltip-fault::before {
+  display: none;
 }

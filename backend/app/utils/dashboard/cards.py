@@ -41,7 +41,7 @@ async def get_strongest_magnitude(hours: int = 24) -> Dict[str, object]:
     # query the database to get the highest magnitude (last 24 hours)
     result = (
         supabase.table("latest_earthquakes")
-        .select("datetime, magnitude, location")
+        .select("datetime, magnitude, location, latitude, longitude")
         .gte("datetime", start_time.isoformat())
         .order("magnitude", desc=True)
         .limit(1)
@@ -65,6 +65,8 @@ async def get_strongest_magnitude(hours: int = 24) -> Dict[str, object]:
     return {
         "magnitude": record.get("magnitude"),
         "location": record.get("location"),
+        "latitude": record.get("latitude"),
+        "longitude": record.get("longitude"),
         "time_ago": time_ago
     }
 

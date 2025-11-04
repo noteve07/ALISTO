@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "name": "Babuyan Claro",
+    "latitude": 19.52408,
+    "longitude": 121.95005,
+    "province": "Cagayan",
+    "coordinates": "0101000020E610000026E4839ECD7C5E40D97C5C1B2A863340"
+  },
+  {
+    "id": 2,
+    "name": "Banahaw",
+    "latitude": 14.06038,
+    "longitude": 121.48803,
+    "province": "Laguna",
+    "coordinates": "0101000020E6100000E15D2EE23B5F5E403BAA9A20EA1E2C40"
+  },
+  {
+    "id": 3,
+    "name": "Biliran (Anas)",
+    "latitude": 11.63268,
+    "longitude": 124.47162,
+    "province": "Leyte",
+    "coordinates": "0101000020E6100000EE08A7052F1E5F40A4AA09A2EE432740"
+  },
+  {
+    "id": 4,
+    "name": "Bud Dajo",
+    "latitude": 6.01295,
+    "longitude": 121.05772,
+    "province": "Sulu",
+    "coordinates": "0101000020E6100000CF143AAFB1435E40CCEEC9C3420D1840"
+  },
+  {
+    "id": 5,
+    "name": "Bulusan",
+    "latitude": 12.76853,
+    "longitude": 124.05445,
+    "province": "Sorsogon",
+    "coordinates": "0101000020E61000001A51DA1B7C035F4061FD9FC37C892940"
+  },
+  {
+    "id": 6,
+    "name": "Cabalian",
+    "latitude": 10.27986,
+    "longitude": 125.21598,
+    "province": "Southern Leyte",
+    "coordinates": "0101000020E6100000C425C79DD24D5F40C8EA56CF498F2440"
+  },
+  {
+    "id": 7,
+    "name": "Cagua",
+    "latitude": 18.22116,
+    "longitude": 122.1163,
+    "province": "Cagayan",
+    "coordinates": "0101000020E610000096218E7571875E40F12E17F19D383240"
+  },
+  {
+    "id": 8,
+    "name": "Camiguin de Babuyanes",
+    "latitude": 18.83037,
+    "longitude": 121.8628,
+    "province": "Cagayan",
+    "coordinates": "0101000020E610000048BF7D1D38775E405B94D92093D43240"
+  },
+  {
+    "id": 9,
+    "name": "Didicas",
+    "latitude": 19.07533,
+    "longitude": 122.20147,
+    "province": "Cagayan",
+    "coordinates": "0101000020E610000002486DE2E48C5E405E68AED348133340"
+  },
+  {
+    "id": 10,
+    "name": "Hibok-hibok",
+    "latitude": 9.20427,
+    "longitude": 124.67115,
+    "province": "Camiguin",
+    "coordinates": "0101000020E6100000772D211FF42A5F409B1BD31396682240"
+  },
+  {
+    "id": 11,
+    "name": "Iraya",
+    "latitude": 20.46669,
+    "longitude": 122.01078,
+    "province": "Batanes",
+    "coordinates": "0101000020E6100000DBDC989EB0805E40C85EEFFE78773440"
+  },
+  {
+    "id": 12,
+    "name": "Iriga",
+    "latitude": 13.45606,
+    "longitude": 123.45479,
+    "province": "Camarines Sur",
+    "coordinates": "0101000020E6100000102384471BDD5E400C0742B280E92A40"
+  },
+  {
+    "id": 13,
+    "name": "Isarog",
+    "latitude": 13.65685,
+    "longitude": 123.38087,
+    "province": "Camarines Sur",
+    "coordinates": "0101000020E6100000C381902C60D85E4055C1A8A44E502B40"
+  },
+  {
+    "id": 14,
+    "name": "Kanlaon",
+    "latitude": 10.41129,
+    "longitude": 123.13243,
+    "province": "Negros Oriental",
+    "coordinates": "0101000020E610000098C0ADBB79C85E40FB57569A94D22440"
+  },
+  {
+    "id": 15,
+    "name": "Leonard Kniaseff",
+    "latitude": 7.39359,
+    "longitude": 126.06418,
+    "province": "Davao del Norte",
+    "coordinates": "0101000020E6100000AA436E861B845F406C21C84109931D40"
+  },
+  {
+    "id": 16,
+    "name": "Makaturing",
+    "latitude": 7.64371,
+    "longitude": 124.31718,
+    "province": "Lanao del Sur",
+    "coordinates": "0101000020E61000007FBC57AD4C145F40C16ED8B628931E40"
+  },
+  {
+    "id": 17,
+    "name": "Matutum",
+    "latitude": 6.36111,
+    "longitude": 125.07603,
+    "province": "South Cotabato",
+    "coordinates": "0101000020E6100000F4E0EEACDD445F40C408E1D1C6711940"
+  },
+  {
+    "id": 18,
+    "name": "Mayon",
+    "latitude": 13.25519,
+    "longitude": 123.68615,
+    "province": "Albay",
+    "coordinates": "0101000020E6100000A089B0E1E9EB5E4051888043A8822A40"
+  },
+  {
+    "id": 19,
+    "name": "Musuan (Calayo)",
+    "latitude": 7.8768,
+    "longitude": 125.06985,
+    "province": "Bukidnon",
+    "coordinates": "0101000020E61000000A68226C78445F40FD87F4DBD7811F40"
+  },
+  {
+    "id": 20,
+    "name": "Parker",
+    "latitude": 6.10274,
+    "longitude": 124.88879,
+    "province": "South Cotabato",
+    "coordinates": "0101000020E6100000C2C073EFE1385F40D3F6AFAC34691840"
+  },
+  {
+    "id": 21,
+    "name": "Pinatubo",
+    "latitude": 15.14162,
+    "longitude": 120.35084,
+    "province": "Pampanga",
+    "coordinates": "0101000020E61000003C889D2974165E4046EBA86A82482E40"
+  },
+  {
+    "id": 22,
+    "name": "Ragang",
+    "latitude": 7.69066,
+    "longitude": 124.50639,
+    "province": "Lanao del Sur",
+    "coordinates": "0101000020E61000005F419AB168205F40179F02603CC31E40"
+  },
+  {
+    "id": 23,
+    "name": "Smith",
+    "latitude": 19.53915,
+    "longitude": 121.91367,
+    "province": "Cagayan",
+    "coordinates": "0101000020E61000008655BC91797A5E406EA301BC058A3340"
+  },
+  {
+    "id": 24,
+    "name": "Taal",
+    "latitude": 14.01024,
+    "longitude": 120.99812,
+    "province": "Batangas",
+    "coordinates": "0101000020E6100000F25EB532E13F5E40DA38622D3E052C40"
+  }
+]

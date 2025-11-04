@@ -32,3 +32,13 @@ class UserProfileResponse(BaseModel):
     home_municipality_id: Optional[int] = Field(None, description="User's home municipality ID")
     home_province_id: Optional[int] = Field(None, description="User's home province ID")
     created_at: Optional[str] = Field(None, description="Account creation timestamp")
+
+
+class UserLocationResponse(BaseModel):
+    """Simple response model for user location."""
+    
+    lat: float = Field(..., description="Latitude")
+    lon: float = Field(..., description="Longitude")
+    municipality: str = Field(..., description="Municipality name")
+    province: str = Field(..., description="Province name")
+    is_fallback: bool = Field(False, description="Whether fallback location was used")

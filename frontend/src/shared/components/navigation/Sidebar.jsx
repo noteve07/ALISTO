@@ -1,10 +1,96 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { authService } from "../../../features/auth/services/authService";
+import { NavLink } from "react-router-dom";
+
+// ISA Chatbot Icon Component (from ChatbotPage)
+const ISAIcon = ({ className = "w-6 h-6" }) => (
+  <svg
+    className={className}
+    viewBox="0 0 200 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect
+      x="50"
+      y="70"
+      width="100"
+      height="80"
+      rx="15"
+      fill="#FDE047"
+      stroke="#000"
+      strokeWidth="4"
+    />
+    <line
+      x1="100"
+      y1="40"
+      x2="100"
+      y2="70"
+      stroke="#000"
+      strokeWidth="4"
+      strokeLinecap="round"
+    />
+    <circle
+      cx="100"
+      cy="35"
+      r="8"
+      fill="#60A5FA"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    <rect
+      x="35"
+      y="95"
+      width="15"
+      height="30"
+      rx="7"
+      fill="#6B7280"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    <rect
+      x="150"
+      y="95"
+      width="15"
+      height="30"
+      rx="7"
+      fill="#6B7280"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    <circle
+      cx="75"
+      cy="100"
+      r="10"
+      fill="#60A5FA"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    <circle
+      cx="125"
+      cy="100"
+      r="10"
+      fill="#60A5FA"
+      stroke="#000"
+      strokeWidth="3"
+    />
+    <path
+      d="M 80 125 Q 100 135 120 125"
+      stroke="#000"
+      strokeWidth="4"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M 70 150 L 60 170 L 80 155 Z"
+      fill="#FDE047"
+      stroke="#000"
+      strokeWidth="3"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const Sidebar = () => {
-  const [isHovered, setIsHovered] = useState(true);
-  const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
   const navItems = [
     {
@@ -74,9 +160,9 @@ const Sidebar = () => {
       ),
     },
     {
-      id: "analytics",
-      label: "Analytics",
-      path: "/app/analytics",
+      id: "emergency-hotlines",
+      label: "Emergency Hotlines",
+      path: "/app/emergency-hotlines",
       icon: (
         <svg
           className="w-6 h-6"
@@ -88,128 +174,49 @@ const Sidebar = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
           />
         </svg>
       ),
     },
     {
       id: "chatbot",
-      label: "AI Assistant",
+      label: "ISA Chatbot",
       path: "/app/chatbot",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-          />
-        </svg>
-      ),
+      icon: <ISAIcon className="w-6 h-6" />,
     },
   ];
-
-  const bottomNavItems = [
-    {
-      id: "account",
-      label: "Account",
-      path: "/app/account",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-          />
-        </svg>
-      ),
-    },
-    {
-      id: "logout",
-      label: "Logout",
-      path: "/",
-      icon: (
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-          />
-        </svg>
-      ),
-    },
-  ];
-
-  const handleLogout = async (e) => {
-    console.log("Logging out...");
-    e.preventDefault();
-    try {
-      await authService.signOut();
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <aside
-      className={`bg-white shadow-lg border-r border-gray-200 transition-all duration-300 ease-in-out ${
-        isHovered ? "w-64" : "w-16"
-      } h-screen flex flex-col`}
+      className={`${
+        isHovered ? "w-72" : "w-20"
+      } bg-white shadow-lg h-screen flex flex-col border-r border-gray-100 transition-[width] duration-200`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Logo Section */}
-      <div className="px-4 py-5">
-        <div className="flex items-center">
-          <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-white font-bold text-base">A</span>
-          </div>
-          {isHovered && (
-            <div className="ml-3 overflow-hidden">
-              <h2 className="text-xl font-bold text-gray-900 whitespace-nowrap">
-                ALISTO
-              </h2>
-            </div>
-          )}
-        </div>
-      </div>
+      {/* Thin divider to align with header (no extra top gap) */}
+      <div className="border-b border-gray-100"></div>
 
       {/* Main Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
         {navItems.map((item) => (
           <NavLink
             key={item.id}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+              `flex items-center px-4 py-3.5 rounded-xl text-[13.5px] font-semibold transition-all duration-200 group relative ${
                 isActive
-                  ? "bg-primary/10 text-primary border-r-2 border-primary"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  ? "text-primary-v2 bg-primary-v2/5 border-l-4 border-primary-v2"
+                  : "text-gray-700 hover:bg-gray-50 hover:text-primary-v2 border-l-4 border-transparent"
               }`
             }
           >
-            <div className="flex-shrink-0">{item.icon}</div>
+            <div className="shrink-0 transition-transform duration-200">
+              {item.icon}
+            </div>
             {isHovered && (
-              <span className="ml-3 whitespace-nowrap overflow-hidden">
+              <span className="ml-3 whitespace-nowrap overflow-hidden tracking-wide">
                 {item.label}
               </span>
             )}
@@ -217,43 +224,35 @@ const Sidebar = () => {
         ))}
       </nav>
 
-      {/* Bottom Navigation */}
-      <div className="border-t border-gray-200 px-3 py-4 space-y-1">
-        {bottomNavItems.map((item) => (
-          <div key={item.id}>
-            {item.id === "logout" ? (
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-200"
-              >
-                <div className="flex-shrink-0">{item.icon}</div>
-                {isHovered && (
-                  <span className="ml-3 whitespace-nowrap overflow-hidden">
-                    {item.label}
-                  </span>
-                )}
-              </button>
-            ) : (
-              <NavLink
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                    isActive
-                      ? "bg-primary/10 text-primary border-r-2 border-primary"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                  }`
-                }
-              >
-                <div className="flex-shrink-0">{item.icon}</div>
-                {isHovered && (
-                  <span className="ml-3 whitespace-nowrap overflow-hidden">
-                    {item.label}
-                  </span>
-                )}
-              </NavLink>
-            )}
-          </div>
-        ))}
+      {/* Footer Links - show only when expanded; sticky at bottom when scrolled */}
+      <div
+        className={`${
+          isHovered ? "block" : "hidden"
+        } sticky bottom-0 bg-white px-5 py-4 border-t border-gray-100 space-y-3`}
+      >
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px]">
+          <button
+            onClick={() => window.open("/terms", "_blank")}
+            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer font-medium"
+          >
+            Terms of Service
+          </button>
+          <button
+            onClick={() => window.open("/privacy", "_blank")}
+            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer font-medium"
+          >
+            Privacy Policy
+          </button>
+          <button
+            onClick={() => window.open("/data-sources", "_blank")}
+            className="text-gray-500 hover:text-primary-v2 transition-colors duration-200 cursor-pointer font-medium"
+          >
+            Data Source
+          </button>
+        </div>
+        <div className="text-[11px] text-gray-400 font-medium">
+          © ALISTO Dev Team 2025
+        </div>
       </div>
     </aside>
   );
