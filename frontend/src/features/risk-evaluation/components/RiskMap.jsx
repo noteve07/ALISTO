@@ -1,9 +1,10 @@
-import React, { useMemo, useRef, useEffect } from "react";
+import React, { useMemo, useRef, useEffect, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import provincesGeoJson from "../../../assets/gis/provinces.json";
+import municipalitiesGeoJson from "../../../assets/gis/municities.json";
 import { getRiskColor } from "../utils/riskUtils";
 import FaultLinesOverlay from "./FaultLinesOverlay";
 import VolcanoesOverlay from "./VolcanoesOverlay";
@@ -13,6 +14,7 @@ import RiskFilterPanel from "./RiskFilterPanel";
 import ProvinceRiskList from "./ProvinceRiskList";
 import CombinedLegend from "./CombinedLegend";
 import LocationRiskAssessment from "./LocationRiskAssessment";
+import MunicipalityOverlay from "./MunicipalityOverlay";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -30,8 +32,8 @@ const mapBounds = [
   [22.0, 140.0],
 ];
 
-// Component to handle initial map view
-const MapViewController = ({ initialMapState }) => {
+// Component to handle initial map view and zoom tracking
+const MapViewController = ({ initialMapState, onZoomChange }) => {
   const map = useMap();
   const hasSetInitialView = useRef(false);
 
@@ -46,6 +48,24 @@ const MapViewController = ({ initialMapState }) => {
     }
   }, [initialMapState, map]);
 
+  useEffect(() => {
+    const handleZoomEnd = () => {
+      const currentZoom = map.getZoom();
+      if (onZoomChange) {
+        onZoomChange(currentZoom);
+      }
+    };
+
+    map.on('zoomend', handleZoomEnd);
+    
+    // Call initially to set current zoom
+    handleZoomEnd();
+
+    return () => {
+      map.off('zoomend', handleZoomEnd);
+    };
+  }, [map, onZoomChange]);
+
   return null;
 };
 
@@ -57,6 +77,50 @@ const RiskMap = ({
 }) => {
   const geoJsonRef = useRef(null);
   const mapRef = useRef(null);
+  
+  // State for zoom tracking and selection hierarchy
+  const [currentZoom, setCurrentZoom] = useState(6);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [selectedMunicipality, setSelectedMunicipality] = useState(null);
+
+  // Handle zoom changes
+  const handleZoomChange = (zoom) => {
+    setCurrentZoom(zoom);
+    
+    // Clear selections when zooming out
+    if (zoom < 8 && selectedProvince) {
+      setSelectedProvince(null);
+      setSelectedMunicipality(null);
+    }
+    if (zoom < 10 && selectedMunicipality) {
+      setSelectedMunicipality(null);
+    }
+  };
+
+  // Handle municipality click
+  const handleMunicipalityClick = (municipalityInfo) => {
+    console.log(`🏛️ Municipality clicked: ${municipalityInfo.name}, ${municipalityInfo.province}`);
+    setSelectedMunicipality(municipalityInfo.name);
+  };
+
+  // Filter municipalities for selected province
+  const municipalitiesForProvince = useMemo(() => {
+    if (!selectedProvince) return null;
+    
+    const filteredFeatures = municipalitiesGeoJson.features.filter(feature => {
+      const provinceName = feature.properties?.NAME_1 || feature.properties?.PROVINCE;
+      return provinceName && provinceName.toLowerCase() === selectedProvince.toLowerCase();
+    });
+
+    return {
+      type: 'FeatureCollection',
+      features: filteredFeatures
+    };
+  }, [selectedProvince]);
+
+  // Determine visibility based on zoom level and selections
+  const shouldShowProvinces = currentZoom < 14; // Hide provinces at zoom 14+ for clean street view
+  const shouldShowMunicipalities = selectedProvince && municipalitiesForProvince && currentZoom > 10 && currentZoom < 14;
 
   const darkenColor = (hex, amount = 0.15) => {
     try {
@@ -96,10 +160,14 @@ const RiskMap = ({
     const risk = riskByProvince[provinceId];
     const baseColor = getRiskColor(risk?.riskLevel);
 
+    // Reduce opacity when municipalities are showing or at high zoom
+    const baseOpacity = shouldShowProvinces ? (risk ? 0.7 : 0.35) : (risk ? 0.2 : 0.1);
+    const weight = shouldShowProvinces ? 1 : 0.5;
+
     return {
-      weight: 1,
+      weight: weight,
       color: darkenColor(baseColor, 0.2),
-      fillOpacity: risk ? 0.7 : 0.35,
+      fillOpacity: baseOpacity,
       fillColor: baseColor,
       dashArray: risk ? "" : "4",
     };
@@ -220,9 +288,13 @@ const RiskMap = ({
           fillOpacity: 0.9,
         });
 
-        // Zoom to province
+        // Select province and zoom
+        console.log(`🗺️ Province clicked: ${provinceName}, selecting for municipalities`);
+        setSelectedProvince(provinceName);
+        
+        // Zoom to province - municipalities will show automatically at zoom > 10
         if (mapRef.current && centroid) {
-          mapRef.current.flyTo(centroid, 10, {
+          mapRef.current.flyTo(centroid, 11, {
             duration: 1.5,
             easeLinearity: 0.25,
           });
@@ -289,7 +361,7 @@ const RiskMap = ({
         zoom={6}
         scrollWheelZoom
         minZoom={6}
-        maxZoom={10}
+        maxZoom={18}
         maxBoundsViscosity={0.7}
         style={{ width: "100%", height: "100%" }}
         zoomControl={false}
@@ -300,14 +372,25 @@ const RiskMap = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           noWrap
         />
-        <MapViewController initialMapState={initialMapState} />
-        <GeoJSON
-          key={riskKey}
-          data={provincesGeoJson}
-          style={styleFeature}
-          onEachFeature={onEachFeature}
-          ref={setGeoJsonRef}
-          pane="tilePane"
+        <MapViewController 
+          initialMapState={initialMapState} 
+          onZoomChange={handleZoomChange}
+        />
+        {shouldShowProvinces && (
+          <GeoJSON
+            key={`${riskKey}-${shouldShowProvinces}-${currentZoom}`}
+            data={provincesGeoJson}
+            style={styleFeature}
+            onEachFeature={onEachFeature}
+            ref={setGeoJsonRef}
+            pane="tilePane"
+          />
+        )}
+        <MunicipalityOverlay
+          municipalitiesData={municipalitiesForProvince}
+          visible={shouldShowMunicipalities}
+          onMunicipalityClick={handleMunicipalityClick}
+          selectedProvince={selectedProvince}
         />
         {filters.showFaultLines && <FaultLinesOverlay />}
         {filters.showVolcanoes && <VolcanoesOverlay />}
