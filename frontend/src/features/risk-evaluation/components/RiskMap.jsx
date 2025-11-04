@@ -1,15 +1,11 @@
-import React, { useMemo, useRef, useEffect } from "react";
+import React, { useMemo, useRef, useEffect, useState } from "react";
 import { MapContainer, TileLayer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import provincesGeoJson from "../../../assets/gis/provinces.json";
-import {
-  formatRiskScore,
-  formatTimestamp,
-  getRiskColor,
-  getRiskLevelKey,
-} from "../utils/riskUtils";
+import municipalitiesGeoJson from "../../../assets/gis/municities.json";
+import { getRiskColor } from "../utils/riskUtils";
 import FaultLinesOverlay from "./FaultLinesOverlay";
 import VolcanoesOverlay from "./VolcanoesOverlay";
 import NearestHazardLines from "./NearestHazardLines";
@@ -18,6 +14,7 @@ import RiskFilterPanel from "./RiskFilterPanel";
 import ProvinceRiskList from "./ProvinceRiskList";
 import CombinedLegend from "./CombinedLegend";
 import LocationRiskAssessment from "./LocationRiskAssessment";
+import MunicipalityOverlay from "./MunicipalityOverlay";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -35,8 +32,8 @@ const mapBounds = [
   [22.0, 140.0],
 ];
 
-// Component to handle initial map view
-const MapViewController = ({ initialMapState }) => {
+// Component to handle initial map view and zoom tracking
+const MapViewController = ({ initialMapState, onZoomChange }) => {
   const map = useMap();
   const hasSetInitialView = useRef(false);
 
@@ -51,6 +48,24 @@ const MapViewController = ({ initialMapState }) => {
     }
   }, [initialMapState, map]);
 
+  useEffect(() => {
+    const handleZoomEnd = () => {
+      const currentZoom = map.getZoom();
+      if (onZoomChange) {
+        onZoomChange(currentZoom);
+      }
+    };
+
+    map.on('zoomend', handleZoomEnd);
+    
+    // Call initially to set current zoom
+    handleZoomEnd();
+
+    return () => {
+      map.off('zoomend', handleZoomEnd);
+    };
+  }, [map, onZoomChange]);
+
   return null;
 };
 
@@ -62,6 +77,63 @@ const RiskMap = ({
 }) => {
   const geoJsonRef = useRef(null);
   const mapRef = useRef(null);
+  
+  // State for zoom tracking and selection hierarchy
+  const [currentZoom, setCurrentZoom] = useState(6);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+  const [selectedMunicipality, setSelectedMunicipality] = useState(null);
+
+  // Handle zoom changes
+  const handleZoomChange = (zoom) => {
+    setCurrentZoom(zoom);
+    
+    // Clear selections when zooming out
+    if (zoom < 8 && selectedProvince) {
+      setSelectedProvince(null);
+      setSelectedMunicipality(null);
+    }
+    if (zoom < 10 && selectedMunicipality) {
+      setSelectedMunicipality(null);
+    }
+  };
+
+  // Handle municipality click
+  const handleMunicipalityClick = (municipalityInfo) => {
+    console.log(`🏛️ Municipality clicked: ${municipalityInfo.name}, ${municipalityInfo.province}`);
+    setSelectedMunicipality(municipalityInfo.name);
+  };
+
+  // Handle user location click for zooming to clean street view
+  const handleUserLocationClick = (locationInfo) => {
+    const { position, currentZoom } = locationInfo;
+    
+    if (currentZoom >= 12 && mapRef.current) {
+      console.log(`📍 Zooming to user location at street level (zoom 14)`);
+      mapRef.current.flyTo(position, 14, {
+        duration: 1.5,
+        easeLinearity: 0.25,
+      });
+    }
+  };
+
+  // Filter municipalities for selected province
+  const municipalitiesForProvince = useMemo(() => {
+    if (!selectedProvince) return null;
+    
+    const filteredFeatures = municipalitiesGeoJson.features.filter(feature => {
+      const provinceName = feature.properties?.NAME_1 || feature.properties?.PROVINCE;
+      return provinceName && provinceName.toLowerCase() === selectedProvince.toLowerCase();
+    });
+
+    return {
+      type: 'FeatureCollection',
+      features: filteredFeatures
+    };
+  }, [selectedProvince]);
+
+  // Determine visibility based on zoom level and selections
+  const shouldShowProvinces = currentZoom < 14; // Hide provinces at zoom 14+ for clean street view
+  const shouldShowMunicipalities = selectedProvince && municipalitiesForProvince && currentZoom > 10 && currentZoom < 14;
 
   const darkenColor = (hex, amount = 0.15) => {
     try {
@@ -101,10 +173,14 @@ const RiskMap = ({
     const risk = riskByProvince[provinceId];
     const baseColor = getRiskColor(risk?.riskLevel);
 
+    // Reduce opacity when municipalities are showing or at high zoom
+    const baseOpacity = shouldShowProvinces ? (risk ? 0.7 : 0.35) : (risk ? 0.2 : 0.1);
+    const weight = shouldShowProvinces ? 1 : 0.5;
+
     return {
-      weight: 1,
+      weight: weight,
       color: darkenColor(baseColor, 0.2),
-      fillOpacity: risk ? 0.7 : 0.35,
+      fillOpacity: baseOpacity,
       fillColor: baseColor,
       dashArray: risk ? "" : "4",
     };
@@ -124,25 +200,78 @@ const RiskMap = ({
     const riskLevelLabel = risk?.riskLevel
       ? risk.riskLevel.toUpperCase()
       : "NO DATA";
-    const dynamicScore = formatRiskScore(risk?.dynamicRiskScore);
-    const baseScore = formatRiskScore(risk?.baseRiskScore);
-    const lastCalculated = formatTimestamp(risk?.calculatedAt);
+    const riskColor = getRiskColor(risk?.riskLevel);
+    const dynamicScore = risk?.dynamicRiskScore 
+      ? (risk.dynamicRiskScore * 10).toFixed(1) 
+      : "N/A";
 
-    const tooltipHtml = `
-      <div style="font-size:12px;color:#e2e8f0;">
-        <p style="margin:0;font-weight:600;font-size:13px;color:#f8fafc;">${provinceName}</p>
-        <p style="margin:2px 0 0;">Risk: <strong>${riskLevelLabel}</strong></p>
+    // Get light background color based on risk level
+    const getHeaderStyle = () => {
+      if (!risk?.riskLevel) {
+        return { bg: "#f1f5f9", text: "#64748b" }; // Gray for no data
+      }
+      const level = risk.riskLevel.toLowerCase();
+      if (level.includes("high")) {
+        return { bg: "#fee2e2", text: "#991b1b" }; // Light red
+      }
+      if (level.includes("medium")) {
+        return { bg: "#fef3c7", text: "#92400e" }; // Light yellow
+      }
+      if (level.includes("low")) {
+        return { bg: "#dcfce7", text: "#166534" }; // Light green
+      }
+      return { bg: "#f1f5f9", text: "#64748b" }; // Default gray
+    };
+    const headerStyle = getHeaderStyle();
+
+    const popupHtml = `
+      <div style="min-width: 180px; font-family: system-ui, -apple-system, sans-serif;">
+        <div style="background: ${headerStyle.bg}; padding: 8px 12px; margin: -12px -16px 8px -16px; border-radius: 4px 4px 0 0;">
+          <p style="margin: 0; font-weight: 600; font-size: 14px; color: ${headerStyle.text}; letter-spacing: 0.3px;">${provinceName}</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: ${riskColor}; flex-shrink: 0;"></div>
+          <div style="flex: 1;">
+            <p style="margin: 0; font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Risk Level</p>
+            <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #111827;">${riskLevelLabel}</p>
+          </div>
+        </div>
+        <div style="padding-top: 6px; border-top: 1px solid #e5e7eb;">
+          <p style="margin: 0; font-size: 11px; color: #6b7280;">Risk Score: <strong style="color: #111827;">${dynamicScore}/10</strong></p>
+        </div>
       </div>
     `;
 
-    layer.bindTooltip(tooltipHtml, {
-      sticky: true,
-      direction: "top",
-      opacity: 0.9,
-      className: `risk-tooltip risk-tooltip--${getRiskLevelKey(
-        risk?.riskLevel
-      )}`,
-    });
+    // Get province centroid
+    let centroid;
+    if (feature.geometry.type === "Polygon") {
+      const coords = feature.geometry.coordinates[0];
+      const lats = coords.map((c) => c[1]);
+      const lngs = coords.map((c) => c[0]);
+      centroid = [
+        (Math.min(...lats) + Math.max(...lats)) / 2,
+        (Math.min(...lngs) + Math.max(...lngs)) / 2,
+      ];
+    } else if (feature.geometry.type === "MultiPolygon") {
+      const allCoords = feature.geometry.coordinates.flatMap((poly) => poly[0]);
+      const lats = allCoords.map((c) => c[1]);
+      const lngs = allCoords.map((c) => c[0]);
+      centroid = [
+        (Math.min(...lats) + Math.max(...lats)) / 2,
+        (Math.min(...lngs) + Math.max(...lngs)) / 2,
+      ];
+    }
+
+    // Bind popup to centroid but don't show on hover
+    if (centroid) {
+      layer.bindPopup(popupHtml, {
+        closeButton: true,
+        autoClose: true,
+        closeOnClick: false,
+        className: 'province-risk-popup',
+        maxWidth: 250,
+      });
+    }
 
     layer.on({
       mouseover: (e) => {
@@ -154,15 +283,41 @@ const RiskMap = ({
           fillColor: darkenColor(baseColor, 0.1),
           fillOpacity: 0.9,
         });
-        target.openTooltip();
       },
       mouseout: (e) => {
         if (geoJsonRef.current) {
           geoJsonRef.current.resetStyle(e.target);
         }
-        e.target.closeTooltip();
       },
-      click: () => {},
+      click: (e) => {
+        const target = e.target;
+        const baseColor = getRiskColor(risk?.riskLevel);
+
+        // Highlight the province
+        target.setStyle({
+          weight: 3,
+          color: darkenColor(baseColor, 0.4),
+          fillColor: darkenColor(baseColor, 0.1),
+          fillOpacity: 0.9,
+        });
+
+        // Select province and zoom
+        console.log(`🗺️ Province clicked: ${provinceName}, selecting for municipalities`);
+        setSelectedProvince(provinceName);
+        
+        // Zoom to province - municipalities will show automatically at zoom > 10
+        if (mapRef.current && centroid) {
+          mapRef.current.flyTo(centroid, 11, {
+            duration: 1.5,
+            easeLinearity: 0.25,
+          });
+        }
+
+        // Open popup at centroid
+        if (centroid) {
+          target.openPopup(centroid);
+        }
+      },
     });
   };
 
@@ -184,13 +339,42 @@ const RiskMap = ({
 
   return (
     <div className="relative w-full h-full">
+      <style>
+        {`
+          .province-risk-popup .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            overflow: hidden;
+          }
+          .province-risk-popup .leaflet-popup-content {
+            margin: 12px 16px;
+            line-height: 1.4;
+          }
+          .province-risk-popup .leaflet-popup-tip {
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+          }
+          .province-risk-popup .leaflet-popup-close-button {
+            color: #6b7280 !important;
+            font-size: 20px !important;
+            padding: 4px 8px !important;
+            width: auto !important;
+            height: auto !important;
+            top: 4px !important;
+            right: 4px !important;
+            font-weight: bold;
+          }
+          .province-risk-popup .leaflet-popup-close-button:hover {
+            color: #111827 !important;
+          }
+        `}
+      </style>
       <MapContainer
         center={mapCenter}
         zoom={6}
         scrollWheelZoom
         minZoom={6}
-        maxZoom={10}
-        maxBounds={mapBounds}
+        maxZoom={18}
         maxBoundsViscosity={0.7}
         style={{ width: "100%", height: "100%" }}
         zoomControl={false}
@@ -201,14 +385,25 @@ const RiskMap = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           noWrap
         />
-        <MapViewController initialMapState={initialMapState} />
-        <GeoJSON
-          key={riskKey}
-          data={provincesGeoJson}
-          style={styleFeature}
-          onEachFeature={onEachFeature}
-          ref={setGeoJsonRef}
-          pane="tilePane"
+        <MapViewController 
+          initialMapState={initialMapState} 
+          onZoomChange={handleZoomChange}
+        />
+        {shouldShowProvinces && (
+          <GeoJSON
+            key={`${riskKey}-${shouldShowProvinces}-${currentZoom}`}
+            data={provincesGeoJson}
+            style={styleFeature}
+            onEachFeature={onEachFeature}
+            ref={setGeoJsonRef}
+            pane="tilePane"
+          />
+        )}
+        <MunicipalityOverlay
+          municipalitiesData={municipalitiesForProvince}
+          visible={shouldShowMunicipalities}
+          onMunicipalityClick={handleMunicipalityClick}
+          selectedProvince={selectedProvince}
         />
         {filters.showFaultLines && <FaultLinesOverlay />}
         {filters.showVolcanoes && <VolcanoesOverlay />}
@@ -216,7 +411,7 @@ const RiskMap = ({
           showVolcano={filters.showVolcanoes}
           showFault={filters.showFaultLines}
         />
-        <UserLocationMarker />
+          <UserLocationMarker onLocationClick={handleUserLocationClick} />
       </MapContainer>
 
       <RiskFilterPanel filters={filters} onFilterChange={onFilterChange} />
