@@ -66,7 +66,7 @@ const FaultLinesOverlay = () => {
         });
 
         userMarkerRef.current.addTo(map);
-        userMarkerRef.current.bindPopup(label).openPopup();
+        userMarkerRef.current.bindPopup(label);
       } catch (error) {
         console.error("Failed to create user location marker", error);
       }
@@ -141,9 +141,9 @@ const FaultLinesOverlay = () => {
 
       try {
         nearestLineRef.current = L.polyline([userLatLng, faultLatLng], {
-          color: "#fb923c",
+          color: "#a855f7",
           dashArray: "6, 8",
-          weight: 2.5,
+          weight: 3,
         }).addTo(map);
 
         nearestLineRef.current
@@ -166,8 +166,7 @@ const FaultLinesOverlay = () => {
             </span>
           </div>
         `
-          )
-          .openPopup();
+          );
       } catch (error) {
         console.error("Failed to draw nearest line", error);
       }
@@ -232,7 +231,7 @@ const FaultLinesOverlay = () => {
         });
 
         faultLayerRef.current.addTo(map);
-        
+
         // Bring fault lines to front to ensure they're above GeoJSON province layer
         if (faultLayerRef.current) {
           faultLayerRef.current.bringToFront();

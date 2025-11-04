@@ -13,12 +13,12 @@ const LiveMonitoringPage = () => {
   const [targetEarthquake, setTargetEarthquake] = useState(null);
   const location = useLocation();
   const [initialMapState, setInitialMapState] = useState(null);
-  
+
   // Filter states
   const [filters, setFilters] = useState({
-    magnitude: 'all',
-    depth: 'all',
-    timePeriod: '7d' // Default to 7 days
+    magnitude: "all",
+    depth: "all",
+    timePeriod: "7d", // Default to 7 days
   });
 
   // Check if navigation state has center and zoom
@@ -38,9 +38,9 @@ const LiveMonitoringPage = () => {
   };
 
   const handleFilterChange = (filterType, value) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [filterType]: value
+      [filterType]: value,
     }));
   };
 
@@ -51,32 +51,33 @@ const LiveMonitoringPage = () => {
     // Time period filter
     const now = Date.now();
     const timeRanges = {
-      '24h': 24 * 60 * 60 * 1000,
-      '7d': 7 * 24 * 60 * 60 * 1000,
-      '30d': 30 * 24 * 60 * 60 * 1000
+      "24h": 24 * 60 * 60 * 1000,
+      "7d": 7 * 24 * 60 * 60 * 1000,
+      "30d": 30 * 24 * 60 * 60 * 1000,
     };
-    const timeRange = timeRanges[filters.timePeriod] || timeRanges['24h'];
-    filtered = filtered.filter(eq => now - eq.timestamp <= timeRange);
+    const timeRange = timeRanges[filters.timePeriod] || timeRanges["24h"];
+    filtered = filtered.filter((eq) => now - eq.timestamp <= timeRange);
 
     // Magnitude filter
-    if (filters.magnitude !== 'all') {
-      const [min, max] = filters.magnitude.includes('+') 
+    if (filters.magnitude !== "all") {
+      const [min, max] = filters.magnitude.includes("+")
         ? [parseFloat(filters.magnitude), Infinity]
-        : filters.magnitude.split('-').map(parseFloat);
-      
-      filtered = filtered.filter(eq => {
+        : filters.magnitude.split("-").map(parseFloat);
+
+      filtered = filtered.filter((eq) => {
         const mag = eq.magnitude;
         return mag >= min && (max === Infinity || mag < max);
       });
     }
 
     // Depth filter
-    if (filters.depth !== 'all') {
-      filtered = filtered.filter(eq => {
+    if (filters.depth !== "all") {
+      filtered = filtered.filter((eq) => {
         const depth = eq.depth;
-        if (filters.depth === 'shallow') return depth < 70;
-        if (filters.depth === 'intermediate') return depth >= 70 && depth <= 300;
-        if (filters.depth === 'deep') return depth > 300;
+        if (filters.depth === "shallow") return depth < 70;
+        if (filters.depth === "intermediate")
+          return depth >= 70 && depth <= 300;
+        if (filters.depth === "deep") return depth > 300;
         return true;
       });
     }

@@ -101,26 +101,27 @@ const NearestHazardLines = () => {
           nearestVolcanoLineRef.current = L.polyline(
             [userLatLng, volcanoLatLng],
             {
-              color: "#dc2626", // Red for volcano
+              color: "#a855f7", // Purple for unified distance style
               dashArray: "8, 10",
-              weight: 2.5,
+              weight: 3,
               opacity: 0.8,
             }
           ).addTo(map);
 
           nearestVolcanoLineRef.current.bindPopup(
             `
-            <div style="font-family:'Inter',system-ui,sans-serif;font-size:12px;">
-              <strong style="color:#dc2626;">🌋 Nearest Volcano</strong><br/>
+            <div style="font-family:'Inter',system-ui,sans-serif;font-size:11px;padding:2px;">
               <strong>${nearestVolcano.name}</strong><br/>
-              <small>Province: ${nearestVolcano.province}</small><br/>
-              <span style="color:#dc2626;font-weight:600;">
-                Distance: ${minDistance.toFixed(1)} km
-              </span>
+              <span style="color:#dc2626;font-weight:600;">Distance: ${minDistance.toFixed(
+                1
+              )} km</span>
             </div>
           `,
             {
-              className: "volcano-distance-popup",
+              className: "hazard-distance-popup",
+              closeButton: true,
+              autoClose: false,
+              closeOnClick: true,
             }
           );
         } catch (error) {
@@ -156,21 +157,46 @@ const NearestHazardLines = () => {
         let minDistance = Infinity;
         let nearestPointCoords = null;
 
-        // Iterate through fault features
+        // Iterate through fault features (support LineString and MultiLineString)
         faultDataRef.current.features.forEach((feature) => {
-          if (feature.geometry.type !== "LineString") return;
+          const geometry = feature.geometry;
+          if (!geometry) return;
 
-          const faultLine = turf.lineString(feature.geometry.coordinates);
-          const nearestPoint = turf.nearestPointOnLine(faultLine, userPoint);
-          const distance = turf.distance(userPoint, nearestPoint, {
-            units: "kilometers",
-          });
+          if (geometry.type === "LineString") {
+            const faultLine = turf.lineString(geometry.coordinates);
+            const nearestPoint = turf.nearestPointOnLine(faultLine, userPoint);
+            const distance = turf.distance(userPoint, nearestPoint, {
+              units: "kilometers",
+            });
 
-          if (distance < minDistance) {
-            minDistance = distance;
-            nearestFaultInfo = feature.properties;
-            nearestFaultGeometry = feature.geometry;
-            nearestPointCoords = nearestPoint.geometry.coordinates;
+            if (distance < minDistance) {
+              minDistance = distance;
+              nearestFaultInfo = feature.properties;
+              nearestFaultGeometry = geometry; // LineString
+              nearestPointCoords = nearestPoint.geometry.coordinates;
+            }
+          } else if (geometry.type === "MultiLineString") {
+            // Check each segment and keep the closest segment
+            geometry.coordinates.forEach((segmentCoords) => {
+              const segmentLine = turf.lineString(segmentCoords);
+              const nearestPoint = turf.nearestPointOnLine(
+                segmentLine,
+                userPoint
+              );
+              const distance = turf.distance(userPoint, nearestPoint, {
+                units: "kilometers",
+              });
+
+              if (distance < minDistance) {
+                minDistance = distance;
+                nearestFaultInfo = feature.properties;
+                nearestFaultGeometry = {
+                  type: "LineString",
+                  coordinates: segmentCoords,
+                };
+                nearestPointCoords = nearestPoint.geometry.coordinates;
+              }
+            });
           }
         });
 
@@ -179,51 +205,60 @@ const NearestHazardLines = () => {
 
           try {
             // Highlight the nearest fault line itself
-            const faultCoords = nearestFaultGeometry.coordinates.map(coord => [
-              coord[1],
-              coord[0],
-            ]);
+            const faultCoords = nearestFaultGeometry.coordinates.map(
+              (coord) => [coord[1], coord[0]]
+            );
 
             nearestFaultLayerRef.current = L.polyline(faultCoords, {
               color: "#fb923c",
               weight: 4,
               opacity: 1,
               className: "nearest-fault-highlight",
+              pane: "overlayPane",
             }).addTo(map);
+
+            console.log(
+              "🔶 Drawing fault distance line from",
+              userLatLng,
+              "to",
+              faultLatLng
+            );
+            console.log(
+              "🔶 Nearest fault:",
+              nearestFaultInfo.NAME,
+              "Distance:",
+              minDistance.toFixed(1),
+              "km"
+            );
 
             // Draw distance line from user to nearest point on fault
             nearestFaultLineRef.current = L.polyline(
               [userLatLng, faultLatLng],
               {
-                color: "#f97316", // Orange for fault
+                color: "#a855f7", // Purple for unified distance style
                 dashArray: "8, 10",
-                weight: 2.5,
+                weight: 3,
                 opacity: 0.8,
+                pane: "overlayPane",
               }
             ).addTo(map);
 
             nearestFaultLineRef.current.bindPopup(
               `
-              <div style="font-family:'Inter',system-ui,sans-serif;font-size:12px;">
-                <strong style="color:#f97316;">⚠️ Nearest Fault Line</strong><br/>
-                <strong>${nearestFaultInfo.NAME || "Unknown Fault"}</strong><br/>
-                ${
-                  nearestFaultInfo.TYPE
-                    ? `<small>Type: ${nearestFaultInfo.TYPE}</small><br/>`
-                    : ""
-                }
-                ${
-                  nearestFaultInfo.ACTIVITY
-                    ? `<small>Activity: ${nearestFaultInfo.ACTIVITY}</small><br/>`
-                    : ""
-                }
-                <span style="color:#f97316;font-weight:600;">
-                  Distance: ${minDistance.toFixed(1)} km
-                </span>
+              <div style="font-family:'Inter',system-ui,sans-serif;font-size:11px;padding:2px;">
+                <strong>${
+                  nearestFaultInfo.NAME || "Unknown Fault"
+                }</strong><br/>
+                <span style="color:#f97316;font-weight:600;">Distance: ${minDistance.toFixed(
+                  1
+                )} km</span>
               </div>
             `,
               {
-                className: "fault-distance-popup",
+                className: "hazard-distance-popup",
+                closeButton: true,
+                autoClose: false,
+                closeOnClick: true,
               }
             );
           } catch (error) {

@@ -189,6 +189,7 @@ const RiskMap = ({ riskByProvince, initialMapState }) => {
           style={styleFeature}
           onEachFeature={onEachFeature}
           ref={setGeoJsonRef}
+          pane="tilePane"
         />
         <FaultLinesOverlay />
         <VolcanoesOverlay />

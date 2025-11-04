@@ -229,9 +229,9 @@ const EnhancedMapView = ({
 
       {/* Earthquake Markers - uses FILTERED data */}
       {filteredEarthquakeData.map((event) => (
-        <EarthquakeMarker 
-          key={event.id} 
-          event={event} 
+        <EarthquakeMarker
+          key={event.id}
+          event={event}
           isLatest={earthquakeData[0]?.id === event.id} // Check against raw data's latest
         />
       ))}

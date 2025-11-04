@@ -2,7 +2,7 @@ import React from "react";
 
 const VolcanoLegend = () => {
   return (
-    <div className="absolute top-3 left-3 z-50 pointer-events-auto scale-90 origin-top-left">
+    <div className="absolute top-3 left-3 z-[1000] pointer-events-auto scale-90 origin-top-left">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 overflow-hidden">
         {/* Header */}
         <div className="bg-red-50 border-b border-red-100 px-3 py-2">
@@ -39,10 +39,10 @@ const VolcanoLegend = () => {
           </div>
           <div className="flex items-center gap-3 pt-1 border-t border-slate-200">
             <div
-              className="h-0.5 w-8 bg-red-600 rounded-full"
+              className="h-0.5 w-8 bg-purple-500 rounded-full"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(90deg, #dc2626 0, #dc2626 6px, transparent 6px, transparent 12px)",
+                  "repeating-linear-gradient(90deg, #a855f7 0, #a855f7 6px, transparent 6px, transparent 12px)",
               }}
             ></div>
             <span className="text-xs text-slate-500">Nearest Volcano</span>

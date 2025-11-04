@@ -2,7 +2,7 @@ import React from "react";
 
 const FilterPanel = ({ filters, onFilterChange }) => {
   return (
-  <div className="absolute top-3 left-11/25 -translate-x-1/2 z-1000 pointer-events-auto scale-90 origin-top">
+    <div className="absolute top-3 left-11/25 -translate-x-1/2 z-1000 pointer-events-auto scale-90 origin-top">
       <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200 px-3 py-2">
         <div className="flex items-center gap-2.5">
           {/* Magnitude Filter */}
@@ -10,9 +10,9 @@ const FilterPanel = ({ filters, onFilterChange }) => {
             <label className="text-xs font-medium text-gray-700 whitespace-nowrap">
               Magnitude:
             </label>
-            <select 
+            <select
               value={filters.magnitude}
-              onChange={(e) => onFilterChange('magnitude', e.target.value)}
+              onChange={(e) => onFilterChange("magnitude", e.target.value)}
               className="px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
             >
               <option value="all">All</option>
@@ -27,9 +27,9 @@ const FilterPanel = ({ filters, onFilterChange }) => {
           {/* Depth Filter */}
           <div className="flex items-center gap-2">
             <label className="text-xs font-medium text-gray-700">Depth:</label>
-            <select 
+            <select
               value={filters.depth}
-              onChange={(e) => onFilterChange('depth', e.target.value)}
+              onChange={(e) => onFilterChange("depth", e.target.value)}
               className="px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
             >
               <option value="all">All</option>
@@ -42,9 +42,9 @@ const FilterPanel = ({ filters, onFilterChange }) => {
           {/* Time Period Filter */}
           <div className="flex items-center gap-2">
             <label className="text-xs font-medium text-gray-700">Period:</label>
-            <select 
+            <select
               value={filters.timePeriod}
-              onChange={(e) => onFilterChange('timePeriod', e.target.value)}
+              onChange={(e) => onFilterChange("timePeriod", e.target.value)}
               className="px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
             >
               <option value="24h">Last 24 Hours</option>
