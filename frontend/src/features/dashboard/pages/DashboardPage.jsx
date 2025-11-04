@@ -1,4 +1,5 @@
 import React from "react";
+import { useUserLocation } from "../../auth/context/UserLocationContext";
 
 // Card Components
 import TodaysEarthquakes from "../components/cards/TodaysEarthquakes";
@@ -22,9 +23,28 @@ import HighRiskProvinces from "../components/lists/HighRiskProvinces";
 import VolcanicAdvisories from "../components/lists/VolcanicAdvisories";
 
 const DashboardPage = () => {
+  const { location } = useUserLocation();
+
   return (
     <div className="p-6 bg-stone-50 min-h-screen">
       <div className="max-w-7xl mx-auto space-y-6 scale-90 origin-top">
+        {/* Location Info */}
+        {location && (
+          <div className="flex items-center justify-end gap-2 text-sm">
+            <span className="material-symbols-outlined text-orange-600 text-lg">
+              location_on
+            </span>
+            <span className="font-medium text-gray-800">Your Location</span>
+            <span className="text-gray-600">
+              {location.municipality}, {location.province}
+            </span>
+            <span className="text-gray-400 text-xs">
+              {location.position[0].toFixed(4)}° N,{" "}
+              {location.position[1].toFixed(4)}° E
+            </span>
+          </div>
+        )}
+
         {/* Dashboard Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <TodaysEarthquakes />
@@ -46,9 +66,9 @@ const DashboardPage = () => {
         </div>
 
         {/* Top Details Section */}
-        <div className="grid grid-cols-1 gap-6">
+        {/* <div className="grid grid-cols-1 gap-6">
           <UserLocation />
-        </div>
+        </div> */}
 
         {/* Lists Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
