@@ -11,7 +11,7 @@ from .endpoints import dashboard
 from .endpoints import risk_evaluations
 from .endpoints import users
 from .endpoints import chatbot
-from .endpoints import test
+from .endpoints import simulation
 
 
 api_router = APIRouter()
@@ -36,8 +36,9 @@ async def api_v1_root():
             "dashboard": "/api/v1/dashboard",
             "users_profile": "/api/v1/users/profile",
             "users_location": "/api/v1/users/location",
-            "test_simulate": "/api/v1/test/simulate-earthquake",
-            "test_info": "/api/v1/test/earthquakes-info",
+            "simulation_earthquake": "/api/v1/simulation/simulate-earthquake",
+            "simulation_volcanic": "/api/v1/simulation/simulate-volcanic-advisory",
+            "simulation_reset_volcanic": "/api/v1/simulation/reset-volcanic-advisory",
         },
         "timestamp": now,
     }
@@ -50,4 +51,4 @@ api_router.include_router(volcanoes.router)
 api_router.include_router(risk_evaluations.router)
 api_router.include_router(users.router)
 api_router.include_router(chatbot.router)
-api_router.include_router(test.router)
+api_router.include_router(simulation.router)

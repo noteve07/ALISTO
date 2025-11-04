@@ -1,11 +1,32 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useVolcanicAdvisories } from "../hooks/useVolcanicAdvisories";
 
 const VolcanicAdvisories = () => {
   const { advisories, loading, error } = useVolcanicAdvisories();
 
   // Debug log
-  console.log("🌋 Volcanic Advisories:", { advisories, loading, error });
+  console.log("🌋 VolcanicAdvisories Component Render:", {
+    advisories,
+    loading,
+    error,
+    count: advisories.length,
+    timestamp: new Date().toISOString(),
+  });
+
+  // Track advisories changes
+  useEffect(() => {
+    console.log(
+      "🔔 Advisories state changed in VolcanicAdvisories component!",
+      {
+        count: advisories.length,
+        advisories: advisories.map((a) => ({
+          id: a.id,
+          volcano: a.volcano,
+          alertLevel: a.alertLevel,
+        })),
+      }
+    );
+  }, [advisories]);
 
   const displayRows = useMemo(() => {
     if (loading) {
