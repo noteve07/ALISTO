@@ -28,13 +28,13 @@ const VolcanicAdvisories = () => {
       case 4:
         return "bg-red-500 text-white";
       case 3:
-        return "bg-orange-500 text-white";
+        return "bg-red-500 text-white"; // Red for alert level 3
       case 2:
-        return "bg-yellow-500 text-white";
+        return "bg-orange-500 text-white"; // Orange for alert level 2
       case 1:
-        return "bg-green-500 text-white";
+        return "bg-yellow-500 text-white"; // Changed from green to yellow
       default:
-        return "bg-gray-500 text-white";
+        return "bg-amber-700 text-white"; // Brown for no alert level
     }
   };
 

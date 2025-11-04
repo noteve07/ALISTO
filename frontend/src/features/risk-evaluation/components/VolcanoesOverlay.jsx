@@ -2,13 +2,19 @@ import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import volcanoes from "../../../assets/gis/volcanoes.json";
+import { useVolcanicAdvisories } from "../../live-monitoring/hooks/useVolcanicAdvisories";
 
-// Custom SVG volcano icon (triangle)
+// Custom SVG volcano icon (triangle) - single orange-red color
 const createVolcanoIcon = () => {
+  // Single orange-red color for all volcanoes
+  const fillColor = "#ea580c"; // Orange-red
+  const strokeColor = "#c2410c";
+  const lavaColor = "#f97316";
+
   const svgIcon = `
     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <filter id="shadow-volcano" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
           <feOffset dx="0" dy="1" result="offsetblur"/>
           <feComponentTransfer>
@@ -22,12 +28,12 @@ const createVolcanoIcon = () => {
       </defs>
       <path 
         d="M 12 4 L 20 20 L 4 20 Z" 
-        fill="#dc2626" 
-        stroke="#991b1b" 
+        fill="${fillColor}" 
+        stroke="${strokeColor}" 
         stroke-width="1.5" 
-        filter="url(#shadow)"
+        filter="url(#shadow-volcano)"
       />
-      <circle cx="12" cy="5" r="1.5" fill="#fbbf24" opacity="0.9"/>
+      <circle cx="12" cy="5" r="1.5" fill="${lavaColor}" opacity="0.9"/>
     </svg>
   `;
 
@@ -41,7 +47,16 @@ const createVolcanoIcon = () => {
 };
 
 const VolcanoesOverlay = ({ visible = true }) => {
-  const volcanoIcon = useMemo(() => createVolcanoIcon(), []);
+  const { advisories } = useVolcanicAdvisories();
+
+  // Create a map of volcano_id to advisory
+  const advisoryMap = useMemo(() => {
+    const map = {};
+    advisories.forEach((advisory) => {
+      map[advisory.id] = advisory;
+    });
+    return map;
+  }, [advisories]);
 
   // Don't render if not visible
   if (!visible) return null;
@@ -50,6 +65,10 @@ const VolcanoesOverlay = ({ visible = true }) => {
     <>
       {volcanoes.map((volcano) => {
         if (!volcano.latitude || !volcano.longitude) return null;
+
+        const advisory = advisoryMap[volcano.id];
+        const alertLevel = advisory?.alertLevel || 0;
+        const volcanoIcon = createVolcanoIcon();
 
         return (
           <Marker
@@ -67,6 +86,26 @@ const VolcanoesOverlay = ({ visible = true }) => {
                     <span className="font-medium">Province:</span>{" "}
                     {volcano.province || "Unknown"}
                   </p>
+                  {advisory && (
+                    <>
+                      <p>
+                        <span className="font-medium">Alert Level:</span>{" "}
+                        <span className={`font-semibold ${
+                          alertLevel >= 3 ? 'text-red-600' :
+                          alertLevel >= 2 ? 'text-orange-600' :
+                          alertLevel >= 1 ? 'text-yellow-600' :
+                          'text-gray-600'
+                        }`}>
+                          {alertLevel > 0 ? `Level ${alertLevel}` : 'Normal'}
+                        </span>
+                      </p>
+                      {advisory.alertStatus && (
+                        <p className="text-xs text-gray-500">
+                          Status: {advisory.alertStatus}
+                        </p>
+                      )}
+                    </>
+                  )}
                   <p>
                     <span className="font-medium">Coordinates:</span>
                   </p>

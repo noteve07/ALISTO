@@ -6,26 +6,26 @@ import { useVolcanicAdvisories } from "../hooks/useVolcanicAdvisories";
 
 // Custom SVG volcano icon (triangle) with alert level colors
 const createVolcanoIcon = (alertLevel) => {
-  // Color based on alert level
-  let fillColor = "#dc2626"; // Default red
-  let strokeColor = "#991b1b";
-  let lavaColor = "#fbbf24";
+  // Color based on alert level - consistent with risk evaluation
+  let fillColor = "#8B4513"; // Brown for no alert level
+  let strokeColor = "#654321";
+  let lavaColor = "#d97706";
 
   if (alertLevel >= 4) {
-    fillColor = "#7f1d1d"; // Very dark red for high alert
+    fillColor = "#7f1d1d"; // Very dark red for alert level 4+
     strokeColor = "#450a0a";
     lavaColor = "#ef4444";
   } else if (alertLevel >= 3) {
-    fillColor = "#dc2626"; // Red for elevated
+    fillColor = "#dc2626"; // Red for alert level 3
     strokeColor = "#991b1b";
     lavaColor = "#f97316";
   } else if (alertLevel >= 2) {
-    fillColor = "#ea580c"; // Orange for moderate
+    fillColor = "#ea580c"; // Orange for alert level 2
     strokeColor = "#c2410c";
     lavaColor = "#fbbf24";
-  } else {
-    fillColor = "#f59e0b"; // Amber for low
-    strokeColor = "#d97706";
+  } else if (alertLevel >= 1) {
+    fillColor = "#eab308"; // Yellow for alert level 1
+    strokeColor = "#ca8a04";
     lavaColor = "#fde047";
   }
 
@@ -79,7 +79,7 @@ const getAlertLevelColor = (level) => {
   if (level >= 4) return "text-red-700";
   if (level >= 3) return "text-red-600";
   if (level >= 2) return "text-orange-600";
-  if (level >= 1) return "text-amber-600";
+  if (level >= 1) return "text-yellow-600"; // Changed from amber to yellow
   return "text-gray-600";
 };
 
