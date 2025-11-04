@@ -4,12 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import provincesGeoJson from "../../../assets/gis/provinces.json";
-import {
-  formatRiskScore,
-  formatTimestamp,
-  getRiskColor,
-  getRiskLevelKey,
-} from "../utils/riskUtils";
+import { getRiskColor } from "../utils/riskUtils";
 import FaultLinesOverlay from "./FaultLinesOverlay";
 import VolcanoesOverlay from "./VolcanoesOverlay";
 import NearestHazardLines from "./NearestHazardLines";
@@ -124,25 +119,78 @@ const RiskMap = ({
     const riskLevelLabel = risk?.riskLevel
       ? risk.riskLevel.toUpperCase()
       : "NO DATA";
-    const dynamicScore = formatRiskScore(risk?.dynamicRiskScore);
-    const baseScore = formatRiskScore(risk?.baseRiskScore);
-    const lastCalculated = formatTimestamp(risk?.calculatedAt);
+    const riskColor = getRiskColor(risk?.riskLevel);
+    const dynamicScore = risk?.dynamicRiskScore 
+      ? (risk.dynamicRiskScore * 10).toFixed(1) 
+      : "N/A";
 
-    const tooltipHtml = `
-      <div style="font-size:12px;color:#e2e8f0;">
-        <p style="margin:0;font-weight:600;font-size:13px;color:#f8fafc;">${provinceName}</p>
-        <p style="margin:2px 0 0;">Risk: <strong>${riskLevelLabel}</strong></p>
+    // Get light background color based on risk level
+    const getHeaderStyle = () => {
+      if (!risk?.riskLevel) {
+        return { bg: "#f1f5f9", text: "#64748b" }; // Gray for no data
+      }
+      const level = risk.riskLevel.toLowerCase();
+      if (level.includes("high")) {
+        return { bg: "#fee2e2", text: "#991b1b" }; // Light red
+      }
+      if (level.includes("medium")) {
+        return { bg: "#fef3c7", text: "#92400e" }; // Light yellow
+      }
+      if (level.includes("low")) {
+        return { bg: "#dcfce7", text: "#166534" }; // Light green
+      }
+      return { bg: "#f1f5f9", text: "#64748b" }; // Default gray
+    };
+    const headerStyle = getHeaderStyle();
+
+    const popupHtml = `
+      <div style="min-width: 180px; font-family: system-ui, -apple-system, sans-serif;">
+        <div style="background: ${headerStyle.bg}; padding: 8px 12px; margin: -12px -16px 8px -16px; border-radius: 4px 4px 0 0;">
+          <p style="margin: 0; font-weight: 600; font-size: 14px; color: ${headerStyle.text}; letter-spacing: 0.3px;">${provinceName}</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: ${riskColor}; flex-shrink: 0;"></div>
+          <div style="flex: 1;">
+            <p style="margin: 0; font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Risk Level</p>
+            <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #111827;">${riskLevelLabel}</p>
+          </div>
+        </div>
+        <div style="padding-top: 6px; border-top: 1px solid #e5e7eb;">
+          <p style="margin: 0; font-size: 11px; color: #6b7280;">Risk Score: <strong style="color: #111827;">${dynamicScore}/10</strong></p>
+        </div>
       </div>
     `;
 
-    layer.bindTooltip(tooltipHtml, {
-      sticky: true,
-      direction: "top",
-      opacity: 0.9,
-      className: `risk-tooltip risk-tooltip--${getRiskLevelKey(
-        risk?.riskLevel
-      )}`,
-    });
+    // Get province centroid
+    let centroid;
+    if (feature.geometry.type === "Polygon") {
+      const coords = feature.geometry.coordinates[0];
+      const lats = coords.map((c) => c[1]);
+      const lngs = coords.map((c) => c[0]);
+      centroid = [
+        (Math.min(...lats) + Math.max(...lats)) / 2,
+        (Math.min(...lngs) + Math.max(...lngs)) / 2,
+      ];
+    } else if (feature.geometry.type === "MultiPolygon") {
+      const allCoords = feature.geometry.coordinates.flatMap((poly) => poly[0]);
+      const lats = allCoords.map((c) => c[1]);
+      const lngs = allCoords.map((c) => c[0]);
+      centroid = [
+        (Math.min(...lats) + Math.max(...lats)) / 2,
+        (Math.min(...lngs) + Math.max(...lngs)) / 2,
+      ];
+    }
+
+    // Bind popup to centroid but don't show on hover
+    if (centroid) {
+      layer.bindPopup(popupHtml, {
+        closeButton: true,
+        autoClose: true,
+        closeOnClick: false,
+        className: 'province-risk-popup',
+        maxWidth: 250,
+      });
+    }
 
     layer.on({
       mouseover: (e) => {
@@ -154,15 +202,37 @@ const RiskMap = ({
           fillColor: darkenColor(baseColor, 0.1),
           fillOpacity: 0.9,
         });
-        target.openTooltip();
       },
       mouseout: (e) => {
         if (geoJsonRef.current) {
           geoJsonRef.current.resetStyle(e.target);
         }
-        e.target.closeTooltip();
       },
-      click: () => {},
+      click: (e) => {
+        const target = e.target;
+        const baseColor = getRiskColor(risk?.riskLevel);
+
+        // Highlight the province
+        target.setStyle({
+          weight: 3,
+          color: darkenColor(baseColor, 0.4),
+          fillColor: darkenColor(baseColor, 0.1),
+          fillOpacity: 0.9,
+        });
+
+        // Zoom to province
+        if (mapRef.current && centroid) {
+          mapRef.current.flyTo(centroid, 10, {
+            duration: 1.5,
+            easeLinearity: 0.25,
+          });
+        }
+
+        // Open popup at centroid
+        if (centroid) {
+          target.openPopup(centroid);
+        }
+      },
     });
   };
 
@@ -184,13 +254,42 @@ const RiskMap = ({
 
   return (
     <div className="relative w-full h-full">
+      <style>
+        {`
+          .province-risk-popup .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            overflow: hidden;
+          }
+          .province-risk-popup .leaflet-popup-content {
+            margin: 12px 16px;
+            line-height: 1.4;
+          }
+          .province-risk-popup .leaflet-popup-tip {
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
+          }
+          .province-risk-popup .leaflet-popup-close-button {
+            color: #6b7280 !important;
+            font-size: 20px !important;
+            padding: 4px 8px !important;
+            width: auto !important;
+            height: auto !important;
+            top: 4px !important;
+            right: 4px !important;
+            font-weight: bold;
+          }
+          .province-risk-popup .leaflet-popup-close-button:hover {
+            color: #111827 !important;
+          }
+        `}
+      </style>
       <MapContainer
         center={mapCenter}
         zoom={6}
         scrollWheelZoom
         minZoom={6}
         maxZoom={10}
-        maxBounds={mapBounds}
         maxBoundsViscosity={0.7}
         style={{ width: "100%", height: "100%" }}
         zoomControl={false}
