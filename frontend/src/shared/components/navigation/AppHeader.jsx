@@ -1,7 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { userService } from "@/features/auth/services/userService";
+import {
+  NotificationBell,
+  NotificationDropdown,
+} from "@/features/notifications/components";
+import { useNotifications } from "@/features/notifications/hooks/useNotifications";
+import {
+  formatNotification,
+  getNavigationConfig,
+} from "@/features/notifications/utils/notificationUtils";
 
 const AppHeader = ({ onLogout }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -12,6 +21,14 @@ const AppHeader = ({ onLogout }) => {
   const userMenuRef = useRef(null);
   const hasFetchedProfile = useRef(false);
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  // Fetch notifications with real-time subscription
+  const {
+    notifications: rawNotifications,
+    loading: notificationsLoading,
+    markAsRead,
+  } = useNotifications();
 
   // Fetch user profile on mount with minimum 2 second loading
   useEffect(() => {
@@ -42,33 +59,35 @@ const AppHeader = ({ onLogout }) => {
     fetchProfile();
   }, [user]);
 
-  // Hardcoded notifications for now
-  const notifications = [
-    {
-      id: 1,
-      title: "Earthquake Alert",
-      message: "Magnitude 5.2 detected near Manila",
-      time: "5 minutes ago",
-      type: "alert",
-      unread: true,
-    },
-    {
-      id: 2,
-      title: "System Update",
-      message: "New features available in ISA Chatbot",
-      time: "2 hours ago",
-      type: "info",
-      unread: true,
-    },
-    {
-      id: 3,
-      title: "Risk Assessment Complete",
-      message: "Your province risk evaluation is ready",
-      time: "1 day ago",
-      type: "success",
-      unread: false,
-    },
-  ];
+  // Format notifications for UI
+  const notifications = useMemo(() => {
+    return rawNotifications.map(formatNotification).filter(Boolean);
+  }, [rawNotifications]);
+
+  const unreadCount = notifications.filter((n) => n.unread).length;
+
+  // Notification handlers
+  const handleNotificationClick = async (notification) => {
+    console.log("Notification clicked:", notification);
+
+    // Mark as read
+    if (notification.unread && notification.id) {
+      await markAsRead(notification.id);
+    }
+
+    // Get navigation config and navigate
+    const navConfig = getNavigationConfig(notification);
+    if (navConfig) {
+      navigate(navConfig.pathname, { state: navConfig.state });
+    }
+
+    setIsNotificationsOpen(false);
+  };
+
+  const handleViewAllNotifications = () => {
+    navigate("/app/notifications");
+    setIsNotificationsOpen(false);
+  };
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -131,151 +150,20 @@ const AppHeader = ({ onLogout }) => {
           </div>
           {/* Notifications */}
           <div className="relative" ref={notificationsRef}>
-            <button
+            <NotificationBell
+              isOpen={isNotificationsOpen}
               onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-              className="relative p-2 text-white/90 hover:bg-white/10 rounded-lg transition-all duration-200"
-            >
-              <span className="sr-only">View notifications</span>
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-              {/* Notification badge */}
-              {notifications.filter((n) => n.unread).length > 0 && (
-                <span className="absolute top-2 right-2 flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-v2 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-v2"></span>
-                </span>
-              )}
-            </button>
+              unreadCount={unreadCount}
+            />
 
             {/* Notifications Dropdown */}
             {isNotificationsOpen && (
-              <div
-                className="absolute right-0 mt-2 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
-                style={{ zIndex: 9999 }}
-              >
-                <div className="p-5 bg-linear-to-r from-primary-v2/5 to-primary/5 border-b border-gray-100">
-                  <h3 className="text-lg font-bold text-gray-900">
-                    Notifications
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-0.5">
-                    {notifications.filter((n) => n.unread).length > 0
-                      ? `You have ${
-                          notifications.filter((n) => n.unread).length
-                        } unread notification${
-                          notifications.filter((n) => n.unread).length > 1
-                            ? "s"
-                            : ""
-                        }`
-                      : "All caught up!"}
-                  </p>
-                </div>
-                <div className="max-h-96 overflow-y-auto">
-                  {notifications.map((notification) => (
-                    <div
-                      key={notification.id}
-                      className={`p-4 border-b border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer ${
-                        notification.unread ? "bg-primary-v2/5" : ""
-                      }`}
-                    >
-                      <div className="flex items-start gap-3">
-                        <div
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                            notification.type === "alert"
-                              ? "bg-red-100 text-red-600"
-                              : notification.type === "info"
-                              ? "bg-blue-100 text-blue-600"
-                              : "bg-green-100 text-green-600"
-                          }`}
-                        >
-                          {notification.type === "alert" ? (
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-1.732-1.333-2.464 0L4.35 16c-.77 1.333.192 3 1.732 3z"
-                              />
-                            </svg>
-                          ) : notification.type === "info" ? (
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                          )}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-gray-900">
-                            {notification.title}
-                          </p>
-                          <p className="text-sm text-gray-600 mt-1 line-clamp-2">
-                            {notification.message}
-                          </p>
-                          <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
-                            <svg
-                              className="w-3 h-3"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            {notification.time}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="p-3 text-center border-t border-gray-100 bg-gray-50">
-                  <button className="text-sm font-semibold text-primary-v2 hover:text-primary transition-colors">
-                    View all notifications →
-                  </button>
-                </div>
-              </div>
+              <NotificationDropdown
+                notifications={notifications}
+                onNotificationClick={handleNotificationClick}
+                onViewAll={handleViewAllNotifications}
+                loading={notificationsLoading}
+              />
             )}
           </div>
 
