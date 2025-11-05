@@ -1,5 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import { 
+  showDesktopNotification, 
+  requestNotificationPermission,
+  initializeDesktopNotifications 
+} from "../utils/desktopNotifications";
 
 /**
  * Hook to fetch and subscribe to real-time notifications
@@ -40,6 +45,9 @@ export const useNotifications = () => {
   // Subscribe to real-time changes
   useEffect(() => {
     fetchNotifications();
+    
+    // Initialize desktop notifications
+    initializeDesktopNotifications();
 
     // Set up real-time subscription
     const channel = supabase
@@ -51,9 +59,20 @@ export const useNotifications = () => {
           schema: "public",
           table: "notifications",
         },
-        (payload) => {
+        async (payload) => {
           console.log("New notification received:", payload.new);
           setNotifications((prev) => [payload.new, ...prev]);
+          
+          // Show desktop notification for new notifications
+          try {
+            // Request permission if not already granted
+            const hasPermission = await requestNotificationPermission();
+            if (hasPermission) {
+              await showDesktopNotification(payload.new);
+            }
+          } catch (error) {
+            console.error("Error showing desktop notification:", error);
+          }
         }
       )
       .on(
