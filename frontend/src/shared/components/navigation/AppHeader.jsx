@@ -11,6 +11,7 @@ import {
   formatNotification,
   getNavigationConfig,
 } from "@/features/notifications/utils/notificationUtils";
+import { playEarthquakeSound, getEarthquakeUrgency } from "@/shared/utils/earthquakeSounds";
 
 const AppHeader = ({ onLogout }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -114,6 +115,21 @@ const AppHeader = ({ onLogout }) => {
   const userEmail = user?.email || "user@alisto.com";
   const userInitial = firstName.charAt(0).toUpperCase();
 
+  // TEMPORARY: Test earthquake sound function
+  const testEarthquakeSound = async (magnitude) => {
+    console.log(`🧪 TESTING earthquake sound with magnitude ${magnitude}`);
+    const urgency = getEarthquakeUrgency(magnitude);
+    
+    try {
+      await playEarthquakeSound(magnitude, {
+        urgency,
+        source: 'header-test'
+      });
+    } catch (error) {
+      console.error('Test sound failed:', error);
+    }
+  };
+
   return (
     <header className="bg-[#213d53] px-6 py-2 shadow-md">
       <div className="flex items-center justify-between">
@@ -147,6 +163,31 @@ const AppHeader = ({ onLogout }) => {
               <div className="absolute inset-0 w-2 h-2 bg-green-300 rounded-full animate-ping"></div>
             </div>
             <span className="text-xs font-semibold text-green-300">Online</span>
+          </div>
+
+          {/* TEMPORARY: Test Sound Buttons */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => testEarthquakeSound(7.2)}
+              className="px-2 py-1 text-xs bg-red-500/20 text-red-300 border border-red-400/30 rounded hover:bg-red-500/30 transition-colors"
+              title="Test Major Earthquake Sound (7.2)"
+            >
+              🔊 7.2
+            </button>
+            <button
+              onClick={() => testEarthquakeSound(4.5)}
+              className="px-2 py-1 text-xs bg-yellow-500/20 text-yellow-300 border border-yellow-400/30 rounded hover:bg-yellow-500/30 transition-colors"
+              title="Test Moderate Earthquake Sound (4.5)"
+            >
+              🔊 4.5
+            </button>
+            <button
+              onClick={() => testEarthquakeSound(2.8)}
+              className="px-2 py-1 text-xs bg-gray-500/20 text-gray-300 border border-gray-400/30 rounded hover:bg-gray-500/30 transition-colors"
+              title="Test Minor Earthquake Sound (2.8)"
+            >
+              🔊 2.8
+            </button>
           </div>
           {/* Notifications */}
           <div className="relative" ref={notificationsRef}>
