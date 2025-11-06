@@ -15,7 +15,7 @@ const VolcanicAdvisories = () => {
     const colors = {
       0: "text-green-700 bg-green-100 border-green-200",
       1: "text-yellow-700 bg-yellow-100 border-yellow-200",
-      2: "text-orange-700 bg-orange-100 border-orange-200",
+      2: "text-primary-v2 bg-primary-v2/10 border-primary-v2/20",
       3: "text-red-700 bg-red-100 border-red-200",
       4: "text-purple-700 bg-purple-100 border-purple-200",
       5: "text-red-900 bg-red-200 border-red-300",
@@ -44,7 +44,7 @@ const VolcanicAdvisories = () => {
           </span>
         </div>
         <div className="flex items-center justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-v2"></div>
         </div>
       </div>
     );

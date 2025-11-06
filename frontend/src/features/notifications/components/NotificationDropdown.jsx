@@ -26,9 +26,9 @@ const NotificationDropdown = ({
         <h3 className="text-lg font-bold text-gray-900">Notifications</h3>
         <p className="text-sm text-gray-600 mt-0.5">
           {unreadCount > 0
-            ? `You have ${unreadCount} unread notification${
-                unreadCount > 1 ? "s" : ""
-              }`
+            ? `You have ${
+                unreadCount > 99 ? "99+" : unreadCount
+              } unread notification${unreadCount > 1 ? "s" : ""}`
             : "All caught up!"}
         </p>
       </div>

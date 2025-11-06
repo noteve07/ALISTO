@@ -138,9 +138,9 @@ const AppHeader = ({ onLogout }) => {
       <div className="flex items-center justify-between">
         {/* Logo and Tagline */}
         <div className="flex items-center gap-3">
-          <div 
+          <div
             className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity duration-200"
-            onClick={() => window.open('/', '_blank')}
+            onClick={() => window.open("/", "_blank")}
             title="Visit ALISTO Landing Page"
           >
             <div className="relative">

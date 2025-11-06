@@ -31,7 +31,7 @@ const DashboardPage = () => {
         {/* Location Info */}
         {location && (
           <div className="flex items-center justify-end gap-2 text-sm">
-            <span className="material-symbols-outlined text-orange-600 text-lg">
+            <span className="material-symbols-outlined text-primary-v2 text-lg">
               location_on
             </span>
             <span className="font-medium text-gray-800">Your Location</span>
