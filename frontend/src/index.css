@@ -3,8 +3,8 @@
 @theme {
   --color-primary: #c27930;
   --color-primary-v2: #ea772e;
-  --color-primary-v2-02: #cd6f40;
-  --color-primary-v2-01: #D2691E;
+  /* --color-primary-v2-02: #cd6f40;
+  --color-primary-v2-01: #D2691E; */
   --color-background: #faf9f7;
   --color-background-alt: #f8f8f8;
 }
