@@ -4,7 +4,6 @@ import EarthquakeMarker from "./EarthquakeMarker";
 import VolcanoMarkers from "./VolcanoMarkers";
 import MapLegend from "./MapLegend";
 import UserLocationMarker from "./UserLocationMarker";
-import { playEarthquakeSound, getEarthquakeUrgency } from "@/shared/utils/earthquakeSounds";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -62,21 +61,51 @@ const MapController = ({
 
       // Play sound notification for new earthquake
       try {
-        // Extract and validate magnitude
-        const magnitude = parseFloat(latestEarthquake.magnitude) || 0;
-        console.log(`🌍 New earthquake detected - Magnitude: ${magnitude} (raw: ${latestEarthquake.magnitude})`);
-        
-        // Determine urgency based on magnitude
-        const urgency = getEarthquakeUrgency(magnitude);
-        console.log(`📊 Urgency level: ${urgency} (magnitude ${magnitude})`);
-        
-        // Play appropriate sound based on magnitude
-        playEarthquakeSound(magnitude, {
-          urgency,
-          source: 'website'
-        });
+        // Create audio context for earthquake alert sound
+        const audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+
+        // Create earthquake alert: 3 rounds of 3 beeps each with 2 second intervals
+        const playEarthquakeAlert = () => {
+          // Play 3 rounds of 3 beeps each with 2 second intervals
+          for (let round = 0; round < 3; round++) {
+            setTimeout(() => {
+              // Play 3 beeps per round
+              for (let beep = 0; beep < 3; beep++) {
+                setTimeout(() => {
+                  const oscillator = audioContext.createOscillator();
+                  const gainNode = audioContext.createGain();
+
+                  oscillator.connect(gainNode);
+                  gainNode.connect(audioContext.destination);
+
+                  // Earthquake alert frequency - deep and urgent
+                  oscillator.frequency.setValueAtTime(
+                    400,
+                    audioContext.currentTime
+                  );
+                  oscillator.frequency.exponentialRampToValueAtTime(
+                    200,
+                    audioContext.currentTime + 0.3
+                  );
+
+                  gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+                  gainNode.gain.exponentialRampToValueAtTime(
+                    0.01,
+                    audioContext.currentTime + 0.3
+                  );
+
+                  oscillator.start(audioContext.currentTime);
+                  oscillator.stop(audioContext.currentTime + 0.3);
+                }, beep * 400); // 400ms between beeps
+              }
+            }, round * 2000); // 2 second interval between rounds
+          }
+        };
+
+        playEarthquakeAlert();
       } catch (error) {
-        console.error("🔇 Error playing earthquake sound:", error);
+        console.log("🔇 Audio not supported or blocked:", error);
       }
 
       // Calculate appropriate zoom level based on magnitude

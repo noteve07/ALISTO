@@ -26,8 +26,8 @@ const DashboardPage = () => {
   const { location } = useUserLocation();
 
   return (
-    <div className="px-4 pt-4 pb-1 bg-[#f5f2ef]">
-      <div className="max-w-7xl mx-auto space-y-6 scale-90 origin-top pb-0">
+    <div className="p-6 bg-stone-50 min-h-screen">
+      <div className="max-w-7xl mx-auto space-y-6 scale-90 origin-top">
         {/* Location Info */}
         {location && (
           <div className="flex items-center justify-end gap-2 text-sm">
@@ -76,7 +76,7 @@ const DashboardPage = () => {
           <VolcanicAdvisories />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 mb-0">
+        <div className="grid grid-cols-1 gap-6">
           <HighRiskProvinces />
         </div>
 
