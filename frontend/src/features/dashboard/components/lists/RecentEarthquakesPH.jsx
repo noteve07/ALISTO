@@ -30,6 +30,10 @@ const RecentEarthquakesPH = () => {
   };
 
   const handleLoadMore = () => {
+    console.log("Load more clicked:", {
+      showAll,
+      earthquakeDataLength: earthquakeData.length,
+    });
     setLoadingMore(true);
     setTimeout(() => {
       setShowAll(true);
@@ -37,8 +41,8 @@ const RecentEarthquakesPH = () => {
     }, 500);
   };
 
-  // Show 7 initially, or all if showAll is true
-  const displayCount = showAll ? earthquakeData.length : 7;
+  // Show 4 initially, or all if showAll is true
+  const displayCount = showAll ? earthquakeData.length : 4;
   const earthquakes = earthquakeData.slice(0, displayCount).map((eq) => ({
     id: eq.id,
     magnitude: eq.magnitude,
@@ -47,6 +51,15 @@ const RecentEarthquakesPH = () => {
     depth: `${eq.depth} km`,
     felt: eq.magnitude >= 3.0,
   }));
+
+  // Debug logging
+  console.log("Dashboard Earthquakes Debug:", {
+    totalEarthquakes: earthquakeData.length,
+    showAll,
+    displayCount,
+    displayedEarthquakes: earthquakes.length,
+    shouldShowLoadMore: !showAll && earthquakeData.length > 4,
+  });
 
   if (loading) {
     return (
@@ -74,7 +87,7 @@ const RecentEarthquakesPH = () => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-xl font-semibold text-gray-900">
@@ -92,9 +105,9 @@ const RecentEarthquakesPH = () => {
       </div>
 
       <div
-        className={`h-[360px] space-y-4 ${
+        className={`space-y-4 mb-4 ${
           showAll
-            ? "overflow-y-auto scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-50"
+            ? "max-h-[480px] overflow-y-auto scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-50"
             : "overflow-hidden"
         }`}
       >
@@ -145,12 +158,20 @@ const RecentEarthquakesPH = () => {
         ))}
       </div>
 
-      {!showAll && earthquakeData.length > 7 && (
-        <div className="flex items-center justify-center mt-6 pt-4 border-t border-gray-100">
+      {!showAll && earthquakeData.length > 4 && (
+        <div className="flex items-center justify-center mb-4 pt-4 border-t border-gray-100">
           <button
-            onClick={handleLoadMore}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log("Button clicked!", {
+                showAll,
+                earthquakeDataLength: earthquakeData.length,
+              });
+              handleLoadMore();
+            }}
             disabled={loadingMore}
-            className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium disabled:opacity-50"
+            className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium disabled:opacity-50 cursor-pointer"
           >
             {loadingMore ? (
               <>
@@ -170,7 +191,7 @@ const RecentEarthquakesPH = () => {
       )}
 
       {/* Footer Links */}
-      <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
+      <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs">
         <button
           onClick={() => navigate("/app/live-monitoring")}
           className="flex items-center gap-1.5 text-gray-600 hover:text-gray-800 font-medium"

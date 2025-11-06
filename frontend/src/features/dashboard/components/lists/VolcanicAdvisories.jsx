@@ -70,8 +70,8 @@ const VolcanicAdvisories = () => {
         </span>
       </div>
 
-      <div className="space-y-4 h-[360px] overflow-hidden">
-        {advisories.slice(0, 4).map((advisory) => (
+      <div className="flex-1 space-y-4 overflow-y-auto pr-2 min-h-0">
+        {advisories.map((advisory) => (
           <a
             key={advisory.id}
             href={advisory.bulletinLink || "#"}
