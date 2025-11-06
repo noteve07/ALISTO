@@ -20,7 +20,7 @@ const HeroLeft = () => {
 
       {/* Modern Headline with Staggered Animation */}
       <div className="space-y-6 relative">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight select-none">
           <span
             className={`inline-block text-primary-v2 transform transition-all duration-700 ${
               isVisible
@@ -40,18 +40,18 @@ const HeroLeft = () => {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            Information for
+            Information
           </span>
           <br />
           <span
-            className={`inline-block bg-gradient-to-r from-primary-v2 to-orange-600 bg-clip-text text-transparent transform transition-all duration-700 ${
+            className={`inline-block text-primary-v2 transform transition-all duration-700 ${
               isVisible
                 ? "translate-y-0 opacity-100"
                 : "translate-y-8 opacity-0"
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            Seismic Tracking
+            for Seismic Tracking
           </span>
           <br />
           <span
@@ -75,9 +75,10 @@ const HeroLeft = () => {
         >
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl font-light mt-4">
             A web platform with{" "}
-            <span className="text-primary-v2 font-semibold relative">
+            <span className="text-primary-v2 font-semibold relative group cursor-pointer transition-all duration-300 hover:scale-105">
               AI-powered
-              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary-v2 to-orange-400 rounded-full"></div>
+              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary-v2 to-orange-400 rounded-full group-hover:h-1 transition-all duration-300"></div>
+              <div className="absolute -inset-1 bg-primary-v2/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
             </span>{" "}
             earthquake monitoring, provincial risk analysis, chatbot, and alert
             system.

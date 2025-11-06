@@ -12,10 +12,11 @@ const HeroGraphics = () => {
             <img
               src="/hero/hero_map.png"
               alt="Philippines Map"
-              className="w-full h-full object-contain animate-pulse-slow drop-shadow-lg"
+              className="w-full h-full object-contain animate-pulse-slow drop-shadow-lg select-none pointer-events-none"
               style={{
                 filter: "drop-shadow(0 10px 25px rgba(0,0,0,0.1))",
               }}
+              draggable={false}
             />
           </div>
 
@@ -28,10 +29,11 @@ const HeroGraphics = () => {
               <img
                 src="/hero/hero_location.png"
                 alt="Location Pin"
-                className="w-28 h-28 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform -rotate-30"
+                className="w-28 h-28 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform -rotate-30 select-none"
                 style={{
                   filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))",
                 }}
+                draggable={false}
               />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></div>
             </div>
@@ -46,10 +48,11 @@ const HeroGraphics = () => {
               <img
                 src="/hero/hero_warning.png"
                 alt="Warning"
-                className="w-24 h-24 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform rotate-10"
+                className="w-24 h-24 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform rotate-10 select-none"
                 style={{
                   filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))",
                 }}
+                draggable={false}
               />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-ping"></div>
             </div>
@@ -64,10 +67,11 @@ const HeroGraphics = () => {
               <img
                 src="/hero/hero_notification.png"
                 alt="Notification"
-                className="w-18 h-18 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform rotate-12"
+                className="w-18 h-18 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform rotate-12 select-none"
                 style={{
                   filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))",
                 }}
+                draggable={false}
               />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-500 rounded-full animate-ping"></div>
             </div>
@@ -82,10 +86,11 @@ const HeroGraphics = () => {
               <img
                 src="/hero/hero_announcement.png"
                 alt="Announcement"
-                className="w-26 h-26 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform rotate-30"
+                className="w-26 h-26 drop-shadow-lg hover:scale-110 transition-transform duration-300 transform rotate-30 select-none"
                 style={{
                   filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))",
                 }}
+                draggable={false}
               />
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
             </div>

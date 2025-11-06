@@ -47,34 +47,12 @@ const Header = () => {
         onClick={() => navigate("/")}
       >
         <div className="relative">
-          {/* Circular background with concentric rings - smaller size */}
-          <div className="w-10 h-10 bg-primary-v2 rounded-full flex items-center justify-center relative">
-            {/* Outer ring */}
-            <div className="absolute inset-0 border-2 border-primary-v2 rounded-full"></div>
-            {/* Middle ring */}
-            <div className="absolute inset-0.5 border border-primary-v2/60 rounded-full"></div>
-            {/* Inner ring */}
-            <div className="absolute inset-1 border border-primary-v2/30 rounded-full"></div>
-
-            {/* Location pin with zigzag earthquake heartbeat */}
-            <svg
-              className="w-6 h-6 text-white relative z-10"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-              <circle cx="12" cy="9" r="2.5" fill="white" />
-              {/* Zigzag earthquake heartbeat line inside white circle */}
-              <path
-                d="M9.5 9h0.8l0.4-1.2 0.6 2.4 0.4-1.2h0.8"
-                stroke="#D2691E"
-                strokeWidth="1.2"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+          <img
+            src="/logo/alisto_logo.png"
+            alt="ALISTO Logo"
+            className="w-10 h-10 object-contain select-none"
+            draggable={false}
+          />
         </div>
         <h2 className="font-black text-2xl tracking-wide text-primary-v2">
           ALISTO
@@ -100,15 +78,32 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <button
           onClick={() => navigate("/login")}
-          className="px-6 py-3 text-base font-medium text-gray-700 hover:text-primary-v2 transition-all duration-300 cursor-pointer select-none"
+          className="group relative px-6 py-3 text-base font-medium text-gray-700 hover:text-primary-v2 transition-all duration-300 cursor-pointer select-none rounded-lg overflow-hidden"
         >
-          Login
+          <div className="absolute inset-0 bg-primary-v2/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+          <span className="relative">Login</span>
         </button>
         <button
           onClick={() => navigate("/signup")}
-          className="px-8 py-3 text-base font-bold rounded-lg bg-primary-v2 text-white hover:bg-orange-600 transition-all duration-300 cursor-pointer select-none"
+          className="group relative px-8 py-3 text-base font-bold rounded-lg bg-primary-v2 text-white hover:bg-primary-v2/90 transition-all duration-300 cursor-pointer select-none transform hover:scale-105 hover:-translate-y-0.5 shadow-md hover:shadow-lg overflow-hidden"
         >
-          Sign Up
+          <div className="absolute inset-0 bg-white/10 transform -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+          <span className="relative flex items-center">
+            Sign Up
+            <svg
+              className="w-4 h-4 ml-1 group-hover:translate-x-0.5 transition-transform duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </span>
         </button>
       </div>
     </div>
