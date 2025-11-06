@@ -13,7 +13,10 @@ const HeroLeft = () => {
       {/* Modern Headline */}
       <div className="space-y-8">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-v2 leading-tight">
-          Automated Live Information for Seismic Tracking and Observation
+          Automated Live<br />
+          Information for<br />
+          Seismic Tracking<br />
+          and Observation
         </h1>
 
         {/* Modern Subheadline */}
