@@ -21,7 +21,7 @@ const ProvinceActivityChart = () => {
   const generateColors = (count) => {
     // Sorted from amber orange to amber yellow (less saturated) - matches data order (highest to lowest count)
     const baseColors = [
-      "#c9782e", // Muted amber orange (dark) - for province with most earthquakes
+      "#ea772e", // Primary color (dark) - for province with most earthquakes
       "#d18a45", // Muted dark amber
       "#d89b5c", // Muted medium-dark amber
       "#dfac73", // Muted medium amber
@@ -114,7 +114,7 @@ const ProvinceActivityChart = () => {
           </h3>
           <p className="text-sm text-gray-600">{apiData.subtitle}</p>
         </div>
-        <span className="material-symbols-outlined text-primary text-xl">
+        <span className="material-symbols-outlined text-primary-v2 text-xl">
           pie_chart
         </span>
       </div>

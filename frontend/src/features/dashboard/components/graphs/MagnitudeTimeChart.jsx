@@ -21,7 +21,7 @@ const MagnitudeTimeChart = () => {
 
   const getMagnitudeColor = (magnitude) => {
     if (magnitude >= 4.5) return 'bg-red-500'
-    if (magnitude >= 3.5) return 'bg-orange-500'
+    if (magnitude >= 3.5) return 'bg-primary-v2'
     if (magnitude >= 3.0) return 'bg-yellow-500'
     return 'bg-green-500'
   }
@@ -39,7 +39,7 @@ const MagnitudeTimeChart = () => {
           <h3 className="text-lg font-semibold text-gray-900">{chartData.title}</h3>
           <p className="text-sm text-gray-600">{chartData.subtitle}</p>
         </div>
-        <span className="material-symbols-outlined text-primary text-xl">
+        <span className="material-symbols-outlined text-primary-v2 text-xl">
           scatter_plot
         </span>
       </div>
@@ -114,7 +114,7 @@ const MagnitudeTimeChart = () => {
           <span className="text-xs text-gray-600">3.0-3.5</span>
         </div>
         <div className="flex items-center space-x-1">
-          <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-primary-v2 rounded-full"></div>
           <span className="text-xs text-gray-600">3.5-4.5</span>
         </div>
         <div className="flex items-center space-x-1">
