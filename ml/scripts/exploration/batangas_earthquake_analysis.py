@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 
 # Define paths
-csv_path = os.path.join(os.path.dirname(__file__), '..', '..', 'dataset', 'earthquake', 'interim', 'cleaned_v1_eq_data.csv')
+csv_path = os.path.join(os.path.dirname(__file__), '..', '..', 'dataset', 'earthquake', 'interim', 'cleaned_v2_eq_data.csv')
 
 # Read CSV (READ ONLY)
 df = pd.read_csv(csv_path)
@@ -17,32 +17,32 @@ df['date_time'] = pd.to_datetime(df['date_time'])
 df['date'] = df['date_time'].dt.date
 df['year'] = df['date_time'].dt.year
 
-# Filter for Cebu province
-cebu_df = df[df['province'] == 'Cebu'].copy()
+# Filter for Batangas province
+batangas_df = df[df['province'] == 'Batangas'].copy()
 
 print("=" * 60)
-print("CEBU EARTHQUAKE FREQUENCY ANALYSIS - January 2018 onwards")
+print("BATANGAS EARTHQUAKE FREQUENCY ANALYSIS - January 2018 onwards")
 print("=" * 60)
 
-if len(cebu_df) == 0:
-    print("\nNo earthquakes recorded in Cebu for this dataset.")
+if len(batangas_df) == 0:
+    print("\nNo earthquakes recorded in Batangas for this dataset.")
 else:
     # Filter from January 2018 onwards
     start_date = pd.to_datetime('2018-01-01')
-    cebu_filtered = cebu_df[cebu_df['date_time'] >= start_date]
+    batangas_filtered = batangas_df[batangas_df['date_time'] >= start_date]
     
-    if len(cebu_filtered) == 0:
-        print(f"\nNo earthquakes recorded in Cebu from January 2018 onwards.")
-        print(f"Total earthquakes in dataset: {len(cebu_df)}")
+    if len(batangas_filtered) == 0:
+        print(f"\nNo earthquakes recorded in Batangas from January 2018 onwards.")
+        print(f"Total earthquakes in dataset: {len(batangas_df)}")
     else:
         # Daily frequency
-        daily_freq = cebu_filtered.groupby('date').size().reset_index(name='count')
+        daily_freq = batangas_filtered.groupby('date').size().reset_index(name='count')
         daily_freq['date'] = pd.to_datetime(daily_freq['date'])
         daily_freq = daily_freq.sort_values('date')
         
-        print(f"\nTotal earthquakes in Cebu (Jan 2018 onwards): {len(cebu_filtered)}")
+        print(f"\nTotal earthquakes in Batangas (Jan 2018 onwards): {len(batangas_filtered)}")
         print(f"Days with earthquakes: {len(daily_freq)}")
-        print(f"Average earthquakes per active day: {len(cebu_filtered) / len(daily_freq):.2f}")
+        print(f"Average earthquakes per active day: {len(batangas_filtered) / len(daily_freq):.2f}")
         print(f"Date range: {daily_freq['date'].min().date()} to {daily_freq['date'].max().date()}")
         
         print("\n" + "-" * 60)
@@ -56,7 +56,7 @@ else:
             count = row['count']
             
             # Get magnitude range for that day
-            day_data = cebu_filtered[cebu_filtered['date'] == date]
+            day_data = batangas_filtered[batangas_filtered['date'] == date]
             mag_min = day_data['magnitude'].min()
             mag_max = day_data['magnitude'].max()
             
@@ -66,7 +66,7 @@ else:
         print(f"Total: {daily_freq['count'].sum()} earthquakes")
         
         # Get max magnitude for each day to determine color
-        max_mag_per_day = cebu_filtered.groupby('date')['magnitude'].max().reset_index()
+        max_mag_per_day = batangas_filtered.groupby('date')['magnitude'].max().reset_index()
         max_mag_per_day['date'] = pd.to_datetime(max_mag_per_day['date'])
         
         # Merge with daily_freq
@@ -83,7 +83,7 @@ else:
         bars = ax1.bar(daily_freq['date'], daily_freq['count'], color=colors, alpha=0.75, linewidth=0.5)
         ax1.set_xlabel('Date', fontsize=11, fontweight='bold')
         ax1.set_ylabel('Number of Earthquakes', fontsize=11, fontweight='bold')
-        ax1.set_title('Cebu Earthquake Frequency - Daily (January 2018 onwards)', fontsize=13, fontweight='bold')
+        ax1.set_title('Batangas Earthquake Frequency - Daily (January 2018 onwards)', fontsize=13, fontweight='bold')
         ax1.set_ylim(0, daily_freq['count'].max() * 1.1)  # Add 10% padding at top
         ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
         ax1.xaxis.set_major_locator(mdates.AutoDateLocator())
@@ -104,7 +104,7 @@ else:
         ax2.fill_between(daily_freq['date'], daily_freq['cumulative'], alpha=0.3, color='red')
         ax2.set_xlabel('Date', fontsize=11, fontweight='bold')
         ax2.set_ylabel('Cumulative Count', fontsize=11, fontweight='bold')
-        ax2.set_title('Cebu Cumulative Earthquake Frequency (January 2018 onwards)', fontsize=13, fontweight='bold')
+        ax2.set_title('Batangas Cumulative Earthquake Frequency (January 2018 onwards)', fontsize=13, fontweight='bold')
         ax2.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
         ax2.xaxis.set_major_locator(mdates.AutoDateLocator())
         plt.setp(ax2.xaxis.get_majorticklabels(), rotation=45, ha='right')
@@ -113,7 +113,7 @@ else:
         plt.tight_layout()
         
         # Save figure
-        output_path = os.path.join(os.path.dirname(__file__), 'cebu_earthquake_analysis.png')
+        output_path = os.path.join(os.path.dirname(__file__), 'batangas_earthquake_analysis.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
         print(f"\n✓ Visualization saved to: {output_path}")
         
