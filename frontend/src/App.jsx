@@ -19,6 +19,7 @@ import RiskEvaluationPage from "./features/risk-evaluation/pages/RiskEvaluationP
 import HotlinePage from "./features/hotlines/pages/HotlinePage";
 import ChatbotPage from "./features/chatbot/pages/ChatbotPage";
 import AccountPage from "./features/account/pages/AccountPage";
+import NotificationsPage from "./features/notifications/pages/NotificationsPage";
 
 // Shared Pages
 import ErrorPage from "./shared/pages/ErrorPage";
@@ -65,6 +66,7 @@ const App = () => {
         { path: "risk-evaluation", element: <RiskEvaluationPage /> },
         { path: "emergency-hotlines", element: <HotlinePage /> },
         { path: "chatbot", element: <ChatbotPage /> },
+        { path: "notifications", element: <NotificationsPage /> },
         { path: "account", element: <AccountPage /> },
         { path: "*", element: <ErrorPage /> },
       ],
