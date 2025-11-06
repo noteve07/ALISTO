@@ -11,7 +11,10 @@ import {
   formatNotification,
   getNavigationConfig,
 } from "@/features/notifications/utils/notificationUtils";
-import { playEarthquakeSound, getEarthquakeUrgency } from "@/shared/utils/earthquakeSounds";
+import {
+  playEarthquakeSound,
+  getEarthquakeUrgency,
+} from "@/shared/utils/earthquakeSounds";
 
 const AppHeader = ({ onLogout }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -119,14 +122,14 @@ const AppHeader = ({ onLogout }) => {
   const testEarthquakeSound = async (magnitude) => {
     console.log(`🧪 TESTING earthquake sound with magnitude ${magnitude}`);
     const urgency = getEarthquakeUrgency(magnitude);
-    
+
     try {
       await playEarthquakeSound(magnitude, {
         urgency,
-        source: 'header-test'
+        source: "header-test",
       });
     } catch (error) {
-      console.error('Test sound failed:', error);
+      console.error("Test sound failed:", error);
     }
   };
 
@@ -135,18 +138,25 @@ const AppHeader = ({ onLogout }) => {
       <div className="flex items-center justify-between">
         {/* Logo and Tagline */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary-v2 rounded-full flex items-center justify-center">
-              <svg
-                className="w-5 h-5 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                <circle cx="12" cy="9" r="2.5" fill="white" />
-              </svg>
+          <div 
+            className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+            onClick={() => window.open('/', '_blank')}
+            title="Visit ALISTO Landing Page"
+          >
+            <div className="relative">
+              <img
+                src="/logo/alisto_logo.png"
+                alt="ALISTO Logo"
+                className="w-8 h-8 object-contain select-none"
+                style={{
+                  filter: "brightness(1.2) contrast(1.1) saturate(0.8)",
+                }}
+                draggable={false}
+              />
             </div>
-            <h1 className="text-xl font-bold text-white">ALISTO</h1>
+            <h1 className="text-xl font-black tracking-wide text-primary-v2">
+              ALISTO
+            </h1>
           </div>
           <div className="h-6 w-px bg-white/20"></div>
           <p className="text-[11px] text-white/80 font-light">
