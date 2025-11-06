@@ -20,7 +20,7 @@ const NearbyEarthquakes = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 animate-pulse">
         <div className="flex items-center justify-between">
           <div>
             <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
@@ -43,9 +43,9 @@ const NearbyEarthquakes = () => {
   return (
     <div
       onClick={handleClick}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:scale-[1.01] hover:-translate-y-0.5 hover:border-b-2 hover:border-b-gray-300 active:scale-[0.98] active:translate-y-0 active:shadow-sm transition-all duration-100 ease-out cursor-pointer"
+      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 cursor-pointer"
     >
-      <div className="flex items-start justify-between">
+      <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-600 mb-1">
             Nearby ({radius}km)
@@ -57,7 +57,7 @@ const NearbyEarthquakes = () => {
             </p>
           )}
         </div>
-        <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg shrink-0 mt-1.5">
+        <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg shrink-0">
           <span className="material-symbols-outlined text-2xl text-orange-700 leading-none">
             my_location
           </span>
