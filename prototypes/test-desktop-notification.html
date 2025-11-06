@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desktop Notification Sound Test</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+    
+    .status {
+      background: #f5f5f5;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    
+    .status-item {
+      margin: 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .status-badge.granted {
+      background: #10b981;
+      color: white;
+    }
+    
+    .status-badge.denied {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .status-badge.default {
+      background: #f59e0b;
+      color: white;
+    }
+    
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .test-btn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+    
+    .test-btn:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+    }
+    
+    .console-log {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 10px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+    
+    .log-entry {
+      margin: 5px 0;
+      padding: 5px;
+      border-left: 3px solid #667eea;
+      padding-left: 10px;
+    }
+    
+    .log-entry.success {
+      border-left-color: #10b981;
+      color: #10b981;
+    }
+    
+    .log-entry.error {
+      border-left-color: #ef4444;
+      color: #ef4444;
+    }
+    
+    .log-entry.warning {
+      border-left-color: #f59e0b;
+      color: #f59e0b;
+    }
+    
+    .clear-btn {
+      background: #6b7280;
+      box-shadow: 0 4px 15px rgba(107, 114, 128, 0.4);
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔔 Desktop Notification Test</h1>
+    <p class="subtitle">Test desktop notifications with custom sound</p>
+    
+    <div class="status">
+      <div class="status-item">
+        <span>Notification Permission:</span>
+        <span class="status-badge" id="permissionStatus">checking...</span>
+      </div>
+      <div class="status-item">
+        <span>Audio File:</span>
+        <span class="status-badge" id="audioFileStatus">checking...</span>
+      </div>
+    </div>
+    
+    <div class="button-group">
+      <button id="requestPermissionBtn">Request Notification Permission</button>
+      <button id="testNotificationBtn" class="test-btn" disabled>Test Desktop Notification with Sound</button>
+    </div>
+    
+    <div class="console-log" id="consoleLog">
+      <div class="log-entry">Console log will appear here...</div>
+    </div>
+    <button class="clear-btn" onclick="clearLog()">Clear Log</button>
+  </div>
+
+  <script>
+    const log = (message, type = 'info') => {
+      const consoleLog = document.getElementById('consoleLog');
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      const timestamp = new Date().toLocaleTimeString();
+      entry.textContent = `[${timestamp}] ${message}`;
+      consoleLog.appendChild(entry);
+      consoleLog.scrollTop = consoleLog.scrollHeight;
+      console.log(message);
+    };
+
+    const clearLog = () => {
+      document.getElementById('consoleLog').innerHTML = '<div class="log-entry">Console log cleared...</div>';
+    };
+
+    // Check notification permission
+    const updatePermissionStatus = () => {
+      const statusBadge = document.getElementById('permissionStatus');
+      const testBtn = document.getElementById('testNotificationBtn');
+      
+      if (!('Notification' in window)) {
+        statusBadge.textContent = 'Not Supported';
+        statusBadge.className = 'status-badge denied';
+        log('❌ Desktop notifications not supported in this browser', 'error');
+        return;
+      }
+
+      const permission = Notification.permission;
+      statusBadge.textContent = permission.charAt(0).toUpperCase() + permission.slice(1);
+      
+      if (permission === 'granted') {
+        statusBadge.className = 'status-badge granted';
+        testBtn.disabled = false;
+        log('✅ Notification permission granted', 'success');
+      } else if (permission === 'denied') {
+        statusBadge.className = 'status-badge denied';
+        testBtn.disabled = true;
+        log('❌ Notification permission denied', 'error');
+      } else {
+        statusBadge.className = 'status-badge default';
+        testBtn.disabled = true;
+        log('⚠️ Notification permission not set', 'warning');
+      }
+    };
+
+    // Check if audio file exists (try multiple paths)
+    const checkAudioFile = async () => {
+      const audioFileStatus = document.getElementById('audioFileStatus');
+      const possiblePaths = [
+        '/sounds/major_earthquake-high.mp3',  // From root (if served via web server)
+        '../frontend/public/sounds/major_earthquake-high.mp3',  // Relative from prototypes
+        '../../frontend/public/sounds/major_earthquake-high.mp3',  // Alternative relative
+      ];
+      
+      let soundFile = possiblePaths[0]; // Default to first path
+      
+      // Try each path
+      for (const path of possiblePaths) {
+        try {
+          const response = await fetch(path, { method: 'HEAD' });
+          if (response.ok) {
+            soundFile = path; // Use the working path
+            audioFileStatus.textContent = 'Found';
+            audioFileStatus.className = 'status-badge granted';
+            log(`✅ Audio file found: ${path}`, 'success');
+            window.workingSoundPath = path; // Store for later use
+            return true;
+          }
+        } catch (error) {
+          // Continue to next path
+          continue;
+        }
+      }
+      
+      // If none worked
+      audioFileStatus.textContent = 'Not Found';
+      audioFileStatus.className = 'status-badge denied';
+      log(`❌ Audio file not found. Tried: ${possiblePaths.join(', ')}`, 'error');
+      log(`💡 Make sure the file exists at: frontend/public/sounds/major_earthquake-high.mp3`, 'warning');
+      log(`💡 Or serve this HTML file through a web server (e.g., Vite dev server)`, 'warning');
+      window.workingSoundPath = possiblePaths[0]; // Fallback to default
+      return false;
+    };
+
+    // Request notification permission
+    document.getElementById('requestPermissionBtn').addEventListener('click', async () => {
+      if (!('Notification' in window)) {
+        log('❌ Desktop notifications not supported', 'error');
+        return;
+      }
+
+      try {
+        const permission = await Notification.requestPermission();
+        log(`📱 Permission result: ${permission}`, permission === 'granted' ? 'success' : 'warning');
+        updatePermissionStatus();
+      } catch (error) {
+        log(`❌ Error requesting permission: ${error.message}`, 'error');
+      }
+    });
+
+    // Play audio file
+    const playAudioFile = async (eventType, urgency) => {
+      try {
+        // Use the working path found during check
+        let soundFile;
+        if (window.workingSoundPath) {
+          // Replace the filename with the requested one
+          const basePath = window.workingSoundPath.replace(/major_earthquake-high\.mp3$/, '');
+          soundFile = `${basePath}${eventType}-${urgency}.mp3`;
+        } else {
+          // Fallback to default path
+          soundFile = `/sounds/${eventType}-${urgency}.mp3`;
+        }
+        log(`🔊 Attempting to play: ${soundFile}`, 'info');
+        
+        const audio = new Audio(soundFile);
+        audio.volume = urgency === 'high' ? 0.7 : urgency === 'normal' ? 0.5 : 0.3;
+        
+        // Set up event listeners for debugging
+        audio.addEventListener('loadstart', () => {
+          log('📥 Audio file loading started', 'info');
+        });
+        
+        audio.addEventListener('canplay', () => {
+          log('✅ Audio file can play', 'success');
+        });
+        
+        audio.addEventListener('error', (e) => {
+          log(`❌ Audio error: ${e.message || 'Unknown error'}`, 'error');
+          log(`   Error code: ${audio.error?.code || 'N/A'}`, 'error');
+          log(`   Error message: ${audio.error?.message || 'N/A'}`, 'error');
+        });
+        
+        audio.addEventListener('play', () => {
+          log('▶️ Audio is playing!', 'success');
+        });
+        
+        audio.addEventListener('ended', () => {
+          log('⏹️ Audio finished playing', 'success');
+        });
+        
+        // Try to play
+        await audio.play();
+        log(`✅ Audio file playing successfully: ${soundFile}`, 'success');
+        return true;
+      } catch (error) {
+        log(`❌ Failed to play audio file: ${error.message}`, 'error');
+        if (error.name === 'NotAllowedError') {
+          log('💡 Browser blocked autoplay. Try clicking the button again.', 'warning');
+        }
+        return false;
+      }
+    };
+
+    // Test desktop notification
+    document.getElementById('testNotificationBtn').addEventListener('click', async () => {
+      if (Notification.permission !== 'granted') {
+        log('❌ Notification permission not granted', 'error');
+        return;
+      }
+
+      log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+      log('🧪 Testing desktop notification with sound...', 'info');
+      
+      try {
+        // Simulate a major earthquake notification
+        const notification = {
+          notification_id: 'test-123',
+          event_type: 'major_earthquake',
+          title: 'Magnitude 6.5 Earthquake Detected',
+          message: 'A magnitude 6.5 earthquake occurred at 015 km S 20° W of Balanga City (Bataan)',
+          province_name: 'Bataan',
+          magnitude: 6.5,
+          urgency: 'high',
+          created_at: new Date().toISOString()
+        };
+
+        // Create desktop notification
+        const options = {
+          body: `${notification.message}\n📍 ${notification.province_name}`,
+          icon: '/favicon.ico',
+          badge: '/favicon.ico',
+          tag: `alisto-${notification.notification_id}`,
+          requireInteraction: true,
+          silent: true, // Silent notification - we'll play custom sound
+          timestamp: new Date().getTime(),
+          data: {
+            notificationId: notification.notification_id,
+            eventType: notification.event_type
+          }
+        };
+
+        const desktopNotification = new Notification(
+          `🌍 ${notification.title}`,
+          options
+        );
+
+        log('✅ Desktop notification created', 'success');
+
+        // Handle notification click
+        desktopNotification.onclick = (event) => {
+          event.preventDefault();
+          window.focus();
+          desktopNotification.close();
+          log('👆 Notification clicked', 'info');
+        };
+
+        // Play custom sound
+        log('🔊 Attempting to play custom sound...', 'info');
+        const soundPlayed = await playAudioFile('major_earthquake', 'high');
+        
+        if (!soundPlayed) {
+          log('⚠️ Audio file failed, trying programmatic sound...', 'warning');
+          
+          // Fallback to programmatic sound
+          try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+              const audioContext = new AudioContext();
+              const oscillator = audioContext.createOscillator();
+              const gainNode = audioContext.createGain();
+              
+              oscillator.connect(gainNode);
+              gainNode.connect(audioContext.destination);
+              
+              oscillator.frequency.setValueAtTime(500, audioContext.currentTime);
+              oscillator.frequency.exponentialRampToValueAtTime(
+                300,
+                audioContext.currentTime + 0.3
+              );
+              
+              gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
+              gainNode.gain.exponentialRampToValueAtTime(
+                0.01,
+                audioContext.currentTime + 0.3
+              );
+              
+              oscillator.type = 'sine';
+              oscillator.start(audioContext.currentTime);
+              oscillator.stop(audioContext.currentTime + 0.3);
+              
+              log('✅ Programmatic sound played', 'success');
+            }
+          } catch (error) {
+            log(`❌ Programmatic sound failed: ${error.message}`, 'error');
+          }
+        }
+
+        log('✅ Test completed!', 'success');
+        log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+        
+        // Auto-close notification after 5 seconds
+        setTimeout(() => {
+          desktopNotification.close();
+          log('🔒 Notification auto-closed', 'info');
+        }, 5000);
+
+      } catch (error) {
+        log(`❌ Error creating notification: ${error.message}`, 'error');
+        console.error('Full error:', error);
+      }
+    });
+
+    // Initialize on load
+    window.addEventListener('load', async () => {
+      log('🚀 Test page loaded', 'success');
+      updatePermissionStatus();
+      await checkAudioFile();
+    });
+
+    // Update permission status periodically (in case user changes it)
+    setInterval(updatePermissionStatus, 2000);
+  </script>
+</body>
+</html>
