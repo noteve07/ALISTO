@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any, Dict, List
 
 from app.core.database import supabase
-from app.services.notifications.notification_service import notification_service
 
 
 class EarthquakeUpdaterService:
@@ -28,9 +27,6 @@ class EarthquakeUpdaterService:
             print(
                 f"✅ Successfully added {len(result.data)} new earthquakes to database"
             )
-
-            # Create notifications for new earthquakes
-            await notification_service.create_earthquake_notifications_batch(new_earthquakes)
 
             await self.cleanup_old_records()
 

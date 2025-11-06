@@ -7,7 +7,6 @@ from fastapi import APIRouter, HTTPException, Query
 
 from app.core.database import supabase
 from app.services.live.earthquakes.earthquake_updater import earthquake_updater
-from app.services.notifications.notification_service import notification_service
 
 
 router = APIRouter(prefix="/simulation", tags=["Simulation"])
@@ -202,18 +201,6 @@ async def simulate_volcanic_advisory(
         advisory_data = advisory_scenarios[option]
         volcano_id = advisory_data["volcano_id"]
         
-        # Fetch current advisory to get previous alert level
-        current_result = (
-            supabase.table("volcanic_advisories")
-            .select("alert_level")
-            .eq("volcano_id", volcano_id)
-            .execute()
-        )
-        
-        previous_alert_level = None
-        if current_result.data and len(current_result.data) > 0:
-            previous_alert_level = current_result.data[0].get("alert_level")
-        
         # Update volcanic advisory in database
         result = (
             supabase.table("volcanic_advisories")
@@ -228,67 +215,11 @@ async def simulate_volcanic_advisory(
                 detail=f"Failed to update volcanic advisory for volcano_id {volcano_id}"
             )
         
-        # Fetch volcano details for notification
-        volcano_result = (
-            supabase.table("volcanoes")
-            .select("name, coordinates, province_id")
-            .eq("volcano_id", volcano_id)
-            .execute()
-        )
-        
-        if not volcano_result.data:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Volcano with id {volcano_id} not found"
-            )
-        
-        volcano = volcano_result.data[0]
-        volcano_name = volcano.get("name", "Unknown Volcano")
-        
-        # Extract coordinates if available
-        volcano_lat = None
-        volcano_lon = None
-        if volcano.get("coordinates"):
-            coords_str = volcano["coordinates"]
-            # Format: SRID=4326;POINT(lon lat)
-            if "POINT" in coords_str:
-                coords_part = coords_str.split("POINT(")[1].rstrip(")")
-                lon_str, lat_str = coords_part.split()
-                volcano_lon = float(lon_str)
-                volcano_lat = float(lat_str)
-        
-        # Fetch province name if available
-        province_name = None
-        if volcano.get("province_id"):
-            province_result = (
-                supabase.table("provinces")
-                .select("name")
-                .eq("province_id", volcano["province_id"])
-                .execute()
-            )
-            if province_result.data:
-                province_name = province_result.data[0].get("name")
-        
-        # Create notification for the updated volcanic advisory
-        updated_advisory = result.data[0]
-        await notification_service.create_volcanic_advisory_notification(
-            volcano_id=volcano_id,
-            volcano_name=volcano_name,
-            alert_level=advisory_data["alert_level"],
-            alert_status=advisory_data["alert_status"],
-            previous_alert_level=previous_alert_level,
-            volcano_lat=volcano_lat,
-            volcano_lon=volcano_lon,
-            province_name=province_name,
-        )
-        
         return {
             "success": True,
             "message": f"Successfully simulated volcanic advisory (option {option})",
-            "data": updated_advisory,
+            "data": result.data[0],
             "updated_at": timestamp_str,
-            "volcano_name": volcano_name,
-            "notification_created": True,
         }
         
     except HTTPException:
