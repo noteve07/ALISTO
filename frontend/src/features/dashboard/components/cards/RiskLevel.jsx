@@ -32,7 +32,7 @@ const RiskLevel = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 animate-pulse">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse">
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
@@ -51,7 +51,7 @@ const RiskLevel = () => {
   return (
     <div
       onClick={handleClick}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 cursor-pointer"
+      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:scale-[1.01] hover:-translate-y-0.5 hover:border-b-2 hover:border-b-gray-300 active:scale-[0.98] active:translate-y-0 active:shadow-sm transition-all duration-100 ease-out cursor-pointer"
     >
       <div className="flex items-center justify-between">
         <div>
@@ -67,7 +67,7 @@ const RiskLevel = () => {
             <span className="text-2xl font-bold text-gray-900">{score}/10</span>
           </div>
         </div>
-        <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg">
+        <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mt-1">
           <span className="material-symbols-outlined text-2xl text-orange-700">
             warning
           </span>

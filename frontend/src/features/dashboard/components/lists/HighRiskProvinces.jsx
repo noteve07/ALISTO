@@ -141,7 +141,7 @@ const HighRiskProvinces = () => {
         ))}
       </div>
 
-      <div className="flex items-center justify-center mt-6 pt-4 border-t border-gray-100">
+      <div className="flex items-center justify-center mt-4 pt-3 border-t border-gray-100">
         <button className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium">
           <span>View detailed risk assessment</span>
           <span className="material-symbols-outlined text-sm">
