@@ -1,0 +1,4727 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 34,
+        "province_name": "Ilocos Norte",
+        "name": "Ilocos Norte",
+        "PROVINCE_NAME": "ILOCOS NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.18,
+          "1": 0.55,
+          "2": 0.27
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.115
+        },
+        "prediction_date": "2025-11-06T14:49:01.120534",
+        "input_features": {
+          "eq_count_last_30d": 66.0,
+          "max_magnitude_last_30d": 5.0,
+          "avg_magnitude_last_30d": 2.6136363636363633,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 19,
+          "eq_count_last_7d": 6,
+          "eq_count_last_14d": 16
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.2,
+              17.8
+            ],
+            [
+              120.8,
+              17.8
+            ],
+            [
+              120.8,
+              18.6
+            ],
+            [
+              120.2,
+              18.6
+            ],
+            [
+              120.2,
+              17.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 35,
+        "province_name": "Ilocos Sur",
+        "name": "Ilocos Sur",
+        "PROVINCE_NAME": "ILOCOS SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.085,
+          "1": 0.835,
+          "2": 0.08
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.035
+        },
+        "prediction_date": "2025-11-06T14:49:06.010444",
+        "input_features": {
+          "eq_count_last_30d": 13.0,
+          "max_magnitude_last_30d": 3.2,
+          "avg_magnitude_last_30d": 2.3461538461538463,
+          "days_since_last_eq": 5,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.1,
+              16.8
+            ],
+            [
+              120.7,
+              16.8
+            ],
+            [
+              120.7,
+              17.8
+            ],
+            [
+              120.1,
+              17.8
+            ],
+            [
+              120.1,
+              16.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 39,
+        "province_name": "La Union",
+        "name": "La Union",
+        "PROVINCE_NAME": "LA UNION",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.015,
+          "1": 0.925,
+          "2": 0.06
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.055
+        },
+        "prediction_date": "2025-11-06T14:49:06.923250",
+        "input_features": {
+          "eq_count_last_30d": 7.0,
+          "max_magnitude_last_30d": 4.4,
+          "avg_magnitude_last_30d": 2.6142857142857143,
+          "days_since_last_eq": 5,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 3
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.2,
+              16.2
+            ],
+            [
+              120.8,
+              16.2
+            ],
+            [
+              120.8,
+              16.8
+            ],
+            [
+              120.2,
+              16.8
+            ],
+            [
+              120.2,
+              16.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 61,
+        "province_name": "Pangasinan",
+        "name": "Pangasinan",
+        "PROVINCE_NAME": "PANGASINAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.09,
+          "1": 0.735,
+          "2": 0.175
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.07
+        },
+        "prediction_date": "2025-11-06T14:49:12.960937",
+        "input_features": {
+          "eq_count_last_30d": 22.0,
+          "max_magnitude_last_30d": 3.3,
+          "avg_magnitude_last_30d": 2.2999999999999994,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 5,
+          "eq_count_last_14d": 11
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              119.8,
+              15.4
+            ],
+            [
+              120.8,
+              15.4
+            ],
+            [
+              120.8,
+              16.4
+            ],
+            [
+              119.8,
+              16.4
+            ],
+            [
+              119.8,
+              15.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 11,
+        "province_name": "Batanes",
+        "name": "Batanes",
+        "PROVINCE_NAME": "BATANES",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.06,
+          "1": 0.845,
+          "2": 0.095
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.02
+        },
+        "prediction_date": "2025-11-06T14:48:54.495732",
+        "input_features": {
+          "eq_count_last_30d": 11.0,
+          "max_magnitude_last_30d": 4.4,
+          "avg_magnitude_last_30d": 2.9909090909090916,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 3
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.8,
+              20.2
+            ],
+            [
+              122.2,
+              20.2
+            ],
+            [
+              122.2,
+              20.6
+            ],
+            [
+              121.8,
+              20.6
+            ],
+            [
+              121.8,
+              20.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 18,
+        "province_name": "Cagayan",
+        "name": "Cagayan",
+        "PROVINCE_NAME": "CAGAYAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.175,
+          "1": 0.675,
+          "2": 0.15
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.095
+        },
+        "prediction_date": "2025-11-06T14:48:56.445428",
+        "input_features": {
+          "eq_count_last_30d": 21.0,
+          "max_magnitude_last_30d": 4.1,
+          "avg_magnitude_last_30d": 2.638095238095238,
+          "days_since_last_eq": 2,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 5,
+          "eq_count_last_14d": 9
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.3,
+              17.8
+            ],
+            [
+              122.2,
+              17.8
+            ],
+            [
+              122.2,
+              18.6
+            ],
+            [
+              121.3,
+              18.6
+            ],
+            [
+              121.3,
+              17.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 37,
+        "province_name": "Isabela",
+        "name": "Isabela",
+        "PROVINCE_NAME": "ISABELA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.03,
+          "1": 0.895,
+          "2": 0.075
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.025
+        },
+        "prediction_date": "2025-11-06T14:49:06.463880",
+        "input_features": {
+          "eq_count_last_30d": 9.0,
+          "max_magnitude_last_30d": 4.5,
+          "avg_magnitude_last_30d": 2.533333333333333,
+          "days_since_last_eq": 4,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.2,
+              16.5
+            ],
+            [
+              122.3,
+              16.5
+            ],
+            [
+              122.3,
+              17.8
+            ],
+            [
+              121.2,
+              17.8
+            ],
+            [
+              121.2,
+              16.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 56,
+        "province_name": "Nueva Vizcaya",
+        "name": "Nueva Vizcaya",
+        "PROVINCE_NAME": "NUEVA VIZCAYA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.005,
+          "1": 0.995,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.005
+        },
+        "prediction_date": "2025-11-06T14:49:19.768474",
+        "input_features": {
+          "eq_count_last_30d": 6.0,
+          "max_magnitude_last_30d": 2.6,
+          "avg_magnitude_last_30d": 2.0166666666666666,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 4,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.8,
+              15.8
+            ],
+            [
+              121.8,
+              15.8
+            ],
+            [
+              121.8,
+              16.8
+            ],
+            [
+              120.8,
+              16.8
+            ],
+            [
+              120.8,
+              15.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 62,
+        "province_name": "Quirino",
+        "name": "Quirino",
+        "PROVINCE_NAME": "QUIRINO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.13,
+          "1": 0.715,
+          "2": 0.155
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.11
+        },
+        "prediction_date": "2025-11-06T14:49:22.435172",
+        "input_features": {
+          "eq_count_last_30d": 14.0,
+          "max_magnitude_last_30d": 4.0,
+          "avg_magnitude_last_30d": 2.3428571428571425,
+          "days_since_last_eq": 2,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 5,
+          "eq_count_last_14d": 8
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.3,
+              16.0
+            ],
+            [
+              121.8,
+              16.0
+            ],
+            [
+              121.8,
+              16.5
+            ],
+            [
+              121.3,
+              16.5
+            ],
+            [
+              121.3,
+              16.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 8,
+        "province_name": "Aurora",
+        "name": "Aurora",
+        "PROVINCE_NAME": "AURORA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.1,
+          "1": 0.765,
+          "2": 0.135
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.105
+        },
+        "prediction_date": "2025-11-06T14:48:52.660456",
+        "input_features": {
+          "eq_count_last_30d": 15.0,
+          "max_magnitude_last_30d": 4.0,
+          "avg_magnitude_last_30d": 2.3266666666666667,
+          "days_since_last_eq": 4,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 4,
+          "eq_count_last_14d": 10
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.4,
+              15.4
+            ],
+            [
+              122.2,
+              15.4
+            ],
+            [
+              122.2,
+              16.5
+            ],
+            [
+              121.4,
+              16.5
+            ],
+            [
+              121.4,
+              15.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 10,
+        "province_name": "Bataan",
+        "name": "Bataan",
+        "PROVINCE_NAME": "BATAAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.035,
+          "1": 0.895,
+          "2": 0.07
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.03
+        },
+        "prediction_date": "2025-11-06T14:48:53.577763",
+        "input_features": {
+          "eq_count_last_30d": 9.0,
+          "max_magnitude_last_30d": 2.6,
+          "avg_magnitude_last_30d": 2.1444444444444444,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.3,
+              14.3
+            ],
+            [
+              120.7,
+              14.3
+            ],
+            [
+              120.7,
+              14.9
+            ],
+            [
+              120.3,
+              14.9
+            ],
+            [
+              120.3,
+              14.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 17,
+        "province_name": "Bulacan",
+        "name": "Bulacan",
+        "PROVINCE_NAME": "BULACAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:02.929100",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.7,
+              14.5
+            ],
+            [
+              121.2,
+              14.5
+            ],
+            [
+              121.2,
+              15.0
+            ],
+            [
+              120.7,
+              15.0
+            ],
+            [
+              120.7,
+              14.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 55,
+        "province_name": "Nueva Ecija",
+        "name": "Nueva Ecija",
+        "PROVINCE_NAME": "NUEVA ECIJA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.01,
+          "1": 0.985,
+          "2": 0.005
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.005
+        },
+        "prediction_date": "2025-11-06T14:49:11.191307",
+        "input_features": {
+          "eq_count_last_30d": 2.0,
+          "max_magnitude_last_30d": 2.0,
+          "avg_magnitude_last_30d": 2.0,
+          "days_since_last_eq": 17,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.6,
+              15.0
+            ],
+            [
+              121.5,
+              15.0
+            ],
+            [
+              121.5,
+              15.8
+            ],
+            [
+              120.6,
+              15.8
+            ],
+            [
+              120.6,
+              15.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 60,
+        "province_name": "Pampanga",
+        "name": "Pampanga",
+        "PROVINCE_NAME": "PAMPANGA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:21.785109",
+        "input_features": {
+          "eq_count_last_30d": 1.0,
+          "max_magnitude_last_30d": 2.0,
+          "avg_magnitude_last_30d": 2.0,
+          "days_since_last_eq": 20,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.4,
+              14.8
+            ],
+            [
+              120.9,
+              14.8
+            ],
+            [
+              120.9,
+              15.3
+            ],
+            [
+              120.4,
+              15.3
+            ],
+            [
+              120.4,
+              14.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 73,
+        "province_name": "Tarlac",
+        "name": "Tarlac",
+        "PROVINCE_NAME": "TARLAC",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.07,
+          "1": 0.92,
+          "2": 0.01
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.11
+        },
+        "prediction_date": "2025-11-06T14:49:38.393354",
+        "input_features": {
+          "eq_count_last_30d": 4.0,
+          "max_magnitude_last_30d": 4.3,
+          "avg_magnitude_last_30d": 3.2,
+          "days_since_last_eq": 8,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 1
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.4,
+              15.2
+            ],
+            [
+              120.9,
+              15.2
+            ],
+            [
+              120.9,
+              15.8
+            ],
+            [
+              120.4,
+              15.8
+            ],
+            [
+              120.4,
+              15.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 77,
+        "province_name": "Zambales",
+        "name": "Zambales",
+        "PROVINCE_NAME": "ZAMBALES",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.02,
+          "1": 0.96,
+          "2": 0.02
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.015
+        },
+        "prediction_date": "2025-11-06T14:49:39.176024",
+        "input_features": {
+          "eq_count_last_30d": 2.0,
+          "max_magnitude_last_30d": 2.9,
+          "avg_magnitude_last_30d": 2.3,
+          "days_since_last_eq": 10,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 1
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              119.8,
+              14.8
+            ],
+            [
+              120.5,
+              14.8
+            ],
+            [
+              120.5,
+              16.0
+            ],
+            [
+              119.8,
+              16.0
+            ],
+            [
+              119.8,
+              14.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 1,
+        "province_name": "Abra",
+        "name": "Abra",
+        "PROVINCE_NAME": "ABRA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.075,
+          "1": 0.805,
+          "2": 0.12
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.06
+        },
+        "prediction_date": "2025-11-06T14:48:49.033925",
+        "input_features": {
+          "eq_count_last_30d": 12.0,
+          "max_magnitude_last_30d": 3.0,
+          "avg_magnitude_last_30d": 2.233333333333333,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 2
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.5,
+              17.4
+            ],
+            [
+              121.0,
+              17.4
+            ],
+            [
+              121.0,
+              17.9
+            ],
+            [
+              120.5,
+              17.9
+            ],
+            [
+              120.5,
+              17.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 7,
+        "province_name": "Apayao",
+        "name": "Apayao",
+        "PROVINCE_NAME": "APAYAO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:48:52.241951",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.8,
+              17.9
+            ],
+            [
+              121.3,
+              17.9
+            ],
+            [
+              121.3,
+              18.5
+            ],
+            [
+              120.8,
+              18.5
+            ],
+            [
+              120.8,
+              17.9
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 13,
+        "province_name": "Benguet",
+        "name": "Benguet",
+        "PROVINCE_NAME": "BENGUET",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.04,
+          "1": 0.96,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:49:01.944568",
+        "input_features": {
+          "eq_count_last_30d": 7.0,
+          "max_magnitude_last_30d": 2.0,
+          "avg_magnitude_last_30d": 1.6714285714285715,
+          "days_since_last_eq": 10,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.4,
+              16.2
+            ],
+            [
+              121.0,
+              16.2
+            ],
+            [
+              121.0,
+              16.8
+            ],
+            [
+              120.4,
+              16.8
+            ],
+            [
+              120.4,
+              16.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 33,
+        "province_name": "Ifugao",
+        "name": "Ifugao",
+        "PROVINCE_NAME": "IFUGAO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:05.534750",
+        "input_features": {
+          "eq_count_last_30d": 1.0,
+          "max_magnitude_last_30d": 1.6,
+          "avg_magnitude_last_30d": 1.6,
+          "days_since_last_eq": 19,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.0,
+              16.6
+            ],
+            [
+              121.5,
+              16.6
+            ],
+            [
+              121.5,
+              17.2
+            ],
+            [
+              121.0,
+              17.2
+            ],
+            [
+              121.0,
+              16.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 38,
+        "province_name": "Kalinga",
+        "name": "Kalinga",
+        "PROVINCE_NAME": "KALINGA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 0.945,
+          "2": 0.055
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.005
+        },
+        "prediction_date": "2025-11-06T14:49:13.443032",
+        "input_features": {
+          "eq_count_last_30d": 1.0,
+          "max_magnitude_last_30d": 1.3,
+          "avg_magnitude_last_30d": 1.3,
+          "days_since_last_eq": 3,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 1
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.0,
+              17.2
+            ],
+            [
+              121.8,
+              17.2
+            ],
+            [
+              121.8,
+              17.9
+            ],
+            [
+              121.0,
+              17.9
+            ],
+            [
+              121.0,
+              17.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 50,
+        "province_name": "Mountain Province",
+        "name": "Mountain Province",
+        "PROVINCE_NAME": "MOUNTAIN PROVINCE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:17.918961",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.8,
+              16.8
+            ],
+            [
+              121.3,
+              16.8
+            ],
+            [
+              121.3,
+              17.4
+            ],
+            [
+              120.8,
+              17.4
+            ],
+            [
+              120.8,
+              16.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 12,
+        "province_name": "Batangas",
+        "name": "Batangas",
+        "PROVINCE_NAME": "BATANGAS",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.13,
+          "1": 0.45,
+          "2": 0.42
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.04
+        },
+        "prediction_date": "2025-11-06T14:48:55.029464",
+        "input_features": {
+          "eq_count_last_30d": 60.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 1.9133333333333333,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 13,
+          "eq_count_last_14d": 25
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.8,
+              13.6
+            ],
+            [
+              121.5,
+              13.6
+            ],
+            [
+              121.5,
+              14.4
+            ],
+            [
+              120.8,
+              14.4
+            ],
+            [
+              120.8,
+              13.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 24,
+        "province_name": "Cavite",
+        "name": "Cavite",
+        "PROVINCE_NAME": "CAVITE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:48:57.810538",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.6,
+              14.1
+            ],
+            [
+              121.0,
+              14.1
+            ],
+            [
+              121.0,
+              14.5
+            ],
+            [
+              120.6,
+              14.5
+            ],
+            [
+              120.6,
+              14.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 40,
+        "province_name": "Laguna",
+        "name": "Laguna",
+        "PROVINCE_NAME": "LAGUNA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.04,
+          "1": 0.94,
+          "2": 0.02
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:49:13.911846",
+        "input_features": {
+          "eq_count_last_30d": 4.0,
+          "max_magnitude_last_30d": 3.5,
+          "avg_magnitude_last_30d": 2.2,
+          "days_since_last_eq": 9,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.0,
+              14.0
+            ],
+            [
+              121.6,
+              14.0
+            ],
+            [
+              121.6,
+              14.6
+            ],
+            [
+              121.0,
+              14.6
+            ],
+            [
+              121.0,
+              14.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 62,
+        "province_name": "Quezon",
+        "name": "Quezon",
+        "PROVINCE_NAME": "QUEZON",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.13,
+          "1": 0.715,
+          "2": 0.155
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.11
+        },
+        "prediction_date": "2025-11-06T14:49:22.435172",
+        "input_features": {
+          "eq_count_last_30d": 14.0,
+          "max_magnitude_last_30d": 4.0,
+          "avg_magnitude_last_30d": 2.3428571428571425,
+          "days_since_last_eq": 2,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 5,
+          "eq_count_last_14d": 8
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.3,
+              13.4
+            ],
+            [
+              122.6,
+              13.4
+            ],
+            [
+              122.6,
+              15.0
+            ],
+            [
+              121.3,
+              15.0
+            ],
+            [
+              121.3,
+              13.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 64,
+        "province_name": "Rizal",
+        "name": "Rizal",
+        "PROVINCE_NAME": "RIZAL",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:23.312582",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.0,
+              14.2
+            ],
+            [
+              121.4,
+              14.2
+            ],
+            [
+              121.4,
+              14.8
+            ],
+            [
+              121.0,
+              14.8
+            ],
+            [
+              121.0,
+              14.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 45,
+        "province_name": "Marinduque",
+        "name": "Marinduque",
+        "PROVINCE_NAME": "MARINDUQUE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.04,
+          "1": 0.915,
+          "2": 0.045
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.09
+        },
+        "prediction_date": "2025-11-06T14:49:08.268011",
+        "input_features": {
+          "eq_count_last_30d": 5.0,
+          "max_magnitude_last_30d": 2.8,
+          "avg_magnitude_last_30d": 2.02,
+          "days_since_last_eq": 7,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.8,
+              13.3
+            ],
+            [
+              122.0,
+              13.3
+            ],
+            [
+              122.0,
+              13.6
+            ],
+            [
+              121.8,
+              13.6
+            ],
+            [
+              121.8,
+              13.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 57,
+        "province_name": "Occidental Mindoro",
+        "name": "Occidental Mindoro",
+        "PROVINCE_NAME": "OCCIDENTAL MINDORO",
+        "risk_level": "Medium",
+        "risk_probabilities": {
+          "0": 0.26,
+          "1": 0.07,
+          "2": 0.67
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.25
+        },
+        "prediction_date": "2025-11-06T14:49:11.862879",
+        "input_features": {
+          "eq_count_last_30d": 81.0,
+          "max_magnitude_last_30d": 3.9,
+          "avg_magnitude_last_30d": 2.1506172839506172,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 16,
+          "eq_count_last_14d": 34
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.8,
+              12.8
+            ],
+            [
+              121.5,
+              12.8
+            ],
+            [
+              121.5,
+              13.8
+            ],
+            [
+              120.8,
+              13.8
+            ],
+            [
+              120.8,
+              12.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 58,
+        "province_name": "Oriental Mindoro",
+        "name": "Oriental Mindoro",
+        "PROVINCE_NAME": "ORIENTAL MINDORO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.085,
+          "1": 0.8,
+          "2": 0.115
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.07
+        },
+        "prediction_date": "2025-11-06T14:49:20.702125",
+        "input_features": {
+          "eq_count_last_30d": 14.0,
+          "max_magnitude_last_30d": 4.3,
+          "avg_magnitude_last_30d": 1.9714285714285715,
+          "days_since_last_eq": 2,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 6
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.2,
+              12.8
+            ],
+            [
+              121.8,
+              12.8
+            ],
+            [
+              121.8,
+              13.8
+            ],
+            [
+              121.2,
+              13.8
+            ],
+            [
+              121.2,
+              12.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 59,
+        "province_name": "Palawan",
+        "name": "Palawan",
+        "PROVINCE_NAME": "PALAWAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.01,
+          "1": 0.98,
+          "2": 0.01
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:49:12.461789",
+        "input_features": {
+          "eq_count_last_30d": 6.0,
+          "max_magnitude_last_30d": 2.8,
+          "avg_magnitude_last_30d": 2.266666666666667,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              117.0,
+              8.0
+            ],
+            [
+              119.5,
+              8.0
+            ],
+            [
+              119.5,
+              11.5
+            ],
+            [
+              117.0,
+              11.5
+            ],
+            [
+              117.0,
+              8.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 65,
+        "province_name": "Romblon",
+        "name": "Romblon",
+        "PROVINCE_NAME": "ROMBLON",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:35.663803",
+        "input_features": {
+          "eq_count_last_30d": 1.0,
+          "max_magnitude_last_30d": 2.9,
+          "avg_magnitude_last_30d": 2.9,
+          "days_since_last_eq": 24,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.1,
+              12.3
+            ],
+            [
+              122.8,
+              12.3
+            ],
+            [
+              122.8,
+              12.9
+            ],
+            [
+              122.1,
+              12.9
+            ],
+            [
+              122.1,
+              12.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 5,
+        "province_name": "Albay",
+        "name": "Albay",
+        "PROVINCE_NAME": "ALBAY",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.045,
+          "1": 0.905,
+          "2": 0.05
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.07
+        },
+        "prediction_date": "2025-11-06T14:48:51.277684",
+        "input_features": {
+          "eq_count_last_30d": 3.0,
+          "max_magnitude_last_30d": 2.4,
+          "avg_magnitude_last_30d": 1.7666666666666668,
+          "days_since_last_eq": 5,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 3
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.4,
+              13.0
+            ],
+            [
+              124.2,
+              13.0
+            ],
+            [
+              124.2,
+              13.5
+            ],
+            [
+              123.4,
+              13.5
+            ],
+            [
+              123.4,
+              13.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 19,
+        "province_name": "Camarines Norte",
+        "name": "Camarines Norte",
+        "PROVINCE_NAME": "CAMARINES NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.03,
+          "1": 0.94,
+          "2": 0.03
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.02
+        },
+        "prediction_date": "2025-11-06T14:49:03.328965",
+        "input_features": {
+          "eq_count_last_30d": 6.0,
+          "max_magnitude_last_30d": 2.6,
+          "avg_magnitude_last_30d": 1.8666666666666665,
+          "days_since_last_eq": 9,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.5,
+              13.8
+            ],
+            [
+              123.0,
+              13.8
+            ],
+            [
+              123.0,
+              14.4
+            ],
+            [
+              122.5,
+              14.4
+            ],
+            [
+              122.5,
+              13.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 20,
+        "province_name": "Camarines Sur",
+        "name": "Camarines Sur",
+        "PROVINCE_NAME": "CAMARINES SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.065,
+          "1": 0.915,
+          "2": 0.02
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.095
+        },
+        "prediction_date": "2025-11-06T14:48:56.925191",
+        "input_features": {
+          "eq_count_last_30d": 13.0,
+          "max_magnitude_last_30d": 2.6,
+          "avg_magnitude_last_30d": 1.869230769230769,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 3
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.0,
+              13.2
+            ],
+            [
+              123.8,
+              13.2
+            ],
+            [
+              123.8,
+              14.2
+            ],
+            [
+              123.0,
+              14.2
+            ],
+            [
+              123.0,
+              13.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 23,
+        "province_name": "Catanduanes",
+        "name": "Catanduanes",
+        "PROVINCE_NAME": "CATANDUANES",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.03,
+          "1": 0.945,
+          "2": 0.025
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.015
+        },
+        "prediction_date": "2025-11-06T14:49:04.224905",
+        "input_features": {
+          "eq_count_last_30d": 7.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 2.3714285714285714,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 4,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.1,
+              13.4
+            ],
+            [
+              124.5,
+              13.4
+            ],
+            [
+              124.5,
+              14.0
+            ],
+            [
+              124.1,
+              14.0
+            ],
+            [
+              124.1,
+              13.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 46,
+        "province_name": "Masbate",
+        "name": "Masbate",
+        "PROVINCE_NAME": "MASBATE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.135,
+          "1": 0.805,
+          "2": 0.06
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.115
+        },
+        "prediction_date": "2025-11-06T14:49:16.474900",
+        "input_features": {
+          "eq_count_last_30d": 12.0,
+          "max_magnitude_last_30d": 3.1,
+          "avg_magnitude_last_30d": 2.2000000000000006,
+          "days_since_last_eq": 9,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.4,
+              12.0
+            ],
+            [
+              124.4,
+              12.0
+            ],
+            [
+              124.4,
+              12.8
+            ],
+            [
+              123.4,
+              12.8
+            ],
+            [
+              123.4,
+              12.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 70,
+        "province_name": "Sorsogon",
+        "name": "Sorsogon",
+        "PROVINCE_NAME": "SORSOGON",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.05,
+          "1": 0.815,
+          "2": 0.135
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.06
+        },
+        "prediction_date": "2025-11-06T14:49:26.608231",
+        "input_features": {
+          "eq_count_last_30d": 11.0,
+          "max_magnitude_last_30d": 3.6,
+          "avg_magnitude_last_30d": 2.536363636363636,
+          "days_since_last_eq": 6,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 8
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.8,
+              12.6
+            ],
+            [
+              124.6,
+              12.6
+            ],
+            [
+              124.6,
+              13.1
+            ],
+            [
+              123.8,
+              13.1
+            ],
+            [
+              123.8,
+              12.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 47,
+        "province_name": "Metropolitan Manila",
+        "name": "Metropolitan Manila",
+        "PROVINCE_NAME": "METROPOLITAN MANILA",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:08.732327",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.9,
+              14.4
+            ],
+            [
+              121.1,
+              14.4
+            ],
+            [
+              121.1,
+              14.8
+            ],
+            [
+              120.9,
+              14.8
+            ],
+            [
+              120.9,
+              14.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 4,
+        "province_name": "Aklan",
+        "name": "Aklan",
+        "PROVINCE_NAME": "AKLAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:48:50.910067",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.8,
+              11.3
+            ],
+            [
+              122.4,
+              11.3
+            ],
+            [
+              122.4,
+              12.0
+            ],
+            [
+              121.8,
+              12.0
+            ],
+            [
+              121.8,
+              11.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 6,
+        "province_name": "Antique",
+        "name": "Antique",
+        "PROVINCE_NAME": "ANTIQUE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.01,
+          "1": 0.96,
+          "2": 0.03
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.09
+        },
+        "prediction_date": "2025-11-06T14:48:51.693166",
+        "input_features": {
+          "eq_count_last_30d": 5.0,
+          "max_magnitude_last_30d": 3.1,
+          "avg_magnitude_last_30d": 2.6799999999999997,
+          "days_since_last_eq": 4,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 2
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.8,
+              10.4
+            ],
+            [
+              122.4,
+              10.4
+            ],
+            [
+              122.4,
+              11.4
+            ],
+            [
+              121.8,
+              11.4
+            ],
+            [
+              121.8,
+              10.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 22,
+        "province_name": "Capiz",
+        "name": "Capiz",
+        "PROVINCE_NAME": "CAPIZ",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:48:57.374269",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.4,
+              11.3
+            ],
+            [
+              123.0,
+              11.3
+            ],
+            [
+              123.0,
+              11.8
+            ],
+            [
+              122.4,
+              11.8
+            ],
+            [
+              122.4,
+              11.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 32,
+        "province_name": "Guimaras",
+        "name": "Guimaras",
+        "PROVINCE_NAME": "GUIMARAS",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:00.687905",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.5,
+              10.5
+            ],
+            [
+              122.8,
+              10.5
+            ],
+            [
+              122.8,
+              10.7
+            ],
+            [
+              122.5,
+              10.7
+            ],
+            [
+              122.5,
+              10.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 36,
+        "province_name": "Iloilo",
+        "name": "Iloilo",
+        "PROVINCE_NAME": "ILOILO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.025,
+          "1": 0.74,
+          "2": 0.235
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.02
+        },
+        "prediction_date": "2025-11-06T14:49:01.514099",
+        "input_features": {
+          "eq_count_last_30d": 10.0,
+          "max_magnitude_last_30d": 4.2,
+          "avg_magnitude_last_30d": 2.2,
+          "days_since_last_eq": 7,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 2
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.3,
+              10.4
+            ],
+            [
+              123.0,
+              10.4
+            ],
+            [
+              123.0,
+              11.2
+            ],
+            [
+              122.3,
+              11.2
+            ],
+            [
+              122.3,
+              10.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 51,
+        "province_name": "Negros Occidental",
+        "name": "Negros Occidental",
+        "PROVINCE_NAME": "NEGROS OCCIDENTAL",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.155,
+          "1": 0.54,
+          "2": 0.305
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:49:10.282955",
+        "input_features": {
+          "eq_count_last_30d": 27.0,
+          "max_magnitude_last_30d": 5.5,
+          "avg_magnitude_last_30d": 2.27037037037037,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 3,
+          "eq_count_last_7d": 7,
+          "eq_count_last_14d": 14
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.8,
+              9.8
+            ],
+            [
+              123.4,
+              9.8
+            ],
+            [
+              123.4,
+              11.0
+            ],
+            [
+              122.8,
+              11.0
+            ],
+            [
+              122.8,
+              9.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 15,
+        "province_name": "Bohol",
+        "name": "Bohol",
+        "PROVINCE_NAME": "BOHOL",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.105,
+          "1": 0.82,
+          "2": 0.075
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.065
+        },
+        "prediction_date": "2025-11-06T14:49:02.455335",
+        "input_features": {
+          "eq_count_last_30d": 9.0,
+          "max_magnitude_last_30d": 3.2,
+          "avg_magnitude_last_30d": 2.0666666666666664,
+          "days_since_last_eq": 2,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 7
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.7,
+              9.5
+            ],
+            [
+              124.5,
+              9.5
+            ],
+            [
+              124.5,
+              10.2
+            ],
+            [
+              123.7,
+              10.2
+            ],
+            [
+              123.7,
+              9.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 25,
+        "province_name": "Cebu",
+        "name": "Cebu",
+        "PROVINCE_NAME": "CEBU",
+        "risk_level": "High",
+        "risk_probabilities": {
+          "0": 0.655,
+          "1": 0.055,
+          "2": 0.29
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.27
+        },
+        "prediction_date": "2025-11-06T14:49:04.677553",
+        "input_features": {
+          "eq_count_last_30d": 1374.0,
+          "max_magnitude_last_30d": 5.8,
+          "avg_magnitude_last_30d": 2.1927947598253277,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 24,
+          "eq_count_last_7d": 147,
+          "eq_count_last_14d": 358
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.2,
+              9.3
+            ],
+            [
+              124.0,
+              9.3
+            ],
+            [
+              124.0,
+              11.3
+            ],
+            [
+              123.2,
+              11.3
+            ],
+            [
+              123.2,
+              9.3
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 52,
+        "province_name": "Negros Oriental",
+        "name": "Negros Oriental",
+        "PROVINCE_NAME": "NEGROS ORIENTAL",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.03,
+          "1": 0.91,
+          "2": 0.06
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.06
+        },
+        "prediction_date": "2025-11-06T14:49:18.563749",
+        "input_features": {
+          "eq_count_last_30d": 7.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 2.542857142857143,
+          "days_since_last_eq": 7,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 1
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.0,
+              9.0
+            ],
+            [
+              123.4,
+              9.0
+            ],
+            [
+              123.4,
+              10.4
+            ],
+            [
+              123.0,
+              10.4
+            ],
+            [
+              123.0,
+              9.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 69,
+        "province_name": "Siquijor",
+        "name": "Siquijor",
+        "PROVINCE_NAME": "SIQUIJOR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:36.953146",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.4,
+              9.1
+            ],
+            [
+              123.6,
+              9.1
+            ],
+            [
+              123.6,
+              9.3
+            ],
+            [
+              123.4,
+              9.3
+            ],
+            [
+              123.4,
+              9.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 14,
+        "province_name": "Biliran",
+        "name": "Biliran",
+        "PROVINCE_NAME": "BILIRAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.02,
+          "1": 0.955,
+          "2": 0.025
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:48:55.530614",
+        "input_features": {
+          "eq_count_last_30d": 4.0,
+          "max_magnitude_last_30d": 2.0,
+          "avg_magnitude_last_30d": 1.8250000000000002,
+          "days_since_last_eq": 6,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 3
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.4,
+              11.4
+            ],
+            [
+              124.6,
+              11.4
+            ],
+            [
+              124.6,
+              11.7
+            ],
+            [
+              124.4,
+              11.7
+            ],
+            [
+              124.4,
+              11.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 31,
+        "province_name": "Eastern Samar",
+        "name": "Eastern Samar",
+        "PROVINCE_NAME": "EASTERN SAMAR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.18,
+          "1": 0.475,
+          "2": 0.345
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.105
+        },
+        "prediction_date": "2025-11-06T14:49:05.104818",
+        "input_features": {
+          "eq_count_last_30d": 30.0,
+          "max_magnitude_last_30d": 4.4,
+          "avg_magnitude_last_30d": 2.7666666666666666,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 9,
+          "eq_count_last_14d": 16
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.2,
+              11.0
+            ],
+            [
+              126.0,
+              11.0
+            ],
+            [
+              126.0,
+              12.6
+            ],
+            [
+              125.2,
+              12.6
+            ],
+            [
+              125.2,
+              11.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 43,
+        "province_name": "Leyte",
+        "name": "Leyte",
+        "PROVINCE_NAME": "LEYTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.14,
+          "1": 0.655,
+          "2": 0.205
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.22
+        },
+        "prediction_date": "2025-11-06T14:49:07.780292",
+        "input_features": {
+          "eq_count_last_30d": 35.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 2.271428571428571,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 5,
+          "eq_count_last_14d": 14
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.3,
+              10.7
+            ],
+            [
+              125.2,
+              10.7
+            ],
+            [
+              125.2,
+              11.8
+            ],
+            [
+              124.3,
+              11.8
+            ],
+            [
+              124.3,
+              10.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 54,
+        "province_name": "Northern Samar",
+        "name": "Northern Samar",
+        "PROVINCE_NAME": "NORTHERN SAMAR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.1,
+          "1": 0.765,
+          "2": 0.135
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.065
+        },
+        "prediction_date": "2025-11-06T14:49:19.213442",
+        "input_features": {
+          "eq_count_last_30d": 21.0,
+          "max_magnitude_last_30d": 4.2,
+          "avg_magnitude_last_30d": 2.285714285714286,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 7
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.3,
+              12.0
+            ],
+            [
+              125.2,
+              12.0
+            ],
+            [
+              125.2,
+              12.9
+            ],
+            [
+              124.3,
+              12.9
+            ],
+            [
+              124.3,
+              12.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 66,
+        "province_name": "Samar",
+        "name": "Samar",
+        "PROVINCE_NAME": "SAMAR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.025,
+          "1": 0.975,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.015
+        },
+        "prediction_date": "2025-11-06T14:49:25.099405",
+        "input_features": {
+          "eq_count_last_30d": 2.0,
+          "max_magnitude_last_30d": 1.7,
+          "avg_magnitude_last_30d": 1.6,
+          "days_since_last_eq": 12,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 1
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.6,
+              11.4
+            ],
+            [
+              125.4,
+              11.4
+            ],
+            [
+              125.4,
+              12.0
+            ],
+            [
+              124.6,
+              12.0
+            ],
+            [
+              124.6,
+              11.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 72,
+        "province_name": "Southern Leyte",
+        "name": "Southern Leyte",
+        "PROVINCE_NAME": "SOUTHERN LEYTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.055,
+          "1": 0.9,
+          "2": 0.045
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.065
+        },
+        "prediction_date": "2025-11-06T14:49:27.960519",
+        "input_features": {
+          "eq_count_last_30d": 7.0,
+          "max_magnitude_last_30d": 4.4,
+          "avg_magnitude_last_30d": 2.4285714285714284,
+          "days_since_last_eq": 3,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.8,
+              9.8
+            ],
+            [
+              125.6,
+              9.8
+            ],
+            [
+              125.6,
+              10.8
+            ],
+            [
+              124.8,
+              10.8
+            ],
+            [
+              124.8,
+              9.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 78,
+        "province_name": "Zamboanga Del Norte",
+        "name": "Zamboanga Del Norte",
+        "PROVINCE_NAME": "ZAMBOANGA DEL NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:31.879332",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.2,
+              8.0
+            ],
+            [
+              123.4,
+              8.0
+            ],
+            [
+              123.4,
+              9.0
+            ],
+            [
+              122.2,
+              9.0
+            ],
+            [
+              122.2,
+              8.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 79,
+        "province_name": "Zamboanga Del Sur",
+        "name": "Zamboanga Del Sur",
+        "PROVINCE_NAME": "ZAMBOANGA DEL SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.145,
+          "1": 0.56,
+          "2": 0.295
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.05
+        },
+        "prediction_date": "2025-11-06T14:49:39.630161",
+        "input_features": {
+          "eq_count_last_30d": 28.0,
+          "max_magnitude_last_30d": 5.1,
+          "avg_magnitude_last_30d": 2.4714285714285715,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 25,
+          "eq_count_last_7d": 4,
+          "eq_count_last_14d": 15
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.0,
+              7.0
+            ],
+            [
+              123.2,
+              7.0
+            ],
+            [
+              123.2,
+              8.2
+            ],
+            [
+              122.0,
+              8.2
+            ],
+            [
+              122.0,
+              7.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 80,
+        "province_name": "Zamboanga Sibugay",
+        "name": "Zamboanga Sibugay",
+        "PROVINCE_NAME": "ZAMBOANGA SIBUGAY",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.035,
+          "1": 0.87,
+          "2": 0.095
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.015
+        },
+        "prediction_date": "2025-11-06T14:49:32.998669",
+        "input_features": {
+          "eq_count_last_30d": 10.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 2.34,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 6
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.0,
+              7.2
+            ],
+            [
+              122.8,
+              7.2
+            ],
+            [
+              122.8,
+              8.0
+            ],
+            [
+              122.0,
+              8.0
+            ],
+            [
+              122.0,
+              7.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 16,
+        "province_name": "Bukidnon",
+        "name": "Bukidnon",
+        "PROVINCE_NAME": "BUKIDNON",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.005,
+          "1": 0.975,
+          "2": 0.02
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.005
+        },
+        "prediction_date": "2025-11-06T14:48:55.964770",
+        "input_features": {
+          "eq_count_last_30d": 2.0,
+          "max_magnitude_last_30d": 2.0,
+          "avg_magnitude_last_30d": 1.95,
+          "days_since_last_eq": 10,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 1
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.4,
+              7.6
+            ],
+            [
+              125.4,
+              7.6
+            ],
+            [
+              125.4,
+              8.6
+            ],
+            [
+              124.4,
+              8.6
+            ],
+            [
+              124.4,
+              7.6
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 21,
+        "province_name": "Camiguin",
+        "name": "Camiguin",
+        "PROVINCE_NAME": "CAMIGUIN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:03.727557",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.6,
+              9.0
+            ],
+            [
+              124.8,
+              9.0
+            ],
+            [
+              124.8,
+              9.3
+            ],
+            [
+              124.6,
+              9.3
+            ],
+            [
+              124.6,
+              9.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 41,
+        "province_name": "Lanao Del Norte",
+        "name": "Lanao Del Norte",
+        "PROVINCE_NAME": "LANAO DEL NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:07.329950",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.4,
+              7.8
+            ],
+            [
+              124.4,
+              7.8
+            ],
+            [
+              124.4,
+              8.8
+            ],
+            [
+              123.4,
+              8.8
+            ],
+            [
+              123.4,
+              7.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 48,
+        "province_name": "Misamis Occidental",
+        "name": "Misamis Occidental",
+        "PROVINCE_NAME": "MISAMIS OCCIDENTAL",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:16.876968",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.2,
+              8.2
+            ],
+            [
+              124.2,
+              8.2
+            ],
+            [
+              124.2,
+              9.0
+            ],
+            [
+              123.2,
+              9.0
+            ],
+            [
+              123.2,
+              8.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 49,
+        "province_name": "Misamis Oriental",
+        "name": "Misamis Oriental",
+        "PROVINCE_NAME": "MISAMIS ORIENTAL",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.005,
+          "1": 0.985,
+          "2": 0.01
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.02
+        },
+        "prediction_date": "2025-11-06T14:49:09.548784",
+        "input_features": {
+          "eq_count_last_30d": 4.0,
+          "max_magnitude_last_30d": 2.6,
+          "avg_magnitude_last_30d": 2.0500000000000003,
+          "days_since_last_eq": 3,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.2,
+              8.2
+            ],
+            [
+              125.2,
+              8.2
+            ],
+            [
+              125.2,
+              9.2
+            ],
+            [
+              124.2,
+              9.2
+            ],
+            [
+              124.2,
+              8.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 26,
+        "province_name": "Compostela Valley",
+        "name": "Compostela Valley",
+        "PROVINCE_NAME": "COMPOSTELA VALLEY",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:48:58.391747",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.8,
+              7.2
+            ],
+            [
+              126.4,
+              7.2
+            ],
+            [
+              126.4,
+              8.0
+            ],
+            [
+              125.8,
+              8.0
+            ],
+            [
+              125.8,
+              7.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 27,
+        "province_name": "Davao Del Norte",
+        "name": "Davao Del Norte",
+        "PROVINCE_NAME": "DAVAO DEL NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.055,
+          "1": 0.87,
+          "2": 0.075
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.06
+        },
+        "prediction_date": "2025-11-06T14:48:59.393822",
+        "input_features": {
+          "eq_count_last_30d": 11.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 2.5727272727272728,
+          "days_since_last_eq": 4,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 4,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.3,
+              7.2
+            ],
+            [
+              126.0,
+              7.2
+            ],
+            [
+              126.0,
+              8.0
+            ],
+            [
+              125.3,
+              8.0
+            ],
+            [
+              125.3,
+              7.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 28,
+        "province_name": "Davao Occidental",
+        "name": "Davao Occidental",
+        "PROVINCE_NAME": "DAVAO OCCIDENTAL",
+        "risk_level": "High",
+        "risk_probabilities": {
+          "0": 0.405,
+          "1": 0.245,
+          "2": 0.35
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.155
+        },
+        "prediction_date": "2025-11-06T14:48:59.776134",
+        "input_features": {
+          "eq_count_last_30d": 35.0,
+          "max_magnitude_last_30d": 4.9,
+          "avg_magnitude_last_30d": 3.38,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 26,
+          "eq_count_last_14d": 31
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.1,
+              6.4
+            ],
+            [
+              125.8,
+              6.4
+            ],
+            [
+              125.8,
+              7.3
+            ],
+            [
+              125.1,
+              7.3
+            ],
+            [
+              125.1,
+              6.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 29,
+        "province_name": "Davao De Oro",
+        "name": "Davao De Oro",
+        "PROVINCE_NAME": "DAVAO DE ORO",
+        "risk_level": "High",
+        "risk_probabilities": {
+          "0": 0.62,
+          "1": 0.04,
+          "2": 0.34
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.315
+        },
+        "prediction_date": "2025-11-06T14:48:58.895980",
+        "input_features": {
+          "eq_count_last_30d": 1208.0,
+          "max_magnitude_last_30d": 7.4,
+          "avg_magnitude_last_30d": 2.7401490066225165,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 5,
+          "eq_count_last_7d": 111,
+          "eq_count_last_14d": 233
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              126.0,
+              7.0
+            ],
+            [
+              126.7,
+              7.0
+            ],
+            [
+              126.7,
+              8.0
+            ],
+            [
+              126.0,
+              8.0
+            ],
+            [
+              126.0,
+              7.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 75,
+        "province_name": "Davao Del Sur",
+        "name": "Davao Del Sur",
+        "PROVINCE_NAME": "DAVAO DEL SUR",
+        "risk_level": "High",
+        "risk_probabilities": {
+          "0": 0.57,
+          "1": 0.08,
+          "2": 0.35
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.42
+        },
+        "prediction_date": "2025-11-06T14:49:38.794148",
+        "input_features": {
+          "eq_count_last_30d": 466.0,
+          "max_magnitude_last_30d": 6.0,
+          "avg_magnitude_last_30d": 2.112875536480687,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 20,
+          "eq_count_last_7d": 44,
+          "eq_count_last_14d": 152
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.1,
+              6.2
+            ],
+            [
+              125.8,
+              6.2
+            ],
+            [
+              125.8,
+              7.4
+            ],
+            [
+              125.1,
+              7.4
+            ],
+            [
+              125.1,
+              6.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 53,
+        "province_name": "North Cotabato",
+        "name": "North Cotabato",
+        "PROVINCE_NAME": "NORTH COTABATO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:10.778494",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.2,
+              6.8
+            ],
+            [
+              125.2,
+              6.8
+            ],
+            [
+              125.2,
+              7.8
+            ],
+            [
+              124.2,
+              7.8
+            ],
+            [
+              124.2,
+              6.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 67,
+        "province_name": "Sarangani",
+        "name": "Sarangani",
+        "PROVINCE_NAME": "SARANGANI",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.045,
+          "1": 0.89,
+          "2": 0.065
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.06
+        },
+        "prediction_date": "2025-11-06T14:49:36.324167",
+        "input_features": {
+          "eq_count_last_30d": 8.0,
+          "max_magnitude_last_30d": 4.2,
+          "avg_magnitude_last_30d": 2.7125,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 5
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.2,
+              5.4
+            ],
+            [
+              126.0,
+              5.4
+            ],
+            [
+              126.0,
+              6.2
+            ],
+            [
+              125.2,
+              6.2
+            ],
+            [
+              125.2,
+              5.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 71,
+        "province_name": "South Cotabato",
+        "name": "South Cotabato",
+        "PROVINCE_NAME": "SOUTH COTABATO",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.005,
+          "1": 0.965,
+          "2": 0.03
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.02
+        },
+        "prediction_date": "2025-11-06T14:49:37.865742",
+        "input_features": {
+          "eq_count_last_30d": 5.0,
+          "max_magnitude_last_30d": 3.9,
+          "avg_magnitude_last_30d": 2.3400000000000003,
+          "days_since_last_eq": 5,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 3
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.6,
+              6.0
+            ],
+            [
+              125.4,
+              6.0
+            ],
+            [
+              125.4,
+              6.8
+            ],
+            [
+              124.6,
+              6.8
+            ],
+            [
+              124.6,
+              6.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 74,
+        "province_name": "Sultan Kudarat",
+        "name": "Sultan Kudarat",
+        "PROVINCE_NAME": "SULTAN KUDARAT",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:29.118219",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.0,
+              6.2
+            ],
+            [
+              124.8,
+              6.2
+            ],
+            [
+              124.8,
+              7.0
+            ],
+            [
+              124.0,
+              7.0
+            ],
+            [
+              124.0,
+              6.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 2,
+        "province_name": "Agusan Del Norte",
+        "name": "Agusan Del Norte",
+        "PROVINCE_NAME": "AGUSAN DEL NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.02,
+          "1": 0.93,
+          "2": 0.05
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:48:49.546055",
+        "input_features": {
+          "eq_count_last_30d": 6.0,
+          "max_magnitude_last_30d": 2.5,
+          "avg_magnitude_last_30d": 2.1999999999999997,
+          "days_since_last_eq": 8,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 2
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.2,
+              8.7
+            ],
+            [
+              126.0,
+              8.7
+            ],
+            [
+              126.0,
+              9.4
+            ],
+            [
+              125.2,
+              9.4
+            ],
+            [
+              125.2,
+              8.7
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 3,
+        "province_name": "Agusan Del Sur",
+        "name": "Agusan Del Sur",
+        "PROVINCE_NAME": "AGUSAN DEL SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.075,
+          "1": 0.81,
+          "2": 0.115
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.05
+        },
+        "prediction_date": "2025-11-06T14:48:50.042403",
+        "input_features": {
+          "eq_count_last_30d": 19.0,
+          "max_magnitude_last_30d": 3.9,
+          "avg_magnitude_last_30d": 2.1999999999999997,
+          "days_since_last_eq": 1,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 4,
+          "eq_count_last_14d": 9
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.4,
+              8.0
+            ],
+            [
+              126.2,
+              8.0
+            ],
+            [
+              126.2,
+              8.9
+            ],
+            [
+              125.4,
+              8.9
+            ],
+            [
+              125.4,
+              8.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 30,
+        "province_name": "Dinagat Islands",
+        "name": "Dinagat Islands",
+        "PROVINCE_NAME": "DINAGAT ISLANDS",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.1,
+          "1": 0.78,
+          "2": 0.12
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.12
+        },
+        "prediction_date": "2025-11-06T14:49:00.208723",
+        "input_features": {
+          "eq_count_last_30d": 9.0,
+          "max_magnitude_last_30d": 3.4,
+          "avg_magnitude_last_30d": 1.8555555555555554,
+          "days_since_last_eq": 7,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              126.0,
+              10.0
+            ],
+            [
+              126.4,
+              10.0
+            ],
+            [
+              126.4,
+              10.4
+            ],
+            [
+              126.0,
+              10.4
+            ],
+            [
+              126.0,
+              10.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 76,
+        "province_name": "Surigao Del Norte",
+        "name": "Surigao Del Norte",
+        "PROVINCE_NAME": "SURIGAO DEL NORTE",
+        "risk_level": "High",
+        "risk_probabilities": {
+          "0": 0.49,
+          "1": 0.065,
+          "2": 0.445
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.32
+        },
+        "prediction_date": "2025-11-06T14:49:30.696512",
+        "input_features": {
+          "eq_count_last_30d": 288.0,
+          "max_magnitude_last_30d": 6.0,
+          "avg_magnitude_last_30d": 2.3312500000000003,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 18,
+          "eq_count_last_7d": 38,
+          "eq_count_last_14d": 93
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.2,
+              9.4
+            ],
+            [
+              126.2,
+              9.4
+            ],
+            [
+              126.2,
+              10.4
+            ],
+            [
+              125.2,
+              10.4
+            ],
+            [
+              125.2,
+              9.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 81,
+        "province_name": "Surigao Del Sur",
+        "name": "Surigao Del Sur",
+        "PROVINCE_NAME": "SURIGAO DEL SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.08,
+          "1": 0.86,
+          "2": 0.06
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.035
+        },
+        "prediction_date": "2025-11-06T14:49:40.080867",
+        "input_features": {
+          "eq_count_last_30d": 9.0,
+          "max_magnitude_last_30d": 3.2,
+          "avg_magnitude_last_30d": 2.0555555555555554,
+          "days_since_last_eq": 4,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 1,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              125.8,
+              8.4
+            ],
+            [
+              126.8,
+              8.4
+            ],
+            [
+              126.8,
+              9.4
+            ],
+            [
+              125.8,
+              9.4
+            ],
+            [
+              125.8,
+              8.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 9,
+        "province_name": "Basilan",
+        "name": "Basilan",
+        "PROVINCE_NAME": "BASILAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:48:53.059361",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.8,
+              6.2
+            ],
+            [
+              122.4,
+              6.2
+            ],
+            [
+              122.4,
+              6.8
+            ],
+            [
+              121.8,
+              6.8
+            ],
+            [
+              121.8,
+              6.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 42,
+        "province_name": "Lanao Del Sur",
+        "name": "Lanao Del Sur",
+        "PROVINCE_NAME": "LANAO DEL SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 0.975,
+          "2": 0.025
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.005
+        },
+        "prediction_date": "2025-11-06T14:49:14.918303",
+        "input_features": {
+          "eq_count_last_30d": 4.0,
+          "max_magnitude_last_30d": 2.3,
+          "avg_magnitude_last_30d": 2.075,
+          "days_since_last_eq": 2,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 2
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              123.8,
+              7.2
+            ],
+            [
+              124.8,
+              7.2
+            ],
+            [
+              124.8,
+              8.2
+            ],
+            [
+              123.8,
+              8.2
+            ],
+            [
+              123.8,
+              7.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 44,
+        "province_name": "Maguindanao Del Norte",
+        "name": "Maguindanao Del Norte",
+        "PROVINCE_NAME": "MAGUINDANAO DEL NORTE",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.05,
+          "1": 0.905,
+          "2": 0.045
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.055
+        },
+        "prediction_date": "2025-11-06T14:49:16.042638",
+        "input_features": {
+          "eq_count_last_30d": 4.0,
+          "max_magnitude_last_30d": 4.0,
+          "avg_magnitude_last_30d": 2.4,
+          "days_since_last_eq": 4,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 3,
+          "eq_count_last_14d": 4
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.0,
+              7.0
+            ],
+            [
+              124.8,
+              7.0
+            ],
+            [
+              124.8,
+              7.8
+            ],
+            [
+              124.0,
+              7.8
+            ],
+            [
+              124.0,
+              7.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 63,
+        "province_name": "Maguindanao Del Sur",
+        "name": "Maguindanao Del Sur",
+        "PROVINCE_NAME": "MAGUINDANAO DEL SUR",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.01,
+          "1": 0.985,
+          "2": 0.005
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.01
+        },
+        "prediction_date": "2025-11-06T14:49:34.914500",
+        "input_features": {
+          "eq_count_last_30d": 3.0,
+          "max_magnitude_last_30d": 2.4,
+          "avg_magnitude_last_30d": 2.0333333333333337,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 2,
+          "eq_count_last_14d": 2
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.2,
+              6.2
+            ],
+            [
+              125.0,
+              6.2
+            ],
+            [
+              125.0,
+              7.2
+            ],
+            [
+              124.2,
+              7.2
+            ],
+            [
+              124.2,
+              6.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 68,
+        "province_name": "Shariff Kabunsuan",
+        "name": "Shariff Kabunsuan",
+        "PROVINCE_NAME": "SHARIFF KABUNSUAN",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:25.880394",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              124.4,
+              7.2
+            ],
+            [
+              125.0,
+              7.2
+            ],
+            [
+              125.0,
+              7.8
+            ],
+            [
+              124.4,
+              7.8
+            ],
+            [
+              124.4,
+              7.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 74,
+        "province_name": "Sulu",
+        "name": "Sulu",
+        "PROVINCE_NAME": "SULU",
+        "risk_level": "Low",
+        "risk_probabilities": {
+          "0": 0.0,
+          "1": 1.0,
+          "2": 0.0
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.0
+        },
+        "prediction_date": "2025-11-06T14:49:29.118219",
+        "input_features": {
+          "eq_count_last_30d": 0.0,
+          "max_magnitude_last_30d": 0.0,
+          "avg_magnitude_last_30d": 0.0,
+          "days_since_last_eq": 9999,
+          "days_since_last_major_eq": 9999,
+          "eq_count_last_7d": 0,
+          "eq_count_last_14d": 0
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              120.8,
+              5.8
+            ],
+            [
+              121.4,
+              5.8
+            ],
+            [
+              121.4,
+              6.4
+            ],
+            [
+              120.8,
+              6.4
+            ],
+            [
+              120.8,
+              5.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "province_id": 75,
+        "province_name": "Tawi-Tawi",
+        "name": "Tawi-Tawi",
+        "PROVINCE_NAME": "TAWI-TAWI",
+        "risk_level": "High",
+        "risk_probabilities": {
+          "0": 0.57,
+          "1": 0.08,
+          "2": 0.35
+        },
+        "major_earthquake_risk": {
+          "prediction": false,
+          "probability": 0.42
+        },
+        "prediction_date": "2025-11-06T14:49:38.794148",
+        "input_features": {
+          "eq_count_last_30d": 466.0,
+          "max_magnitude_last_30d": 6.0,
+          "avg_magnitude_last_30d": 2.112875536480687,
+          "days_since_last_eq": 0,
+          "days_since_last_major_eq": 20,
+          "eq_count_last_7d": 44,
+          "eq_count_last_14d": 152
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              119.8,
+              4.8
+            ],
+            [
+              120.4,
+              4.8
+            ],
+            [
+              120.4,
+              5.4
+            ],
+            [
+              119.8,
+              5.4
+            ],
+            [
+              119.8,
+              4.8
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "total_provinces": 84,
+    "matched_with_risk_data": 84,
+    "generated_date": "2025-11-06T15:25:46.777640",
+    "data_source": "comprehensive_philippines_provinces",
+    "risk_prediction_metadata": {
+      "prediction_date": "2025-11-06T14:49:40.081374",
+      "total_provinces": 82,
+      "successful_predictions": 82,
+      "failed_predictions": 0,
+      "model_info": {
+        "multiclass_model": "multiclass_risk_v2",
+        "binary_model": "binary_has_major_eq_v2",
+        "features_used": 13
+      },
+      "source_features_date": "2025-11-06T14:42:18.180167"
+    }
+  }
+}

@@ -88,6 +88,31 @@
   display: none;  /* Safari and Chrome */
 }
 
+/* Custom amber scrollbar - only thumb visible */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Hide track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f59e0b; /* Amber color */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706; /* Darker amber on hover */
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f59e0b transparent; /* thumb color, track transparent */
+}
+
 /* Custom earthquake popup styling */
 .custom-earthquake-popup .leaflet-popup-content-wrapper {
   border-radius: 12px !important;

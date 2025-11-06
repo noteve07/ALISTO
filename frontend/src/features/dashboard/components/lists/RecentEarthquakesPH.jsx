@@ -107,7 +107,7 @@ const RecentEarthquakesPH = () => {
       <div
         className={`space-y-4 mb-4 ${
           showAll
-            ? "max-h-[480px] overflow-y-auto scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-50"
+            ? "max-h-[480px] overflow-y-auto"
             : "overflow-hidden"
         }`}
       >
