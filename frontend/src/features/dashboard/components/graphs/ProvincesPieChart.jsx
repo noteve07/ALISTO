@@ -7,7 +7,7 @@ const ProvincesPieChart = () => {
     subtitle: 'Philippines',
     data: [
       { province: 'Batangas', count: 8, percentage: 32, color: 'bg-red-500' },
-      { province: 'Mindanao', count: 6, percentage: 24, color: 'bg-orange-500' },
+      { province: 'Mindanao', count: 6, percentage: 24, color: 'bg-primary-v2' },
       { province: 'Luzon', count: 5, percentage: 20, color: 'bg-yellow-500' },
       { province: 'Visayas', count: 4, percentage: 16, color: 'bg-green-500' },
       { province: 'Others', count: 2, percentage: 8, color: 'bg-gray-400' }
@@ -55,7 +55,7 @@ const ProvincesPieChart = () => {
           <h3 className="text-lg font-semibold text-gray-900">{chartData.title}</h3>
           <p className="text-sm text-gray-600">{chartData.subtitle}</p>
         </div>
-        <span className="material-symbols-outlined text-primary text-xl">
+        <span className="material-symbols-outlined text-primary-v2 text-xl">
           pie_chart
         </span>
       </div>
@@ -70,7 +70,7 @@ const ProvincesPieChart = () => {
                 d={createPieSlice(item.startAngle * 3.6, item.endAngle * 3.6, item.color)}
                 fill={`rgb(${
                   item.color === 'bg-red-500' ? '239 68 68' :
-                  item.color === 'bg-orange-500' ? '249 115 22' :
+                  item.color === 'bg-primary-v2' ? '234 119 46' :
                   item.color === 'bg-yellow-500' ? '234 179 8' :
                   item.color === 'bg-green-500' ? '34 197 94' :
                   '156 163 175'
