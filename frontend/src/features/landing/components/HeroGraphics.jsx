@@ -87,7 +87,7 @@ const HeroGraphics = () => {
                   filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))",
                 }}
               />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full animate-ping"></div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ const HeroGraphics = () => {
           style={{ animationDelay: "2s", animationDuration: "3.5s" }}
         ></div>
         <div
-          className="absolute bottom-40 right-8 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-60"
+          className="absolute bottom-40 right-8 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-60"
           style={{ animationDelay: "0.8s", animationDuration: "2.8s" }}
         ></div>
         <div
