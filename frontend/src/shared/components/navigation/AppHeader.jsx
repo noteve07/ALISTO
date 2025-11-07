@@ -11,10 +11,11 @@ import {
   formatNotification,
   getNavigationConfig,
 } from "@/features/notifications/utils/notificationUtils";
-import {
-  playEarthquakeSound,
-  getEarthquakeUrgency,
-} from "@/shared/utils/earthquakeSounds";
+// TEMPORARY: Sound imports - COMMENTED OUT
+// import {
+//   playEarthquakeSound,
+//   getEarthquakeUrgency,
+// } from "@/shared/utils/earthquakeSounds";
 
 const AppHeader = ({ onLogout }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -118,23 +119,23 @@ const AppHeader = ({ onLogout }) => {
   const userEmail = user?.email || "user@alisto.com";
   const userInitial = firstName.charAt(0).toUpperCase();
 
-  // TEMPORARY: Test earthquake sound function
-  const testEarthquakeSound = async (magnitude) => {
-    console.log(`🧪 TESTING earthquake sound with magnitude ${magnitude}`);
-    const urgency = getEarthquakeUrgency(magnitude);
+  // TEMPORARY: Test earthquake sound function - COMMENTED OUT
+  // const testEarthquakeSound = async (magnitude) => {
+  //   console.log(`🧪 TESTING earthquake sound with magnitude ${magnitude}`);
+  //   const urgency = getEarthquakeUrgency(magnitude);
 
-    try {
-      await playEarthquakeSound(magnitude, {
-        urgency,
-        source: "header-test",
-      });
-    } catch (error) {
-      console.error("Test sound failed:", error);
-    }
-  };
+  //   try {
+  //     await playEarthquakeSound(magnitude, {
+  //       urgency,
+  //       source: "header-test",
+  //     });
+  //   } catch (error) {
+  //     console.error("Test sound failed:", error);
+  //   }
+  // };
 
   return (
-    <header className="bg-[#213d53] px-6 py-2 shadow-md">
+    <header className="bg-white px-6 py-2 shadow-md border-b border-gray-100">
       <div className="flex items-center justify-between">
         {/* Logo and Tagline */}
         <div className="flex items-center gap-3">
@@ -149,7 +150,7 @@ const AppHeader = ({ onLogout }) => {
                 alt="ALISTO Logo"
                 className="w-8 h-8 object-contain select-none"
                 style={{
-                  filter: "brightness(1.2) contrast(1.1) saturate(0.8)",
+                  filter: "brightness(1.0) contrast(1.0) saturate(1.0)",
                 }}
                 draggable={false}
               />
@@ -158,8 +159,8 @@ const AppHeader = ({ onLogout }) => {
               ALISTO
             </h1>
           </div>
-          <div className="h-6 w-px bg-white/20"></div>
-          <p className="text-[11px] text-white/80 font-light">
+          <div className="h-6 w-px bg-gray-300"></div>
+          <p className="text-[11px] text-gray-600 font-light">
             Automated Live Information for Seismic Tracking and Observation
           </p>
         </div>
@@ -167,38 +168,38 @@ const AppHeader = ({ onLogout }) => {
         {/* Right Side Actions */}
         <div className="flex items-center space-x-2">
           {/* System Status - Live Indicator */}
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 rounded-lg border border-green-400/30">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 rounded-lg border border-green-200">
             <div className="relative">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <div className="absolute inset-0 w-2 h-2 bg-green-300 rounded-full animate-ping"></div>
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
             </div>
-            <span className="text-xs font-semibold text-green-300">Online</span>
+            <span className="text-xs font-semibold text-green-700">Online</span>
           </div>
 
-          {/* TEMPORARY: Test Sound Buttons */}
-          <div className="flex items-center gap-1">
+          {/* TEMPORARY: Test Sound Buttons - COMMENTED OUT */}
+          {/* <div className="flex items-center gap-1">
             <button
               onClick={() => testEarthquakeSound(7.2)}
-              className="px-2 py-1 text-xs bg-red-500/20 text-red-300 border border-red-400/30 rounded hover:bg-red-500/30 transition-colors"
+              className="px-2 py-1 text-xs bg-red-50 text-red-700 border border-red-200 rounded hover:bg-red-100 transition-colors"
               title="Test Major Earthquake Sound (7.2)"
             >
               🔊 7.2
             </button>
             <button
               onClick={() => testEarthquakeSound(4.5)}
-              className="px-2 py-1 text-xs bg-yellow-500/20 text-yellow-300 border border-yellow-400/30 rounded hover:bg-yellow-500/30 transition-colors"
+              className="px-2 py-1 text-xs bg-yellow-50 text-yellow-700 border border-yellow-200 rounded hover:bg-yellow-100 transition-colors"
               title="Test Moderate Earthquake Sound (4.5)"
             >
               🔊 4.5
             </button>
             <button
               onClick={() => testEarthquakeSound(2.8)}
-              className="px-2 py-1 text-xs bg-gray-500/20 text-gray-300 border border-gray-400/30 rounded hover:bg-gray-500/30 transition-colors"
+              className="px-2 py-1 text-xs bg-gray-50 text-gray-700 border border-gray-200 rounded hover:bg-gray-100 transition-colors"
               title="Test Minor Earthquake Sound (2.8)"
             >
               🔊 2.8
             </button>
-          </div>
+          </div> */}
           {/* Notifications */}
           <div className="relative" ref={notificationsRef}>
             <NotificationBell
@@ -222,7 +223,7 @@ const AppHeader = ({ onLogout }) => {
           <div className="relative" ref={userMenuRef}>
             <button
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-white/10 transition-all duration-200 border border-white/20"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200"
             >
               <div className="w-8 h-8 bg-primary-v2 rounded-full flex items-center justify-center">
                 {isLoadingProfile ? (
@@ -236,20 +237,20 @@ const AppHeader = ({ onLogout }) => {
               <div className="hidden lg:block text-left">
                 {isLoadingProfile ? (
                   <>
-                    <div className="h-3 w-20 bg-white/30 rounded animate-pulse mb-1"></div>
-                    <div className="h-2 w-32 bg-white/20 rounded animate-pulse"></div>
+                    <div className="h-3 w-20 bg-gray-200 rounded animate-pulse mb-1"></div>
+                    <div className="h-2 w-32 bg-gray-100 rounded animate-pulse"></div>
                   </>
                 ) : (
                   <>
-                    <p className="text-xs font-semibold text-white">
+                    <p className="text-xs font-semibold text-gray-900">
                       {displayName}
                     </p>
-                    <p className="text-[10px] text-white/70">{userEmail}</p>
+                    <p className="text-[10px] text-gray-600">{userEmail}</p>
                   </>
                 )}
               </div>
               <svg
-                className={`w-3 h-3 text-white/70 transition-transform duration-200 ${
+                className={`w-3 h-3 text-gray-500 transition-transform duration-200 ${
                   isUserMenuOpen ? "rotate-180" : ""
                 }`}
                 fill="none"
