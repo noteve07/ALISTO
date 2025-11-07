@@ -1,5 +1,5 @@
 import React from "react";
-import { useUserLocation } from "@/features/auth/context/UserLocationContext";
+import useUserLocation from "@/features/auth/hooks/useUserLocation";
 
 const LocationRiskAssessment = () => {
   const { location: userLocation } = useUserLocation();

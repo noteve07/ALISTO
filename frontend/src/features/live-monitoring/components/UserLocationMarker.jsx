@@ -1,7 +1,7 @@
 import React from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
-import { useUserLocation } from "@/features/auth/context/UserLocationContext";
+import useUserLocation from "@/features/auth/hooks/useUserLocation";
 
 // Custom user location icon - normal marker style
 const userLocationIcon = new L.Icon({
@@ -30,25 +30,27 @@ const UserLocationMarker = ({ onLocationClick }) => {
 
   const handleMarkerClick = () => {
     const currentZoom = map.getZoom();
-    
+
     // If at zoom 12+, zoom to street level (14) for clean view
     if (currentZoom >= 12 && onLocationClick) {
-      console.log(`📍 User location clicked at zoom ${currentZoom}, zooming to clean street view...`);
+      console.log(
+        `📍 User location clicked at zoom ${currentZoom}, zooming to clean street view...`
+      );
       onLocationClick({
         position,
         municipality,
         province,
-        currentZoom
+        currentZoom,
       });
     }
   };
 
   return (
-    <Marker 
-      position={position} 
+    <Marker
+      position={position}
       icon={userLocationIcon}
       eventHandlers={{
-        click: handleMarkerClick
+        click: handleMarkerClick,
       }}
     >
       <Popup opacity={0.6}>

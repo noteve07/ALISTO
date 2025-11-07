@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import * as turf from "@turf/turf";
-import { useUserLocation } from "@/features/auth/context/UserLocationContext";
+import useUserLocation from "@/features/auth/hooks/useUserLocation";
 
 const defaultFaultStyle = {
   color: "#fb923c",
@@ -33,7 +33,7 @@ const userMarkerHtml = `
 
 const FaultLinesOverlay = () => {
   const map = useMap();
-  const { location: userLocation } = useUserLocation();
+  const { location: userLocation, loading } = useUserLocation();
   const faultLayerRef = useRef(null);
   const nearestLineRef = useRef(null);
   const selectedFaultRef = useRef(null);
@@ -73,7 +73,10 @@ const FaultLinesOverlay = () => {
     };
 
     const locateUser = () => {
-      // Use location from UserLocationContext instead of geolocation API
+      if (loading) {
+        return;
+      }
+
       if (!userLocation) {
         console.warn("User location not available from context");
         return;
@@ -146,9 +149,8 @@ const FaultLinesOverlay = () => {
           weight: 3,
         }).addTo(map);
 
-        nearestLineRef.current
-          .bindPopup(
-            `
+        nearestLineRef.current.bindPopup(
+          `
           <div style="font-family:'Inter',system-ui,sans-serif;font-size:12px;">
             <strong>${feature.properties?.NAME || "Fault Line"}</strong><br/>
             ${
@@ -166,7 +168,7 @@ const FaultLinesOverlay = () => {
             </span>
           </div>
         `
-          );
+        );
       } catch (error) {
         console.error("Failed to draw nearest line", error);
       }
@@ -213,6 +215,10 @@ const FaultLinesOverlay = () => {
     };
 
     const loadFaultLines = async () => {
+      if (faultLayerRef.current) {
+        return;
+      }
+
       try {
         const faultDataUrl = new URL(
           "../../../assets/gis/fault_lines.geojson",
@@ -243,7 +249,10 @@ const FaultLinesOverlay = () => {
 
     map.whenReady(() => {
       if (!isMounted) return;
-      locateUser();
+      // Only locate user if location is available
+      if (userLocation && !loading) {
+        locateUser();
+      }
       loadFaultLines();
     });
 
@@ -271,7 +280,7 @@ const FaultLinesOverlay = () => {
       clearNearestLine();
       resetSelectedFault();
     };
-  }, [map, userLocation]);
+  }, [map, userLocation, loading]);
 
   return null;
 };

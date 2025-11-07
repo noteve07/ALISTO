@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 import * as turf from "@turf/turf";
-import { useUserLocation } from "@/features/auth/context/UserLocationContext";
+import useUserLocation from "@/features/auth/hooks/useUserLocation";
 import volcanoes from "../../../assets/gis/volcanoes.json";
 
 const NearestHazardLines = ({ showVolcano = true, showFault = true }) => {
   const map = useMap();
-  const { location: userLocation } = useUserLocation();
+  const { location: userLocation, loading } = useUserLocation();
   const nearestVolcanoLineRef = useRef(null);
   const nearestFaultLineRef = useRef(null);
   const nearestFaultLayerRef = useRef(null);
@@ -16,7 +16,7 @@ const NearestHazardLines = ({ showVolcano = true, showFault = true }) => {
   const faultDataRef = useRef(null);
 
   useEffect(() => {
-    if (!map || !userLocation) return;
+    if (!map || loading || !userLocation) return;
 
     let isMounted = true;
 
@@ -285,7 +285,7 @@ const NearestHazardLines = ({ showVolcano = true, showFault = true }) => {
       isMounted = false;
       clearLines();
     };
-  }, [map, userLocation, showVolcano, showFault]);
+  }, [map, userLocation, loading, showVolcano, showFault]);
 
   return null;
 };

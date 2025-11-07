@@ -29,8 +29,8 @@ router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
 @router.get("")
 async def get_dashboard_data(
     user_id: int | None = Query(None),
-    lat: float = Query(14.6799),
-    lon: float = Query(120.5421),
+    lat: float = Query(14.676041),  # Balanga City latitude - matches user location fallback
+    lon: float = Query(120.536319), # Balanga City longitude - matches user location fallback
 ):
     try:
         today = await get_todays_earthquakes()
