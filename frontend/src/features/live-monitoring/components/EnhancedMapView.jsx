@@ -139,7 +139,7 @@ const MapController = ({
 
       // Smooth pan and zoom to the latest earthquake with right offset
       map.flyTo([offsetLat, offsetLng], targetZoom, {
-        duration: 2, // 2 seconds animation
+        duration: 1, // Faster - 1 second animation
         easeLinearity: 0.25,
       });
 

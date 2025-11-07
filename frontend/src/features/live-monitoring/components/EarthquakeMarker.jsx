@@ -15,13 +15,16 @@ const EarthquakeMarker = ({ event, isLatest }) => {
 
     const color = getMagnitudeColor(event.magnitude);
     const radius = calculateEarthquakeRadius(event.magnitude);
-    const opacity = getMagnitudeOpacity(event.magnitude);
+    const baseOpacity = getMagnitudeOpacity(event.magnitude);
+
+    // Reduce opacity significantly if this is the latest earthquake (with animation)
+    const circleOpacity = isLatest ? 0.5 : baseOpacity; // Fixed low opacity for latest
 
     // For all earthquakes, add a circle marker
     const circle = L.circle([event.latitude, event.longitude], {
       color: color,
       fillColor: color,
-      fillOpacity: opacity,
+      fillOpacity: circleOpacity,
       weight: 0, // Remove border
       radius: radius,
     }).addTo(map);
@@ -134,8 +137,8 @@ const EarthquakeMarker = ({ event, isLatest }) => {
       const pulseLayers = [];
       const cancelAnimations = [];
       const duration = 3000;
-      const maxScale = 12.0; // smaller radius for the animation
-      const delays = [0, 900, 1500];
+      const maxScale = 8.0; // smaller radius for the animation
+      const delays = [1200, 2100, 2600]; // Start animations 1.2 seconds later to wait for map pan
 
       const startPulseAnimation = (
         layer,

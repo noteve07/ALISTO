@@ -14,8 +14,9 @@ const EarthquakeAlertModal = ({ isOpen, earthquake, onClose }) => {
     >
       <div
         className="relative w-full max-w-xs bg-red-600 rounded-2xl shadow-2xl border-4 border-red-800 ring-4 ring-red-500/30"
-        style={{ 
-          boxShadow: "0 25px 50px -12px rgba(220, 38, 38, 0.5), 0 0 0 1px rgba(220, 38, 38, 0.1)" 
+        style={{
+          boxShadow:
+            "0 25px 50px -12px rgba(220, 38, 38, 0.5), 0 0 0 1px rgba(220, 38, 38, 0.1)",
         }}
       >
         <button
