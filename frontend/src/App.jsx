@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // Layouts
 import PublicLayout from "./shared/layouts/PublicLayout";
 import AppLayout from "./shared/layouts/AppLayout";
-import { DashboardProvider } from "./features/dashboard/context/DashboardContext";
+import { DashboardProvider } from "./features/dashboard/context/DashboardContext.jsx";
 
 // Public Pages
 import LandingPage from "./features/landing/pages/LandingPage";

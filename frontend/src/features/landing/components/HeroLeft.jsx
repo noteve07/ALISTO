@@ -75,10 +75,10 @@ const HeroLeft = () => {
         >
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl font-light mt-4">
             A web platform with{" "}
-            <span className="text-primary-v2 font-semibold relative group cursor-pointer transition-all duration-300 hover:scale-105">
-              AI-powered
-              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary-v2 to-orange-400 rounded-full group-hover:h-1 transition-all duration-300"></div>
-              <div className="absolute -inset-1 bg-primary-v2/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+            <span className="text-primary-v2 font-semibold relative group cursor-pointer transition-all duration-300 hover:scale-105 inline-block">
+              <span className="relative z-10">AI-powered</span>
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary-v2 to-orange-400 rounded-full group-hover:h-1 transition-all duration-300 block"></span>
+              <span className="absolute -inset-1 bg-primary-v2/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 block"></span>
             </span>{" "}
             earthquake monitoring, provincial risk analysis, chatbot, and alert
             system.
@@ -160,7 +160,7 @@ const HeroLeft = () => {
       </div>
 
       {/* Custom Animation Styles */}
-      <style jsx>{`
+      <style>{`
         @keyframes pulse-slow {
           0%,
           100% {
