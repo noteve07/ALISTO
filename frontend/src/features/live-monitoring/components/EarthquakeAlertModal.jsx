@@ -6,21 +6,22 @@ const EarthquakeAlertModal = ({ isOpen, earthquake, onClose }) => {
   }
 
   const magnitude = Number.parseFloat(earthquake.magnitude) || 0;
-  const location = earthquake.location || "Unknown location";
 
   return (
     <div
-      className="fixed inset-0 z-2000 flex items-center bg-slate-900/20 px-4"
+      className="fixed inset-0 z-2000 flex items-center bg-slate-900/50 px-4"
       style={{ justifyContent: "center", marginLeft: "-55px" }}
     >
       <div
-        className="relative w-full max-w-xs bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/30"
-        style={{ backgroundColor: "var(--color-secondary)" }}
+        className="relative w-full max-w-xs bg-red-600 rounded-2xl shadow-2xl border-4 border-red-800 ring-4 ring-red-500/30"
+        style={{ 
+          boxShadow: "0 25px 50px -12px rgba(220, 38, 38, 0.5), 0 0 0 1px rgba(220, 38, 38, 0.1)" 
+        }}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white/70 transition hover:bg-white/20 hover:text-white focus:outline-none"
+          className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-red-800/80 text-white transition hover:bg-red-800 focus:outline-none ring-2 ring-white/20"
           aria-label="Dismiss"
         >
           <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none">
@@ -35,9 +36,9 @@ const EarthquakeAlertModal = ({ isOpen, earthquake, onClose }) => {
 
         <div className="p-5 text-center">
           {/* Warning Icon */}
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 border-2 border-red-200 shadow-lg">
             <svg
-              className="h-6 w-6 text-red-400"
+              className="h-6 w-6 text-red-600"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.5"
@@ -55,31 +56,31 @@ const EarthquakeAlertModal = ({ isOpen, earthquake, onClose }) => {
           <h2 className="text-white text-lg font-bold mb-1">
             EARTHQUAKE ALERT
           </h2>
-          <p className="text-white/70 text-xs mb-4">
-            M{magnitude.toFixed(1)} •{" "}
-            {location.length > 25
-              ? location.substring(0, 25) + "..."
-              : location}
+          <p className="text-red-100 text-xs mb-2 font-medium">
+            M{magnitude.toFixed(1)} • Balanga City (Bataan)
+          </p>
+          <p className="text-red-200/80 text-xs mb-4 font-mono">
+            14.6760°N, 120.5367°E
           </p>
 
-          {/* Actions - Simple Pills */}
+          {/* Actions - Strong Pills */}
           <div className="space-y-2 mb-4">
-            <div className="bg-white/15 rounded-lg py-2.5">
+            <div className="bg-red-800 border-2 border-red-700 rounded-lg py-2.5 shadow-lg">
               <h3 className="text-white text-xl font-black">DUCK</h3>
             </div>
 
-            <div className="bg-white/15 rounded-lg py-2.5">
+            <div className="bg-red-800 border-2 border-red-700 rounded-lg py-2.5 shadow-lg">
               <h3 className="text-white text-xl font-black">COVER</h3>
             </div>
 
-            <div className="bg-white/15 rounded-lg py-2.5">
+            <div className="bg-red-800 border-2 border-red-700 rounded-lg py-2.5 shadow-lg">
               <h3 className="text-white text-xl font-black">HOLD</h3>
             </div>
           </div>
 
           {/* Status */}
-          <div className="flex items-center justify-center gap-2 text-xs text-white/60">
-            <div className="h-1.5 w-1.5 bg-red-400 rounded-full animate-pulse"></div>
+          <div className="flex items-center justify-center gap-2 text-xs text-red-100 font-semibold">
+            <div className="h-1.5 w-1.5 bg-yellow-300 rounded-full animate-pulse shadow-sm"></div>
             LIVE ALERT
           </div>
         </div>
