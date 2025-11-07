@@ -54,10 +54,10 @@ export const getMagnitudeOpacity = (magnitude) => {
  * @returns {number} Radius in meters
  */
 export const calculateEarthquakeRadius = (magnitude) => {
-  // Base radius with minimum size for visibility
-  const baseRadius = Math.max(magnitude * 6000, 3000)
-  // Cap maximum radius to prevent overly large circles
-  return Math.min(baseRadius, 50000)
+  // Smaller base radius with minimum size for visibility
+  const baseRadius = Math.max(magnitude * 3000, 2000)
+  // Lower maximum radius cap to prevent overly large circles
+  return Math.min(baseRadius, 25000)
 }
 
 /**

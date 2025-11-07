@@ -11,7 +11,7 @@ const SummaryCard = ({ label, value, accent }) => (
 );
 
 const RiskEvaluationPage = () => {
-  const { riskByProvince, riskSummary, loading, error } = useRiskEvaluations();
+  const { riskByProvince, loading, error } = useRiskEvaluations();
   const location = useLocation();
   const [initialMapState, setInitialMapState] = useState(null);
   const [filters, setFilters] = useState({
