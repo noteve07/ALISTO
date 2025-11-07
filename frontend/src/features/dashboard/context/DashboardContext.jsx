@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import useUserLocation from "@/features/auth/hooks/useUserLocation";
-import DashboardContext from "./dashboardContext";
 import { dashboardService } from "../services/dashboardService";
+
+const DashboardContext = createContext();
 
 export const DashboardProvider = ({ children }) => {
   const { location, loading: locationLoading } = useUserLocation();
@@ -94,3 +95,5 @@ export const DashboardProvider = ({ children }) => {
     </DashboardContext.Provider>
   );
 };
+
+export default DashboardContext;

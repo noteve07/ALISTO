@@ -1,5 +1,2 @@
-import { createContext } from "react";
-
-const DashboardContext = createContext();
-
-export default DashboardContext;
+export { default } from "./DashboardContext.jsx";
+export { DashboardProvider } from "./DashboardContext.jsx";

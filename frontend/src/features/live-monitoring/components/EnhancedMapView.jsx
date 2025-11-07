@@ -86,7 +86,7 @@ const MapController = ({
 
       // Calculate appropriate zoom level based on magnitude
       const getZoomLevel = (magnitude) => {
-        if (magnitude >= 6) return 9; // Major earthquakes - closer view
+        if (magnitude >= 6) return 8; // Major earthquakes - closer view
         if (magnitude >= 5) return 8; // Strong earthquakes
         if (magnitude >= 4) return 7; // Moderate earthquakes
         return 7; // Minor earthquakes
