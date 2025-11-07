@@ -187,11 +187,23 @@ const ChatbotPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [typingMessage, setTypingMessage] = useState(""); // For typing animation
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
   const typingIntervalRef = useRef(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const shouldSmoothScroll = !isTyping;
+
+    if (typeof container.scrollTo === "function") {
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior: shouldSmoothScroll ? "smooth" : "auto",
+      });
+    } else {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages, isTyping, typingMessage]);
 
   // Cleanup typing animation on unmount
@@ -302,16 +314,17 @@ const ChatbotPage = () => {
   };
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-b from-white via-slate-50 to-slate-100 shadow-xl">
+  <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-slate-200 bg-linear-to-b from-white via-slate-50 to-slate-100 shadow-xl">
       <div
-        className={`flex-1 overflow-y-auto px-6 py-8 sm:px-10 sm:py-10 ${
+        ref={messagesContainerRef}
+        className={`flex-1 min-h-0 overflow-y-auto px-6 py-8 sm:px-10 sm:py-10 ${
           messages.length === 0 ? "flex items-center justify-center" : ""
         }`}
       >
         {/* Welcome Section */}
         <div className={`text-center ${messages.length > 0 ? "mb-8" : ""}`}>
           <div className="relative mb-6">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 via-orange-300 to-orange-400 shadow-lg">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-linear-to-br from-amber-200 via-orange-300 to-orange-400 shadow-lg">
               <AssistantIcon className="h-16 w-16" />
             </div>
             <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 translate-y-1/2 inline-flex h-5 w-5 items-center justify-center rounded-full border-3 border-white bg-emerald-400" />
@@ -345,7 +358,7 @@ const ChatbotPage = () => {
                 }
               >
                 {message.author === "isa" && (
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-amber-200 to-orange-300 shadow-inner">
                     <AssistantIcon className="h-9 w-9" />
                   </div>
                 )}
@@ -390,7 +403,7 @@ const ChatbotPage = () => {
 
             {isTyping && (
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-linear-to-br from-amber-200 to-orange-300 shadow-inner">
                   <AssistantIcon className="h-9 w-9" />
                 </div>
                 {typingMessage ? (
@@ -406,8 +419,6 @@ const ChatbotPage = () => {
                 )}
               </div>
             )}
-
-            <div ref={messagesEndRef} />
           </div>
         )}
       </div>
@@ -436,7 +447,7 @@ const ChatbotPage = () => {
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-orange-400 to-orange-500 px-6 text-sm font-semibold text-white shadow-lg shadow-orange-400/30 transition-all duration-200 hover:from-orange-500 hover:to-orange-600 hover:shadow-xl hover:shadow-orange-400/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-lg font-sans"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-orange-400 to-orange-500 px-6 text-sm font-semibold text-white shadow-lg shadow-orange-400/30 transition-all duration-200 hover:from-orange-500 hover:to-orange-600 hover:shadow-xl hover:shadow-orange-400/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-lg font-sans"
           >
             Send
             <svg
