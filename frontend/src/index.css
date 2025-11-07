@@ -141,6 +141,32 @@
   outline: none !important;
 }
 
+/* Ocean blue background for live monitoring map */
+.ocean-blue-background {
+  background-color: #15384d !important;
+}
+
+.leaflet-container {
+  background-color: #15384d !important;
+}
+
+.leaflet-tile-pane {
+  background-color: #15384d !important;
+}
+
+/* Light blue background for risk evaluation map */
+.risk-map-background {
+  background-color: #aed2de !important;
+}
+
+.risk-map-background .leaflet-container {
+  background-color: #aed2de !important;
+}
+
+.risk-map-background .leaflet-tile-pane {
+  background-color: #aed2de !important;
+}
+
 /* Volcano marker styles */
 .volcano-marker {
   background: transparent !important;
