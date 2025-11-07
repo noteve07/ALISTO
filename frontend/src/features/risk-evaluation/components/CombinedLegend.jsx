@@ -70,19 +70,11 @@ const CombinedLegend = () => {
                 <div className="h-0.5 w-8 bg-orange-500 rounded-full"></div>
                 <span className="text-sm font-medium">Fault Line</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="h-1 w-8 bg-purple-500 rounded-full"></div>
-                <span className="text-sm font-medium">Nearest Fault</span>
-              </div>
               <div className="flex items-center gap-3 pt-1 border-t border-slate-200">
-                <div
-                  className="h-0.5 w-8 bg-purple-500 rounded-full"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(90deg, #a855f7 0, #a855f7 6px, transparent 6px, transparent 12px)",
-                  }}
-                ></div>
-                <span className="text-xs text-slate-500">Distance Line</span>
+                <div className="h-0.5 w-8 border-t-2 border-dashed border-purple-500"></div>
+                <span className="text-xs text-slate-500">
+                  Nearest Fault Line
+                </span>
               </div>
             </div>
           </div>
@@ -111,13 +103,7 @@ const CombinedLegend = () => {
                 <span className="text-sm font-medium">Volcano Location</span>
               </div>
               <div className="flex items-center gap-3 pt-1 border-t border-slate-200">
-                <div
-                  className="h-0.5 w-8 bg-purple-500 rounded-full"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(90deg, #a855f7 0, #a855f7 6px, transparent 6px, transparent 12px)",
-                  }}
-                ></div>
+                <div className="h-0.5 w-8 border-t-2 border-dashed border-purple-500"></div>
                 <span className="text-xs text-slate-500">Nearest Volcano</span>
               </div>
             </div>

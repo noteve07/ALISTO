@@ -10,10 +10,10 @@ const NotificationBell = ({ isOpen, onClick, unreadCount = 0 }) => {
   return (
     <button
       onClick={onClick}
-      className={`relative p-2 rounded-lg transition-all duration-200 ${
+      className={`relative p-2 rounded-lg transition-all duration-200 border ${
         isOpen
-          ? "bg-primary-v2 text-white shadow-lg"
-          : "text-white hover:bg-white/10"
+          ? "bg-primary-v2 text-white shadow-lg border-primary-v2"
+          : "text-gray-700 hover:bg-gray-50 border-gray-200"
       }`}
       aria-label="Notifications"
       aria-expanded={isOpen}
