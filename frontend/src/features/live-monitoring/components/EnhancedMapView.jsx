@@ -4,7 +4,10 @@ import EarthquakeMarker from "./EarthquakeMarker";
 import VolcanoMarkers from "./VolcanoMarkers";
 import MapLegend from "./MapLegend";
 import UserLocationMarker from "./UserLocationMarker";
-import { playEarthquakeSound, getEarthquakeUrgency } from "@/shared/utils/earthquakeSounds";
+import {
+  playEarthquakeSound,
+  getEarthquakeUrgency,
+} from "@/shared/utils/earthquakeSounds";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -64,16 +67,18 @@ const MapController = ({
       try {
         // Extract and validate magnitude
         const magnitude = parseFloat(latestEarthquake.magnitude) || 0;
-        console.log(`🌍 New earthquake detected - Magnitude: ${magnitude} (raw: ${latestEarthquake.magnitude})`);
-        
+        console.log(
+          `🌍 New earthquake detected - Magnitude: ${magnitude} (raw: ${latestEarthquake.magnitude})`
+        );
+
         // Determine urgency based on magnitude
         const urgency = getEarthquakeUrgency(magnitude);
         console.log(`📊 Urgency level: ${urgency} (magnitude ${magnitude})`);
-        
+
         // Play appropriate sound based on magnitude
         playEarthquakeSound(magnitude, {
           urgency,
-          source: 'website'
+          source: "website",
         });
       } catch (error) {
         console.error("🔇 Error playing earthquake sound:", error);
@@ -173,7 +178,8 @@ const EnhancedMapView = ({
       center={[12.8797, 121.774]}
       zoom={6}
       scrollWheelZoom
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", backgroundColor: "#15384d" }}
+      className="ocean-blue-background"
       minZoom={5}
       maxZoom={12}
       maxBounds={[

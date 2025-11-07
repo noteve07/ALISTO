@@ -56,13 +56,13 @@ const MapViewController = ({ initialMapState, onZoomChange }) => {
       }
     };
 
-    map.on('zoomend', handleZoomEnd);
-    
+    map.on("zoomend", handleZoomEnd);
+
     // Call initially to set current zoom
     handleZoomEnd();
 
     return () => {
-      map.off('zoomend', handleZoomEnd);
+      map.off("zoomend", handleZoomEnd);
     };
   }, [map, onZoomChange]);
 
@@ -77,7 +77,7 @@ const RiskMap = ({
 }) => {
   const geoJsonRef = useRef(null);
   const mapRef = useRef(null);
-  
+
   // State for zoom tracking and selection hierarchy
   const [currentZoom, setCurrentZoom] = useState(6);
   const [selectedProvince, setSelectedProvince] = useState(null);
@@ -86,7 +86,7 @@ const RiskMap = ({
   // Handle zoom changes
   const handleZoomChange = (zoom) => {
     setCurrentZoom(zoom);
-    
+
     // Clear selections when zooming out
     if (zoom < 8 && selectedProvince) {
       setSelectedProvince(null);
@@ -99,14 +99,16 @@ const RiskMap = ({
 
   // Handle municipality click
   const handleMunicipalityClick = (municipalityInfo) => {
-    console.log(`🏛️ Municipality clicked: ${municipalityInfo.name}, ${municipalityInfo.province}`);
+    console.log(
+      `🏛️ Municipality clicked: ${municipalityInfo.name}, ${municipalityInfo.province}`
+    );
     setSelectedMunicipality(municipalityInfo.name);
   };
 
   // Handle user location click for zooming to clean street view
   const handleUserLocationClick = (locationInfo) => {
     const { position, currentZoom } = locationInfo;
-    
+
     if (currentZoom >= 12 && mapRef.current) {
       console.log(`📍 Zooming to user location at street level (zoom 14)`);
       mapRef.current.flyTo(position, 14, {
@@ -119,21 +121,31 @@ const RiskMap = ({
   // Filter municipalities for selected province
   const municipalitiesForProvince = useMemo(() => {
     if (!selectedProvince) return null;
-    
-    const filteredFeatures = municipalitiesGeoJson.features.filter(feature => {
-      const provinceName = feature.properties?.NAME_1 || feature.properties?.PROVINCE;
-      return provinceName && provinceName.toLowerCase() === selectedProvince.toLowerCase();
-    });
+
+    const filteredFeatures = municipalitiesGeoJson.features.filter(
+      (feature) => {
+        const provinceName =
+          feature.properties?.NAME_1 || feature.properties?.PROVINCE;
+        return (
+          provinceName &&
+          provinceName.toLowerCase() === selectedProvince.toLowerCase()
+        );
+      }
+    );
 
     return {
-      type: 'FeatureCollection',
-      features: filteredFeatures
+      type: "FeatureCollection",
+      features: filteredFeatures,
     };
   }, [selectedProvince]);
 
   // Determine visibility based on zoom level and selections
   const shouldShowProvinces = currentZoom < 14; // Hide provinces at zoom 14+ for clean street view
-  const shouldShowMunicipalities = selectedProvince && municipalitiesForProvince && currentZoom > 10 && currentZoom < 14;
+  const shouldShowMunicipalities =
+    selectedProvince &&
+    municipalitiesForProvince &&
+    currentZoom > 10 &&
+    currentZoom < 14;
 
   const darkenColor = (hex, amount = 0.15) => {
     try {
@@ -174,7 +186,13 @@ const RiskMap = ({
     const baseColor = getRiskColor(risk?.riskLevel);
 
     // Reduce opacity when municipalities are showing or at high zoom
-    const baseOpacity = shouldShowProvinces ? (risk ? 0.7 : 0.35) : (risk ? 0.2 : 0.1);
+    const baseOpacity = shouldShowProvinces
+      ? risk
+        ? 0.7
+        : 0.35
+      : risk
+      ? 0.2
+      : 0.1;
     const weight = shouldShowProvinces ? 1 : 0.5;
 
     return {
@@ -201,8 +219,8 @@ const RiskMap = ({
       ? risk.riskLevel.toUpperCase()
       : "NO DATA";
     const riskColor = getRiskColor(risk?.riskLevel);
-    const dynamicScore = risk?.dynamicRiskScore 
-      ? (risk.dynamicRiskScore * 10).toFixed(1) 
+    const dynamicScore = risk?.dynamicRiskScore
+      ? (risk.dynamicRiskScore * 10).toFixed(1)
       : "N/A";
 
     // Get light background color based on risk level
@@ -268,7 +286,7 @@ const RiskMap = ({
         closeButton: true,
         autoClose: true,
         closeOnClick: false,
-        className: 'province-risk-popup',
+        className: "province-risk-popup",
         maxWidth: 250,
       });
     }
@@ -302,9 +320,11 @@ const RiskMap = ({
         });
 
         // Select province and zoom
-        console.log(`🗺️ Province clicked: ${provinceName}, selecting for municipalities`);
+        console.log(
+          `🗺️ Province clicked: ${provinceName}, selecting for municipalities`
+        );
         setSelectedProvince(provinceName);
-        
+
         // Zoom to province - municipalities will show automatically at zoom > 10
         if (mapRef.current && centroid) {
           mapRef.current.flyTo(centroid, 11, {
@@ -376,7 +396,8 @@ const RiskMap = ({
         minZoom={6}
         maxZoom={18}
         maxBoundsViscosity={0.7}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", backgroundColor: "#aed2de" }}
+        className="risk-map-background"
         zoomControl={false}
         ref={mapRef}
       >
@@ -385,8 +406,8 @@ const RiskMap = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           noWrap
         />
-        <MapViewController 
-          initialMapState={initialMapState} 
+        <MapViewController
+          initialMapState={initialMapState}
           onZoomChange={handleZoomChange}
         />
         {shouldShowProvinces && (
@@ -411,7 +432,7 @@ const RiskMap = ({
           showVolcano={filters.showVolcanoes}
           showFault={filters.showFaultLines}
         />
-          <UserLocationMarker onLocationClick={handleUserLocationClick} />
+        <UserLocationMarker onLocationClick={handleUserLocationClick} />
       </MapContainer>
 
       <RiskFilterPanel filters={filters} onFilterChange={onFilterChange} />

@@ -1,8 +1,7 @@
-import { createContext, useEffect, useState, useRef } from "react";
-import { useUserLocation } from "@/features/auth/context/UserLocationContext";
+import { useEffect, useState, useRef } from "react";
+import useUserLocation from "@/features/auth/hooks/useUserLocation";
+import DashboardContext from "./dashboardContext";
 import { dashboardService } from "../services/dashboardService";
-
-export const DashboardContext = createContext();
 
 export const DashboardProvider = ({ children }) => {
   const { location, loading: locationLoading } = useUserLocation();
@@ -10,22 +9,35 @@ export const DashboardProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const hasFetched = useRef(false);
+  const lastLocationKey = useRef(null);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      // Wait for location to load
+      // Keep loader visible while waiting for location
       if (locationLoading) {
+        setLoading(true);
         return;
       }
 
-      // If no location available, use fallback
-      if (!location) {
-        console.warn("No location available, using fallback coordinates");
+      // Fallback location still surfaces, but we skip fetch until we have coordinates
+      if (
+        !location ||
+        !Array.isArray(location.position) ||
+        location.position.length < 2
+      ) {
+        console.warn("No valid location available for dashboard data fetch");
+        hasFetched.current = false;
+        lastLocationKey.current = null;
         setLoading(false);
         return;
       }
 
-      // Only fetch once
+      const locationKey = location.position.join(",");
+      if (lastLocationKey.current !== locationKey) {
+        hasFetched.current = false;
+        lastLocationKey.current = locationKey;
+      }
+
       if (hasFetched.current) {
         return;
       }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import useEarthquakeData from "../hooks/useEarthquakeData";
 import EnhancedMapView from "../components/EnhancedMapView";
-import LoadingOverlay from "../components/LoadingOverlay";
 import LiveChatWidget from "../components/LiveChatWidget";
 import FilterPanel from "../components/FilterPanel";
 import EnhancedRecentEarthquakesList from "../components/EnhancedRecentEarthquakesList";
@@ -87,7 +86,6 @@ const LiveMonitoringPage = () => {
 
   return (
     <div className="h-full relative">
-      {loading && <LoadingOverlay />}
       <EnhancedMapView
         earthquakeData={earthquakeData}
         filteredEarthquakeData={filteredEarthquakeData}

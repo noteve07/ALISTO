@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useUserLocation } from "../../auth/context/UserLocationContext";
+import useUserLocation from "@/features/auth/hooks/useUserLocation";
 import { useDashboard } from "../hooks/useDashboard";
 
 // Loading Component
