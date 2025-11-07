@@ -19,18 +19,18 @@ const ProvinceActivityChart = () => {
 
   // Generate colors from amber orange to amber yellow - darker for higher counts
   const generateColors = (count) => {
-    // Sorted from amber orange to amber yellow (less saturated) - matches data order (highest to lowest count)
+    // Sorted from primary orange to lighter orange shades - matches data order (highest to lowest count)
     const baseColors = [
-      "#ea772e", // Primary color (dark) - for province with most earthquakes
-      "#d18a45", // Muted dark amber
-      "#d89b5c", // Muted medium-dark amber
-      "#dfac73", // Muted medium amber
-      "#e6bd8a", // Muted medium-light amber
-      "#edcea1", // Muted light amber
-      "#f4dfb8", // Muted lighter amber
-      "#f8e8c8", // Muted very light amber
-      "#fcf0d8", // Muted lightest amber
-      "#fef8e8", // Palest amber - for province with least earthquakes
+      "#fc924e", // Primary color (dark) - for province with most earthquakes
+      "#f59356", // Lighter orange
+      "#ffaf7e", // Light orange
+      "#ffbd92", // Medium-light orange
+      "#ffcba6", // Lighter orange
+      "#ffd9ba", // Very light orange
+      "#ffe7ce", // Pale orange
+      "#fff0dc", // Very pale orange
+      "#fff5e8", // Lightest orange
+      "#fffaf4", // Palest orange - for province with least earthquakes
     ];
     return baseColors.slice(0, count);
   };

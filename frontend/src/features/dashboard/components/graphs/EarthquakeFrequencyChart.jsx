@@ -46,8 +46,8 @@ const EarthquakeFrequencyChart = () => {
         type: "bar",
         label: "< 3.0",
         data: apiData.data.map((item) => item.below_3 || 0),
-        backgroundColor: "#e8c5a5", // Light brown/orange
-        borderColor: "#e8c5a5",
+        backgroundColor: "#f5b585", // Light version of new primary
+        borderColor: "#f5b585",
         borderWidth: 0,
         borderRadius: {
           topLeft: 0,
@@ -63,8 +63,8 @@ const EarthquakeFrequencyChart = () => {
         type: "bar",
         label: "3.0 - 5.0",
         data: apiData.data.map((item) => item.between_3_5 || 0),
-        backgroundColor: "#d9a574", // Medium brown/orange
-        borderColor: "#d9a574",
+        backgroundColor: "#ef9659", // Medium version of new primary
+        borderColor: "#ef9659",
         borderWidth: 0,
         borderRadius: 0,
         datalabels: {
@@ -75,8 +75,8 @@ const EarthquakeFrequencyChart = () => {
         type: "bar",
         label: "> 5.0",
         data: apiData.data.map((item) => item.above_5 || 0),
-        backgroundColor: "#cd7a38", // Primary brown/orange
-        borderColor: "#cd7a38",
+        backgroundColor: "#ea772e", // New primary color
+        borderColor: "#ea772e",
         borderWidth: 0,
         borderRadius: {
           topLeft: 8,
@@ -92,8 +92,8 @@ const EarthquakeFrequencyChart = () => {
         type: "line",
         label: "Total",
         data: apiData.data.map((item) => item.total || 0),
-        borderColor: "rgba(205, 122, 56, 0.6)", // Primary with lower opacity
-        backgroundColor: "rgba(205, 122, 56, 0.6)",
+        borderColor: "rgba(234, 119, 46, 0.6)", // New primary with opacity
+        backgroundColor: "rgba(234, 119, 46, 0.6)",
         borderWidth: 2,
         borderDash: [5, 5], // Dashed line
         pointRadius: 4,
@@ -230,7 +230,7 @@ const EarthquakeFrequencyChart = () => {
 
       {/* Statistics - Modern Compact Design */}
       <div className="grid grid-cols-3 gap-3 pt-3 border-t border-gray-200">
-        <div className="bg-orange-50 rounded-lg p-3">
+        <div className="bg-primary-v2/10 rounded-lg p-3">
           <div className="flex items-baseline gap-1">
             <span className="text-2xl font-bold text-gray-700">
               {stats.total_week}
@@ -238,7 +238,7 @@ const EarthquakeFrequencyChart = () => {
             <span className="text-xs text-gray-600 font-medium">total</span>
           </div>
         </div>
-        <div className="bg-orange-50 rounded-lg p-3">
+        <div className="bg-primary-v2/10 rounded-lg p-3">
           <div className="flex items-baseline gap-1">
             <span className="text-2xl font-bold text-gray-700">
               {stats.daily_average}
@@ -246,7 +246,7 @@ const EarthquakeFrequencyChart = () => {
             <span className="text-xs text-gray-600 font-medium">avg/day</span>
           </div>
         </div>
-        <div className="bg-orange-50 rounded-lg p-3">
+        <div className="bg-primary-v2/10 rounded-lg p-3">
           <div className="flex items-baseline gap-1">
             <span className="text-2xl font-bold text-gray-700">
               {stats.peak_day}
