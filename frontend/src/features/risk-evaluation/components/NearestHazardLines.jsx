@@ -235,7 +235,7 @@ const NearestHazardLines = ({ showVolcano = true, showFault = true }) => {
             nearestFaultLineRef.current = L.polyline(
               [userLatLng, faultLatLng],
               {
-                color: "#a855f7", // Purple for unified distance style
+                color: "#ec4899", // Pink for fault distance line
                 dashArray: "8, 10",
                 weight: 3,
                 opacity: 0.8,
