@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException, Query
 from app.core.database import supabase
 from app.services.live.earthquakes.earthquake_updater import earthquake_updater
 from app.services.notifications.notification_service import notification_service
+from app.services.chatbot.context_manager import context_manager
 
 
 router = APIRouter(prefix="/simulation", tags=["Simulation"])
@@ -281,6 +282,14 @@ async def simulate_volcanic_advisory(
             volcano_lon=volcano_lon,
             province_name=province_name,
         )
+        
+        # Auto-update volcanic context after simulation
+        print("🔄 Auto-updating volcanic context after simulation...")
+        try:
+            await context_manager.update_volcanic_context()
+            print("✅ Volcanic context auto-updated successfully")
+        except Exception as context_error:
+            print(f"⚠️ Failed to auto-update volcanic context: {context_error}")
         
         return {
             "success": True,

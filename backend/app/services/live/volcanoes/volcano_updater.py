@@ -10,6 +10,7 @@ from typing import Dict, List, Optional
 from app.core.database import supabase
 from app.models.volcano import VolcanoAdvisoryData
 from app.services.notifications.notification_service import notification_service
+from app.services.chatbot.context_manager import context_manager
 
 
 class VolcanoUpdaterService:
@@ -52,6 +53,14 @@ class VolcanoUpdaterService:
             
             # Create notifications for changed/new advisories
             await self._create_notifications_for_changes(advisories, current_alert_map)
+            
+            # Auto-update volcanic context after advisories are updated
+            print("🔄 Auto-updating volcanic context...")
+            try:
+                await context_manager.update_volcanic_context()
+                print("✅ Volcanic context auto-updated successfully")
+            except Exception as context_error:
+                print(f"⚠️ Failed to auto-update volcanic context: {context_error}")
             
             return True
 
