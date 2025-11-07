@@ -19,55 +19,122 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
   const volcano = advisory.volcano || "Unknown volcano";
   const alertStatus = advisory.alertStatus || "Status unavailable";
 
-  // Helper functions for glassmorphism styling with volcanic urgency colors
+  // Helper functions for solid alert styling with volcanic urgency colors
+  const getVolcanoModalBg = (level) => {
+    switch (level) {
+      case 5:
+        return "bg-red-700"; // Most urgent - deep red
+      case 4:
+        return "bg-red-600";
+      case 3:
+        return "bg-orange-600";
+      case 2:
+        return "bg-amber-600";
+      case 1:
+        return "bg-yellow-600";
+      default:
+        return "bg-gray-600";
+    }
+  };
+
+  const getVolcanoBorderColor = (level) => {
+    switch (level) {
+      case 5:
+        return "border-red-900";
+      case 4:
+        return "border-red-800";
+      case 3:
+        return "border-orange-800";
+      case 2:
+        return "border-amber-800";
+      case 1:
+        return "border-yellow-800";
+      default:
+        return "border-gray-800";
+    }
+  };
+
+  const getVolcanoRingColor = (level) => {
+    switch (level) {
+      case 5:
+        return "ring-red-600/40";
+      case 4:
+        return "ring-red-500/40";
+      case 3:
+        return "ring-orange-500/40";
+      case 2:
+        return "ring-amber-500/40";
+      case 1:
+        return "ring-yellow-500/40";
+      default:
+        return "ring-gray-500/40";
+    }
+  };
+
+  const getVolcanoShadowColor = (level) => {
+    switch (level) {
+      case 5:
+        return "rgba(185, 28, 28, 0.6)"; // red-700
+      case 4:
+        return "rgba(220, 38, 38, 0.5)"; // red-600
+      case 3:
+        return "rgba(234, 88, 12, 0.5)"; // orange-600
+      case 2:
+        return "rgba(217, 119, 6, 0.5)"; // amber-600
+      case 1:
+        return "rgba(202, 138, 4, 0.5)"; // yellow-600
+      default:
+        return "rgba(75, 85, 99, 0.5)"; // gray-600
+    }
+  };
   const getVolcanoIconBg = (level) => {
     switch (level) {
       case 5:
-        return "bg-red-500/30";
+        return "bg-white/90";
       case 4:
-        return "bg-red-500/25";
+        return "bg-white/90";
       case 3:
-        return "bg-orange-500/25";
+        return "bg-white/90";
       case 2:
-        return "bg-amber-500/25";
+        return "bg-white/90";
       case 1:
-        return "bg-yellow-500/25";
+        return "bg-white/90";
       default:
-        return "bg-gray-500/20";
+        return "bg-white/90";
     }
   };
 
   const getVolcanoIconColor = (level) => {
     switch (level) {
       case 5:
-        return "text-red-300";
+        return "text-red-700";
       case 4:
-        return "text-red-400";
+        return "text-red-600";
       case 3:
-        return "text-orange-400";
+        return "text-orange-600";
       case 2:
-        return "text-amber-400";
+        return "text-amber-600";
       case 1:
-        return "text-yellow-400";
+        return "text-yellow-600";
       default:
-        return "text-gray-400";
+        return "text-gray-600";
     }
   };
 
   const getAlertLevelBadgeStyle = (level) => {
     switch (level) {
       case 5:
-        return "bg-red-500/40";
+        return "bg-red-800 border-2 border-red-900";
       case 4:
-        return "bg-red-500/35";
+        return "bg-red-700 border-2 border-red-800";
       case 3:
-        return "bg-orange-500/35";
+        return "bg-orange-700 border-2 border-orange-800";
       case 2:
-        return "bg-amber-500/35";
+        return "bg-amber-700 border-2 border-amber-800";
       case 1:
-        return "bg-yellow-500/35";
+        return "bg-yellow-700 border-2 border-yellow-800";
       default:
-        return "bg-gray-500/30";
+        return "bg-gray-700 border-2 border-gray-800";
     }
   };
 
@@ -91,15 +158,15 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
   const getStatusIndicatorColor = (level) => {
     switch (level) {
       case 5:
-        return "bg-red-400";
+        return "bg-yellow-300";
       case 4:
-        return "bg-red-400";
+        return "bg-yellow-300";
       case 3:
-        return "bg-orange-400";
+        return "bg-yellow-300";
       case 2:
-        return "bg-amber-400";
+        return "bg-yellow-300";
       case 1:
-        return "bg-yellow-400";
+        return "bg-yellow-300";
       default:
         return "bg-gray-400";
     }
@@ -107,17 +174,25 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-2000 flex items-center bg-slate-900/20 px-4"
+      className="fixed inset-0 z-2000 flex items-center bg-slate-900/50 px-4"
       style={{ justifyContent: "center", marginLeft: "-55px" }}
     >
       <div
-        className="relative w-full max-w-md bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/30"
-        style={{ backgroundColor: "var(--color-secondary)" }}
+        className={`relative w-full max-w-md rounded-2xl shadow-2xl border-4 ring-4 ${getVolcanoModalBg(
+          alertLevel
+        )} ${getVolcanoBorderColor(alertLevel)} ${getVolcanoRingColor(
+          alertLevel
+        )}`}
+        style={{
+          boxShadow: `0 25px 50px -12px ${getVolcanoShadowColor(
+            alertLevel
+          )}, 0 0 0 1px ${getVolcanoShadowColor(alertLevel)}`,
+        }}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white/70 transition hover:bg-white/20 hover:text-white focus:outline-none"
+          className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-white transition hover:bg-white/30 focus:outline-none ring-2 ring-white/20"
           aria-label="Dismiss"
         >
           <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none">
@@ -133,7 +208,7 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
         <div className="p-6 text-center">
           {/* Volcano Icon with urgency color */}
           <div
-            className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${getVolcanoIconBg(
+            className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-white/30 shadow-lg ${getVolcanoIconBg(
               alertLevel
             )}`}
           >
@@ -165,7 +240,7 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
           {/* Alert Level Badge */}
           <div className="mb-4">
             <div
-              className={`inline-block backdrop-blur-sm rounded-full px-4 py-2 ${getAlertLevelBadgeStyle(
+              className={`inline-block rounded-full px-4 py-2 shadow-lg ${getAlertLevelBadgeStyle(
                 alertLevel
               )}`}
             >
@@ -176,13 +251,13 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
           </div>
 
           {/* Alert Status */}
-          <p className="text-white/70 text-sm mb-4 leading-relaxed">
+          <p className="text-white/90 text-sm mb-4 leading-relaxed font-medium">
             {alertStatus}
           </p>
 
           {/* Issuance Date */}
           {advisory.issuanceDate && (
-            <p className="text-white/50 text-xs mb-4">
+            <p className="text-white/70 text-xs mb-4">
               Issued: {new Date(advisory.issuanceDate).toLocaleString()}
             </p>
           )}
@@ -192,7 +267,7 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
             <div className="flex justify-center mb-4">
               <button
                 onClick={() => window.open(advisory.bulletinLink, "_blank")}
-                className="bg-white/20 backdrop-blur-sm text-white font-medium py-2 px-6 rounded-lg hover:bg-white/30 transition-colors"
+                className="bg-white/90 text-gray-800 font-semibold py-2 px-6 rounded-lg hover:bg-white transition-colors border-2 border-white/30 shadow-lg"
               >
                 View Bulletin
               </button>
@@ -200,9 +275,9 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
           )}
 
           {/* Status Indicator */}
-          <div className="flex items-center justify-center gap-2 text-xs text-white/60">
+          <div className="flex items-center justify-center gap-2 text-xs text-white font-semibold">
             <div
-              className={`h-1.5 w-1.5 rounded-full animate-pulse ${getStatusIndicatorColor(
+              className={`h-1.5 w-1.5 rounded-full animate-pulse shadow-sm ${getStatusIndicatorColor(
                 alertLevel
               )}`}
             ></div>

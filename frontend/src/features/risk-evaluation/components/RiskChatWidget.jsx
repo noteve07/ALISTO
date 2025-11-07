@@ -113,30 +113,31 @@ const MessageIcon = ({ className = "h-4 w-4" }) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M21 11a7 7 0 0 1-7 7H7l-4 4V11a7 7 0 1 1 14 0Z"
+      d="M21 12a9 9 0 0 1-9 9c-1.23 0-2.4-.2-3.49-.57L3 21l.57-5.51A9 9 0 1 1 21 12Z"
       stroke="currentColor"
-      strokeWidth="1.6"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <circle cx="9.5" cy="11" r="1" fill="currentColor" />
-    <circle cx="12.5" cy="11" r="1" fill="currentColor" />
-    <circle cx="15.5" cy="11" r="1" fill="currentColor" />
+    <circle cx="9" cy="12" r=".5" fill="currentColor" />
+    <circle cx="15" cy="12" r=".5" fill="currentColor" />
+    <circle cx="12" cy="12" r=".5" fill="currentColor" />
   </svg>
 );
 
-const CloseIcon = ({ className = "h-3.5 w-3.5" }) => (
+const CloseIcon = () => (
   <svg
-    className={className}
-    viewBox="0 0 14 14"
+    className="h-4 w-4"
+    viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      d="M1 1l12 12M13 1 1 13"
+      d="M18 6L6 18M6 6l12 12"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth="2"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -144,97 +145,62 @@ const CloseIcon = ({ className = "h-3.5 w-3.5" }) => (
 // Component to render formatted message with markdown-like styling
 const FormattedMessage = ({ content }) => {
   const lines = content.split("\n");
-
-  // helper to render inline bold within a line
-  const renderInline = (line, keyPrefix) => {
-    const parts = [];
-    let lastIndex = 0;
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    let match;
-    while ((match = boldRegex.exec(line)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(
-          <span key={`${keyPrefix}-text-${lastIndex}`}>
-            {line.substring(lastIndex, match.index)}
+  const formattedLines = lines.map((line, index) => {
+    // Handle bullet points (starting with - or *)
+    if (line.trim().startsWith("- ") || line.trim().startsWith("* ")) {
+      return (
+        <div key={index} className="flex items-start gap-2">
+          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-orange-400 shrink-0" />
+          <span>{line.trim().substring(2)}</span>
+        </div>
+      );
+    }
+    // Handle bold text (**text**)
+    else if (line.includes("**")) {
+      const parts = line.split(/(\*\*.*?\*\*)/);
+      return (
+        <div key={index}>
+          {parts.map((part, partIndex) =>
+            part.startsWith("**") && part.endsWith("**") ? (
+              <strong key={partIndex}>{part.slice(2, -2)}</strong>
+            ) : (
+              <span key={partIndex}>{part}</span>
+            )
+          )}
+        </div>
+      );
+    }
+    // Handle numbered lists (starting with 1. 2. etc.)
+    else if (line.trim().match(/^\d+\./)) {
+      return (
+        <div key={index} className="flex items-start gap-2">
+          <span className="font-semibold text-orange-600 shrink-0">
+            {line.trim().match(/^\d+\./)[0]}
           </span>
-        );
-      }
-      parts.push(
-        <strong
-          key={`${keyPrefix}-bold-${match.index}`}
-          className="font-semibold text-slate-700"
-        >
-          {match[1]}
-        </strong>
-      );
-      lastIndex = match.index + match[0].length;
-    }
-    if (lastIndex < line.length) {
-      parts.push(
-        <span key={`${keyPrefix}-text-${lastIndex}`}>
-          {line.substring(lastIndex)}
-        </span>
+          <span>{line.trim().replace(/^\d+\.\s*/, "")}</span>
+        </div>
       );
     }
-    return parts.length > 0 ? parts : line;
-  };
-
-  const elements = [];
-  let listBuffer = [];
-
-  const flushList = (keyBase) => {
-    if (listBuffer.length) {
-      elements.push(
-        <ul key={`ul-${keyBase}`} className="list-disc pl-4 space-y-1">
-          {listBuffer.map((item, i) => (
-            <li key={`li-${keyBase}-${i}`} className="leading-relaxed">
-              {renderInline(item, `li-${keyBase}-${i}`)}
-            </li>
-          ))}
-        </ul>
-      );
-      listBuffer = [];
+    // Regular lines
+    else if (line.trim()) {
+      return <div key={index}>{line}</div>;
     }
-  };
-
-  lines.forEach((line, idx) => {
-    const trimmed = line.trim();
-    if (!trimmed) {
-      // empty line: flush any list and add spacing
-      flushList(idx);
-      elements.push(<div key={`sp-${idx}`} className="h-1" />);
-      return;
+    // Empty lines (line breaks)
+    else {
+      return <div key={index} className="h-2" />;
     }
-
-    const bulletMatch = trimmed.match(/^[-*]\s+(.+)/);
-    if (bulletMatch) {
-      // accumulate list items
-      listBuffer.push(bulletMatch[1]);
-      return;
-    }
-
-    // non-list line: flush list and render paragraph
-    flushList(idx);
-    elements.push(
-      <p key={`p-${idx}`} className="leading-relaxed">
-        {renderInline(line, `p-${idx}`)}
-      </p>
-    );
   });
 
-  // flush if content ended with a list
-  flushList("end");
-
-  return <div className="space-y-1">{elements}</div>;
+  return <div className="space-y-1">{formattedLines}</div>;
 };
 
-const LiveChatWidget = () => {
+const RiskChatWidget = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([
     {
-      id: "isa-greeting",
+      id: 1,
       author: "isa",
       content:
         "Hi! I am ISA, your seismic assistant. How can I help you today?",
@@ -324,7 +290,7 @@ const LiveChatWidget = () => {
         },
         body: JSON.stringify({
           message: userMessage.content,
-          user_id: "live-monitoring-user",
+          user_id: "risk-evaluation-user",
         }),
       });
 
@@ -392,7 +358,7 @@ const LiveChatWidget = () => {
             </div>
           </div>
 
-          <div className="flex h-70 flex-col gap-4 overflow-y-auto px-4 py-4 text-sm text-slate-600">
+          <div className="flex h-65 flex-col gap-4 overflow-y-auto px-4 py-4 text-sm text-slate-600">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -500,4 +466,4 @@ const LiveChatWidget = () => {
   );
 };
 
-export default LiveChatWidget;
+export default RiskChatWidget;

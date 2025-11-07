@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException, Query
 from app.core.database import supabase
 from app.services.live.earthquakes.earthquake_updater import earthquake_updater
 from app.services.notifications.notification_service import notification_service
+from app.services.chatbot.context_manager import context_manager
 
 
 router = APIRouter(prefix="/simulation", tags=["Simulation"])
@@ -26,8 +27,8 @@ async def simulate_earthquake(
     Simulate an earthquake insertion for testing purposes.
     
     Options:
-    - 1: Northern Samar (Mag 2.9, Shallow)
-    - 2: Bataan - Mariveles (Mag 2.4, Deep)
+    - 1: Northern Samar (Mag 4.6, Shallow)
+    - 2: Bataan - Mariveles (Mag 3.8, Deep)
     - 3: Bataan - Balanga City (Mag 5.6, Moderate depth)
     """
     
@@ -48,7 +49,7 @@ async def simulate_earthquake(
                 "longitude": 125.17,
                 "coordinates": f"SRID=4326;POINT({125.17} {12.51})",
                 "depth": 17,
-                "magnitude": 2.9,
+                "magnitude": 4.6,
                 "location": "007 km S 59° E of Palapag (Northern Samar)",
                 "province_id": 54,  # Northern Samar
             },
@@ -281,6 +282,14 @@ async def simulate_volcanic_advisory(
             volcano_lon=volcano_lon,
             province_name=province_name,
         )
+        
+        # Auto-update volcanic context after simulation
+        print("🔄 Auto-updating volcanic context after simulation...")
+        try:
+            await context_manager.update_volcanic_context()
+            print("✅ Volcanic context auto-updated successfully")
+        except Exception as context_error:
+            print(f"⚠️ Failed to auto-update volcanic context: {context_error}")
         
         return {
             "success": True,

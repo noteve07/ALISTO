@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException
 from app.models.chatbot import ChatRequest, ChatResponse
 from app.services.chatbot.gemini_service import gemini_service
 from app.services.chatbot.context_manager import context_manager
+from app.services.chatbot.conversation_history import conversation_history
 
 
 router = APIRouter(prefix="/chat", tags=["Chatbot"])
@@ -58,6 +59,84 @@ async def get_current_context():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Context retrieval error: {str(e)}")
+
+
+@router.get("/history/{user_id}")
+async def get_conversation_history(user_id: str):
+    """
+    Get conversation history for a specific user (for debugging purposes)
+    """
+    try:
+        history = conversation_history.get_history(user_id)
+        return {
+            "success": True,
+            "user_id": user_id,
+            "history": history
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"History retrieval error: {str(e)}")
+
+
+@router.delete("/history/{user_id}")
+async def clear_user_conversation_history(user_id: str):
+    """
+    Clear conversation history for a specific user
+    """
+    try:
+        conversation_history.clear_history(user_id)
+        return {
+            "success": True,
+            "message": f"Conversation history cleared for user: {user_id}"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"History clearing error: {str(e)}")
+
+
+@router.delete("/history")
+async def clear_all_conversation_histories():
+    """
+    Clear all conversation histories
+    """
+    try:
+        conversation_history.clear_all_histories()
+        return {
+            "success": True,
+            "message": "All conversation histories cleared"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"History clearing error: {str(e)}")
+
+
+@router.get("/history-stats")
+async def get_conversation_stats():
+    """
+    Get statistics about current conversations
+    """
+    try:
+        stats = conversation_history.get_stats()
+        return {
+            "success": True,
+            "stats": stats
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Stats retrieval error: {str(e)}")
+
+
+@router.post("/cleanup-histories")
+async def cleanup_old_histories():
+    """
+    Manually trigger cleanup of old conversation histories
+    """
+    try:
+        conversation_history.cleanup_all_old_messages()
+        stats = conversation_history.get_stats()
+        return {
+            "success": True,
+            "message": "Old conversation histories cleaned up",
+            "remaining_stats": stats
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Cleanup error: {str(e)}")
 
 
 

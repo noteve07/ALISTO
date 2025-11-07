@@ -6,6 +6,7 @@ from typing import Any, Dict, List
 
 from app.core.database import supabase
 from app.services.notifications.notification_service import notification_service
+from app.services.chatbot.context_manager import context_manager
 
 
 class EarthquakeUpdaterService:
@@ -31,6 +32,14 @@ class EarthquakeUpdaterService:
 
             # Create notifications for new earthquakes
             await notification_service.create_earthquake_notifications_batch(new_earthquakes)
+            
+            # Auto-update earthquake context after new earthquakes are added
+            print("🔄 Auto-updating earthquake context...")
+            try:
+                await context_manager.update_earthquake_context()
+                print("✅ Earthquake context auto-updated successfully")
+            except Exception as context_error:
+                print(f"⚠️ Failed to auto-update earthquake context: {context_error}")
 
             await self.cleanup_old_records()
 

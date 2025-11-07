@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import RiskMap from "../components/RiskMap";
+import RiskChatWidget from "../components/RiskChatWidget";
 import { useRiskEvaluations } from "../hooks/useRiskEvaluations";
 
 const SummaryCard = ({ label, value, accent }) => (
@@ -68,6 +69,9 @@ const RiskEvaluationPage = () => {
           filters={filters}
           onFilterChange={handleFilterChange}
         />
+
+        {/* ISA Chat Widget */}
+        <RiskChatWidget />
       </div>
     </div>
   );
