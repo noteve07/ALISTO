@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useUserLocation } from "../../auth/context/UserLocationContext";
+import { useDashboard } from "../hooks/useDashboard";
+
+// Loading Component
+import DashboardLoader from "../components/DashboardLoader";
 
 // Card Components
 import TodaysEarthquakes from "../components/cards/TodaysEarthquakes";
@@ -24,13 +28,89 @@ import VolcanicAdvisories from "../components/lists/VolcanicAdvisories";
 
 const DashboardPage = () => {
   const { location } = useUserLocation();
+  const { loading, error } = useDashboard();
+
+  // Transition states for smooth loading to content animation
+  const [isLoadingExiting, setIsLoadingExiting] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const [forceShowContent, setForceShowContent] = useState(false);
+
+  // Auto-show content after maximum 2 seconds, regardless of loading state
+  useEffect(() => {
+    const maxWaitTimer = setTimeout(() => {
+      setForceShowContent(true);
+      setIsLoadingExiting(true);
+      setTimeout(() => {
+        setShowContent(true);
+      }, 300);
+    }, 2000); // Show content after 2 seconds max
+
+    return () => clearTimeout(maxWaitTimer);
+  }, []);
+
+  // Handle transition from loading to content when data is ready
+  useEffect(() => {
+    if (!loading && !error && !showContent && !forceShowContent) {
+      // Start exit animation for loader
+      setIsLoadingExiting(true);
+
+      // After loader starts fading out, show content
+      const timer = setTimeout(() => {
+        setShowContent(true);
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [loading, error, showContent, forceShowContent]);
+
+  // Show loading screen while data is being fetched or during transition
+  if ((loading && !forceShowContent) || (!showContent && !error)) {
+    return <DashboardLoader isExiting={isLoadingExiting} />;
+  }
+
+  // Show error state if something went wrong
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#f5f2ef] flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto">
+            <span className="material-symbols-outlined text-white text-2xl">
+              error
+            </span>
+          </div>
+          <h2 className="text-2xl font-semibold text-gray-800">
+            Failed to Load Dashboard
+          </h2>
+          <p className="text-gray-600">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-[#ea772e] text-white rounded-lg hover:bg-[#d66a2a] transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="px-4 pt-4 pb-1 bg-[#f5f2ef]">
+    <div
+      className={`px-4 pt-4 pb-1 bg-[#f5f2ef] transition-all duration-700 ease-out ${
+        showContent
+          ? "opacity-100 transform translate-y-0"
+          : "opacity-0 transform translate-y-4"
+      }`}
+    >
       <div className="max-w-7xl mx-auto space-y-6 scale-90 origin-top pb-0">
         {/* Location Info */}
         {location && (
-          <div className="flex items-center justify-end gap-2 text-sm">
+          <div
+            className={`flex items-center justify-end gap-2 text-sm transition-all duration-500 delay-100 ${
+              showContent
+                ? "opacity-100 transform translate-y-0"
+                : "opacity-0 transform translate-y-2"
+            }`}
+          >
             <span className="material-symbols-outlined text-primary-v2 text-lg">
               location_on
             </span>
@@ -46,7 +126,13 @@ const DashboardPage = () => {
         )}
 
         {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 delay-200 ${
+            showContent
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-4"
+          }`}
+        >
           <TodaysEarthquakes />
           <StrongestMagnitude />
           <NearbyEarthquakes />
@@ -54,7 +140,13 @@ const DashboardPage = () => {
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 transition-all duration-700 delay-300 ${
+            showContent
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-4"
+          }`}
+        >
           <div className="xl:col-span-2">
             <EarthquakeFrequencyChart />
           </div>
@@ -71,12 +163,24 @@ const DashboardPage = () => {
         </div> */}
 
         {/* Lists Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 transition-all duration-700 delay-400 ${
+            showContent
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-4"
+          }`}
+        >
           <RecentEarthquakesPH />
           <VolcanicAdvisories />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 mb-0">
+        <div
+          className={`grid grid-cols-1 gap-6 mb-0 transition-all duration-700 delay-500 ${
+            showContent
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-4"
+          }`}
+        >
           <HighRiskProvinces />
         </div>
 

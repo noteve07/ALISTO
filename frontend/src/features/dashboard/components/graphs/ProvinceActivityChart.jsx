@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useDashboard } from "../../hooks/useDashboard";
@@ -8,6 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ProvinceActivityChart = () => {
   const { dashboardData } = useDashboard();
+  const [isHovered, setIsHovered] = useState(false);
 
   // Use data from API or fallback to placeholder
   const apiData = dashboardData?.charts?.province_activity || {
@@ -46,7 +47,9 @@ const ProvinceActivityChart = () => {
         backgroundColor: colors,
         borderColor: "#ffffff",
         borderWidth: 2,
-        hoverOffset: 10,
+        hoverOffset: 15,
+        hoverBorderWidth: 3,
+        hoverBorderColor: "#ea772e",
       },
     ],
   };
@@ -54,6 +57,21 @@ const ProvinceActivityChart = () => {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: {
+      animateRotate: true,
+      animateScale: true,
+      duration: 800,
+      easing: "easeInOutQuart",
+    },
+    interaction: {
+      intersect: false,
+      mode: "index",
+    },
+    elements: {
+      arc: {
+        borderJoinStyle: "round",
+      },
+    },
     plugins: {
       legend: {
         display: true,
@@ -105,23 +123,42 @@ const ProvinceActivityChart = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900">
-            {apiData.title}
-          </h3>
-          <p className="text-sm text-gray-600">{apiData.subtitle}</p>
-        </div>
-        <span className="material-symbols-outlined text-primary-v2 text-xl">
-          pie_chart
-        </span>
-      </div>
+    <div
+      className={`relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 transition-all duration-300 ease-in-out group cursor-pointer ${
+        isHovered ? "shadow-lg -translate-y-1" : ""
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated border highlight */}
+      <div
+        className={`absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#ea772e] transition-all duration-300 pointer-events-none`}
+      ></div>
 
-      {/* Chart */}
-      <div className="h-64">
-        <Doughnut data={chartData} options={options} />
+      {/* Animated bottom highlight line */}
+      <div
+        className={`absolute bottom-0 left-0 h-1 bg-[#ea772e] rounded-b-xl transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out`}
+      ></div>
+
+      {/* Content wrapper */}
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">
+              {apiData.title}
+            </h3>
+            <p className="text-sm text-gray-600">{apiData.subtitle}</p>
+          </div>
+          <span className="material-symbols-outlined text-primary-v2 text-xl">
+            pie_chart
+          </span>
+        </div>
+
+        {/* Chart */}
+        <div className="h-64">
+          <Doughnut data={chartData} options={options} />
+        </div>
       </div>
     </div>
   );

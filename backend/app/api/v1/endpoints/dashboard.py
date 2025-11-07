@@ -54,7 +54,7 @@ async def get_dashboard_data(
             "today_earthquakes": today,
             "strongest_magnitude": strongest,
             "nearby_earthquakes": nearby,
-            "risk_level": await get_risk_level(user_id=user_id) if user_id else None,
+            "risk_level": await get_risk_level(),  # Now always calls for Bataan (province_id=10)
             "charts": charts,
             "lists": lists,
         }
