@@ -61,9 +61,9 @@ const DashboardPage = () => {
           <ProvinceActivityChart />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
+        {/* <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
           <MagnitudeTimeChart />
-        </div>
+        </div> */}
 
         {/* Top Details Section */}
         {/* <div className="grid grid-cols-1 gap-6">
