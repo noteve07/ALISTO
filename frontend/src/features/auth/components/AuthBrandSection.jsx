@@ -17,7 +17,7 @@ const AuthBrandSection = ({ type = "login" }) => {
   return (
     <div
       className={`
-        relative bg-linear-to-br from-primary-v2 via-primary to-[#b86e2a] 
+        relative bg-gradient-to-br from-primary-v2 via-primary to-[#f59e0b] 
         p-12 flex flex-col justify-between text-white
         transition-all duration-500 ease-in-out
         ${isLogin ? "lg:order-1" : "lg:order-2"}
