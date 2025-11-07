@@ -3,7 +3,7 @@
  * Handles browser desktop notifications for real-time alerts
  */
 
-import { playEarthquakeSound, getEarthquakeUrgency } from '@/shared/utils/earthquakeSounds';
+import { playEarthquakeSound } from '@/shared/utils/earthquakeSounds';
 
 // Check if browser supports notifications
 export const isNotificationSupported = () => {

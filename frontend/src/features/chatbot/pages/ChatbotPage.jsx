@@ -314,7 +314,7 @@ const ChatbotPage = () => {
   };
 
   return (
-  <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-slate-200 bg-linear-to-b from-white via-slate-50 to-slate-100 shadow-xl">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-3xl border border-slate-200 bg-linear-to-b from-white via-slate-50 to-slate-100 shadow-xl">
       <div
         ref={messagesContainerRef}
         className={`flex-1 min-h-0 overflow-y-auto px-6 py-8 sm:px-10 sm:py-10 ${

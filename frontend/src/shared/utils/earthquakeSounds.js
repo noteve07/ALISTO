@@ -3,6 +3,33 @@
  * Shared functions for playing earthquake sounds across the app
  */
 
+// Global AudioContext instance to reuse across calls
+let audioContext = null;
+let audioContextInitialized = false;
+
+// Initialize AudioContext with user interaction handling
+const initializeAudioContext = async () => {
+  if (audioContext && audioContextInitialized) {
+    return audioContext;
+  }
+
+  try {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    if (audioContext.state === 'suspended') {
+      console.log('🔊 AudioContext suspended - attempting to resume...');
+      await audioContext.resume();
+    }
+    
+    audioContextInitialized = true;
+    console.log('🔊 AudioContext initialized successfully');
+    return audioContext;
+  } catch (error) {
+    console.error('🔇 Failed to initialize AudioContext:', error);
+    return null;
+  }
+};
+
 // Play audio file if available
 const playAudioFile = async (magnitude, urgency) => {
   try {
@@ -69,9 +96,13 @@ const playAudioFile = async (magnitude, urgency) => {
 };
 
 // Programmatic earthquake alert sound (original beeping pattern)
-const playProgrammaticEarthquakeSound = (magnitude) => {
+const playProgrammaticEarthquakeSound = async (magnitude) => {
   try {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = await initializeAudioContext();
+    if (!audioCtx) {
+      console.log('🔇 AudioContext not available - skipping programmatic sound');
+      return false;
+    }
     
     // Determine sound characteristics based on magnitude
     const volume = magnitude >= 6.0 ? 0.5 : magnitude >= 4.0 ? 0.4 : 0.3;
@@ -83,31 +114,31 @@ const playProgrammaticEarthquakeSound = (magnitude) => {
         // Play 3 beeps per round
         for (let beep = 0; beep < 3; beep++) {
           setTimeout(() => {
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
 
             oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            gainNode.connect(audioCtx.destination);
 
             // Earthquake alert frequency - deep and urgent
             oscillator.frequency.setValueAtTime(
               400,
-              audioContext.currentTime
+              audioCtx.currentTime
             );
             oscillator.frequency.exponentialRampToValueAtTime(
               200,
-              audioContext.currentTime + 0.3
+              audioCtx.currentTime + 0.3
             );
 
-            gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(
               0.01,
-              audioContext.currentTime + 0.3
+              audioCtx.currentTime + 0.3
             );
 
             oscillator.type = 'sine';
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.3);
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.3);
           }, beep * 400); // 400ms between beeps
         }
       }, round * 2000); // 2 second interval between rounds
@@ -151,7 +182,7 @@ export const playEarthquakeSound = async (magnitude, options = {}) => {
   
   // FALLBACK: Use programmatic sound
   console.log(`🔊 Playing programmatic beeping sound for magnitude ${magnitude}`);
-  const result = playProgrammaticEarthquakeSound(magnitude);
+  const result = await playProgrammaticEarthquakeSound(magnitude);
   console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
   return result;
 };
@@ -183,7 +214,7 @@ export const checkEarthquakeSoundFiles = async () => {
     try {
       const response = await fetch(file, { method: 'HEAD' });
       results[file] = response.ok;
-    } catch (error) {
+    } catch {
       results[file] = false;
     }
   }

@@ -23,10 +23,37 @@ L.Icon.Default.mergeOptions({
 });
 
 // Component to handle map pan when new earthquake is detected
+const ALERT_PROVINCES = [
+  "bataan",
+  "pampanga",
+  "batangas",
+  "zambales",
+  "bulacan",
+];
+
+const shouldTriggerAlert = (earthquake) => {
+  if (!earthquake) {
+    return false;
+  }
+
+  const magnitude = Number.parseFloat(earthquake.magnitude);
+  if (!Number.isFinite(magnitude) || magnitude < 4) {
+    return false;
+  }
+
+  const location = (earthquake.location || "").toLowerCase();
+  if (!location) {
+    return false;
+  }
+
+  return ALERT_PROVINCES.some((province) => location.includes(province));
+};
+
 const MapController = ({
   earthquakeData,
   targetEarthquake,
   initialMapState,
+  onEarthquakeAlert,
 }) => {
   const map = useMap();
   const prevLatestEarthquakeRef = useRef(null);
@@ -75,6 +102,15 @@ const MapController = ({
         const urgency = getEarthquakeUrgency(magnitude);
         console.log(`📊 Urgency level: ${urgency} (magnitude ${magnitude})`);
 
+        if (shouldTriggerAlert(latestEarthquake)) {
+          console.log(
+            "🚨 Triggering protective action modal after 1 second delay"
+          );
+          setTimeout(() => {
+            onEarthquakeAlert?.(latestEarthquake);
+          }, 0); // 1 second delay
+        }
+
         // Play appropriate sound based on magnitude
         playEarthquakeSound(magnitude, {
           urgency,
@@ -86,34 +122,36 @@ const MapController = ({
 
       // Calculate appropriate zoom level based on magnitude
       const getZoomLevel = (magnitude) => {
-        if (magnitude >= 6) return 9; // Major earthquakes - closer view
-        if (magnitude >= 5) return 8; // Strong earthquakes
-        if (magnitude >= 4) return 7; // Moderate earthquakes
-        return 7; // Minor earthquakes
+        if (magnitude >= 6) return 9; // Major earthquakes - closer view (+1 zoom)
+        if (magnitude >= 5) return 9; // Strong earthquakes (+1 zoom)
+        if (magnitude >= 4) return 9; // Moderate earthquakes
+        return 9; // Minor earthquakes
       };
 
       const targetZoom = getZoomLevel(latestEarthquake.magnitude);
 
-      // Smooth pan and zoom to the latest earthquake
-      map.flyTo(
-        [latestEarthquake.latitude, latestEarthquake.longitude],
-        targetZoom,
-        {
-          duration: 2, // 2 seconds animation
-          easeLinearity: 0.25,
-        }
-      );
+      // Calculate offset coordinates - move center slightly to the right
+      const latOffset = 0; // No vertical offset
+      const lngOffset = 0.2; // Move right by ~2km (adjust longitude eastward)
+      const offsetLat = latestEarthquake.latitude + latOffset;
+      const offsetLng = latestEarthquake.longitude + lngOffset;
+
+      // Smooth pan and zoom to the latest earthquake with right offset
+      map.flyTo([offsetLat, offsetLng], targetZoom, {
+        duration: 2, // 2 seconds animation
+        easeLinearity: 0.25,
+      });
 
       // Optional: Show a brief notification or highlight
       setTimeout(() => {
         // You could add a temporary highlight or popup here
         console.log("🎯 Focused on latest earthquake");
-      }, 2000);
+      }, 1000);
     }
 
     // Update the reference
     prevLatestEarthquakeRef.current = latestEarthquake;
-  }, [earthquakeData, map]);
+  }, [earthquakeData, map, onEarthquakeAlert]);
 
   // Handle manual earthquake click (from list)
   useEffect(() => {
@@ -172,6 +210,7 @@ const EnhancedMapView = ({
   filteredEarthquakeData, // Filtered data for displaying markers
   targetEarthquake,
   initialMapState,
+  onEarthquakeAlert,
 }) => {
   return (
     <MapContainer
@@ -199,6 +238,7 @@ const EnhancedMapView = ({
         earthquakeData={earthquakeData}
         targetEarthquake={targetEarthquake}
         initialMapState={initialMapState}
+        onEarthquakeAlert={onEarthquakeAlert}
       />
 
       {/* User Location Marker */}

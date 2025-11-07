@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import { useLocation } from "react-router-dom";
 import useEarthquakeData from "../hooks/useEarthquakeData";
 import EnhancedMapView from "../components/EnhancedMapView";
@@ -6,12 +12,17 @@ import LiveChatWidget from "../components/LiveChatWidget";
 import FilterPanel from "../components/FilterPanel";
 import EnhancedRecentEarthquakesList from "../components/EnhancedRecentEarthquakesList";
 import VolcanicAdvisories from "../components/VolcanicAdvisories";
+import EarthquakeAlertModal from "../components/EarthquakeAlertModal";
 
 const LiveMonitoringPage = () => {
-  const { earthquakeData, loading } = useEarthquakeData();
+  const { earthquakeData } = useEarthquakeData();
   const [targetEarthquake, setTargetEarthquake] = useState(null);
   const location = useLocation();
   const [initialMapState, setInitialMapState] = useState(null);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertEarthquake, setAlertEarthquake] = useState(null);
+  const lastAlertIdRef = useRef(null);
+  const alertTimeoutRef = useRef(null);
 
   // Filter states
   const [filters, setFilters] = useState({
@@ -30,6 +41,44 @@ const LiveMonitoringPage = () => {
     }
   }, [location]);
 
+  // Initialize audio context on first user interaction
+  useEffect(() => {
+    const initializeAudioOnInteraction = () => {
+      // Create and resume audio context when user first interacts with page
+      if (window.AudioContext || window.webkitAudioContext) {
+        try {
+          const audioContext = new (window.AudioContext ||
+            window.webkitAudioContext)();
+          if (audioContext.state === "suspended") {
+            audioContext.resume();
+            console.log(
+              "🔊 Audio context initialized and resumed for earthquake sounds"
+            );
+          }
+        } catch (error) {
+          console.log("🔇 Audio context initialization failed:", error);
+        }
+      }
+
+      // Remove event listeners after first interaction
+      document.removeEventListener("click", initializeAudioOnInteraction);
+      document.removeEventListener("keydown", initializeAudioOnInteraction);
+      document.removeEventListener("touchstart", initializeAudioOnInteraction);
+    };
+
+    // Add event listeners for user interactions
+    document.addEventListener("click", initializeAudioOnInteraction);
+    document.addEventListener("keydown", initializeAudioOnInteraction);
+    document.addEventListener("touchstart", initializeAudioOnInteraction);
+
+    return () => {
+      // Cleanup event listeners
+      document.removeEventListener("click", initializeAudioOnInteraction);
+      document.removeEventListener("keydown", initializeAudioOnInteraction);
+      document.removeEventListener("touchstart", initializeAudioOnInteraction);
+    };
+  }, []);
+
   const handleEarthquakeClick = (earthquake) => {
     setTargetEarthquake(earthquake);
     // Clear the target after a short delay to allow re-clicking the same earthquake
@@ -42,6 +91,45 @@ const LiveMonitoringPage = () => {
       [filterType]: value,
     }));
   };
+
+  const handleEarthquakeAlert = useCallback((earthquake) => {
+    if (!earthquake) {
+      return;
+    }
+
+    const quakeId =
+      earthquake.id ??
+      `${earthquake.latitude}-${earthquake.longitude}-${earthquake.timestamp}`;
+    if (lastAlertIdRef.current === quakeId) {
+      return;
+    }
+
+    lastAlertIdRef.current = quakeId;
+    setAlertEarthquake(earthquake);
+
+    if (alertTimeoutRef.current) {
+      clearTimeout(alertTimeoutRef.current);
+    }
+
+    setIsAlertOpen(false);
+
+    alertTimeoutRef.current = setTimeout(() => {
+      setIsAlertOpen(true);
+    }, 3000);
+  }, []);
+
+  const handleAlertDismiss = useCallback(() => {
+    setIsAlertOpen(false);
+    setAlertEarthquake(null);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (alertTimeoutRef.current) {
+        clearTimeout(alertTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Filter earthquake data based on selected filters
   const filteredEarthquakeData = useMemo(() => {
@@ -91,6 +179,7 @@ const LiveMonitoringPage = () => {
         filteredEarthquakeData={filteredEarthquakeData}
         targetEarthquake={targetEarthquake}
         initialMapState={initialMapState}
+        onEarthquakeAlert={handleEarthquakeAlert}
       />
 
       {/* Overlays */}
@@ -101,6 +190,12 @@ const LiveMonitoringPage = () => {
         onEarthquakeClick={handleEarthquakeClick}
       />
       <LiveChatWidget />
+
+      <EarthquakeAlertModal
+        isOpen={isAlertOpen}
+        earthquake={alertEarthquake}
+        onClose={handleAlertDismiss}
+      />
     </div>
   );
 };

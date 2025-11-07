@@ -1,12 +1,12 @@
-import React, { useRef, useCallback } from 'react';
-import { GeoJSON, useMap } from 'react-leaflet';
-import L from 'leaflet';
+import React, { useRef, useCallback } from "react";
+import { GeoJSON, useMap } from "react-leaflet";
+import L from "leaflet";
 
-const MunicipalityOverlay = ({ 
-  municipalitiesData, 
-  visible = true, 
+const MunicipalityOverlay = ({
+  municipalitiesData,
+  visible = true,
   onMunicipalityClick,
-  selectedProvince
+  selectedProvince,
 }) => {
   const geoJsonRef = useRef(null);
   const map = useMap();
@@ -33,23 +33,28 @@ const MunicipalityOverlay = ({
     return centroid;
   }, []);
 
-  const styleFeature = useCallback((feature) => {
+  const styleFeature = useCallback(() => {
     return {
       weight: 2,
-      color: '#3b82f6', // blue-500
+      color: "#3b82f6", // blue-500
       fillOpacity: 0.1,
-      fillColor: '#3b82f6',
-      dashArray: '',
+      fillColor: "#3b82f6",
+      dashArray: "",
     };
   }, []);
 
-  const onEachFeature = useCallback((feature, layer) => {
-    const municipalityName = feature.properties?.NAME_2 || "Unknown Municipality";
-    const provinceName = feature.properties?.NAME_1 || feature.properties?.PROVINCE || "Unknown Province";
-    const municipalityType = feature.properties?.ENGTYPE_2 || "Municipality";
-    const region = feature.properties?.REGION || "Unknown Region";
+  const onEachFeature = useCallback(
+    (feature, layer) => {
+      const municipalityName =
+        feature.properties?.NAME_2 || "Unknown Municipality";
+      const provinceName =
+        feature.properties?.NAME_1 ||
+        feature.properties?.PROVINCE ||
+        "Unknown Province";
+      const municipalityType = feature.properties?.ENGTYPE_2 || "Municipality";
+      const region = feature.properties?.REGION || "Unknown Region";
 
-    const popupHtml = `
+      const popupHtml = `
       <div style="min-width: 200px; font-family: system-ui, -apple-system, sans-serif;">
         <div style="background: #f0f9ff; padding: 8px 12px; margin: -12px -16px 8px -16px; border-radius: 4px 4px 0 0;">
           <p style="margin: 0; font-weight: 600; font-size: 14px; color: #1e40af; letter-spacing: 0.3px;">${municipalityName}</p>
@@ -62,72 +67,74 @@ const MunicipalityOverlay = ({
       </div>
     `;
 
-    const centroid = getMunicipalityCentroid(feature);
+      const centroid = getMunicipalityCentroid(feature);
 
-    if (centroid) {
-      layer.bindPopup(popupHtml, {
-        closeButton: true,
-        autoClose: true,
-        closeOnClick: false,
-        className: 'municipality-popup',
-        maxWidth: 250,
-      });
-    }
-
-    layer.on({
-      mouseover: (e) => {
-        const target = e.target;
-        target.setStyle({
-          weight: 3,
-          color: '#1d4ed8', // blue-700
-          fillColor: '#3b82f6',
-          fillOpacity: 0.3,
+      if (centroid) {
+        layer.bindPopup(popupHtml, {
+          closeButton: true,
+          autoClose: true,
+          closeOnClick: false,
+          className: "municipality-popup",
+          maxWidth: 250,
         });
-      },
-      mouseout: (e) => {
-        if (geoJsonRef.current) {
-          geoJsonRef.current.resetStyle(e.target);
-        }
-      },
-      click: (e) => {
-        const target = e.target;
-        
-        // Highlight the municipality
-        target.setStyle({
-          weight: 3,
-          color: '#1d4ed8',
-          fillColor: '#2563eb',
-          fillOpacity: 0.4,
-        });
+      }
 
-        // Get municipality info
-        const municipalityInfo = {
-          name: municipalityName,
-          province: provinceName,
-          centroid: centroid,
-          bounds: target.getBounds()
-        };
-
-        // Call the click handler
-        if (onMunicipalityClick) {
-          onMunicipalityClick(municipalityInfo);
-        }
-
-        // Zoom to municipality
-        if (centroid) {
-          map.flyTo(centroid, 12, {
-            duration: 1.5,
-            easeLinearity: 0.25,
+      layer.on({
+        mouseover: (e) => {
+          const target = e.target;
+          target.setStyle({
+            weight: 3,
+            color: "#1d4ed8", // blue-700
+            fillColor: "#3b82f6",
+            fillOpacity: 0.3,
           });
-        }
+        },
+        mouseout: (e) => {
+          if (geoJsonRef.current) {
+            geoJsonRef.current.resetStyle(e.target);
+          }
+        },
+        click: (e) => {
+          const target = e.target;
 
-        // Open popup
-        if (centroid) {
-          target.openPopup(centroid);
-        }
-      },
-    });
-  }, [getMunicipalityCentroid, onMunicipalityClick, map]);
+          // Highlight the municipality
+          target.setStyle({
+            weight: 3,
+            color: "#1d4ed8",
+            fillColor: "#2563eb",
+            fillOpacity: 0.4,
+          });
+
+          // Get municipality info
+          const municipalityInfo = {
+            name: municipalityName,
+            province: provinceName,
+            centroid: centroid,
+            bounds: target.getBounds(),
+          };
+
+          // Call the click handler
+          if (onMunicipalityClick) {
+            onMunicipalityClick(municipalityInfo);
+          }
+
+          // Zoom to municipality
+          if (centroid) {
+            map.flyTo(centroid, 12, {
+              duration: 1.5,
+              easeLinearity: 0.25,
+            });
+          }
+
+          // Open popup
+          if (centroid) {
+            target.openPopup(centroid);
+          }
+        },
+      });
+    },
+    [getMunicipalityCentroid, onMunicipalityClick, map]
+  );
 
   const setGeoJsonRef = useCallback((layer) => {
     if (layer) {
@@ -172,7 +179,7 @@ const MunicipalityOverlay = ({
         `}
       </style>
       <GeoJSON
-        key={`municipalities-${selectedProvince || 'none'}`}
+        key={`municipalities-${selectedProvince || "none"}`}
         data={municipalitiesData}
         style={styleFeature}
         onEachFeature={onEachFeature}

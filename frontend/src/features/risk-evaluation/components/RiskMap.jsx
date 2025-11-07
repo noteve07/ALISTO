@@ -395,6 +395,7 @@ const RiskMap = ({
         scrollWheelZoom
         minZoom={6}
         maxZoom={18}
+        maxBounds={mapBounds}
         maxBoundsViscosity={0.7}
         style={{ width: "100%", height: "100%", backgroundColor: "#aed2de" }}
         className="risk-map-background"
