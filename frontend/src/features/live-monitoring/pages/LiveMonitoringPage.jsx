@@ -7,22 +7,37 @@ import React, {
 } from "react";
 import { useLocation } from "react-router-dom";
 import useEarthquakeData from "../hooks/useEarthquakeData";
+import { useVolcanicAdvisoryAlerts } from "../hooks/useVolcanicAdvisoryAlerts";
 import EnhancedMapView from "../components/EnhancedMapView";
 import LiveChatWidget from "../components/LiveChatWidget";
 import FilterPanel from "../components/FilterPanel";
 import EnhancedRecentEarthquakesList from "../components/EnhancedRecentEarthquakesList";
 import VolcanicAdvisories from "../components/VolcanicAdvisories";
 import EarthquakeAlertModal from "../components/EarthquakeAlertModal";
+import VolcanicAdvisoryModal from "../components/VolcanicAdvisoryModal";
+import {
+  playVolcanicAdvisorySound,
+  getVolcanicAdvisoryUrgency,
+} from "@/shared/utils/earthquakeSounds";
 
 const LiveMonitoringPage = () => {
   const { earthquakeData } = useEarthquakeData();
   const [targetEarthquake, setTargetEarthquake] = useState(null);
+  const [targetVolcanicAdvisory, setTargetVolcanicAdvisory] = useState(null);
   const location = useLocation();
   const [initialMapState, setInitialMapState] = useState(null);
+
+  // Earthquake alert states
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertEarthquake, setAlertEarthquake] = useState(null);
   const lastAlertIdRef = useRef(null);
   const alertTimeoutRef = useRef(null);
+
+  // Volcanic advisory alert states
+  const [isVolcanicAlertOpen, setIsVolcanicAlertOpen] = useState(false);
+  const [alertVolcanicAdvisory, setAlertVolcanicAdvisory] = useState(null);
+  const lastVolcanicAlertIdRef = useRef(null);
+  const volcanicAlertTimeoutRef = useRef(null);
 
   // Filter states
   const [filters, setFilters] = useState({
@@ -123,10 +138,65 @@ const LiveMonitoringPage = () => {
     setAlertEarthquake(null);
   }, []);
 
+  // Volcanic advisory alert handler
+  const handleVolcanicAdvisoryAlert = useCallback((advisory) => {
+    if (!advisory) {
+      return;
+    }
+
+    const advisoryId = `${advisory.id}-${advisory.alertLevel}`;
+    if (lastVolcanicAlertIdRef.current === advisoryId) {
+      return;
+    }
+
+    console.log("🌋 Triggering volcanic advisory alert:", advisory);
+
+    lastVolcanicAlertIdRef.current = advisoryId;
+    setAlertVolcanicAdvisory(advisory);
+    setTargetVolcanicAdvisory(advisory);
+
+    // Play volcanic advisory sound
+    try {
+      const urgency = getVolcanicAdvisoryUrgency(advisory.alertLevel);
+      console.log(
+        `🌋 Playing volcanic advisory sound - Alert Level: ${advisory.alertLevel}, Urgency: ${urgency}`
+      );
+
+      playVolcanicAdvisorySound(advisory.alertLevel, urgency);
+    } catch (error) {
+      console.error("🔇 Error playing volcanic advisory sound:", error);
+    }
+
+    if (volcanicAlertTimeoutRef.current) {
+      clearTimeout(volcanicAlertTimeoutRef.current);
+    }
+
+    setIsVolcanicAlertOpen(false);
+
+    // Show modal after a short delay
+    volcanicAlertTimeoutRef.current = setTimeout(() => {
+      setIsVolcanicAlertOpen(true);
+    }, 2000);
+
+    // Clear target after map pan is complete
+    setTimeout(() => setTargetVolcanicAdvisory(null), 5000);
+  }, []);
+
+  const handleVolcanicAlertDismiss = useCallback(() => {
+    setIsVolcanicAlertOpen(false);
+    setAlertVolcanicAdvisory(null);
+  }, []);
+
+  // Use the volcanic advisory alerts hook
+  useVolcanicAdvisoryAlerts(handleVolcanicAdvisoryAlert);
+
   useEffect(() => {
     return () => {
       if (alertTimeoutRef.current) {
         clearTimeout(alertTimeoutRef.current);
+      }
+      if (volcanicAlertTimeoutRef.current) {
+        clearTimeout(volcanicAlertTimeoutRef.current);
       }
     };
   }, []);
@@ -178,6 +248,7 @@ const LiveMonitoringPage = () => {
         earthquakeData={earthquakeData}
         filteredEarthquakeData={filteredEarthquakeData}
         targetEarthquake={targetEarthquake}
+        targetVolcanicAdvisory={targetVolcanicAdvisory}
         initialMapState={initialMapState}
         onEarthquakeAlert={handleEarthquakeAlert}
       />
@@ -191,10 +262,17 @@ const LiveMonitoringPage = () => {
       />
       <LiveChatWidget />
 
+      {/* Alert Modals */}
       <EarthquakeAlertModal
         isOpen={isAlertOpen}
         earthquake={alertEarthquake}
         onClose={handleAlertDismiss}
+      />
+
+      <VolcanicAdvisoryModal
+        isOpen={isVolcanicAlertOpen}
+        advisory={alertVolcanicAdvisory}
+        onClose={handleVolcanicAlertDismiss}
       />
     </div>
   );
