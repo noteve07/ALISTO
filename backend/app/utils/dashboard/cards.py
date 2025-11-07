@@ -171,11 +171,68 @@ def _serialize_earthquake(record: Dict[str, Any], reference: datetime) -> Dict[s
 
 
 
-async def get_risk_level(*args, **kwargs):  # noqa: ANN001, ANN002
-    """Placeholder for dashboard risk computation."""
-
-    # Not implemented yet – returning placeholder.
-    return None
+async def get_risk_level(province_id: int = 10) -> Optional[Dict[str, Any]]:
+    """Get risk level for a specific province (default: Bataan, province_id=10)."""
+    
+    try:
+        # Query the risk_evaluations table for the specified province
+        result = (
+            supabase.table("risk_evaluations")
+            .select("province_id, base_risk_score, dynamic_risk_score, risk_level, factors, calculated_at")
+            .eq("province_id", province_id)
+            .single()
+            .execute()
+        )
+        
+        if not result.data:
+            # Return fallback data if no risk evaluation found
+            return {
+                "level": "Moderate",
+                "score": 6.2,
+                "base_score": 5.8,
+                "dynamic_score": 6.2,
+                "factors": {
+                    "historical_activity": 0.7,
+                    "geological_factors": 0.6,
+                    "population_density": 0.8,
+                    "recent_activity": 0.5
+                },
+                "province_id": province_id,
+                "calculated_at": None
+            }
+        
+        record = result.data
+        
+        # Use dynamic_risk_score if available, otherwise fall back to base_risk_score
+        score = record.get("dynamic_risk_score") or record.get("base_risk_score") or 6.2
+        
+        return {
+            "level": record.get("risk_level") or "Moderate",
+            "score": float(score),
+            "base_score": float(record.get("base_risk_score") or 0),
+            "dynamic_score": float(record.get("dynamic_risk_score") or 0),
+            "factors": record.get("factors") or {},
+            "province_id": record.get("province_id"),
+            "calculated_at": record.get("calculated_at")
+        }
+        
+    except Exception as e:
+        print(f"Error fetching risk level for province {province_id}: {e}")
+        # Return fallback data on error
+        return {
+            "level": "Moderate", 
+            "score": 6.2,
+            "base_score": 5.8,
+            "dynamic_score": 6.2,
+            "factors": {
+                "historical_activity": 0.7,
+                "geological_factors": 0.6,
+                "population_density": 0.8,
+                "recent_activity": 0.5
+            },
+            "province_id": province_id,
+            "calculated_at": None
+        }
 
 
 

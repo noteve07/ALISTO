@@ -22,17 +22,58 @@ const RiskLevel = () => {
 
   const getRiskColor = (level) => {
     const colors = {
-      Low: "bg-green-500",
-      Moderate: "bg-yellow-500",
-      High: "bg-orange-500",
-      "Very High": "bg-red-500",
+      Low: "bg-green-100 border-green-300",
+      Moderate: "bg-orange-100 border-orange-300",
+      High: "bg-red-100 border-red-300",
+      "Very High": "bg-red-200 border-red-400",
     };
     return colors[level] || colors.Moderate;
   };
 
+  const getRiskTextColor = (level) => {
+    const colors = {
+      Low: "text-green-800",
+      Moderate: "text-orange-800",
+      High: "text-red-800",
+      "Very High": "text-red-900",
+    };
+    return colors[level] || colors.Moderate;
+  };
+
+  const getRiskHighlightColor = (level) => {
+    const colors = {
+      Low: "bg-green-500",
+      Moderate: "bg-orange-500",
+      High: "bg-red-500",
+      "Very High": "bg-red-600",
+    };
+    return colors[level] || colors.Moderate;
+  };
+
+  const formatLastUpdated = (calculatedAt) => {
+    if (!calculatedAt) return "No data";
+
+    try {
+      const date = new Date(calculatedAt);
+      const now = new Date();
+      const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+
+      if (diffInHours < 1) return "Just updated";
+      if (diffInHours < 24) return `${diffInHours}h ago`;
+      const diffInDays = Math.floor(diffInHours / 24);
+      if (diffInDays < 7) return `${diffInDays}d ago`;
+      return date.toLocaleDateString();
+    } catch {
+      return "Unknown";
+    }
+  };
+
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse">
+      <div className="relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse group">
+        {/* Bottom thick primary color highlight - 80% width, centered */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4/5 h-1 bg-[#ea772e] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out"></div>
+
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
@@ -46,32 +87,43 @@ const RiskLevel = () => {
 
   // Use risk level from API or fallback
   const level = riskLevel?.level || "Moderate";
-  const score = riskLevel?.score || 6.2;
+  const calculatedAt = riskLevel?.calculated_at;
 
   return (
     <div
       onClick={handleClick}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:scale-[1.01] hover:-translate-y-0.5 hover:border-b-2 hover:border-b-gray-300 active:scale-[0.98] active:translate-y-0 active:shadow-sm transition-all duration-100 ease-out cursor-pointer"
+      className={`relative rounded-xl shadow-sm border p-6 hover:shadow-lg hover:scale-[1.01] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 active:shadow-sm transition-all duration-100 ease-out cursor-pointer group ${getRiskColor(
+        level
+      )}`}
     >
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-medium text-gray-600 mb-1">Risk Level</p>
-          <div className="flex items-center space-x-2">
-            <span
-              className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold text-white ${getRiskColor(
-                level
-              )}`}
-            >
-              {level}
-            </span>
-            <span className="text-2xl font-bold text-gray-900">{score}/10</span>
-          </div>
+      {/* Bottom colored highlight - 80% width and normal thickness */}
+      <div
+        className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4/5 h-0.5 ${getRiskHighlightColor(
+          level
+        )} rounded-full transition-transform duration-300 ease-out ${
+          level === "High" || level === "Very High"
+            ? "scale-x-100"
+            : "scale-x-0 group-hover:scale-x-100"
+        }`}
+      ></div>
+
+      {/* Centered layout */}
+      <div className="text-center">
+        <p className="text-sm font-medium text-gray-600 mb-3">
+          Risk Level (Bataan)
+        </p>
+
+        {/* Large prominent risk level text */}
+        <div className="mb-3">
+          <h2 className={`text-4xl font-bold ${getRiskTextColor(level)}`}>
+            {level}
+          </h2>
         </div>
-        <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-lg mt-1">
-          <span className="material-symbols-outlined text-2xl text-orange-700">
-            warning
-          </span>
-        </div>
+
+        {/* Last updated info */}
+        <p className="text-xs text-gray-500">
+          Last Updated: {formatLastUpdated(calculatedAt)}
+        </p>
       </div>
     </div>
   );

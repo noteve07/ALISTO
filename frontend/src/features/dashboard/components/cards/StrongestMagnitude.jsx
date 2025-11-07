@@ -22,7 +22,10 @@ const StrongestMagnitude = () => {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse">
+      <div className="relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 animate-pulse group">
+        {/* Left side light orange highlight */}
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ea772e]/80 rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></div>
+
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
@@ -36,7 +39,10 @@ const StrongestMagnitude = () => {
 
   if (!strongestMagnitude) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+      <div className="relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200 group">
+        {/* Left side light orange highlight */}
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ea772e]/80 rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></div>
+
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600 mb-1">
@@ -57,8 +63,11 @@ const StrongestMagnitude = () => {
   return (
     <div
       onClick={handleClick}
-      className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:scale-[1.01] hover:-translate-y-0.5 hover:border-b-2 hover:border-b-gray-300 active:scale-[0.98] active:translate-y-0 active:shadow-sm transition-all duration-100 ease-out cursor-pointer"
+      className="relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-lg hover:scale-[1.01] hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 active:shadow-sm transition-all duration-100 ease-out cursor-pointer group"
     >
+      {/* Left side light orange highlight */}
+      <div className="absolute left-0 top-0 bottom-0 w-2 bg-[#ea772e]/50 rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></div>
+
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-600 mb-1">

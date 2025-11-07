@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -29,6 +29,7 @@ ChartJS.register(
 
 const EarthquakeFrequencyChart = () => {
   const { dashboardData } = useDashboard();
+  const [isHovered, setIsHovered] = useState(false);
 
   // Use data from API or fallback to placeholder
   const apiData = dashboardData?.charts?.frequency || {
@@ -122,6 +123,20 @@ const EarthquakeFrequencyChart = () => {
     maintainAspectRatio: false,
     barPercentage: 0.5,
     categoryPercentage: 0.6,
+    animation: {
+      duration: 800,
+      easing: "easeInOutQuart",
+    },
+    interaction: {
+      intersect: false,
+      mode: "index",
+    },
+    elements: {
+      bar: {
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+    },
     plugins: {
       legend: {
         display: true,
@@ -209,49 +224,68 @@ const EarthquakeFrequencyChart = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900">
-            {apiData.title}
-          </h3>
-          <p className="text-sm text-gray-600">{apiData.subtitle}</p>
-        </div>
-        <span className="material-symbols-outlined text-primary text-xl">
-          bar_chart
-        </span>
-      </div>
+    <div
+      className={`relative bg-white rounded-xl shadow-sm border border-gray-200 p-6 transition-all duration-300 ease-in-out group cursor-pointer ${
+        isHovered ? "shadow-lg -translate-y-1" : ""
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated border highlight */}
+      <div
+        className={`absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#ea772e] transition-all duration-300 pointer-events-none`}
+      ></div>
 
-      {/* Chart */}
-      <div className="h-52 mb-3">
-        <Bar data={chartData} options={options} />
-      </div>
+      {/* Animated bottom highlight line */}
+      <div
+        className={`absolute bottom-0 left-0 h-1 bg-[#ea772e] rounded-b-xl transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out`}
+      ></div>
 
-      {/* Statistics - Modern Compact Design */}
-      <div className="grid grid-cols-3 gap-3 pt-3 border-t border-gray-200">
-        <div className="bg-primary-v2/10 rounded-lg p-3">
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-gray-700">
-              {stats.total_week}
-            </span>
-            <span className="text-xs text-gray-600 font-medium">total</span>
+      {/* Content wrapper */}
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">
+              {apiData.title}
+            </h3>
+            <p className="text-sm text-gray-600">{apiData.subtitle}</p>
           </div>
+          <span className="material-symbols-outlined text-primary text-xl">
+            bar_chart
+          </span>
         </div>
-        <div className="bg-primary-v2/10 rounded-lg p-3">
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-gray-700">
-              {stats.daily_average}
-            </span>
-            <span className="text-xs text-gray-600 font-medium">avg/day</span>
+
+        {/* Chart */}
+        <div className="h-52 mb-3">
+          <Bar data={chartData} options={options} />
+        </div>
+
+        {/* Statistics - Modern Compact Design */}
+        <div className="grid grid-cols-3 gap-3 pt-3 border-t border-gray-200">
+          <div className="bg-primary-v2/10 rounded-lg p-3">
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-gray-700">
+                {stats.total_week}
+              </span>
+              <span className="text-xs text-gray-600 font-medium">total</span>
+            </div>
           </div>
-        </div>
-        <div className="bg-primary-v2/10 rounded-lg p-3">
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-gray-700">
-              {stats.peak_day}
-            </span>
-            <span className="text-xs text-gray-600 font-medium">peak</span>
+          <div className="bg-primary-v2/10 rounded-lg p-3">
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-gray-700">
+                {stats.daily_average}
+              </span>
+              <span className="text-xs text-gray-600 font-medium">avg/day</span>
+            </div>
+          </div>
+          <div className="bg-primary-v2/10 rounded-lg p-3">
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl font-bold text-gray-700">
+                {stats.peak_day}
+              </span>
+              <span className="text-xs text-gray-600 font-medium">peak</span>
+            </div>
           </div>
         </div>
       </div>
