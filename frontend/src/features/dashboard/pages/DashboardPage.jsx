@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useUserLocation } from "../../auth/context/UserLocationContext";
 import { useDashboard } from "../hooks/useDashboard";
 
+// Loading Component
+import DashboardLoader from "../components/DashboardLoader";
+
 // Card Components
 import TodaysEarthquakes from "../components/cards/TodaysEarthquakes";
 import StrongestMagnitude from "../components/cards/StrongestMagnitude";
@@ -22,44 +25,6 @@ import ProvinceActivityChart from "../components/graphs/ProvinceActivityChart";
 import RecentEarthquakesPH from "../components/lists/RecentEarthquakesPH";
 import HighRiskProvinces from "../components/lists/HighRiskProvinces";
 import VolcanicAdvisories from "../components/lists/VolcanicAdvisories";
-
-// Loading Component with smooth transition
-const DashboardLoader = ({ isExiting = false }) => {
-  return (
-    <div
-      className={`px-4 pt-4 pb-1 bg-[#f5f2ef] relative transition-opacity duration-700 ease-out ${
-        isExiting ? "opacity-0" : "opacity-100"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto space-y-6 scale-90 origin-top pb-0 min-h-screen">
-        {/* Loading Overlay */}
-        <div
-          className={`absolute inset-0 bg-[#f5f2ef]/70 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity duration-500 ${
-            isExiting ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <div className="text-center space-y-4">
-            {/* Loading Animation */}
-            <div className="flex justify-center">
-              <div
-                className={`w-8 h-8 border-4 border-[#ea772e] border-t-transparent rounded-full transition-all duration-300 ${
-                  isExiting
-                    ? "animate-none opacity-60"
-                    : "animate-spin opacity-100"
-                }`}
-              ></div>
-            </div>
-
-            {/* Simple Loading Text */}
-            <p className="text-gray-700 font-medium">
-              Loading personalized board
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const DashboardPage = () => {
   const { location } = useUserLocation();
