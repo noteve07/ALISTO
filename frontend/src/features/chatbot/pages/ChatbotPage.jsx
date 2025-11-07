@@ -450,7 +450,7 @@ const ChatbotPage = () => {
           <button
             type="submit"
             disabled={!inputValue.trim()}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-orange-400 to-orange-500 px-6 text-sm font-semibold text-white shadow-lg shadow-orange-400/30 transition-all duration-200 hover:from-orange-500 hover:to-orange-600 hover:shadow-xl hover:shadow-orange-400/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-lg font-sans -mt-top-4"
+            className="mb-1.5 inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-orange-400 to-orange-500 px-6 text-sm font-semibold text-white shadow-lg shadow-orange-400/30 transition-all duration-200 hover:from-orange-500 hover:to-orange-600 hover:shadow-xl hover:shadow-orange-400/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-lg font-sans -mt-top-4"
           >
             Send
             <svg
