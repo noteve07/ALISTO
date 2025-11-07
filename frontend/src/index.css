@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Global overflow control to prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 @theme {
   /* --color-primary: #c27930; */
   --color-primary: #ea772e;
