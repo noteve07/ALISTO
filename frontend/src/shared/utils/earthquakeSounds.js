@@ -9,6 +9,18 @@ let audioContextInitialized = false;
 
 // Initialize AudioContext with user interaction handling
 const initializeAudioContext = async () => {
+  // Check if we have a global audio context from user interaction
+  if (window.globalAudioContext && window.globalAudioContext.state !== 'closed') {
+    audioContext = window.globalAudioContext;
+    if (audioContext.state === 'suspended') {
+      console.log('🔊 Resuming existing global AudioContext...');
+      await audioContext.resume();
+    }
+    audioContextInitialized = true;
+    console.log('🔊 Using global AudioContext');
+    return audioContext;
+  }
+
   if (audioContext && audioContextInitialized) {
     return audioContext;
   }
@@ -213,6 +225,18 @@ export const playVolcanicAdvisorySound = async (alertLevel = 1, urgency = 'moder
     if (!context) {
       console.warn('🔇 AudioContext not available for volcanic advisory sound');
       return false;
+    }
+
+    // Ensure AudioContext is running
+    if (context.state === 'suspended') {
+      console.log('🔊 AudioContext suspended, attempting to resume...');
+      try {
+        await context.resume();
+        console.log('✅ AudioContext resumed successfully');
+      } catch (error) {
+        console.error('❌ Failed to resume AudioContext:', error);
+        return false;
+      }
     }
 
     // Try to play custom volcanic sound file first

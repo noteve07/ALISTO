@@ -11,6 +11,7 @@ export const useVolcanicAdvisoryAlerts = (onAlert) => {
   const [lastAlertId, setLastAlertId] = useState(null);
   const previousAdvisoriesRef = useRef(new Set());
   const alertTimeoutRef = useRef(null);
+  const isInitialLoadRef = useRef(true); // Track if this is the initial data load
 
   // Get volcano coordinates by ID
   const getVolcanoCoordinates = (volcanoId) => {
@@ -49,6 +50,14 @@ export const useVolcanicAdvisoryAlerts = (onAlert) => {
       advisories.map(advisory => `${advisory.id}-${advisory.alertLevel}`)
     );
 
+    // On initial load, just populate the previous advisories without triggering alerts
+    if (isInitialLoadRef.current) {
+      console.log('🌋 Initial load - setting baseline advisories without alerts');
+      previousAdvisoriesRef.current = currentAdvisoryIds;
+      isInitialLoadRef.current = false;
+      return;
+    }
+
     // Find new advisories that weren't in the previous state
     const newAdvisories = advisories.filter(advisory => {
       const advisoryKey = `${advisory.id}-${advisory.alertLevel}`;
@@ -61,7 +70,7 @@ export const useVolcanicAdvisoryAlerts = (onAlert) => {
       // Sort by alert level (highest first) and get the most critical one
       const mostCriticalAdvisory = newAdvisories.sort((a, b) => b.alertLevel - a.alertLevel)[0];
       
-      console.log('🚨 New critical volcanic advisory detected:', mostCriticalAdvisory);
+      console.log('🚨 New critical volcanic advisory detected (real-time update):', mostCriticalAdvisory);
       
       // Prevent duplicate alerts for the same advisory
       const alertKey = `${mostCriticalAdvisory.id}-${mostCriticalAdvisory.alertLevel}`;

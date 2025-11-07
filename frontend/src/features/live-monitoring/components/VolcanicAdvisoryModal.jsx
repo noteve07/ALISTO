@@ -19,55 +19,91 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
   const volcano = advisory.volcano || "Unknown volcano";
   const alertStatus = advisory.alertStatus || "Status unavailable";
 
-  // Get alert level description and colors
-  const getAlertLevelInfo = (level) => {
+  // Helper functions for glassmorphism styling with volcanic urgency colors
+  const getVolcanoIconBg = (level) => {
     switch (level) {
       case 5:
-        return {
-          text: "ALERT LEVEL 5 - HAZARDOUS ERUPTION",
-          bgColor: "bg-red-900",
-          textColor: "text-red-200",
-          iconColor: "text-red-300",
-        };
+        return "bg-red-500/30";
       case 4:
-        return {
-          text: "ALERT LEVEL 4 - HAZARDOUS ERUPTION IMMINENT",
-          bgColor: "bg-red-800",
-          textColor: "text-red-200",
-          iconColor: "text-red-300",
-        };
+        return "bg-red-500/25";
       case 3:
-        return {
-          text: "ALERT LEVEL 3 - MAGMATIC UNREST",
-          bgColor: "bg-orange-800",
-          textColor: "text-orange-200",
-          iconColor: "text-orange-300",
-        };
+        return "bg-orange-500/25";
       case 2:
-        return {
-          text: "ALERT LEVEL 2 - MODERATE UNREST",
-          bgColor: "bg-amber-800",
-          textColor: "text-amber-200",
-          iconColor: "text-amber-300",
-        };
+        return "bg-amber-500/25";
       case 1:
-        return {
-          text: "ALERT LEVEL 1 - LOW LEVEL UNREST",
-          bgColor: "bg-yellow-800",
-          textColor: "text-yellow-200",
-          iconColor: "text-yellow-300",
-        };
+        return "bg-yellow-500/25";
       default:
-        return {
-          text: "NORMAL",
-          bgColor: "bg-gray-800",
-          textColor: "text-gray-200",
-          iconColor: "text-gray-300",
-        };
+        return "bg-gray-500/20";
     }
   };
 
-  const alertInfo = getAlertLevelInfo(alertLevel);
+  const getVolcanoIconColor = (level) => {
+    switch (level) {
+      case 5:
+        return "text-red-300";
+      case 4:
+        return "text-red-400";
+      case 3:
+        return "text-orange-400";
+      case 2:
+        return "text-amber-400";
+      case 1:
+        return "text-yellow-400";
+      default:
+        return "text-gray-400";
+    }
+  };
+
+  const getAlertLevelBadgeStyle = (level) => {
+    switch (level) {
+      case 5:
+        return "bg-red-500/40";
+      case 4:
+        return "bg-red-500/35";
+      case 3:
+        return "bg-orange-500/35";
+      case 2:
+        return "bg-amber-500/35";
+      case 1:
+        return "bg-yellow-500/35";
+      default:
+        return "bg-gray-500/30";
+    }
+  };
+
+  const getAlertLevelText = (level) => {
+    switch (level) {
+      case 5:
+        return "ALERT LEVEL 5 - HAZARDOUS ERUPTION";
+      case 4:
+        return "ALERT LEVEL 4 - ERUPTION IMMINENT";
+      case 3:
+        return "ALERT LEVEL 3 - MAGMATIC UNREST";
+      case 2:
+        return "ALERT LEVEL 2 - MODERATE UNREST";
+      case 1:
+        return "ALERT LEVEL 1 - LOW LEVEL UNREST";
+      default:
+        return "NORMAL";
+    }
+  };
+
+  const getStatusIndicatorColor = (level) => {
+    switch (level) {
+      case 5:
+        return "bg-red-400";
+      case 4:
+        return "bg-red-400";
+      case 3:
+        return "bg-orange-400";
+      case 2:
+        return "bg-amber-400";
+      case 1:
+        return "bg-yellow-400";
+      default:
+        return "bg-gray-400";
+    }
+  };
 
   return (
     <div
@@ -75,7 +111,8 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
       style={{ justifyContent: "center", marginLeft: "-55px" }}
     >
       <div
-        className={`relative w-full max-w-md backdrop-blur-md rounded-2xl shadow-2xl border border-white/30 ${alertInfo.bgColor}`}
+        className="relative w-full max-w-md bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/30"
+        style={{ backgroundColor: "var(--color-secondary)" }}
       >
         <button
           type="button"
@@ -94,10 +131,14 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
         </button>
 
         <div className="p-6 text-center">
-          {/* Volcano Icon */}
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/20">
+          {/* Volcano Icon with urgency color */}
+          <div
+            className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${getVolcanoIconBg(
+              alertLevel
+            )}`}
+          >
             <svg
-              className={`h-8 w-8 ${alertInfo.iconColor}`}
+              className={`h-8 w-8 ${getVolcanoIconColor(alertLevel)}`}
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -114,41 +155,41 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
           </div>
 
           {/* Title */}
-          <h2 className={`text-xl font-bold mb-2 ${alertInfo.textColor}`}>
-            Volcanic Advisory
+          <h2 className="text-white text-xl font-bold mb-2">
+            VOLCANIC ADVISORY
           </h2>
 
           {/* Volcano Name */}
-          <h3 className={`text-lg font-semibold mb-3 ${alertInfo.textColor}`}>
-            {volcano}
-          </h3>
+          <h3 className="text-white text-lg font-semibold mb-3">{volcano}</h3>
 
           {/* Alert Level Badge */}
           <div className="mb-4">
-            <div className="inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-              <span className={`text-sm font-bold ${alertInfo.textColor}`}>
-                {alertInfo.text}
+            <div
+              className={`inline-block backdrop-blur-sm rounded-full px-4 py-2 ${getAlertLevelBadgeStyle(
+                alertLevel
+              )}`}
+            >
+              <span className="text-sm font-bold text-white">
+                {getAlertLevelText(alertLevel)}
               </span>
             </div>
           </div>
 
           {/* Alert Status */}
-          <p
-            className={`text-sm mb-4 ${alertInfo.textColor} opacity-90 leading-relaxed`}
-          >
+          <p className="text-white/70 text-sm mb-4 leading-relaxed">
             {alertStatus}
           </p>
 
           {/* Issuance Date */}
           {advisory.issuanceDate && (
-            <p className={`text-xs ${alertInfo.textColor} opacity-75 mb-4`}>
+            <p className="text-white/50 text-xs mb-4">
               Issued: {new Date(advisory.issuanceDate).toLocaleString()}
             </p>
           )}
 
           {/* Action Button */}
           {advisory.bulletinLink && (
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-4">
               <button
                 onClick={() => window.open(advisory.bulletinLink, "_blank")}
                 className="bg-white/20 backdrop-blur-sm text-white font-medium py-2 px-6 rounded-lg hover:bg-white/30 transition-colors"
@@ -157,6 +198,16 @@ const VolcanicAdvisoryModal = ({ isOpen, advisory, onClose }) => {
               </button>
             </div>
           )}
+
+          {/* Status Indicator */}
+          <div className="flex items-center justify-center gap-2 text-xs text-white/60">
+            <div
+              className={`h-1.5 w-1.5 rounded-full animate-pulse ${getStatusIndicatorColor(
+                alertLevel
+              )}`}
+            ></div>
+            VOLCANIC ALERT
+          </div>
         </div>
       </div>
     </div>

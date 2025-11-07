@@ -67,9 +67,11 @@ const LiveMonitoringPage = () => {
           if (audioContext.state === "suspended") {
             audioContext.resume();
             console.log(
-              "🔊 Audio context initialized and resumed for earthquake sounds"
+              "🔊 Audio context initialized and resumed for all sounds (earthquake + volcanic)"
             );
           }
+          // Store reference globally for volcanic sounds to use
+          window.globalAudioContext = audioContext;
         } catch (error) {
           console.log("🔇 Audio context initialization failed:", error);
         }
@@ -139,7 +141,7 @@ const LiveMonitoringPage = () => {
   }, []);
 
   // Volcanic advisory alert handler
-  const handleVolcanicAdvisoryAlert = useCallback((advisory) => {
+  const handleVolcanicAdvisoryAlert = useCallback(async (advisory) => {
     if (!advisory) {
       return;
     }
@@ -162,7 +164,16 @@ const LiveMonitoringPage = () => {
         `🌋 Playing volcanic advisory sound - Alert Level: ${advisory.alertLevel}, Urgency: ${urgency}`
       );
 
-      playVolcanicAdvisorySound(advisory.alertLevel, urgency);
+      // Ensure audio context is ready before playing sound
+      const soundSuccess = await playVolcanicAdvisorySound(
+        advisory.alertLevel,
+        urgency
+      );
+      if (!soundSuccess) {
+        console.warn(
+          "🔇 Volcanic advisory sound failed to play - may require user interaction first"
+        );
+      }
     } catch (error) {
       console.error("🔇 Error playing volcanic advisory sound:", error);
     }
