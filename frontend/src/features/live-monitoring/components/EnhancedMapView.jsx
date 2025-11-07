@@ -52,6 +52,7 @@ const shouldTriggerAlert = (earthquake) => {
 const MapController = ({
   earthquakeData,
   targetEarthquake,
+  targetVolcanicAdvisory,
   initialMapState,
   onEarthquakeAlert,
 }) => {
@@ -153,6 +154,35 @@ const MapController = ({
     prevLatestEarthquakeRef.current = latestEarthquake;
   }, [earthquakeData, map, onEarthquakeAlert]);
 
+  // Handle auto-pan for volcanic advisory alerts
+  useEffect(() => {
+    if (!targetVolcanicAdvisory?.coordinates) return;
+
+    console.log(
+      "🌋 New volcanic advisory detected! Panning to volcano location:",
+      targetVolcanicAdvisory.volcano
+    );
+
+    const [lat, lng] = targetVolcanicAdvisory.coordinates;
+
+    // Calculate appropriate zoom level based on alert level
+    const getVolcanoZoomLevel = (alertLevel) => {
+      if (alertLevel >= 4) return 10; // Critical - closer view
+      if (alertLevel >= 3) return 9; // High unrest - close view
+      if (alertLevel >= 2) return 8; // Moderate unrest - medium view
+      return 8; // Low level unrest
+    };
+
+    const targetZoom = getVolcanoZoomLevel(targetVolcanicAdvisory.alertLevel);
+
+    // Pan to volcano location without animation for immediate focus
+    map.setView([lat, lng], targetZoom);
+
+    console.log(
+      `🎯 Focused on volcano: ${targetVolcanicAdvisory.volcano} (Alert Level ${targetVolcanicAdvisory.alertLevel})`
+    );
+  }, [targetVolcanicAdvisory, map]);
+
   // Handle manual earthquake click (from list)
   useEffect(() => {
     if (targetEarthquake) {
@@ -209,6 +239,7 @@ const EnhancedMapView = ({
   earthquakeData, // Raw data for alert detection
   filteredEarthquakeData, // Filtered data for displaying markers
   targetEarthquake,
+  targetVolcanicAdvisory,
   initialMapState,
   onEarthquakeAlert,
 }) => {
@@ -237,6 +268,7 @@ const EnhancedMapView = ({
       <MapController
         earthquakeData={earthquakeData}
         targetEarthquake={targetEarthquake}
+        targetVolcanicAdvisory={targetVolcanicAdvisory}
         initialMapState={initialMapState}
         onEarthquakeAlert={onEarthquakeAlert}
       />

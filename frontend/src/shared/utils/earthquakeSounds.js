@@ -9,6 +9,18 @@ let audioContextInitialized = false;
 
 // Initialize AudioContext with user interaction handling
 const initializeAudioContext = async () => {
+  // Check if we have a global audio context from user interaction
+  if (window.globalAudioContext && window.globalAudioContext.state !== 'closed') {
+    audioContext = window.globalAudioContext;
+    if (audioContext.state === 'suspended') {
+      console.log('🔊 Resuming existing global AudioContext...');
+      await audioContext.resume();
+    }
+    audioContextInitialized = true;
+    console.log('🔊 Using global AudioContext');
+    return audioContext;
+  }
+
   if (audioContext && audioContextInitialized) {
     return audioContext;
   }
@@ -199,6 +211,207 @@ export const getEarthquakeUrgency = (magnitude) => {
 };
 
 /**
+ * Play volcanic advisory alert sound based on alert level
+ * @param {number} alertLevel - Volcanic alert level (1-5)
+ * @param {string} urgency - Urgency level (low, moderate, high, extreme)
+ * @returns {Promise<boolean>} Success status
+ */
+export const playVolcanicAdvisorySound = async (alertLevel = 1, urgency = 'moderate') => {
+  console.log(`🌋 Playing volcanic advisory sound for alert level ${alertLevel} (${urgency})`);
+
+  try {
+    // Initialize audio context first
+    const context = await initializeAudioContext();
+    if (!context) {
+      console.warn('🔇 AudioContext not available for volcanic advisory sound');
+      return false;
+    }
+
+    // Ensure AudioContext is running
+    if (context.state === 'suspended') {
+      console.log('🔊 AudioContext suspended, attempting to resume...');
+      try {
+        await context.resume();
+        console.log('✅ AudioContext resumed successfully');
+      } catch (error) {
+        console.error('❌ Failed to resume AudioContext:', error);
+        return false;
+      }
+    }
+
+    // Try to play custom volcanic sound file first
+    const soundPlayed = await playVolcanicAudioFile(alertLevel);
+    if (soundPlayed) {
+      return true;
+    }
+
+    // Fallback to programmatic sound generation
+    console.log('🎵 Using programmatic volcanic advisory sound generation');
+    await generateVolcanicAdvisoryTone(context, alertLevel);
+    return true;
+
+  } catch (error) {
+    console.error('🔇 Failed to play volcanic advisory sound:', error);
+    return false;
+  }
+};
+
+/**
+ * Play volcanic advisory audio file if available
+ * @param {number} alertLevel - Volcanic alert level
+ * @returns {Promise<boolean>} Success status
+ */
+const playVolcanicAudioFile = async (alertLevel) => {
+  try {
+    // Determine which sound file to use based on alert level
+    let soundFile;
+    if (alertLevel >= 4) {
+      soundFile = '/sounds/volcanic_eruption-critical.mp3';
+      console.log(`🎵 Critical volcanic activity (level ${alertLevel}) - trying custom sound: ${soundFile}`);
+    } else if (alertLevel >= 3) {
+      soundFile = '/sounds/volcanic_eruption-high.mp3';
+      console.log(`🎵 High volcanic activity (level ${alertLevel}) - trying custom sound: ${soundFile}`);
+    } else if (alertLevel >= 2) {
+      soundFile = '/sounds/volcanic_advisory-moderate.mp3';
+      console.log(`🎵 Moderate volcanic activity (level ${alertLevel}) - trying custom sound: ${soundFile}`);
+    } else {
+      // For low-level alerts, use programmatic sound
+      console.log(`🎵 Low volcanic activity (level ${alertLevel}) - using programmatic sound`);
+      return false;
+    }
+
+    // Test if the sound file exists
+    const response = await fetch(soundFile, { method: 'HEAD' });
+    if (!response.ok) {
+      console.log(`🎵 Custom volcanic sound not available: ${soundFile} - using programmatic`);
+      return false;
+    }
+
+    // Create and play audio element
+    const audio = new Audio(soundFile);
+    audio.volume = getVolcanicSoundVolume(alertLevel);
+    
+    // Return promise that resolves when audio starts playing
+    return new Promise((resolve) => {
+      audio.oncanplaythrough = () => {
+        audio.play()
+          .then(() => {
+            console.log(`🔊 Successfully playing volcanic sound: ${soundFile}`);
+            resolve(true);
+          })
+          .catch((error) => {
+            console.warn(`🔇 Failed to play volcanic sound file: ${soundFile}`, error);
+            resolve(false);
+          });
+      };
+      
+      audio.onerror = () => {
+        console.warn(`🔇 Error loading volcanic sound: ${soundFile}`);
+        resolve(false);
+      };
+    });
+
+  } catch (error) {
+    console.warn('🔇 Failed to play volcanic audio file:', error);
+    return false;
+  }
+};
+
+/**
+ * Generate programmatic volcanic advisory tone
+ * @param {AudioContext} audioContext - Web Audio API context
+ * @param {number} alertLevel - Volcanic alert level
+ */
+const generateVolcanicAdvisoryTone = async (audioContext, alertLevel) => {
+  const now = audioContext.currentTime;
+  
+  // Configure tone based on alert level
+  let frequency, duration, pulseCount;
+  
+  if (alertLevel >= 4) {
+    // Critical: Fast, high-pitched, urgent pattern
+    frequency = 800;
+    duration = 0.15;
+    pulseCount = 6;
+  } else if (alertLevel >= 3) {
+    // High: Moderate speed, mid-high pitch
+    frequency = 650;
+    duration = 0.2;
+    pulseCount = 5;
+  } else if (alertLevel >= 2) {
+    // Moderate: Steady pattern
+    frequency = 500;
+    duration = 0.25;
+    pulseCount = 4;
+  } else {
+    // Low: Gentle, slower pattern
+    frequency = 400;
+    duration = 0.3;
+    pulseCount = 3;
+  }
+  
+  // Play the sound pattern 5 times with delays between each
+  for (let repeat = 0; repeat < 5; repeat++) {
+    const repeatDelay = repeat * (pulseCount * (duration + 0.1) + 0.8); // 0.8s gap between repeats
+    
+    // Create oscillator for this repeat
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    // Connect audio nodes
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Set oscillator type for volcanic sound (triangle for rumbling effect)
+    oscillator.type = 'triangle';
+    oscillator.frequency.setValueAtTime(frequency, now + repeatDelay);
+    
+    // Create pulsing pattern
+    const volume = getVolcanicSoundVolume(alertLevel);
+    gainNode.gain.setValueAtTime(0, now + repeatDelay);
+    
+    for (let i = 0; i < pulseCount; i++) {
+      const startTime = now + repeatDelay + (i * (duration + 0.1));
+      const endTime = startTime + duration;
+      
+      // Fade in and out for each pulse
+      gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.02);
+      gainNode.gain.linearRampToValueAtTime(0, endTime);
+    }
+    
+    // Start and stop the oscillator
+    oscillator.start(now + repeatDelay);
+    oscillator.stop(now + repeatDelay + (pulseCount * (duration + 0.1)));
+  }
+  
+  console.log(`🔊 Generated volcanic advisory tone (5x repeats): ${frequency}Hz, ${pulseCount} pulses per repeat, level ${alertLevel}`);
+};
+
+/**
+ * Get volcanic advisory sound volume based on alert level
+ * @param {number} alertLevel - Volcanic alert level
+ * @returns {number} Volume level (0.0 to 1.0)
+ */
+const getVolcanicSoundVolume = (alertLevel) => {
+  if (alertLevel >= 4) return 0.8;  // Very loud for critical
+  if (alertLevel >= 3) return 0.6;  // Loud for high
+  if (alertLevel >= 2) return 0.4;  // Moderate for moderate
+  return 0.3;  // Softer for low level
+};
+
+/**
+ * Get volcanic advisory urgency level based on alert level
+ * @param {number} alertLevel - Volcanic alert level (1-5)
+ * @returns {string} Urgency level
+ */
+export const getVolcanicAdvisoryUrgency = (alertLevel) => {
+  if (alertLevel >= 4) return 'extreme';
+  if (alertLevel >= 3) return 'high';
+  if (alertLevel >= 2) return 'moderate';
+  return 'low';
+};
+
+/**
  * Check if custom sound files are available
  * @returns {Object} Status of sound files
  */
@@ -206,6 +419,31 @@ export const checkEarthquakeSoundFiles = async () => {
   const soundFiles = [
     '/sounds/major_earthquake-high.mp3',
     '/sounds/major_earthquake-normal.mp3'
+  ];
+  
+  const results = {};
+  
+  for (const file of soundFiles) {
+    try {
+      const response = await fetch(file, { method: 'HEAD' });
+      results[file] = response.ok;
+    } catch {
+      results[file] = false;
+    }
+  }
+  
+  return results;
+};
+
+/**
+ * Check if volcanic advisory sound files are available
+ * @returns {Object} Status of volcanic sound files
+ */
+export const checkVolcanicSoundFiles = async () => {
+  const soundFiles = [
+    '/sounds/volcanic_eruption-critical.mp3',
+    '/sounds/volcanic_eruption-high.mp3', 
+    '/sounds/volcanic_advisory-moderate.mp3'
   ];
   
   const results = {};
