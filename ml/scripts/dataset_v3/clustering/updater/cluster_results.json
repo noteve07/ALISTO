@@ -1,0 +1,494 @@
+[
+  {
+    "province": "Abra",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Agusan Del Norte",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.45995042392445473
+  },
+  {
+    "province": "Agusan Del Sur",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.5838016168010635
+  },
+  {
+    "province": "Aklan",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5852358635871279
+  },
+  {
+    "province": "Albay",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6640742537909142
+  },
+  {
+    "province": "Antique",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.43187373566689063
+  },
+  {
+    "province": "Apayao",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6499069109372136
+  },
+  {
+    "province": "Aurora",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.48793614465623536
+  },
+  {
+    "province": "Basilan",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.34106147408494353
+  },
+  {
+    "province": "Bataan",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.4095040147877036
+  },
+  {
+    "province": "Batanes",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.22617185357746075
+  },
+  {
+    "province": "Batangas",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Benguet",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6560018791258533
+  },
+  {
+    "province": "Biliran",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6154907871600918
+  },
+  {
+    "province": "Bohol",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.39560971835354725
+  },
+  {
+    "province": "Bukidnon",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.5019194702712235
+  },
+  {
+    "province": "Bulacan",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5841691397688066
+  },
+  {
+    "province": "Cagayan",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Camarines Norte",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.620495118611945
+  },
+  {
+    "province": "Camarines Sur",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.4519423475640129
+  },
+  {
+    "province": "Camiguin",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.4479509637936364
+  },
+  {
+    "province": "Capiz",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5723271726091927
+  },
+  {
+    "province": "Catanduanes",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.22855994483446063
+  },
+  {
+    "province": "Cavite",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5997300826851477
+  },
+  {
+    "province": "Cebu",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Compostela Valley",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.5159152019652414
+  },
+  {
+    "province": "Davao Del Norte",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.651135053455038
+  },
+  {
+    "province": "Davao Del Sur",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Davao Oriental",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Dinagat Islands",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.49454946170508013
+  },
+  {
+    "province": "Eastern Samar",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Guimaras",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.41938054026743726
+  },
+  {
+    "province": "Ifugao",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6457321840660601
+  },
+  {
+    "province": "Ilocos Norte",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Ilocos Sur",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.45148765275030106
+  },
+  {
+    "province": "Iloilo",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6570241822645062
+  },
+  {
+    "province": "Isabela",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.7187988255568953
+  },
+  {
+    "province": "Kalinga",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6275609321824002
+  },
+  {
+    "province": "La Union",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5070828471471367
+  },
+  {
+    "province": "Laguna",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6096092427143717
+  },
+  {
+    "province": "Lanao Del Norte",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5970289892890069
+  },
+  {
+    "province": "Lanao Del Sur",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.621032184023163
+  },
+  {
+    "province": "Leyte",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.6875950956535146
+  },
+  {
+    "province": "Maguindanao",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.574440375342186
+  },
+  {
+    "province": "Marinduque",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.636687025813058
+  },
+  {
+    "province": "Masbate",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.31809153735562223
+  },
+  {
+    "province": "Metropolitan Manila",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5625070492463311
+  },
+  {
+    "province": "Misamis Occidental",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.625640505594525
+  },
+  {
+    "province": "Misamis Oriental",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.641819018197277
+  },
+  {
+    "province": "Mountain Province",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6228244686616843
+  },
+  {
+    "province": "Negros Occidental",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.5794331633943116
+  },
+  {
+    "province": "Negros Oriental",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.722831301431371
+  },
+  {
+    "province": "North Cotabato",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Northern Samar",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.6277404478373717
+  },
+  {
+    "province": "Nueva Ecija",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6396287488792111
+  },
+  {
+    "province": "Nueva Vizcaya",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6459312869046052
+  },
+  {
+    "province": "Nueva Vizcaya ",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5625070492463311
+  },
+  {
+    "province": "Occidental Mindoro",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Oriental Mindoro",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5160450176708428
+  },
+  {
+    "province": "Palawan",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5786642036895374
+  },
+  {
+    "province": "Pampanga",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6741076589480082
+  },
+  {
+    "province": "Pangasinan",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.6802682687727842
+  },
+  {
+    "province": "Quezon",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.7410051580230657
+  },
+  {
+    "province": "Quirino",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5940204188227024
+  },
+  {
+    "province": "Rizal",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5768931275522104
+  },
+  {
+    "province": "Romblon",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6603885590346765
+  },
+  {
+    "province": "Samar",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.658654786118974
+  },
+  {
+    "province": "Sarangani",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.8412499751545396
+  },
+  {
+    "province": "Siquijor",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5425148359502941
+  },
+  {
+    "province": "Sorsogon",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5522729747641536
+  },
+  {
+    "province": "South Cotabato",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6322927143043345
+  },
+  {
+    "province": "Southern Leyte",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.6280282328177129
+  },
+  {
+    "province": "Sultan Kudarat",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.849561341989553
+  },
+  {
+    "province": "Sulu",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.21745872129733068
+  },
+  {
+    "province": "Surigao Del Norte",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Surigao Del Sur",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Tarlac",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6586240221074353
+  },
+  {
+    "province": "Tawi-Tawi",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.1818070552023035
+  },
+  {
+    "province": "Zambales",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.99
+  },
+  {
+    "province": "Zamboanga Del Norte",
+    "cluster_id": 1,
+    "risk_level": "Medium",
+    "confidence_score": 0.5133083031218306
+  },
+  {
+    "province": "Zamboanga Del Sur",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.5925696054360327
+  },
+  {
+    "province": "Zamboanga Sibugay",
+    "cluster_id": 0,
+    "risk_level": "Low",
+    "confidence_score": 0.6192146352555321
+  }
+]
