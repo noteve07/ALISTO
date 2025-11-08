@@ -57,10 +57,18 @@ def extract_features_by_province(df):
         total_quakes = len(province_data)  # Total activity
         major_quakes = len(province_data[province_data['magnitude'] >= 3.0])  # Significant earthquakes (M≥3.0)
         
+        # Additional statistics
+        avg_magnitude = province_data['magnitude'].mean()
+        max_magnitude = province_data['magnitude'].max()
+        avg_depth = province_data['depth'].mean()
+        
         features_list.append({
             'province': province,
             'total_quakes': total_quakes,
             'major_quakes_m3plus': major_quakes,
+            'avg_magnitude': avg_magnitude,
+            'max_magnitude': max_magnitude,
+            'avg_depth': avg_depth,
         })
     
     return pd.DataFrame(features_list)
@@ -166,9 +174,65 @@ def map_clusters_to_risk_levels(provinces_features):
     
     return provinces_features, risk_mapping
 
+def export_results_to_csv(provinces_features, output_dir):
+    """Export clustering results to CSV files"""
+    # All provinces with full details
+    output_csv = os.path.join(output_dir, 'province_risk_clustering_results.csv')
+    
+    # Sort by total_quakes descending
+    export_df = provinces_features.sort_values('total_quakes', ascending=False).copy()
+    
+    # Select columns to export and reorder
+    columns_to_export = [
+        'province',
+        'risk_level',
+        'total_quakes',
+        'major_quakes_m3plus',
+        'avg_magnitude',
+        'max_magnitude',
+        'avg_depth',
+        'risk_cluster',
+        'is_outlier'
+    ]
+    
+    export_df_final = export_df[columns_to_export]
+    
+    # Round numeric columns for better readability
+    export_df_final['avg_magnitude'] = export_df_final['avg_magnitude'].round(2)
+    export_df_final['max_magnitude'] = export_df_final['max_magnitude'].round(2)
+    export_df_final['avg_depth'] = export_df_final['avg_depth'].round(2)
+    
+    export_df_final.to_csv(output_csv, index=False)
+    print(f"\n✓ Full results exported to: {output_csv}")
+    
+    # Export summary by risk level
+    summary_csv = os.path.join(output_dir, 'province_risk_clustering_summary.csv')
+    
+    summary_data = []
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            summary_data.append({
+                'Risk Level': risk_level,
+                'Number of Provinces': len(risk_data),
+                'Total Earthquakes (Sum)': int(risk_data['total_quakes'].sum()),
+                'Total Major Earthquakes (Sum)': int(risk_data['major_quakes_m3plus'].sum()),
+                'Avg Total Earthquakes': risk_data['total_quakes'].mean().round(2),
+                'Avg Major Earthquakes': risk_data['major_quakes_m3plus'].mean().round(2),
+                'Avg Magnitude': risk_data['avg_magnitude'].mean().round(2),
+                'Max Magnitude': risk_data['max_magnitude'].max().round(2),
+                'Avg Depth': risk_data['avg_depth'].mean().round(2),
+            })
+    
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(summary_csv, index=False)
+    print(f"✓ Summary exported to: {summary_csv}")
+    
+    return export_df_final, summary_df
+
 def main():
     print("="*70)
-    print("PROVINCE RISK CLUSTERING V6 (FILTERED MODEL + OUTLIER PREDICTION)")
+    print("PROVINCE RISK CLUSTERING V7 (WITH CSV EXPORT)")
     print("="*70)
     print("\nClustering Features:")
     print("1. total_quakes       - How active? (quantity)")
@@ -212,18 +276,18 @@ def main():
     
     # Display results
     print("\n" + "="*70)
-    print("RISK-BASED CLUSTERING RESULTS (V6 - WITH OUTLIER PREDICTION)")
+    print("RISK-BASED CLUSTERING RESULTS (V7 - WITH DETAILED OUTPUT)")
     print("="*70)
     
     for risk_level in ['Low', 'Medium']:
         risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
         if len(risk_data) > 0:
             print(f"\n{risk_level.upper()} RISK ({len(risk_data)} provinces):")
-            print(f"{'Province':<30} {'Total EQ':>10} {'Major EQ':>10} {'Is Outlier':>15}")
-            print("-" * 65)
+            print(f"{'Province':<30} {'Total EQ':>10} {'Major EQ':>10} {'Avg Mag':>10} {'Max Mag':>10} {'Is Outlier':>15}")
+            print("-" * 90)
             for _, row in risk_data.sort_values('total_quakes', ascending=False).iterrows():
                 outlier_mark = "YES (>2000)" if row['is_outlier'] else "No"
-                print(f"{row['province']:<30} {int(row['total_quakes']):>10} {int(row['major_quakes_m3plus']):>10} {outlier_mark:>15}")
+                print(f"{row['province']:<30} {int(row['total_quakes']):>10} {int(row['major_quakes_m3plus']):>10} {row['avg_magnitude']:>10.2f} {row['max_magnitude']:>10.2f} {outlier_mark:>15}")
     
     # Create visualizations
     fig = plt.figure(figsize=(16, 12))
@@ -326,24 +390,32 @@ def main():
     
     plt.tight_layout()
     
+    # Save outputs
+    output_dir = os.path.dirname(__file__)
+    
     # Save the plot
-    output_path = os.path.join(os.path.dirname(__file__), 'province_risk_clustering_v6.png')
+    output_path = os.path.join(output_dir, 'province_risk_clustering_v7.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     print(f"\n✓ Clustering visualization saved to: {output_path}")
     
     # Save the model and scaler
-    model_dir = os.path.dirname(__file__)
-    model_path = os.path.join(model_dir, 'province_risk_kmeans_model.joblib')
-    scaler_path = os.path.join(model_dir, 'province_risk_scaler.joblib')
-    cluster_mapping_path = os.path.join(model_dir, 'province_risk_cluster_mapping.joblib')
+    model_path = os.path.join(output_dir, 'province_risk_kmeans_model.joblib')
+    scaler_path = os.path.join(output_dir, 'province_risk_scaler.joblib')
+    cluster_mapping_path = os.path.join(output_dir, 'province_risk_cluster_mapping.joblib')
     
     joblib.dump(kmeans, model_path)
     joblib.dump(scaler, scaler_path)
     joblib.dump(cluster_to_risk, cluster_mapping_path)
     
-    print(f"\n✓ Model saved to: {model_path}")
+    print(f"✓ Model saved to: {model_path}")
     print(f"✓ Scaler saved to: {scaler_path}")
     print(f"✓ Cluster mapping saved to: {cluster_mapping_path}")
+    
+    # Export results to CSV
+    print("\n" + "="*70)
+    print("EXPORTING RESULTS TO CSV")
+    print("="*70)
+    export_results_to_csv(provinces_features, output_dir)
     
     plt.show()
 

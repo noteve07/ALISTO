@@ -5,8 +5,10 @@ import glob
 from tqdm import tqdm
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.preprocessing import StandardScaler
+from scipy.spatial import ConvexHull
 import numpy as np
 import joblib
+import json
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -57,10 +59,22 @@ def extract_features_by_province(df):
         total_quakes = len(province_data)  # Total activity
         major_quakes = len(province_data[province_data['magnitude'] >= 3.0])  # Significant earthquakes (M≥3.0)
         
+        # Additional statistics
+        avg_magnitude = province_data['magnitude'].mean()
+        max_magnitude = province_data['magnitude'].max()
+        min_magnitude = province_data['magnitude'].min()
+        avg_depth = province_data['depth'].mean()
+        max_depth = province_data['depth'].max()
+        
         features_list.append({
             'province': province,
             'total_quakes': total_quakes,
             'major_quakes_m3plus': major_quakes,
+            'avg_magnitude': avg_magnitude,
+            'max_magnitude': max_magnitude,
+            'min_magnitude': min_magnitude,
+            'avg_depth': avg_depth,
+            'max_depth': max_depth,
         })
     
     return pd.DataFrame(features_list)
@@ -166,9 +180,181 @@ def map_clusters_to_risk_levels(provinces_features):
     
     return provinces_features, risk_mapping
 
+def export_results_to_csv(provinces_features, output_dir):
+    """Export clustering results to CSV files"""
+    # All provinces with full details
+    output_csv = os.path.join(output_dir, 'province_risk_clustering_results.csv')
+    
+    # Sort by total_quakes descending
+    export_df = provinces_features.sort_values('total_quakes', ascending=False).copy()
+    
+    # Select columns to export and reorder
+    columns_to_export = [
+        'province',
+        'risk_level',
+        'total_quakes',
+        'major_quakes_m3plus',
+        'avg_magnitude',
+        'max_magnitude',
+        'min_magnitude',
+        'avg_depth',
+        'max_depth',
+        'risk_cluster',
+        'is_outlier'
+    ]
+    
+    export_df_final = export_df[columns_to_export]
+    
+    # Round numeric columns for better readability
+    export_df_final['avg_magnitude'] = export_df_final['avg_magnitude'].round(2)
+    export_df_final['max_magnitude'] = export_df_final['max_magnitude'].round(2)
+    export_df_final['min_magnitude'] = export_df_final['min_magnitude'].round(2)
+    export_df_final['avg_depth'] = export_df_final['avg_depth'].round(2)
+    export_df_final['max_depth'] = export_df_final['max_depth'].round(2)
+    
+    export_df_final.to_csv(output_csv, index=False)
+    print(f"\n✓ Full results exported to: {output_csv}")
+    
+    # Export summary by risk level
+    summary_csv = os.path.join(output_dir, 'province_risk_clustering_summary.csv')
+    
+    summary_data = []
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            summary_data.append({
+                'Risk Level': risk_level,
+                'Number of Provinces': len(risk_data),
+                'Total Earthquakes (Sum)': int(risk_data['total_quakes'].sum()),
+                'Total Major Earthquakes (Sum)': int(risk_data['major_quakes_m3plus'].sum()),
+                'Avg Total Earthquakes': risk_data['total_quakes'].mean().round(2),
+                'Avg Major Earthquakes': risk_data['major_quakes_m3plus'].mean().round(2),
+                'Avg Magnitude': risk_data['avg_magnitude'].mean().round(2),
+                'Max Magnitude': risk_data['max_magnitude'].max().round(2),
+                'Avg Depth': risk_data['avg_depth'].mean().round(2),
+            })
+    
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(summary_csv, index=False)
+    print(f"✓ Summary exported to: {summary_csv}")
+    
+    return export_df_final, summary_df
+
+def export_results_to_json(provinces_features, output_dir):
+    """Export clustering results to JSON files"""
+    # Full results as JSON
+    output_json = os.path.join(output_dir, 'province_risk_clustering_results.json')
+    
+    # Sort by total_quakes descending
+    export_df = provinces_features.sort_values('total_quakes', ascending=False).copy()
+    
+    # Convert to list of dicts
+    provinces_list = []
+    for idx, row in export_df.iterrows():
+        province_dict = {
+            'province': row['province'],
+            'risk_level': row['risk_level'],
+            'data': {
+                'total_earthquakes': int(row['total_quakes']),
+                'major_earthquakes_m3plus': int(row['major_quakes_m3plus']),
+                'average_magnitude': round(float(row['avg_magnitude']), 2),
+                'max_magnitude': round(float(row['max_magnitude']), 2),
+                'min_magnitude': round(float(row['min_magnitude']), 2),
+                'average_depth_km': round(float(row['avg_depth']), 2),
+                'max_depth_km': round(float(row['max_depth']), 2),
+            },
+            'clustering_info': {
+                'cluster_id': int(row['risk_cluster']),
+                'is_outlier': bool(row['is_outlier']),
+                'threshold_filter': 2000,
+            }
+        }
+        provinces_list.append(province_dict)
+    
+    full_json = {
+        'metadata': {
+            'total_provinces': len(provinces_list),
+            'clustering_algorithm': 'K-Means',
+            'n_clusters': 2,
+            'filter_threshold': 2000,
+            'features': ['total_quakes', 'major_quakes_m3plus'],
+        },
+        'provinces': provinces_list
+    }
+    
+    with open(output_json, 'w') as f:
+        json.dump(full_json, f, indent=2)
+    
+    print(f"\n✓ Full results exported to: {output_json}")
+    
+    # Summary as JSON
+    summary_json = os.path.join(output_dir, 'province_risk_clustering_summary.json')
+    
+    summary_data = {}
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            summary_data[risk_level] = {
+                'number_of_provinces': len(risk_data),
+                'province_names': risk_data['province'].tolist(),
+                'statistics': {
+                    'total_earthquakes_sum': int(risk_data['total_quakes'].sum()),
+                    'total_major_earthquakes_sum': int(risk_data['major_quakes_m3plus'].sum()),
+                    'avg_total_earthquakes': round(risk_data['total_quakes'].mean(), 2),
+                    'avg_major_earthquakes': round(risk_data['major_quakes_m3plus'].mean(), 2),
+                    'avg_magnitude': round(risk_data['avg_magnitude'].mean(), 2),
+                    'max_magnitude': round(risk_data['max_magnitude'].max(), 2),
+                    'avg_depth_km': round(risk_data['avg_depth'].mean(), 2),
+                }
+            }
+    
+    with open(summary_json, 'w') as f:
+        json.dump(summary_data, f, indent=2)
+    
+    print(f"✓ Summary exported to: {summary_json}")
+
+def draw_cluster_boundaries(ax, provinces_features, scaler, kmeans, risk_colors):
+    """Draw convex hull boundaries around clusters"""
+    
+    features = ['total_quakes', 'major_quakes_m3plus']
+    X = provinces_features[features].fillna(0).values
+    X_scaled = scaler.transform(X)
+    
+    # Get cluster assignments and risk levels
+    clusters = kmeans.predict(X_scaled)
+    
+    # Draw boundary for each cluster
+    for cluster_id in [0, 1]:
+        cluster_points_scaled = X_scaled[clusters == cluster_id]
+        cluster_points = X[clusters == cluster_id]
+        
+        if len(cluster_points) >= 3:
+            try:
+                # Get the risk level for this cluster
+                cluster_mask = (clusters == cluster_id)
+                risk_level = provinces_features[cluster_mask]['risk_level'].iloc[0]
+                color = risk_colors.get(risk_level, '#cccccc')
+                
+                # Compute convex hull
+                hull = ConvexHull(cluster_points_scaled)
+                
+                # Get hull vertices in original space
+                hull_vertices = cluster_points[hull.vertices]
+                
+                # Close the polygon
+                hull_vertices_closed = np.vstack([hull_vertices, hull_vertices[0]])
+                
+                # Draw polygon
+                ax.plot(hull_vertices_closed[:, 0], hull_vertices_closed[:, 1],
+                       color=color, linewidth=2.5, linestyle='--', alpha=0.7)
+                ax.fill(hull_vertices_closed[:, 0], hull_vertices_closed[:, 1],
+                       color=color, alpha=0.05)
+            except:
+                pass  # Skip if ConvexHull fails (e.g., collinear points)
+
 def main():
     print("="*70)
-    print("PROVINCE RISK CLUSTERING V6 (FILTERED MODEL + OUTLIER PREDICTION)")
+    print("PROVINCE RISK CLUSTERING V8 (JSON + CLUSTER BOUNDARIES)")
     print("="*70)
     print("\nClustering Features:")
     print("1. total_quakes       - How active? (quantity)")
@@ -212,18 +398,18 @@ def main():
     
     # Display results
     print("\n" + "="*70)
-    print("RISK-BASED CLUSTERING RESULTS (V6 - WITH OUTLIER PREDICTION)")
+    print("RISK-BASED CLUSTERING RESULTS (V8 - WITH JSON & BOUNDARIES)")
     print("="*70)
     
     for risk_level in ['Low', 'Medium']:
         risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
         if len(risk_data) > 0:
             print(f"\n{risk_level.upper()} RISK ({len(risk_data)} provinces):")
-            print(f"{'Province':<30} {'Total EQ':>10} {'Major EQ':>10} {'Is Outlier':>15}")
-            print("-" * 65)
+            print(f"{'Province':<30} {'Total EQ':>10} {'Major EQ':>10} {'Avg Mag':>10} {'Max Mag':>10} {'Is Outlier':>15}")
+            print("-" * 90)
             for _, row in risk_data.sort_values('total_quakes', ascending=False).iterrows():
                 outlier_mark = "YES (>2000)" if row['is_outlier'] else "No"
-                print(f"{row['province']:<30} {int(row['total_quakes']):>10} {int(row['major_quakes_m3plus']):>10} {outlier_mark:>15}")
+                print(f"{row['province']:<30} {int(row['total_quakes']):>10} {int(row['major_quakes_m3plus']):>10} {row['avg_magnitude']:>10.2f} {row['max_magnitude']:>10.2f} {outlier_mark:>15}")
     
     # Create visualizations
     fig = plt.figure(figsize=(16, 12))
@@ -252,28 +438,20 @@ def main():
     ax1.legend()
     ax1.grid(True, alpha=0.3)
     
-    # Plot 2: Total Quakes vs Major Quakes (with labels, showing which are outliers)
+    # Plot 2: Total Quakes vs Major Quakes (with labels, showing which are outliers + cluster boundaries)
     ax2 = fig.add_subplot(2, 2, 2)
+    
+    # Draw cluster boundaries first (so they appear behind)
+    draw_cluster_boundaries(ax2, provinces_features, scaler, kmeans, risk_colors)
+    
     for risk_level in ['Low', 'Medium']:
         data = provinces_features[provinces_features['risk_level'] == risk_level]
         if len(data) > 0:
-            # Separate outliers and normal points
-            outliers = data[data['is_outlier']]
-            normal = data[~data['is_outlier']]
-            
-            # Plot normal points
-            if len(normal) > 0:
-                ax2.scatter(normal['total_quakes'], normal['major_quakes_m3plus'],
-                           s=100, alpha=0.6, label=f'{risk_level} (< 2000)', 
-                           color=risk_colors[risk_level],
-                           edgecolor='black', linewidth=0.5)
-            
-            # Plot outliers with solid circle (lighter orange, dark gray border)
-            if len(outliers) > 0:
-                ax2.scatter(outliers['total_quakes'], outliers['major_quakes_m3plus'],
-                           s=120, alpha=0.7, label=f'{risk_level} outlier (≥ 2000)', 
-                           color='#fcc876', 
-                           edgecolor='#555555', linewidth=1.5)
+            # Plot ALL points with EXACTLY same styling (no difference at all)
+            ax2.scatter(data['total_quakes'], data['major_quakes_m3plus'],
+                       s=100, alpha=0.6, label=risk_level, 
+                       color=risk_colors[risk_level],
+                       edgecolor='black', linewidth=0.5)
             
             # Add province labels for clarity
             for _, row in data.iterrows():
@@ -287,8 +465,8 @@ def main():
     
     ax2.set_xlabel('Total Earthquake Count', fontsize=11, fontweight='bold')
     ax2.set_ylabel('Major Earthquake Count (M≥3.0)', fontsize=11, fontweight='bold')
-    ax2.set_title('ALL Provinces (orange dashed = outliers ≥ 2000)', fontsize=12, fontweight='bold')
-    ax2.legend()
+    ax2.set_title('ALL Provinces with Cluster Boundaries', fontsize=12, fontweight='bold')
+    ax2.legend(loc='upper left', fontsize=9)
     ax2.grid(True, alpha=0.3)
     
     # Plot 3: Distribution histogram
@@ -326,24 +504,38 @@ def main():
     
     plt.tight_layout()
     
+    # Save outputs
+    output_dir = os.path.dirname(__file__)
+    
     # Save the plot
-    output_path = os.path.join(os.path.dirname(__file__), 'province_risk_clustering_v6.png')
+    output_path = os.path.join(output_dir, 'province_risk_clustering_v8.png')
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     print(f"\n✓ Clustering visualization saved to: {output_path}")
     
     # Save the model and scaler
-    model_dir = os.path.dirname(__file__)
-    model_path = os.path.join(model_dir, 'province_risk_kmeans_model.joblib')
-    scaler_path = os.path.join(model_dir, 'province_risk_scaler.joblib')
-    cluster_mapping_path = os.path.join(model_dir, 'province_risk_cluster_mapping.joblib')
+    model_path = os.path.join(output_dir, 'province_risk_kmeans_model.joblib')
+    scaler_path = os.path.join(output_dir, 'province_risk_scaler.joblib')
+    cluster_mapping_path = os.path.join(output_dir, 'province_risk_cluster_mapping.joblib')
     
     joblib.dump(kmeans, model_path)
     joblib.dump(scaler, scaler_path)
     joblib.dump(cluster_to_risk, cluster_mapping_path)
     
-    print(f"\n✓ Model saved to: {model_path}")
+    print(f"✓ Model saved to: {model_path}")
     print(f"✓ Scaler saved to: {scaler_path}")
     print(f"✓ Cluster mapping saved to: {cluster_mapping_path}")
+    
+    # Export results to CSV
+    print("\n" + "="*70)
+    print("EXPORTING RESULTS TO CSV")
+    print("="*70)
+    export_results_to_csv(provinces_features, output_dir)
+    
+    # Export results to JSON
+    print("\n" + "="*70)
+    print("EXPORTING RESULTS TO JSON")
+    print("="*70)
+    export_results_to_json(provinces_features, output_dir)
     
     plt.show()
 
