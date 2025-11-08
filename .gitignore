@@ -69,3 +69,6 @@ pnpm-debug.log*
 .DS_Store
 *.log
 backend/app/__pycache__/main.cpython-313.pyc
+backend/app/services/chatbot/context/earthquakes.txt
+backend/app/services/chatbot/context/master.txt
+backend/app/services/chatbot/context/volcanic_advisories.txt
