@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Province Boundaries Map</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        
+        #info-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+            display: none;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .province-info {
+            margin: 0;
+        }
+        
+        .province-info h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .province-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border: 1px solid #333;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+            width: 100%;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div id="controls">
+        <h3>Map Controls</h3>
+        <button onclick="toggleBoundaries()">Toggle Boundaries</button>
+        <button onclick="fitToBounds()">Fit to All Provinces</button>
+        <button onclick="clearAll()">Clear All</button>
+        
+        <div class="legend">
+            <h4>Legend</h4>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #3388ff;"></div>
+                <span>Province Boundary</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: green;"></div>
+                <span>Selected Province</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="info-panel">
+        <div class="province-info">
+            <h3 id="province-name">Province Name</h3>
+            <p><strong>ID:</strong> <span id="province-id">-</span></p>
+        </div>
+    </div>
+    
+    <div id="loading">Loading province data...</div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Global variables
+        let map;
+        let provinceData = [];
+        let boundaryLayers = [];
+        let isBoundariesVisible = true;
+
+        // Initialize the map
+        function initMap() {
+            // Create map centered on a default location (you may want to adjust this)
+            map = L.map('map').setView([0, 0], 2);
+            
+            // Add base tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Close info panel when clicking on map
+            map.on('click', function() {
+                document.getElementById('info-panel').style.display = 'none';
+            });
+            
+            // Load province data
+            loadProvinceData();
+        }
+
+        // Load province data from JSON file
+        async function loadProvinceData() {
+            try {
+                const response = await fetch('province_boundaries.json');
+                provinceData = await response.json();
+                
+                document.getElementById('loading').style.display = 'none';
+                
+                if (provinceData.length === 0) {
+                    alert('No province data found!');
+                    return;
+                }
+                
+                // Draw all provinces
+                drawAllProvinces();
+                fitToBounds();
+                
+            } catch (error) {
+                console.error('Error loading province data:', error);
+                document.getElementById('loading').innerHTML = 'Error loading data. Please check console.';
+            }
+        }
+
+        // Draw all provinces on the map
+        function drawAllProvinces() {
+            provinceData.forEach(province => {
+                drawProvince(province);
+            });
+        }
+
+        // Draw a single province
+        function drawProvince(province) {
+            // Draw boundary if available
+            if (province.boundary) {
+                const boundaryLayer = createBoundaryLayer(province);
+                boundaryLayers.push(boundaryLayer);
+                
+                if (isBoundariesVisible) {
+                    boundaryLayer.addTo(map);
+                }
+            }
+        }
+
+        // Create boundary layer for a province
+        function createBoundaryLayer(province) {
+            let latLngs = [];
+            
+            // Handle different geometry types
+            if (Array.isArray(province.boundary[0][0][0])) {
+                // MultiPolygon - multiple polygons
+                province.boundary.forEach(polygon => {
+                    polygon.forEach(ring => {
+                        const ringLatLngs = ring.map(coord => [coord[1], coord[0]]); // Convert [lng, lat] to [lat, lng]
+                        latLngs.push(ringLatLngs);
+                    });
+                });
+            } else {
+                // Polygon - single polygon
+                province.boundary.forEach(ring => {
+                    const ringLatLngs = ring.map(coord => [coord[1], coord[0]]); // Convert [lng, lat] to [lat, lng]
+                    latLngs.push(ringLatLngs);
+                });
+            }
+            
+            // Create polygon layer
+            const polygon = L.polygon(latLngs, {
+                color: '#3388ff',
+                weight: 2,
+                fillColor: '#3388ff',
+                fillOpacity: 0.1,
+                className: `province-boundary province-${province.province_id}`
+            });
+            
+            // Add popup and click event
+            polygon.bindPopup(`
+                <strong>${province.province_name}</strong><br>
+                ID: ${province.province_id}<br>
+                <button onclick="highlightProvince(${province.province_id})">Highlight</button>
+            `);
+            
+            polygon.on('click', function(e) {
+                showProvinceInfo(province);
+                highlightProvince(province.province_id);
+                e.originalEvent.stopPropagation();
+            });
+            
+            return polygon;
+        }
+
+        // Show province information in the info panel
+        function showProvinceInfo(province) {
+            const infoPanel = document.getElementById('info-panel');
+            document.getElementById('province-name').textContent = province.province_name;
+            document.getElementById('province-id').textContent = province.province_id;
+            
+            infoPanel.style.display = 'block';
+        }
+
+        // Highlight a specific province
+        function highlightProvince(provinceId) {
+            // Reset all boundaries to default style
+            boundaryLayers.forEach(layer => {
+                layer.setStyle({
+                    color: '#3388ff',
+                    weight: 2,
+                    fillOpacity: 0.1
+                });
+            });
+            
+            // Find and highlight the selected province
+            const selectedLayers = boundaryLayers.filter(layer => 
+                layer.options.className.includes(`province-${provinceId}`)
+            );
+            
+            selectedLayers.forEach(layer => {
+                layer.setStyle({
+                    color: 'green',
+                    weight: 4,
+                    fillOpacity: 0.3
+                });
+                layer.bringToFront();
+            });
+        }
+
+        // Toggle boundaries visibility
+        function toggleBoundaries() {
+            isBoundariesVisible = !isBoundariesVisible;
+            boundaryLayers.forEach(layer => {
+                if (isBoundariesVisible) {
+                    map.addLayer(layer);
+                } else {
+                    map.removeLayer(layer);
+                }
+            });
+        }
+
+        // Fit map to show all provinces
+        function fitToBounds() {
+            if (boundaryLayers.length === 0) return;
+            
+            const group = new L.featureGroup(boundaryLayers);
+            map.fitBounds(group.getBounds(), { padding: [20, 20] });
+        }
+
+        // Clear all layers from map
+        function clearAll() {
+            boundaryLayers.forEach(layer => map.removeLayer(layer));
+            document.getElementById('info-panel').style.display = 'none';
+        }
+
+        // Initialize map when page loads
+        document.addEventListener('DOMContentLoaded', initMap);
+    </script>
+</body>
+</html>

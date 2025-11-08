@@ -1,0 +1,94 @@
+{
+  "model_info": {
+    "algorithm": "K-Means",
+    "n_clusters": 2,
+    "features": [
+      "total_quakes",
+      "major_quakes_m3plus",
+      "nearest_fault_km"
+    ],
+    "filter_threshold": 2000,
+    "random_state": 42
+  },
+  "clustering_quality_metrics": {
+    "silhouette_score": 0.407,
+    "davies_bouldin_index": 1.0447,
+    "calinski_harabasz_score": 24.7916,
+    "inertia": 103.8859,
+    "description": {
+      "silhouette_score": "Range [-1, 1]. Higher is better. Measures how similar points are to their own cluster vs other clusters.",
+      "davies_bouldin_index": "Lower is better. Measures average similarity between clusters.",
+      "calinski_harabasz_score": "Higher is better. Ratio of between-cluster to within-cluster dispersion.",
+      "inertia": "Lower is better. Sum of squared distances to nearest cluster center."
+    }
+  },
+  "cluster_statistics": {
+    "cluster_0": {
+      "size": 32,
+      "avg_total_quakes": 3111.69,
+      "avg_major_quakes": 732.28,
+      "avg_fault_distance_km": 1.49,
+      "std_total_quakes": 3311.43,
+      "std_major_quakes": 1108.42,
+      "std_fault_distance_km": 8.41
+    },
+    "cluster_1": {
+      "size": 51,
+      "avg_total_quakes": 260.04,
+      "avg_major_quakes": 40.39,
+      "avg_fault_distance_km": 9.95,
+      "std_total_quakes": 214.03,
+      "std_major_quakes": 43.26,
+      "std_fault_distance_km": 22.42
+    }
+  },
+  "risk_level_statistics": {
+    "Low": {
+      "count": 51,
+      "percentage": 61.45,
+      "avg_total_quakes": 260.04,
+      "avg_major_quakes": 40.39,
+      "avg_fault_distance_km": 9.95,
+      "min_total_quakes": 1,
+      "max_total_quakes": 770
+    },
+    "Medium": {
+      "count": 32,
+      "percentage": 38.55,
+      "avg_total_quakes": 3111.69,
+      "avg_major_quakes": 732.28,
+      "avg_fault_distance_km": 1.49,
+      "min_total_quakes": 977,
+      "max_total_quakes": 15980
+    }
+  },
+  "training_statistics": {
+    "training_set_size": 70,
+    "outlier_set_size": 13,
+    "total_provinces": 83,
+    "training_percentage": 84.34
+  },
+  "feature_statistics": {
+    "total_quakes": {
+      "min": 1,
+      "max": 15980,
+      "mean": 1359.47,
+      "median": 444.0,
+      "std": 2474.55
+    },
+    "major_quakes_m3plus": {
+      "min": 0,
+      "max": 5065,
+      "mean": 307.14,
+      "median": 66.0,
+      "std": 761.84
+    },
+    "nearest_fault_km": {
+      "min": 0.0,
+      "max": 100.25,
+      "mean": 6.68,
+      "median": 0.0,
+      "std": 18.72
+    }
+  }
+}

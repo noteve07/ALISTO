@@ -1,0 +1,1945 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Province Features Dataset</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                max-height: 100vh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .header {
+                background: rgba(255, 255, 255, 0.95);
+                padding: 15px 20px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                backdrop-filter: blur(10px);
+            }
+            
+            .header h1 {
+                color: #333;
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
+            
+            .stats {
+                display: flex;
+                gap: 20px;
+                font-size: 14px;
+                color: #666;
+            }
+            
+            .stats span {
+                background: #e3f2fd;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-weight: 500;
+            }
+            
+            .table-container {
+                flex: 1;
+                overflow: auto;
+                margin: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                backdrop-filter: blur(10px);
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 13px;
+            }
+            
+            thead {
+                position: sticky;
+                top: 0;
+                background: linear-gradient(135deg, #4CAF50, #45a049);
+                z-index: 10;
+            }
+            
+            th {
+                color: white;
+                font-weight: 600;
+                padding: 12px 8px;
+                text-align: center;
+                border-bottom: 2px solid #45a049;
+                white-space: nowrap;
+                font-size: 12px;
+            }
+            
+            td {
+                padding: 8px;
+                text-align: center;
+                border-bottom: 1px solid #e0e0e0;
+                transition: background-color 0.2s;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #f8f9fa;
+            }
+            
+            tr:hover {
+                background-color: #e8f5e8 !important;
+                transform: scale(1.01);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            
+            .province {
+                text-align: left !important;
+                font-weight: 500;
+                color: #2c3e50;
+                max-width: 200px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .number {
+                font-family: 'Courier New', monospace;
+                font-weight: 500;
+            }
+            
+            .high-activity {
+                background: linear-gradient(45deg, #ff6b6b, #ee5a52) !important;
+                color: white;
+            }
+            
+            .medium-activity {
+                background: linear-gradient(45deg, #feca57, #ff9ff3) !important;
+                color: white;
+            }
+            
+            .low-activity {
+                background: linear-gradient(45deg, #48dbfb, #0abde3) !important;
+                color: white;
+            }
+            
+            .magnitude-high {
+                color: #d32f2f;
+                font-weight: bold;
+            }
+            
+            .magnitude-medium {
+                color: #f57c00;
+                font-weight: bold;
+            }
+            
+            .magnitude-low {
+                color: #388e3c;
+                font-weight: bold;
+            }
+            
+            ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                border-radius: 4px;
+            }
+            
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(45deg, #5a67d8, #6b46c1);
+            }
+            
+            @media (max-width: 768px) {
+                .stats {
+                    flex-direction: column;
+                    gap: 5px;
+                }
+                
+                th, td {
+                    padding: 6px 4px;
+                    font-size: 11px;
+                }
+                
+                .header h1 {
+                    font-size: 20px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>🌍 Province Earthquake Features</h1>
+            <div class="stats">
+                <span>📊 142 Provinces</span>
+                <span>🌍 112,836 Total Earthquakes</span>
+                <span>⚡ 25,493 Major (M≥3.0)</span>
+                <span>📈 Avg: 795/province</span>
+                <span>💪 Max Mag: 7.4</span>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🏆 Rank</th>
+                        <th>📍 Province</th>
+                        <th>🌍 Total<br>Earthquakes</th>
+                        <th>⚡ Major EQ<br>(M≥3.0)</th>
+                        <th>📊 Avg<br>Magnitude</th>
+                        <th>💪 Max<br>Magnitude</th>
+                        <th>📉 Min<br>Magnitude</th>
+                        <th>🌊 Avg Depth<br>(km)</th>
+                        <th>🏔️ Max Depth<br>(km)</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr class="high-activity">
+                        <td class="number"><strong>1</strong></td>
+                        <td class="province" title="Surigao Del Sur">Surigao Del Sur</td>
+                        <td class="number">15,905</td>
+                        <td class="number">3,395</td>
+                        <td class="number">2.47</td>
+                        <td class="number magnitude-high">7.40</td>
+                        <td class="number">1.10</td>
+                        <td class="number">21.6</td>
+                        <td class="number">209.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>2</strong></td>
+                        <td class="province" title="Davao Oriental">Davao Oriental</td>
+                        <td class="number">9,080</td>
+                        <td class="number">3,161</td>
+                        <td class="number">2.78</td>
+                        <td class="number magnitude-high">7.40</td>
+                        <td class="number">1.00</td>
+                        <td class="number">42.6</td>
+                        <td class="number">292.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>3</strong></td>
+                        <td class="province" title="Surigao Del Norte">Surigao Del Norte</td>
+                        <td class="number">8,094</td>
+                        <td class="number">1,710</td>
+                        <td class="number">2.47</td>
+                        <td class="number magnitude-high">6.20</td>
+                        <td class="number">1.20</td>
+                        <td class="number">20.6</td>
+                        <td class="number">238.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>4</strong></td>
+                        <td class="province" title="Davao Occidental">Davao Occidental</td>
+                        <td class="number">7,787</td>
+                        <td class="number">4,652</td>
+                        <td class="number">3.20</td>
+                        <td class="number magnitude-high">7.10</td>
+                        <td class="number">1.20</td>
+                        <td class="number">70.0</td>
+                        <td class="number">667.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>5</strong></td>
+                        <td class="province" title="Batangas">Batangas</td>
+                        <td class="number">5,793</td>
+                        <td class="number">620</td>
+                        <td class="number">2.18</td>
+                        <td class="number magnitude-high">6.60</td>
+                        <td class="number">1.20</td>
+                        <td class="number">78.2</td>
+                        <td class="number">1068.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>6</strong></td>
+                        <td class="province" title="Occidental Mindoro">Occidental Mindoro</td>
+                        <td class="number">5,399</td>
+                        <td class="number">831</td>
+                        <td class="number">2.38</td>
+                        <td class="number magnitude-high">6.40</td>
+                        <td class="number">1.00</td>
+                        <td class="number">30.5</td>
+                        <td class="number">310.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>7</strong></td>
+                        <td class="province" title="Cebu">Cebu</td>
+                        <td class="number">3,289</td>
+                        <td class="number">356</td>
+                        <td class="number">2.21</td>
+                        <td class="number magnitude-high">6.90</td>
+                        <td class="number">1.00</td>
+                        <td class="number">15.6</td>
+                        <td class="number">85.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>8</strong></td>
+                        <td class="province" title="Cagayan">Cagayan</td>
+                        <td class="number">3,123</td>
+                        <td class="number">811</td>
+                        <td class="number">2.60</td>
+                        <td class="number magnitude-high">6.30</td>
+                        <td class="number">1.30</td>
+                        <td class="number">18.9</td>
+                        <td class="number">224.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>9</strong></td>
+                        <td class="province" title="Abra">Abra</td>
+                        <td class="number">2,854</td>
+                        <td class="number">341</td>
+                        <td class="number">2.28</td>
+                        <td class="number magnitude-high">7.00</td>
+                        <td class="number">1.00</td>
+                        <td class="number">13.8</td>
+                        <td class="number">195.0</td>
+                    </tr>
+        
+                    <tr class="high-activity">
+                        <td class="number"><strong>10</strong></td>
+                        <td class="province" title="Eastern Samar">Eastern Samar</td>
+                        <td class="number">2,668</td>
+                        <td class="number">905</td>
+                        <td class="number">2.76</td>
+                        <td class="number magnitude-high">6.50</td>
+                        <td class="number">1.40</td>
+                        <td class="number">19.9</td>
+                        <td class="number">193.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>11</strong></td>
+                        <td class="province" title="Ilocos Norte">Ilocos Norte</td>
+                        <td class="number">2,593</td>
+                        <td class="number">504</td>
+                        <td class="number">2.45</td>
+                        <td class="number magnitude-medium">5.70</td>
+                        <td class="number">1.10</td>
+                        <td class="number">18.4</td>
+                        <td class="number">333.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>12</strong></td>
+                        <td class="province" title="Zambales">Zambales</td>
+                        <td class="number">2,352</td>
+                        <td class="number">323</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-high">6.10</td>
+                        <td class="number">1.10</td>
+                        <td class="number">27.6</td>
+                        <td class="number">172.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>13</strong></td>
+                        <td class="province" title="Cotabato">Cotabato</td>
+                        <td class="number">2,301</td>
+                        <td class="number">441</td>
+                        <td class="number">2.49</td>
+                        <td class="number magnitude-high">6.60</td>
+                        <td class="number">1.40</td>
+                        <td class="number">21.6</td>
+                        <td class="number">422.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>14</strong></td>
+                        <td class="province" title="Masbate">Masbate</td>
+                        <td class="number">1,869</td>
+                        <td class="number">486</td>
+                        <td class="number">2.60</td>
+                        <td class="number magnitude-high">6.60</td>
+                        <td class="number">1.20</td>
+                        <td class="number">11.1</td>
+                        <td class="number">123.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>15</strong></td>
+                        <td class="province" title="Ilocos Sur">Ilocos Sur</td>
+                        <td class="number">1,825</td>
+                        <td class="number">363</td>
+                        <td class="number">2.50</td>
+                        <td class="number magnitude-medium">5.10</td>
+                        <td class="number">1.20</td>
+                        <td class="number">20.3</td>
+                        <td class="number">151.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>16</strong></td>
+                        <td class="province" title="Negros Occidental">Negros Occidental</td>
+                        <td class="number">1,766</td>
+                        <td class="number">276</td>
+                        <td class="number">2.44</td>
+                        <td class="number magnitude-medium">5.10</td>
+                        <td class="number">1.00</td>
+                        <td class="number">18.2</td>
+                        <td class="number">142.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>17</strong></td>
+                        <td class="province" title="Southern Leyte">Southern Leyte</td>
+                        <td class="number">1,696</td>
+                        <td class="number">243</td>
+                        <td class="number">2.36</td>
+                        <td class="number magnitude-medium">5.80</td>
+                        <td class="number">1.20</td>
+                        <td class="number">17.8</td>
+                        <td class="number">209.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>18</strong></td>
+                        <td class="province" title="Davao Del Sur">Davao Del Sur</td>
+                        <td class="number">1,683</td>
+                        <td class="number">412</td>
+                        <td class="number">2.61</td>
+                        <td class="number magnitude-high">6.90</td>
+                        <td class="number">1.40</td>
+                        <td class="number">18.2</td>
+                        <td class="number">247.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>19</strong></td>
+                        <td class="province" title="Agusan Del Sur">Agusan Del Sur</td>
+                        <td class="number">1,593</td>
+                        <td class="number">188</td>
+                        <td class="number">2.31</td>
+                        <td class="number magnitude-medium">5.30</td>
+                        <td class="number">1.10</td>
+                        <td class="number">24.9</td>
+                        <td class="number">175.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>20</strong></td>
+                        <td class="province" title="Leyte">Leyte</td>
+                        <td class="number">1,580</td>
+                        <td class="number">286</td>
+                        <td class="number">2.46</td>
+                        <td class="number magnitude-medium">5.80</td>
+                        <td class="number">1.20</td>
+                        <td class="number">11.5</td>
+                        <td class="number">188.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>21</strong></td>
+                        <td class="province" title="Quezon">Quezon</td>
+                        <td class="number">1,534</td>
+                        <td class="number">235</td>
+                        <td class="number">2.34</td>
+                        <td class="number magnitude-medium">5.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">13.4</td>
+                        <td class="number">135.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>22</strong></td>
+                        <td class="province" title="Sarangani">Sarangani</td>
+                        <td class="number">1,459</td>
+                        <td class="number">253</td>
+                        <td class="number">2.41</td>
+                        <td class="number magnitude-high">6.10</td>
+                        <td class="number">1.30</td>
+                        <td class="number">34.9</td>
+                        <td class="number">572.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>23</strong></td>
+                        <td class="province" title="Sultan Kudarat">Sultan Kudarat</td>
+                        <td class="number">1,387</td>
+                        <td class="number">270</td>
+                        <td class="number">2.50</td>
+                        <td class="number magnitude-high">7.10</td>
+                        <td class="number">1.20</td>
+                        <td class="number">38.2</td>
+                        <td class="number">686.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>24</strong></td>
+                        <td class="province" title="Negros Oriental">Negros Oriental</td>
+                        <td class="number">1,349</td>
+                        <td class="number">214</td>
+                        <td class="number">2.43</td>
+                        <td class="number magnitude-medium">4.90</td>
+                        <td class="number">1.00</td>
+                        <td class="number">16.5</td>
+                        <td class="number">132.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>25</strong></td>
+                        <td class="province" title="Davao De Oro">Davao De Oro</td>
+                        <td class="number">1,248</td>
+                        <td class="number">128</td>
+                        <td class="number">2.26</td>
+                        <td class="number magnitude-high">6.00</td>
+                        <td class="number">1.20</td>
+                        <td class="number">20.6</td>
+                        <td class="number">165.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>26</strong></td>
+                        <td class="province" title="Aurora">Aurora</td>
+                        <td class="number">1,242</td>
+                        <td class="number">137</td>
+                        <td class="number">2.26</td>
+                        <td class="number magnitude-medium">5.10</td>
+                        <td class="number">1.20</td>
+                        <td class="number">16.4</td>
+                        <td class="number">102.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>27</strong></td>
+                        <td class="province" title="Isabela">Isabela</td>
+                        <td class="number">1,203</td>
+                        <td class="number">235</td>
+                        <td class="number">2.48</td>
+                        <td class="number magnitude-medium">5.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">24.7</td>
+                        <td class="number">158.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>28</strong></td>
+                        <td class="province" title="Northern Samar">Northern Samar</td>
+                        <td class="number">1,179</td>
+                        <td class="number">309</td>
+                        <td class="number">2.59</td>
+                        <td class="number magnitude-medium">5.70</td>
+                        <td class="number">1.20</td>
+                        <td class="number">25.3</td>
+                        <td class="number">175.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>29</strong></td>
+                        <td class="province" title="Pangasinan">Pangasinan</td>
+                        <td class="number">1,165</td>
+                        <td class="number">230</td>
+                        <td class="number">2.46</td>
+                        <td class="number magnitude-medium">5.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">27.6</td>
+                        <td class="number">211.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>30</strong></td>
+                        <td class="province" title="Bohol">Bohol</td>
+                        <td class="number">1,064</td>
+                        <td class="number">90</td>
+                        <td class="number">2.23</td>
+                        <td class="number magnitude-medium">5.90</td>
+                        <td class="number">1.20</td>
+                        <td class="number">21.0</td>
+                        <td class="number">587.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>31</strong></td>
+                        <td class="province" title="Zamboanga Del Norte">Zamboanga Del Norte</td>
+                        <td class="number">1,028</td>
+                        <td class="number">169</td>
+                        <td class="number">2.34</td>
+                        <td class="number magnitude-medium">5.40</td>
+                        <td class="number">1.20</td>
+                        <td class="number">24.5</td>
+                        <td class="number">176.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>32</strong></td>
+                        <td class="province" title="Batanes">Batanes</td>
+                        <td class="number">995</td>
+                        <td class="number">550</td>
+                        <td class="number">3.11</td>
+                        <td class="number magnitude-high">6.70</td>
+                        <td class="number">1.40</td>
+                        <td class="number">29.1</td>
+                        <td class="number">219.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>33</strong></td>
+                        <td class="province" title="Bukidnon">Bukidnon</td>
+                        <td class="number">976</td>
+                        <td class="number">179</td>
+                        <td class="number">2.50</td>
+                        <td class="number magnitude-medium">5.90</td>
+                        <td class="number">1.30</td>
+                        <td class="number">10.6</td>
+                        <td class="number">121.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>34</strong></td>
+                        <td class="province" title="Camarines Sur">Camarines Sur</td>
+                        <td class="number">768</td>
+                        <td class="number">113</td>
+                        <td class="number">2.29</td>
+                        <td class="number magnitude-medium">4.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">14.7</td>
+                        <td class="number">102.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>35</strong></td>
+                        <td class="province" title="Oriental Mindoro">Oriental Mindoro</td>
+                        <td class="number">691</td>
+                        <td class="number">60</td>
+                        <td class="number">2.19</td>
+                        <td class="number magnitude-medium">5.10</td>
+                        <td class="number">1.00</td>
+                        <td class="number">19.2</td>
+                        <td class="number">181.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>36</strong></td>
+                        <td class="province" title="Agusan Del Norte">Agusan Del Norte</td>
+                        <td class="number">680</td>
+                        <td class="number">122</td>
+                        <td class="number">2.44</td>
+                        <td class="number magnitude-medium">5.80</td>
+                        <td class="number">1.30</td>
+                        <td class="number">18.1</td>
+                        <td class="number">117.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>37</strong></td>
+                        <td class="province" title="La Union">La Union</td>
+                        <td class="number">635</td>
+                        <td class="number">99</td>
+                        <td class="number">2.38</td>
+                        <td class="number magnitude-medium">5.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">28.1</td>
+                        <td class="number">113.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>38</strong></td>
+                        <td class="province" title="Catanduanes">Catanduanes</td>
+                        <td class="number">610</td>
+                        <td class="number">183</td>
+                        <td class="number">2.68</td>
+                        <td class="number magnitude-high">6.20</td>
+                        <td class="number">1.30</td>
+                        <td class="number">23.0</td>
+                        <td class="number">235.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>39</strong></td>
+                        <td class="province" title="Dinagat Islands">Dinagat Islands</td>
+                        <td class="number">555</td>
+                        <td class="number">75</td>
+                        <td class="number">2.34</td>
+                        <td class="number magnitude-medium">5.70</td>
+                        <td class="number">1.30</td>
+                        <td class="number">44.7</td>
+                        <td class="number">214.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>40</strong></td>
+                        <td class="province" title="Antique">Antique</td>
+                        <td class="number">529</td>
+                        <td class="number">173</td>
+                        <td class="number">2.76</td>
+                        <td class="number magnitude-medium">5.10</td>
+                        <td class="number">1.30</td>
+                        <td class="number">15.2</td>
+                        <td class="number">137.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>41</strong></td>
+                        <td class="province" title="Camarines Norte">Camarines Norte</td>
+                        <td class="number">487</td>
+                        <td class="number">93</td>
+                        <td class="number">2.49</td>
+                        <td class="number magnitude-medium">5.30</td>
+                        <td class="number">1.30</td>
+                        <td class="number">14.1</td>
+                        <td class="number">121.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>42</strong></td>
+                        <td class="province" title="Zamboanga Del Sur">Zamboanga Del Sur</td>
+                        <td class="number">486</td>
+                        <td class="number">65</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-medium">4.90</td>
+                        <td class="number">1.20</td>
+                        <td class="number">21.5</td>
+                        <td class="number">122.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>43</strong></td>
+                        <td class="province" title="Lanao Del Sur">Lanao Del Sur</td>
+                        <td class="number">435</td>
+                        <td class="number">51</td>
+                        <td class="number">2.33</td>
+                        <td class="number magnitude-high">6.00</td>
+                        <td class="number">1.10</td>
+                        <td class="number">12.3</td>
+                        <td class="number">619.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>44</strong></td>
+                        <td class="province" title="Sorsogon">Sorsogon</td>
+                        <td class="number">424</td>
+                        <td class="number">108</td>
+                        <td class="number">2.53</td>
+                        <td class="number magnitude-medium">5.40</td>
+                        <td class="number">1.10</td>
+                        <td class="number">28.5</td>
+                        <td class="number">198.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>45</strong></td>
+                        <td class="province" title="South Cotabato">South Cotabato</td>
+                        <td class="number">422</td>
+                        <td class="number">46</td>
+                        <td class="number">2.27</td>
+                        <td class="number magnitude-medium">5.00</td>
+                        <td class="number">1.30</td>
+                        <td class="number">26.9</td>
+                        <td class="number">414.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>46</strong></td>
+                        <td class="province" title="Nueva Vizcaya">Nueva Vizcaya</td>
+                        <td class="number">384</td>
+                        <td class="number">39</td>
+                        <td class="number">2.23</td>
+                        <td class="number magnitude-medium">4.40</td>
+                        <td class="number">1.30</td>
+                        <td class="number">18.5</td>
+                        <td class="number">96.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>47</strong></td>
+                        <td class="province" title="Bataan">Bataan</td>
+                        <td class="number">373</td>
+                        <td class="number">31</td>
+                        <td class="number">2.16</td>
+                        <td class="number magnitude-medium">4.60</td>
+                        <td class="number">1.30</td>
+                        <td class="number">78.3</td>
+                        <td class="number">210.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>48</strong></td>
+                        <td class="province" title="Biliran">Biliran</td>
+                        <td class="number">358</td>
+                        <td class="number">80</td>
+                        <td class="number">2.60</td>
+                        <td class="number magnitude-medium">5.00</td>
+                        <td class="number">1.40</td>
+                        <td class="number">11.0</td>
+                        <td class="number">99.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>49</strong></td>
+                        <td class="province" title="Apayao">Apayao</td>
+                        <td class="number">333</td>
+                        <td class="number">24</td>
+                        <td class="number">2.12</td>
+                        <td class="number magnitude-medium">4.40</td>
+                        <td class="number">1.30</td>
+                        <td class="number">25.7</td>
+                        <td class="number">119.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>50</strong></td>
+                        <td class="province" title="Benguet">Benguet</td>
+                        <td class="number">326</td>
+                        <td class="number">30</td>
+                        <td class="number">2.18</td>
+                        <td class="number magnitude-medium">4.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">19.6</td>
+                        <td class="number">127.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>51</strong></td>
+                        <td class="province" title="Davao Del Norte">Davao Del Norte</td>
+                        <td class="number">322</td>
+                        <td class="number">56</td>
+                        <td class="number">2.48</td>
+                        <td class="number magnitude-medium">4.90</td>
+                        <td class="number">1.30</td>
+                        <td class="number">25.1</td>
+                        <td class="number">170.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>52</strong></td>
+                        <td class="province" title="Iloilo">Iloilo</td>
+                        <td class="number">310</td>
+                        <td class="number">54</td>
+                        <td class="number">2.48</td>
+                        <td class="number magnitude-medium">4.90</td>
+                        <td class="number">1.30</td>
+                        <td class="number">17.8</td>
+                        <td class="number">101.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>53</strong></td>
+                        <td class="province" title="Samar">Samar</td>
+                        <td class="number">292</td>
+                        <td class="number">37</td>
+                        <td class="number">2.32</td>
+                        <td class="number magnitude-medium">5.20</td>
+                        <td class="number">1.20</td>
+                        <td class="number">37.3</td>
+                        <td class="number">233.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>54</strong></td>
+                        <td class="province" title="Maguindanao">Maguindanao</td>
+                        <td class="number">289</td>
+                        <td class="number">51</td>
+                        <td class="number">2.49</td>
+                        <td class="number magnitude-high">6.40</td>
+                        <td class="number">1.50</td>
+                        <td class="number">35.1</td>
+                        <td class="number">636.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>55</strong></td>
+                        <td class="province" title="Albay">Albay</td>
+                        <td class="number">276</td>
+                        <td class="number">46</td>
+                        <td class="number">2.36</td>
+                        <td class="number magnitude-medium">4.80</td>
+                        <td class="number">1.30</td>
+                        <td class="number">22.4</td>
+                        <td class="number">107.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>56</strong></td>
+                        <td class="province" title="Ifugao">Ifugao</td>
+                        <td class="number">226</td>
+                        <td class="number">17</td>
+                        <td class="number">2.05</td>
+                        <td class="number magnitude-low">3.80</td>
+                        <td class="number">1.30</td>
+                        <td class="number">24.2</td>
+                        <td class="number">192.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>57</strong></td>
+                        <td class="province" title="Nueva Ecija">Nueva Ecija</td>
+                        <td class="number">220</td>
+                        <td class="number">13</td>
+                        <td class="number">2.05</td>
+                        <td class="number magnitude-medium">4.70</td>
+                        <td class="number">1.20</td>
+                        <td class="number">23.7</td>
+                        <td class="number">186.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>58</strong></td>
+                        <td class="province" title="Tarlac">Tarlac</td>
+                        <td class="number">218</td>
+                        <td class="number">31</td>
+                        <td class="number">2.24</td>
+                        <td class="number magnitude-medium">5.70</td>
+                        <td class="number">1.20</td>
+                        <td class="number">54.2</td>
+                        <td class="number">191.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>59</strong></td>
+                        <td class="province" title="Romblon">Romblon</td>
+                        <td class="number">209</td>
+                        <td class="number">43</td>
+                        <td class="number">2.47</td>
+                        <td class="number magnitude-medium">4.80</td>
+                        <td class="number">1.20</td>
+                        <td class="number">14.7</td>
+                        <td class="number">201.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>60</strong></td>
+                        <td class="province" title="Maguindanao Del Norte">Maguindanao Del Norte</td>
+                        <td class="number">185</td>
+                        <td class="number">24</td>
+                        <td class="number">2.31</td>
+                        <td class="number magnitude-medium">4.90</td>
+                        <td class="number">1.30</td>
+                        <td class="number">23.9</td>
+                        <td class="number">604.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>61</strong></td>
+                        <td class="province" title="Mountain Province">Mountain Province</td>
+                        <td class="number">180</td>
+                        <td class="number">6</td>
+                        <td class="number">2.02</td>
+                        <td class="number magnitude-medium">4.50</td>
+                        <td class="number">1.20</td>
+                        <td class="number">27.3</td>
+                        <td class="number">131.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>62</strong></td>
+                        <td class="province" title="Palawan">Palawan</td>
+                        <td class="number">177</td>
+                        <td class="number">25</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-medium">5.10</td>
+                        <td class="number">1.50</td>
+                        <td class="number">25.4</td>
+                        <td class="number">161.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>63</strong></td>
+                        <td class="province" title="Marinduque">Marinduque</td>
+                        <td class="number">176</td>
+                        <td class="number">16</td>
+                        <td class="number">2.27</td>
+                        <td class="number magnitude-low">3.80</td>
+                        <td class="number">1.20</td>
+                        <td class="number">13.4</td>
+                        <td class="number">58.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>64</strong></td>
+                        <td class="province" title="Guimaras">Guimaras</td>
+                        <td class="number">169</td>
+                        <td class="number">13</td>
+                        <td class="number">2.27</td>
+                        <td class="number magnitude-medium">4.00</td>
+                        <td class="number">1.20</td>
+                        <td class="number">19.0</td>
+                        <td class="number">88.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>65</strong></td>
+                        <td class="province" title="North Cotabato">North Cotabato</td>
+                        <td class="number">167</td>
+                        <td class="number">41</td>
+                        <td class="number">2.63</td>
+                        <td class="number magnitude-medium">5.60</td>
+                        <td class="number">1.50</td>
+                        <td class="number">17.7</td>
+                        <td class="number">96.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>66</strong></td>
+                        <td class="province" title="Zamboanga Sibugay">Zamboanga Sibugay</td>
+                        <td class="number">148</td>
+                        <td class="number">8</td>
+                        <td class="number">1.96</td>
+                        <td class="number magnitude-medium">5.00</td>
+                        <td class="number">1.20</td>
+                        <td class="number">26.4</td>
+                        <td class="number">205.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>67</strong></td>
+                        <td class="province" title="Kalinga">Kalinga</td>
+                        <td class="number">143</td>
+                        <td class="number">15</td>
+                        <td class="number">2.26</td>
+                        <td class="number magnitude-medium">4.00</td>
+                        <td class="number">1.20</td>
+                        <td class="number">26.8</td>
+                        <td class="number">183.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>68</strong></td>
+                        <td class="province" title="Misamis Oriental">Misamis Oriental</td>
+                        <td class="number">135</td>
+                        <td class="number">36</td>
+                        <td class="number">2.61</td>
+                        <td class="number magnitude-medium">4.70</td>
+                        <td class="number">1.40</td>
+                        <td class="number">17.9</td>
+                        <td class="number">168.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>69</strong></td>
+                        <td class="province" title="Dinagat">Dinagat</td>
+                        <td class="number">133</td>
+                        <td class="number">23</td>
+                        <td class="number">2.45</td>
+                        <td class="number magnitude-medium">5.40</td>
+                        <td class="number">1.50</td>
+                        <td class="number">35.1</td>
+                        <td class="number">182.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>70</strong></td>
+                        <td class="province" title="Pampanga">Pampanga</td>
+                        <td class="number">118</td>
+                        <td class="number">13</td>
+                        <td class="number">2.27</td>
+                        <td class="number magnitude-low">3.80</td>
+                        <td class="number">1.40</td>
+                        <td class="number">43.1</td>
+                        <td class="number">175.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>71</strong></td>
+                        <td class="province" title="Laguna">Laguna</td>
+                        <td class="number">112</td>
+                        <td class="number">8</td>
+                        <td class="number">2.00</td>
+                        <td class="number magnitude-low">3.70</td>
+                        <td class="number">1.00</td>
+                        <td class="number">19.9</td>
+                        <td class="number">70.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>72</strong></td>
+                        <td class="province" title="Surigao del Norte">Surigao del Norte</td>
+                        <td class="number">106</td>
+                        <td class="number">32</td>
+                        <td class="number">2.77</td>
+                        <td class="number magnitude-medium">5.00</td>
+                        <td class="number">1.80</td>
+                        <td class="number">15.6</td>
+                        <td class="number">99.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>73</strong></td>
+                        <td class="province" title="Quirino">Quirino</td>
+                        <td class="number">79</td>
+                        <td class="number">4</td>
+                        <td class="number">2.06</td>
+                        <td class="number magnitude-medium">4.90</td>
+                        <td class="number">1.40</td>
+                        <td class="number">24.4</td>
+                        <td class="number">108.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>74</strong></td>
+                        <td class="province" title="Compostela Valley">Compostela Valley</td>
+                        <td class="number">75</td>
+                        <td class="number">19</td>
+                        <td class="number">2.64</td>
+                        <td class="number magnitude-medium">4.40</td>
+                        <td class="number">1.80</td>
+                        <td class="number">17.9</td>
+                        <td class="number">58.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>75</strong></td>
+                        <td class="province" title="Surigao del Sur">Surigao del Sur</td>
+                        <td class="number">74</td>
+                        <td class="number">23</td>
+                        <td class="number">2.70</td>
+                        <td class="number magnitude-medium">4.00</td>
+                        <td class="number">1.70</td>
+                        <td class="number">30.0</td>
+                        <td class="number">123.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>76</strong></td>
+                        <td class="province" title="Lanao Del Norte">Lanao Del Norte</td>
+                        <td class="number">70</td>
+                        <td class="number">7</td>
+                        <td class="number">2.28</td>
+                        <td class="number magnitude-medium">4.10</td>
+                        <td class="number">1.40</td>
+                        <td class="number">26.7</td>
+                        <td class="number">615.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>77</strong></td>
+                        <td class="province" title="Siquijor">Siquijor</td>
+                        <td class="number">67</td>
+                        <td class="number">7</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-medium">4.40</td>
+                        <td class="number">1.40</td>
+                        <td class="number">30.8</td>
+                        <td class="number">550.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>78</strong></td>
+                        <td class="province" title="Cavite">Cavite</td>
+                        <td class="number">57</td>
+                        <td class="number">15</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-medium">4.00</td>
+                        <td class="number">1.40</td>
+                        <td class="number">28.2</td>
+                        <td class="number">202.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>79</strong></td>
+                        <td class="province" title="Bulacan">Bulacan</td>
+                        <td class="number">49</td>
+                        <td class="number">4</td>
+                        <td class="number">1.99</td>
+                        <td class="number magnitude-low">3.30</td>
+                        <td class="number">1.10</td>
+                        <td class="number">21.3</td>
+                        <td class="number">40.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>80</strong></td>
+                        <td class="province" title="Maguindanao Del Sur">Maguindanao Del Sur</td>
+                        <td class="number">43</td>
+                        <td class="number">1</td>
+                        <td class="number">2.09</td>
+                        <td class="number magnitude-low">3.80</td>
+                        <td class="number">1.40</td>
+                        <td class="number">20.1</td>
+                        <td class="number">139.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>81</strong></td>
+                        <td class="province" title="Sulu">Sulu</td>
+                        <td class="number">43</td>
+                        <td class="number">32</td>
+                        <td class="number">3.49</td>
+                        <td class="number magnitude-medium">4.80</td>
+                        <td class="number">2.10</td>
+                        <td class="number">149.5</td>
+                        <td class="number">621.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>82</strong></td>
+                        <td class="province" title="Western Samar">Western Samar</td>
+                        <td class="number">40</td>
+                        <td class="number">3</td>
+                        <td class="number">2.36</td>
+                        <td class="number magnitude-low">3.60</td>
+                        <td class="number">1.70</td>
+                        <td class="number">26.5</td>
+                        <td class="number">107.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>83</strong></td>
+                        <td class="province" title="Misamis Occidental">Misamis Occidental</td>
+                        <td class="number">39</td>
+                        <td class="number">5</td>
+                        <td class="number">2.32</td>
+                        <td class="number magnitude-medium">4.20</td>
+                        <td class="number">1.50</td>
+                        <td class="number">14.6</td>
+                        <td class="number">105.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>84</strong></td>
+                        <td class="province" title="Rizal">Rizal</td>
+                        <td class="number">39</td>
+                        <td class="number">1</td>
+                        <td class="number">1.94</td>
+                        <td class="number magnitude-low">3.90</td>
+                        <td class="number">1.10</td>
+                        <td class="number">23.9</td>
+                        <td class="number">47.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>85</strong></td>
+                        <td class="province" title="Aklan">Aklan</td>
+                        <td class="number">35</td>
+                        <td class="number">9</td>
+                        <td class="number">2.46</td>
+                        <td class="number magnitude-medium">4.00</td>
+                        <td class="number">1.40</td>
+                        <td class="number">15.6</td>
+                        <td class="number">40.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>86</strong></td>
+                        <td class="province" title="Basilan">Basilan</td>
+                        <td class="number">31</td>
+                        <td class="number">5</td>
+                        <td class="number">2.41</td>
+                        <td class="number magnitude-low">3.80</td>
+                        <td class="number">1.50</td>
+                        <td class="number">31.3</td>
+                        <td class="number">72.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>87</strong></td>
+                        <td class="province" title="Camiguin">Camiguin</td>
+                        <td class="number">28</td>
+                        <td class="number">4</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-medium">4.00</td>
+                        <td class="number">1.70</td>
+                        <td class="number">17.9</td>
+                        <td class="number">45.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>88</strong></td>
+                        <td class="province" title="Capiz">Capiz</td>
+                        <td class="number">22</td>
+                        <td class="number">2</td>
+                        <td class="number">2.55</td>
+                        <td class="number magnitude-low">3.70</td>
+                        <td class="number">1.80</td>
+                        <td class="number">17.9</td>
+                        <td class="number">48.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>89</strong></td>
+                        <td class="province" title="Tawi-tawi">Tawi-tawi</td>
+                        <td class="number">21</td>
+                        <td class="number">21</td>
+                        <td class="number">4.33</td>
+                        <td class="number magnitude-medium">4.80</td>
+                        <td class="number">3.00</td>
+                        <td class="number">274.5</td>
+                        <td class="number">635.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>90</strong></td>
+                        <td class="province" title="Agusan del Norte">Agusan del Norte</td>
+                        <td class="number">20</td>
+                        <td class="number">3</td>
+                        <td class="number">2.42</td>
+                        <td class="number magnitude-low">3.30</td>
+                        <td class="number">1.80</td>
+                        <td class="number">16.9</td>
+                        <td class="number">33.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>91</strong></td>
+                        <td class="province" title="Agusan del Sur">Agusan del Sur</td>
+                        <td class="number">16</td>
+                        <td class="number">1</td>
+                        <td class="number">2.67</td>
+                        <td class="number magnitude-medium">4.60</td>
+                        <td class="number">2.00</td>
+                        <td class="number">23.4</td>
+                        <td class="number">68.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>92</strong></td>
+                        <td class="province" title="Zamboanga del Norte">Zamboanga del Norte</td>
+                        <td class="number">12</td>
+                        <td class="number">4</td>
+                        <td class="number">3.21</td>
+                        <td class="number magnitude-medium">5.50</td>
+                        <td class="number">1.90</td>
+                        <td class="number">26.2</td>
+                        <td class="number">94.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>93</strong></td>
+                        <td class="province" title="Zamboanga del Sur">Zamboanga del Sur</td>
+                        <td class="number">10</td>
+                        <td class="number">1</td>
+                        <td class="number">2.39</td>
+                        <td class="number magnitude-low">3.30</td>
+                        <td class="number">2.00</td>
+                        <td class="number">20.8</td>
+                        <td class="number">33.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>94</strong></td>
+                        <td class="province" title="Lanao del Sur">Lanao del Sur</td>
+                        <td class="number">9</td>
+                        <td class="number">4</td>
+                        <td class="number">2.97</td>
+                        <td class="number magnitude-medium">5.00</td>
+                        <td class="number">1.90</td>
+                        <td class="number">112.8</td>
+                        <td class="number">588.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>95</strong></td>
+                        <td class="province" title="Cataduanes">Cataduanes</td>
+                        <td class="number">7</td>
+                        <td class="number">0</td>
+                        <td class="number">2.47</td>
+                        <td class="number magnitude-low">2.90</td>
+                        <td class="number">2.00</td>
+                        <td class="number">22.3</td>
+                        <td class="number">51.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>96</strong></td>
+                        <td class="province" title="Davao del Norte">Davao del Norte</td>
+                        <td class="number">5</td>
+                        <td class="number">2</td>
+                        <td class="number">2.52</td>
+                        <td class="number magnitude-low">3.50</td>
+                        <td class="number">2.00</td>
+                        <td class="number">15.8</td>
+                        <td class="number">36.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>97</strong></td>
+                        <td class="province" title="Compostella Valley">Compostella Valley</td>
+                        <td class="number">5</td>
+                        <td class="number">0</td>
+                        <td class="number">2.28</td>
+                        <td class="number magnitude-low">2.60</td>
+                        <td class="number">2.00</td>
+                        <td class="number">5.0</td>
+                        <td class="number">13.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>98</strong></td>
+                        <td class="province" title="Davao del Sur">Davao del Sur</td>
+                        <td class="number">4</td>
+                        <td class="number">0</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-low">2.70</td>
+                        <td class="number">1.90</td>
+                        <td class="number">19.0</td>
+                        <td class="number">26.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>99</strong></td>
+                        <td class="province" title="Masbate (Ticao Island">Masbate (Ticao Island</td>
+                        <td class="number">3</td>
+                        <td class="number">0</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-low">2.40</td>
+                        <td class="number">2.20</td>
+                        <td class="number">29.3</td>
+                        <td class="number">50.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>100</strong></td>
+                        <td class="province" title=" Davao De Oro"> Davao De Oro</td>
+                        <td class="number">3</td>
+                        <td class="number">0</td>
+                        <td class="number">2.47</td>
+                        <td class="number magnitude-low">2.80</td>
+                        <td class="number">2.10</td>
+                        <td class="number">31.7</td>
+                        <td class="number">48.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>101</strong></td>
+                        <td class="province" title="Easterm Samar">Easterm Samar</td>
+                        <td class="number">2</td>
+                        <td class="number">2</td>
+                        <td class="number">3.45</td>
+                        <td class="number magnitude-low">3.50</td>
+                        <td class="number">3.40</td>
+                        <td class="number">11.0</td>
+                        <td class="number">13.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>102</strong></td>
+                        <td class="province" title="South Cotobato">South Cotobato</td>
+                        <td class="number">2</td>
+                        <td class="number">0</td>
+                        <td class="number">1.90</td>
+                        <td class="number magnitude-low">2.30</td>
+                        <td class="number">1.50</td>
+                        <td class="number">27.5</td>
+                        <td class="number">30.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>103</strong></td>
+                        <td class="province" title="(Iloilo">(Iloilo</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.20</td>
+                        <td class="number magnitude-low">2.20</td>
+                        <td class="number">2.20</td>
+                        <td class="number">59.0</td>
+                        <td class="number">59.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>104</strong></td>
+                        <td class="province" title="Agusan De Sur">Agusan De Sur</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.10</td>
+                        <td class="number magnitude-low">2.10</td>
+                        <td class="number">2.10</td>
+                        <td class="number">33.0</td>
+                        <td class="number">33.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>105</strong></td>
+                        <td class="province" title=" Occidental Mindoro "> Occidental Mindoro </td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-low">2.40</td>
+                        <td class="number">2.40</td>
+                        <td class="number">3.0</td>
+                        <td class="number">3.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>106</strong></td>
+                        <td class="province" title=" Bukidnon "> Bukidnon </td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-low">2.40</td>
+                        <td class="number">2.40</td>
+                        <td class="number">10.0</td>
+                        <td class="number">10.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>107</strong></td>
+                        <td class="province" title=" Davao Occidental"> Davao Occidental</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">1.90</td>
+                        <td class="number magnitude-low">1.90</td>
+                        <td class="number">1.90</td>
+                        <td class="number">17.0</td>
+                        <td class="number">17.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>108</strong></td>
+                        <td class="province" title=" Occidental Mindoro"> Occidental Mindoro</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-low">2.30</td>
+                        <td class="number">2.30</td>
+                        <td class="number">32.0</td>
+                        <td class="number">32.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>109</strong></td>
+                        <td class="province" title=" Surigao Del Norte"> Surigao Del Norte</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-low">2.30</td>
+                        <td class="number">2.30</td>
+                        <td class="number">29.0</td>
+                        <td class="number">29.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>110</strong></td>
+                        <td class="province" title="Batanagas">Batanagas</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-low">2.40</td>
+                        <td class="number">2.40</td>
+                        <td class="number">75.0</td>
+                        <td class="number">75.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>111</strong></td>
+                        <td class="province" title="Lanao del Norte">Lanao del Norte</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.50</td>
+                        <td class="number magnitude-low">2.50</td>
+                        <td class="number">2.50</td>
+                        <td class="number">16.0</td>
+                        <td class="number">16.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>112</strong></td>
+                        <td class="province" title="Lanao Del Nortel">Lanao Del Nortel</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.20</td>
+                        <td class="number magnitude-low">3.20</td>
+                        <td class="number">3.20</td>
+                        <td class="number">9.0</td>
+                        <td class="number">9.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>113</strong></td>
+                        <td class="province" title="Island Garden City of Samal (Davao Del Norte">Island Garden City of Samal (Davao Del Norte</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.90</td>
+                        <td class="number magnitude-low">2.90</td>
+                        <td class="number">2.90</td>
+                        <td class="number">28.0</td>
+                        <td class="number">28.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>114</strong></td>
+                        <td class="province" title="La union">La union</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.50</td>
+                        <td class="number magnitude-low">2.50</td>
+                        <td class="number">2.50</td>
+                        <td class="number">26.0</td>
+                        <td class="number">26.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>115</strong></td>
+                        <td class="province" title="Davao de Oro">Davao de Oro</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.20</td>
+                        <td class="number magnitude-low">2.20</td>
+                        <td class="number">2.20</td>
+                        <td class="number">43.0</td>
+                        <td class="number">43.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>116</strong></td>
+                        <td class="province" title="Eastren Samar">Eastren Samar</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">4.60</td>
+                        <td class="number magnitude-medium">4.60</td>
+                        <td class="number">4.60</td>
+                        <td class="number">33.0</td>
+                        <td class="number">33.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>117</strong></td>
+                        <td class="province" title="General Luna">General Luna</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.10</td>
+                        <td class="number magnitude-low">2.10</td>
+                        <td class="number">2.10</td>
+                        <td class="number">22.0</td>
+                        <td class="number">22.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>118</strong></td>
+                        <td class="province" title="Eatern Samar">Eatern Samar</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.90</td>
+                        <td class="number magnitude-low">2.90</td>
+                        <td class="number">2.90</td>
+                        <td class="number">12.0</td>
+                        <td class="number">12.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>119</strong></td>
+                        <td class="province" title="Davao Orientall">Davao Orientall</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.10</td>
+                        <td class="number magnitude-low">2.10</td>
+                        <td class="number">2.10</td>
+                        <td class="number">27.0</td>
+                        <td class="number">27.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>120</strong></td>
+                        <td class="province" title="Davao Occidentall">Davao Occidentall</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.60</td>
+                        <td class="number magnitude-low">3.60</td>
+                        <td class="number">3.60</td>
+                        <td class="number">120.0</td>
+                        <td class="number">120.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>121</strong></td>
+                        <td class="province" title="Davao Orinetal">Davao Orinetal</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.80</td>
+                        <td class="number magnitude-low">2.80</td>
+                        <td class="number">2.80</td>
+                        <td class="number">15.0</td>
+                        <td class="number">15.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>122</strong></td>
+                        <td class="province" title="CamarinesSur">CamarinesSur</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">1.40</td>
+                        <td class="number magnitude-low">1.40</td>
+                        <td class="number">1.40</td>
+                        <td class="number">13.0</td>
+                        <td class="number">13.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>123</strong></td>
+                        <td class="province" title="Camarines Surl">Camarines Surl</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.00</td>
+                        <td class="number magnitude-low">3.00</td>
+                        <td class="number">3.00</td>
+                        <td class="number">8.0</td>
+                        <td class="number">8.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>124</strong></td>
+                        <td class="province" title="Negros Occedental">Negros Occedental</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.10</td>
+                        <td class="number magnitude-low">2.10</td>
+                        <td class="number">2.10</td>
+                        <td class="number">20.0</td>
+                        <td class="number">20.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>125</strong></td>
+                        <td class="province" title="National Capital Region">National Capital Region</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">1.10</td>
+                        <td class="number magnitude-low">1.10</td>
+                        <td class="number">1.10</td>
+                        <td class="number">25.0</td>
+                        <td class="number">25.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>126</strong></td>
+                        <td class="province" title="Northen Samar">Northen Samar</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-low">2.30</td>
+                        <td class="number">2.30</td>
+                        <td class="number">50.0</td>
+                        <td class="number">50.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>127</strong></td>
+                        <td class="province" title="Occ.mindoro">Occ.mindoro</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">1.80</td>
+                        <td class="number magnitude-low">1.80</td>
+                        <td class="number">1.80</td>
+                        <td class="number">30.0</td>
+                        <td class="number">30.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>128</strong></td>
+                        <td class="province" title="Occidental">Occidental</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.80</td>
+                        <td class="number magnitude-low">3.80</td>
+                        <td class="number">3.80</td>
+                        <td class="number">23.0</td>
+                        <td class="number">23.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>129</strong></td>
+                        <td class="province" title="Nuevq Ecija">Nuevq Ecija</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.70</td>
+                        <td class="number magnitude-low">2.70</td>
+                        <td class="number">2.70</td>
+                        <td class="number">56.0</td>
+                        <td class="number">56.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>130</strong></td>
+                        <td class="province" title="Nueva Vizcaya ">Nueva Vizcaya </td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-low">2.40</td>
+                        <td class="number">2.40</td>
+                        <td class="number">6.0</td>
+                        <td class="number">6.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>131</strong></td>
+                        <td class="province" title="Oriemtal Mindoro">Oriemtal Mindoro</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.40</td>
+                        <td class="number magnitude-low">3.40</td>
+                        <td class="number">3.40</td>
+                        <td class="number">8.0</td>
+                        <td class="number">8.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>132</strong></td>
+                        <td class="province" title="Oriental">Oriental</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.40</td>
+                        <td class="number magnitude-low">2.40</td>
+                        <td class="number">2.40</td>
+                        <td class="number">15.0</td>
+                        <td class="number">15.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>133</strong></td>
+                        <td class="province" title="Saranggani">Saranggani</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.30</td>
+                        <td class="number magnitude-low">2.30</td>
+                        <td class="number">2.30</td>
+                        <td class="number">20.0</td>
+                        <td class="number">20.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>134</strong></td>
+                        <td class="province" title="San Isidro">San Isidro</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.70</td>
+                        <td class="number magnitude-low">3.70</td>
+                        <td class="number">3.70</td>
+                        <td class="number">10.0</td>
+                        <td class="number">10.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>135</strong></td>
+                        <td class="province" title="Surigao De Norte">Surigao De Norte</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.70</td>
+                        <td class="number magnitude-low">2.70</td>
+                        <td class="number">2.70</td>
+                        <td class="number">13.0</td>
+                        <td class="number">13.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>136</strong></td>
+                        <td class="province" title="Suquijor">Suquijor</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.10</td>
+                        <td class="number magnitude-low">2.10</td>
+                        <td class="number">2.10</td>
+                        <td class="number">21.0</td>
+                        <td class="number">21.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>137</strong></td>
+                        <td class="province" title="Saragani">Saragani</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.70</td>
+                        <td class="number magnitude-low">3.70</td>
+                        <td class="number">3.70</td>
+                        <td class="number">32.0</td>
+                        <td class="number">32.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>138</strong></td>
+                        <td class="province" title="S.leyte">S.leyte</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.90</td>
+                        <td class="number magnitude-low">2.90</td>
+                        <td class="number">2.90</td>
+                        <td class="number">29.0</td>
+                        <td class="number">29.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>139</strong></td>
+                        <td class="province" title="San Mariano">San Mariano</td>
+                        <td class="number">1</td>
+                        <td class="number">0</td>
+                        <td class="number">2.90</td>
+                        <td class="number magnitude-low">2.90</td>
+                        <td class="number">2.90</td>
+                        <td class="number">17.0</td>
+                        <td class="number">17.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>140</strong></td>
+                        <td class="province" title="Sutan Kudarat">Sutan Kudarat</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.50</td>
+                        <td class="number magnitude-low">3.50</td>
+                        <td class="number">3.50</td>
+                        <td class="number">1.0</td>
+                        <td class="number">1.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>141</strong></td>
+                        <td class="province" title="Surigao de Sur">Surigao de Sur</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.10</td>
+                        <td class="number magnitude-low">3.10</td>
+                        <td class="number">3.10</td>
+                        <td class="number">76.0</td>
+                        <td class="number">76.0</td>
+                    </tr>
+        
+                    <tr class="">
+                        <td class="number"><strong>142</strong></td>
+                        <td class="province" title="SurigaoDel Norte">SurigaoDel Norte</td>
+                        <td class="number">1</td>
+                        <td class="number">1</td>
+                        <td class="number">3.00</td>
+                        <td class="number magnitude-low">3.00</td>
+                        <td class="number">3.00</td>
+                        <td class="number">13.0</td>
+                        <td class="number">13.0</td>
+                    </tr>
+        
+                </tbody>
+            </table>
+        </div>
+        
+        <script>
+            // Add smooth scrolling and dynamic highlighting
+            document.addEventListener('DOMContentLoaded', function() {
+                const rows = document.querySelectorAll('tbody tr');
+                
+                // Highlight top performers
+                rows.forEach((row, index) => {
+                    if (index < 3) {
+                        const rankCell = row.querySelector('td:first-child');
+                        rankCell.innerHTML = `�${index === 0 ? '🏅' : index === 1 ? '🥈' : '🥉'} <strong>${index + 1}</strong>`;
+                    }
+                });
+                
+                // Add click to highlight functionality
+                rows.forEach(row => {
+                    row.addEventListener('click', function() {
+                        rows.forEach(r => r.style.outline = 'none');
+                        this.style.outline = '3px solid #4CAF50';
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    });
+                });
+            });
+        </script>
+    </body>
+    </html>
+    

@@ -1,0 +1,412 @@
+[
+  {
+    "province_id": 1,
+    "province_name": "Abra",
+    "nearest_fault_distance_km": 1.139
+  },
+  {
+    "province_id": 2,
+    "province_name": "Agusan del Norte",
+    "nearest_fault_distance_km": 13.665
+  },
+  {
+    "province_id": 3,
+    "province_name": "Agusan del Sur",
+    "nearest_fault_distance_km": 8.341
+  },
+  {
+    "province_id": 4,
+    "province_name": "Aklan",
+    "nearest_fault_distance_km": 21.249
+  },
+  {
+    "province_id": 5,
+    "province_name": "Albay",
+    "nearest_fault_distance_km": 11.0
+  },
+  {
+    "province_id": 6,
+    "province_name": "Antique",
+    "nearest_fault_distance_km": 8.075
+  },
+  {
+    "province_id": 7,
+    "province_name": "Apayao",
+    "nearest_fault_distance_km": 3.927
+  },
+  {
+    "province_id": 8,
+    "province_name": "Aurora",
+    "nearest_fault_distance_km": 31.81
+  },
+  {
+    "province_id": 9,
+    "province_name": "Basilan",
+    "nearest_fault_distance_km": 100.4
+  },
+  {
+    "province_id": 10,
+    "province_name": "Bataan",
+    "nearest_fault_distance_km": 46.519
+  },
+  {
+    "province_id": 11,
+    "province_name": "Batanes",
+    "nearest_fault_distance_km": 55.704
+  },
+  {
+    "province_id": 12,
+    "province_name": "Batangas",
+    "nearest_fault_distance_km": 0.029
+  },
+  {
+    "province_id": 14,
+    "province_name": "Biliran",
+    "nearest_fault_distance_km": 3.816
+  },
+  {
+    "province_id": 16,
+    "province_name": "Bukidnon",
+    "nearest_fault_distance_km": 54.366
+  },
+  {
+    "province_id": 18,
+    "province_name": "Cagayan",
+    "nearest_fault_distance_km": 18.494
+  },
+  {
+    "province_id": 20,
+    "province_name": "Camarines Sur",
+    "nearest_fault_distance_km": 2.689
+  },
+  {
+    "province_id": 22,
+    "province_name": "Capiz",
+    "nearest_fault_distance_km": 64.663
+  },
+  {
+    "province_id": 24,
+    "province_name": "Cavite",
+    "nearest_fault_distance_km": 47.059
+  },
+  {
+    "province_id": 26,
+    "province_name": "Compostela Valley",
+    "nearest_fault_distance_km": 5.254
+  },
+  {
+    "province_id": 28,
+    "province_name": "Davao del Sur",
+    "nearest_fault_distance_km": 46.419
+  },
+  {
+    "province_id": 30,
+    "province_name": "Dinagat Islands",
+    "nearest_fault_distance_km": 26.609
+  },
+  {
+    "province_id": 32,
+    "province_name": "Guimaras",
+    "nearest_fault_distance_km": 46.675
+  },
+  {
+    "province_id": 34,
+    "province_name": "Ilocos Norte",
+    "nearest_fault_distance_km": 9.107
+  },
+  {
+    "province_id": 36,
+    "province_name": "Iloilo",
+    "nearest_fault_distance_km": 48.31
+  },
+  {
+    "province_id": 13,
+    "province_name": "Benguet",
+    "nearest_fault_distance_km": 16.767
+  },
+  {
+    "province_id": 15,
+    "province_name": "Bohol",
+    "nearest_fault_distance_km": 21.105
+  },
+  {
+    "province_id": 17,
+    "province_name": "Bulacan",
+    "nearest_fault_distance_km": 10.634
+  },
+  {
+    "province_id": 19,
+    "province_name": "Camarines Norte",
+    "nearest_fault_distance_km": 52.389
+  },
+  {
+    "province_id": 21,
+    "province_name": "Camiguin",
+    "nearest_fault_distance_km": 42.795
+  },
+  {
+    "province_id": 23,
+    "province_name": "Catanduanes",
+    "nearest_fault_distance_km": 97.802
+  },
+  {
+    "province_id": 25,
+    "province_name": "Cebu",
+    "nearest_fault_distance_km": 21.802
+  },
+  {
+    "province_id": 27,
+    "province_name": "Davao del Norte",
+    "nearest_fault_distance_km": 36.417
+  },
+  {
+    "province_id": 29,
+    "province_name": "Davao Oriental",
+    "nearest_fault_distance_km": 23.282
+  },
+  {
+    "province_id": 31,
+    "province_name": "Eastern Samar",
+    "nearest_fault_distance_km": 64.847
+  },
+  {
+    "province_id": 33,
+    "province_name": "Ifugao",
+    "nearest_fault_distance_km": 33.161
+  },
+  {
+    "province_id": 35,
+    "province_name": "Ilocos Sur",
+    "nearest_fault_distance_km": 3.124
+  },
+  {
+    "province_id": 37,
+    "province_name": "Isabela",
+    "nearest_fault_distance_km": 8.953
+  },
+  {
+    "province_id": 39,
+    "province_name": "La Union",
+    "nearest_fault_distance_km": 5.21
+  },
+  {
+    "province_id": 41,
+    "province_name": "Lanao del Norte",
+    "nearest_fault_distance_km": 8.173
+  },
+  {
+    "province_id": 43,
+    "province_name": "Leyte",
+    "nearest_fault_distance_km": 31.811
+  },
+  {
+    "province_id": 45,
+    "province_name": "Marinduque",
+    "nearest_fault_distance_km": 11.189
+  },
+  {
+    "province_id": 47,
+    "province_name": "Metropolitan Manila",
+    "nearest_fault_distance_km": 7.545
+  },
+  {
+    "province_id": 49,
+    "province_name": "Misamis Oriental",
+    "nearest_fault_distance_km": 34.911
+  },
+  {
+    "province_id": 51,
+    "province_name": "Negros Occidental",
+    "nearest_fault_distance_km": 55.192
+  },
+  {
+    "province_id": 53,
+    "province_name": "North Cotabato",
+    "nearest_fault_distance_km": 54.054
+  },
+  {
+    "province_id": 55,
+    "province_name": "Nueva Ecija",
+    "nearest_fault_distance_km": 29.232
+  },
+  {
+    "province_id": 57,
+    "province_name": "Occidental Mindoro",
+    "nearest_fault_distance_km": 19.608
+  },
+  {
+    "province_id": 59,
+    "province_name": "Palawan",
+    "nearest_fault_distance_km": 255.019
+  },
+  {
+    "province_id": 61,
+    "province_name": "Pangasinan",
+    "nearest_fault_distance_km": 35.099
+  },
+  {
+    "province_id": 38,
+    "province_name": "Kalinga",
+    "nearest_fault_distance_km": 4.263
+  },
+  {
+    "province_id": 40,
+    "province_name": "Laguna",
+    "nearest_fault_distance_km": 13.029
+  },
+  {
+    "province_id": 42,
+    "province_name": "Lanao del Sur",
+    "nearest_fault_distance_km": 12.009
+  },
+  {
+    "province_id": 44,
+    "province_name": "Maguindanao",
+    "nearest_fault_distance_km": 19.017
+  },
+  {
+    "province_id": 46,
+    "province_name": "Masbate",
+    "nearest_fault_distance_km": 82.394
+  },
+  {
+    "province_id": 48,
+    "province_name": "Misamis Occidental",
+    "nearest_fault_distance_km": 4.197
+  },
+  {
+    "province_id": 50,
+    "province_name": "Mountain Province",
+    "nearest_fault_distance_km": 2.025
+  },
+  {
+    "province_id": 52,
+    "province_name": "Negros Oriental",
+    "nearest_fault_distance_km": 16.871
+  },
+  {
+    "province_id": 54,
+    "province_name": "Northern Samar",
+    "nearest_fault_distance_km": 22.54
+  },
+  {
+    "province_id": 56,
+    "province_name": "Nueva Vizcaya",
+    "nearest_fault_distance_km": 22.631
+  },
+  {
+    "province_id": 58,
+    "province_name": "Oriental Mindoro",
+    "nearest_fault_distance_km": 10.829
+  },
+  {
+    "province_id": 60,
+    "province_name": "Pampanga",
+    "nearest_fault_distance_km": 53.67
+  },
+  {
+    "province_id": 62,
+    "province_name": "Quezon",
+    "nearest_fault_distance_km": 1.372
+  },
+  {
+    "province_id": 64,
+    "province_name": "Rizal",
+    "nearest_fault_distance_km": 24.17
+  },
+  {
+    "province_id": 66,
+    "province_name": "Samar",
+    "nearest_fault_distance_km": 4.385
+  },
+  {
+    "province_id": 68,
+    "province_name": "Shariff Kabunsuan",
+    "nearest_fault_distance_km": 20.062
+  },
+  {
+    "province_id": 70,
+    "province_name": "Sorsogon",
+    "nearest_fault_distance_km": 32.875
+  },
+  {
+    "province_id": 72,
+    "province_name": "Southern Leyte",
+    "nearest_fault_distance_km": 14.816
+  },
+  {
+    "province_id": 74,
+    "province_name": "Sulu",
+    "nearest_fault_distance_km": 185.886
+  },
+  {
+    "province_id": 76,
+    "province_name": "Surigao del Sur",
+    "nearest_fault_distance_km": 40.809
+  },
+  {
+    "province_id": 78,
+    "province_name": "Tawi-Tawi",
+    "nearest_fault_distance_km": 226.27
+  },
+  {
+    "province_id": 80,
+    "province_name": "Zamboanga del Norte",
+    "nearest_fault_distance_km": 9.232
+  },
+  {
+    "province_id": 82,
+    "province_name": "Zamboanga Sibugay",
+    "nearest_fault_distance_km": 55.107
+  },
+  {
+    "province_id": 63,
+    "province_name": "Quirino",
+    "nearest_fault_distance_km": 9.3
+  },
+  {
+    "province_id": 65,
+    "province_name": "Romblon",
+    "nearest_fault_distance_km": 11.095
+  },
+  {
+    "province_id": 67,
+    "province_name": "Sarangani",
+    "nearest_fault_distance_km": 9.559
+  },
+  {
+    "province_id": 69,
+    "province_name": "Siquijor",
+    "nearest_fault_distance_km": 39.229
+  },
+  {
+    "province_id": 71,
+    "province_name": "South Cotabato",
+    "nearest_fault_distance_km": 24.714
+  },
+  {
+    "province_id": 73,
+    "province_name": "Sultan Kudarat",
+    "nearest_fault_distance_km": 27.478
+  },
+  {
+    "province_id": 75,
+    "province_name": "Surigao del Norte",
+    "nearest_fault_distance_km": 31.563
+  },
+  {
+    "province_id": 77,
+    "province_name": "Tarlac",
+    "nearest_fault_distance_km": 27.258
+  },
+  {
+    "province_id": 79,
+    "province_name": "Zambales",
+    "nearest_fault_distance_km": 53.095
+  },
+  {
+    "province_id": 81,
+    "province_name": "Zamboanga del Sur",
+    "nearest_fault_distance_km": 36.44
+  }
+]
