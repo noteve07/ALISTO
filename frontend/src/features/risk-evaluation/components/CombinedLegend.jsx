@@ -47,16 +47,6 @@ const CombinedLegend = () => {
                   </span>
                 </div>
               ))}
-              <div className="flex items-center gap-3 pt-1 border-t border-slate-200">
-                <span
-                  className="inline-block h-3 w-8 rounded-full border border-dashed border-slate-300"
-                  style={{ backgroundColor: RISK_LEVELS.unknown.color }}
-                  aria-hidden="true"
-                />
-                <span className="text-xs uppercase tracking-wide text-slate-500">
-                  No data
-                </span>
-              </div>
             </div>
           </div>
 
@@ -71,7 +61,7 @@ const CombinedLegend = () => {
                 <span className="text-sm font-medium">Fault Line</span>
               </div>
               <div className="flex items-center gap-3 pt-1 border-t border-slate-200">
-                <div className="h-0.5 w-8 border-t-2 border-dashed border-purple-500"></div>
+                <div className="h-0.5 w-8 border-t-2 border-dashed border-pink-500"></div>
                 <span className="text-xs text-slate-500">
                   Nearest Fault Line
                 </span>

@@ -144,7 +144,7 @@ const FaultLinesOverlay = () => {
 
       try {
         nearestLineRef.current = L.polyline([userLatLng, faultLatLng], {
-          color: "#a855f7",
+          color: "#ec4899",
           dashArray: "6, 8",
           weight: 3,
         }).addTo(map);

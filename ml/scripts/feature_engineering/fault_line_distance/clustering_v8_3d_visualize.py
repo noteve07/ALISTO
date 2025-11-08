@@ -1,0 +1,595 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import os
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from scipy.spatial import ConvexHull
+import numpy as np
+import joblib
+import json
+import warnings
+warnings.filterwarnings('ignore')
+
+# Paths
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+INPUT_CSV = os.path.join(THIS_DIR, 'province_features_with_fault_distance.csv')
+
+
+def load_province_features():
+    """Load province features CSV with fault distance"""
+    print(f"Loading province features from: {INPUT_CSV}")
+    
+    if not os.path.exists(INPUT_CSV):
+        raise FileNotFoundError(f"Input CSV not found: {INPUT_CSV}")
+    
+    df = pd.read_csv(INPUT_CSV)
+    print(f"Loaded {len(df)} provinces with {len(df.columns)} features")
+    
+    return df
+
+
+def cluster_with_filtered_model_3d(provinces_features, filter_threshold=2000, n_clusters=2):
+    """
+    Train K-Means on filtered data (< threshold), then predict all data
+    This ensures outliers get classified by the model trained on clean data
+    Now with 3 features including fault distance
+    """
+    print(f"\nClustering Strategy (3D):")
+    print(f"  1. Train K-Means on provinces with total_quakes < {filter_threshold}")
+    print(f"  2. Predict risk for ALL provinces (including outliers)")
+    print("Features: total_quakes, major_quakes_m3plus, nearest_fault_km")
+    
+    # 3 core features
+    features = [
+        'total_quakes',           # Total activity
+        'major_quakes_m3plus',    # Significant earthquakes (M≥3.0)
+        'nearest_fault_km',       # Distance to nearest fault line
+    ]
+    
+    X = provinces_features[features].fillna(0)
+    
+    # Split into filtered (for training) and all data
+    filtered_mask = provinces_features['total_quakes'] < filter_threshold
+    filtered_provinces = provinces_features[filtered_mask]
+    outlier_provinces = provinces_features[~filtered_mask]
+    
+    print(f"\n  Step 1: Train K-Means on filtered data (< {filter_threshold} quakes)...")
+    print(f"    Training set: {len(filtered_provinces)} provinces")
+    print(f"    Outliers to predict: {len(outlier_provinces)} provinces")
+    
+    # Standardize features
+    scaler = StandardScaler()
+    X_filtered = filtered_provinces[features].fillna(0)
+    X_scaled_filtered = scaler.fit_transform(X_filtered)
+    
+    # Train K-Means only on filtered data
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+    base_clusters = kmeans.fit_predict(X_scaled_filtered)
+    
+    print(f"    Filtered Cluster 0: {sum(base_clusters == 0)} provinces")
+    print(f"    Filtered Cluster 1: {sum(base_clusters == 1)} provinces")
+    
+    # Now predict all data using the trained model
+    print(f"\n  Step 2: Predict all provinces using trained K-Means...")
+    X_scaled_all = scaler.transform(X)
+    all_clusters = kmeans.predict(X_scaled_all)
+    
+    print(f"    All Cluster 0: {sum(all_clusters == 0)} provinces")
+    print(f"    All Cluster 1: {sum(all_clusters == 1)} provinces")
+    
+    provinces_features['risk_cluster'] = all_clusters
+    provinces_features['is_outlier'] = ~filtered_mask
+    
+    return provinces_features, kmeans, scaler
+
+
+def map_clusters_to_risk_levels(provinces_features):
+    """Map K-Means clusters to risk levels with post-processing"""
+    print("\nMapping clusters to risk levels...")
+    
+    # Calculate cluster statistics
+    cluster_0 = provinces_features[provinces_features['risk_cluster'] == 0]
+    cluster_1 = provinces_features[provinces_features['risk_cluster'] == 1]
+    
+    print("\nCluster Statistics:")
+    print(f"  Cluster 0: avg_total={cluster_0['total_quakes'].mean():.1f}, avg_major={cluster_0['major_quakes_m3plus'].mean():.1f}, avg_fault_dist={cluster_0['nearest_fault_km'].mean():.1f}km")
+    print(f"  Cluster 1: avg_total={cluster_1['total_quakes'].mean():.1f}, avg_major={cluster_1['major_quakes_m3plus'].mean():.1f}, avg_fault_dist={cluster_1['nearest_fault_km'].mean():.1f}km")
+    
+    # Determine which cluster is low risk vs medium risk
+    # Higher activity + closer to faults = higher risk
+    score_0 = cluster_0['total_quakes'].mean() + cluster_0['major_quakes_m3plus'].mean()
+    score_1 = cluster_1['total_quakes'].mean() + cluster_1['major_quakes_m3plus'].mean()
+    
+    risk_mapping = {}
+    if score_0 < score_1:
+        risk_mapping[0] = 'Low'
+        risk_mapping[1] = 'Medium'
+        print("\n  Cluster 0 -> LOW RISK (lower activity)")
+        print("  Cluster 1 -> MEDIUM RISK (higher activity)")
+    else:
+        risk_mapping[0] = 'Medium'
+        risk_mapping[1] = 'Low'
+        print("\n  Cluster 0 -> MEDIUM RISK (higher activity)")
+        print("  Cluster 1 -> LOW RISK (lower activity)")
+    
+    provinces_features['risk_level'] = provinces_features['risk_cluster'].map(risk_mapping)
+    
+    # Post-processing: Apply rule-based corrections
+    print("\nApplying post-processing rules...")
+    initial_counts = provinces_features['risk_level'].value_counts()
+    
+    # Rule 1: Very low activity should always be Low risk
+    # If total_quakes < 800 AND major_quakes < 150, force to Low risk
+    low_activity_mask = (provinces_features['total_quakes'] < 800) & (provinces_features['major_quakes_m3plus'] < 150)
+    corrections_made = sum((low_activity_mask) & (provinces_features['risk_level'] == 'Medium'))
+    provinces_features.loc[low_activity_mask, 'risk_level'] = 'Low'
+    
+    if corrections_made > 0:
+        print(f"  ✓ Corrected {corrections_made} provinces from Medium to Low (low activity rule)")
+    
+    final_counts = provinces_features['risk_level'].value_counts()
+    print(f"\n  Before correction: Low={initial_counts.get('Low', 0)}, Medium={initial_counts.get('Medium', 0)}")
+    print(f"  After correction:  Low={final_counts.get('Low', 0)}, Medium={final_counts.get('Medium', 0)}")
+    
+    return provinces_features, risk_mapping
+
+
+def export_results_to_csv(provinces_features, output_dir):
+    """Export clustering results to CSV files"""
+    # All provinces with full details
+    output_csv = os.path.join(output_dir, 'province_risk_clustering_3d_results.csv')
+    
+    # Sort by total_quakes descending
+    export_df = provinces_features.sort_values('total_quakes', ascending=False).copy()
+    
+    # Select columns to export and reorder
+    columns_to_export = [
+        'province',
+        'risk_level',
+        'total_quakes',
+        'major_quakes_m3plus',
+        'nearest_fault_km',
+        'avg_magnitude',
+        'max_magnitude',
+        'min_magnitude',
+        'avg_depth',
+        'max_depth',
+        'risk_cluster',
+        'is_outlier'
+    ]
+    
+    export_df_final = export_df[columns_to_export]
+    
+    # Round numeric columns for better readability
+    export_df_final['nearest_fault_km'] = export_df_final['nearest_fault_km'].round(2)
+    export_df_final['avg_magnitude'] = export_df_final['avg_magnitude'].round(2)
+    export_df_final['max_magnitude'] = export_df_final['max_magnitude'].round(2)
+    export_df_final['min_magnitude'] = export_df_final['min_magnitude'].round(2)
+    export_df_final['avg_depth'] = export_df_final['avg_depth'].round(2)
+    export_df_final['max_depth'] = export_df_final['max_depth'].round(2)
+    
+    export_df_final.to_csv(output_csv, index=False)
+    print(f"\n✓ Full results exported to: {output_csv}")
+    
+    # Export summary by risk level
+    summary_csv = os.path.join(output_dir, 'province_risk_clustering_3d_summary.csv')
+    
+    summary_data = []
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            summary_data.append({
+                'Risk Level': risk_level,
+                'Number of Provinces': len(risk_data),
+                'Total Earthquakes (Sum)': int(risk_data['total_quakes'].sum()),
+                'Total Major Earthquakes (Sum)': int(risk_data['major_quakes_m3plus'].sum()),
+                'Avg Total Earthquakes': risk_data['total_quakes'].mean().round(2),
+                'Avg Major Earthquakes': risk_data['major_quakes_m3plus'].mean().round(2),
+                'Avg Fault Distance (km)': risk_data['nearest_fault_km'].mean().round(2),
+                'Avg Magnitude': risk_data['avg_magnitude'].mean().round(2),
+                'Max Magnitude': risk_data['max_magnitude'].max().round(2),
+                'Avg Depth': risk_data['avg_depth'].mean().round(2),
+            })
+    
+    summary_df = pd.DataFrame(summary_data)
+    summary_df.to_csv(summary_csv, index=False)
+    print(f"✓ Summary exported to: {summary_csv}")
+    
+    return export_df_final, summary_df
+
+
+def export_results_to_json(provinces_features, output_dir):
+    """Export clustering results to JSON files"""
+    # Full results as JSON
+    output_json = os.path.join(output_dir, 'province_risk_clustering_3d_results.json')
+    
+    # Sort by total_quakes descending
+    export_df = provinces_features.sort_values('total_quakes', ascending=False).copy()
+    
+    # Convert to list of dicts
+    provinces_list = []
+    for idx, row in export_df.iterrows():
+        province_dict = {
+            'province': row['province'],
+            'risk_level': row['risk_level'],
+            'data': {
+                'total_earthquakes': int(row['total_quakes']),
+                'major_earthquakes_m3plus': int(row['major_quakes_m3plus']),
+                'nearest_fault_distance_km': round(float(row['nearest_fault_km']), 2),
+                'average_magnitude': round(float(row['avg_magnitude']), 2),
+                'max_magnitude': round(float(row['max_magnitude']), 2),
+                'min_magnitude': round(float(row['min_magnitude']), 2),
+                'average_depth_km': round(float(row['avg_depth']), 2),
+                'max_depth_km': round(float(row['max_depth']), 2),
+            },
+            'clustering_info': {
+                'cluster_id': int(row['risk_cluster']),
+                'is_outlier': bool(row['is_outlier']),
+                'threshold_filter': 2000,
+            }
+        }
+        provinces_list.append(province_dict)
+    
+    full_json = {
+        'metadata': {
+            'total_provinces': len(provinces_list),
+            'clustering_algorithm': 'K-Means',
+            'n_clusters': 2,
+            'filter_threshold': 2000,
+            'features': ['total_quakes', 'major_quakes_m3plus', 'nearest_fault_km'],
+        },
+        'provinces': provinces_list
+    }
+    
+    with open(output_json, 'w') as f:
+        json.dump(full_json, f, indent=2)
+    
+    print(f"\n✓ Full results exported to: {output_json}")
+    
+    # Summary as JSON
+    summary_json = os.path.join(output_dir, 'province_risk_clustering_3d_summary.json')
+    
+    summary_data = {}
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            summary_data[risk_level] = {
+                'number_of_provinces': len(risk_data),
+                'province_names': risk_data['province'].tolist(),
+                'statistics': {
+                    'total_earthquakes_sum': int(risk_data['total_quakes'].sum()),
+                    'total_major_earthquakes_sum': int(risk_data['major_quakes_m3plus'].sum()),
+                    'avg_total_earthquakes': round(risk_data['total_quakes'].mean(), 2),
+                    'avg_major_earthquakes': round(risk_data['major_quakes_m3plus'].mean(), 2),
+                    'avg_fault_distance_km': round(risk_data['nearest_fault_km'].mean(), 2),
+                    'avg_magnitude': round(risk_data['avg_magnitude'].mean(), 2),
+                    'max_magnitude': round(risk_data['max_magnitude'].max(), 2),
+                    'avg_depth_km': round(risk_data['avg_depth'].mean(), 2),
+                }
+            }
+    
+    with open(summary_json, 'w') as f:
+        json.dump(summary_data, f, indent=2)
+    
+    print(f"✓ Summary exported to: {summary_json}")
+
+
+def export_evaluation_metrics(provinces_features, kmeans, scaler, output_dir):
+    """Export clustering evaluation metrics to JSON"""
+    print("\nCalculating evaluation metrics...")
+    
+    from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
+    
+    # Prepare data for metrics calculation
+    features = ['total_quakes', 'major_quakes_m3plus', 'nearest_fault_km']
+    X = provinces_features[features].fillna(0)
+    X_scaled = scaler.transform(X)
+    clusters = provinces_features['risk_cluster'].values
+    
+    # Calculate metrics
+    silhouette = silhouette_score(X_scaled, clusters)
+    davies_bouldin = davies_bouldin_score(X_scaled, clusters)
+    calinski_harabasz = calinski_harabasz_score(X_scaled, clusters)
+    
+    # Calculate inertia (within-cluster sum of squares)
+    inertia = kmeans.inertia_
+    
+    # Calculate cluster sizes and statistics
+    cluster_stats = {}
+    for cluster_id in [0, 1]:
+        cluster_data = provinces_features[provinces_features['risk_cluster'] == cluster_id]
+        cluster_stats[f'cluster_{cluster_id}'] = {
+            'size': len(cluster_data),
+            'avg_total_quakes': round(float(cluster_data['total_quakes'].mean()), 2),
+            'avg_major_quakes': round(float(cluster_data['major_quakes_m3plus'].mean()), 2),
+            'avg_fault_distance_km': round(float(cluster_data['nearest_fault_km'].mean()), 2),
+            'std_total_quakes': round(float(cluster_data['total_quakes'].std()), 2),
+            'std_major_quakes': round(float(cluster_data['major_quakes_m3plus'].std()), 2),
+            'std_fault_distance_km': round(float(cluster_data['nearest_fault_km'].std()), 2),
+        }
+    
+    # Risk level statistics
+    risk_stats = {}
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            risk_stats[risk_level] = {
+                'count': len(risk_data),
+                'percentage': round(len(risk_data) / len(provinces_features) * 100, 2),
+                'avg_total_quakes': round(float(risk_data['total_quakes'].mean()), 2),
+                'avg_major_quakes': round(float(risk_data['major_quakes_m3plus'].mean()), 2),
+                'avg_fault_distance_km': round(float(risk_data['nearest_fault_km'].mean()), 2),
+                'min_total_quakes': int(risk_data['total_quakes'].min()),
+                'max_total_quakes': int(risk_data['total_quakes'].max()),
+            }
+    
+    # Training vs prediction statistics
+    training_data = provinces_features[provinces_features['total_quakes'] < 2000]
+    outlier_data = provinces_features[provinces_features['total_quakes'] >= 2000]
+    
+    training_stats = {
+        'training_set_size': len(training_data),
+        'outlier_set_size': len(outlier_data),
+        'total_provinces': len(provinces_features),
+        'training_percentage': round(len(training_data) / len(provinces_features) * 100, 2),
+    }
+    
+    # Compile all metrics
+    evaluation_metrics = {
+        'model_info': {
+            'algorithm': 'K-Means',
+            'n_clusters': 2,
+            'features': features,
+            'filter_threshold': 2000,
+            'random_state': 42,
+        },
+        'clustering_quality_metrics': {
+            'silhouette_score': round(float(silhouette), 4),
+            'davies_bouldin_index': round(float(davies_bouldin), 4),
+            'calinski_harabasz_score': round(float(calinski_harabasz), 4),
+            'inertia': round(float(inertia), 4),
+            'description': {
+                'silhouette_score': 'Range [-1, 1]. Higher is better. Measures how similar points are to their own cluster vs other clusters.',
+                'davies_bouldin_index': 'Lower is better. Measures average similarity between clusters.',
+                'calinski_harabasz_score': 'Higher is better. Ratio of between-cluster to within-cluster dispersion.',
+                'inertia': 'Lower is better. Sum of squared distances to nearest cluster center.',
+            }
+        },
+        'cluster_statistics': cluster_stats,
+        'risk_level_statistics': risk_stats,
+        'training_statistics': training_stats,
+        'feature_statistics': {
+            'total_quakes': {
+                'min': int(provinces_features['total_quakes'].min()),
+                'max': int(provinces_features['total_quakes'].max()),
+                'mean': round(float(provinces_features['total_quakes'].mean()), 2),
+                'median': round(float(provinces_features['total_quakes'].median()), 2),
+                'std': round(float(provinces_features['total_quakes'].std()), 2),
+            },
+            'major_quakes_m3plus': {
+                'min': int(provinces_features['major_quakes_m3plus'].min()),
+                'max': int(provinces_features['major_quakes_m3plus'].max()),
+                'mean': round(float(provinces_features['major_quakes_m3plus'].mean()), 2),
+                'median': round(float(provinces_features['major_quakes_m3plus'].median()), 2),
+                'std': round(float(provinces_features['major_quakes_m3plus'].std()), 2),
+            },
+            'nearest_fault_km': {
+                'min': round(float(provinces_features['nearest_fault_km'].min()), 2),
+                'max': round(float(provinces_features['nearest_fault_km'].max()), 2),
+                'mean': round(float(provinces_features['nearest_fault_km'].mean()), 2),
+                'median': round(float(provinces_features['nearest_fault_km'].median()), 2),
+                'std': round(float(provinces_features['nearest_fault_km'].std()), 2),
+            }
+        }
+    }
+    
+    # Save to JSON
+    metrics_json = os.path.join(output_dir, 'province_risk_clustering_3d_evaluation_metrics.json')
+    with open(metrics_json, 'w') as f:
+        json.dump(evaluation_metrics, f, indent=2)
+    
+    print(f"✓ Evaluation metrics exported to: {metrics_json}")
+    
+    # Print summary
+    print("\n" + "="*70)
+    print("EVALUATION METRICS SUMMARY")
+    print("="*70)
+    print(f"Silhouette Score: {silhouette:.4f} (higher is better, range: -1 to 1)")
+    print(f"Davies-Bouldin Index: {davies_bouldin:.4f} (lower is better)")
+    print(f"Calinski-Harabasz Score: {calinski_harabasz:.4f} (higher is better)")
+    print(f"Inertia: {inertia:.4f} (lower is better)")
+    print("="*70)
+    
+    return evaluation_metrics
+
+
+def create_3d_visualizations(provinces_features, kmeans, scaler, output_dir):
+    """Create 3D visualizations - 4 plots only"""
+    print("\nCreating 3D visualizations...")
+    
+    # Color mapping
+    risk_colors = {'Low': '#2ecc71', 'Medium': '#f39c12'}
+    
+    # Create figure with 2x2 grid
+    fig = plt.figure(figsize=(16, 12))
+    
+    # ========== Plot 1: 3D Scatter (Training Data - exclude fault distance >= 300km) ==========
+    ax1 = fig.add_subplot(2, 2, 1, projection='3d')
+    # Filter: < 2000 quakes AND < 300km fault distance (exclude outliers)
+    filtered_data = provinces_features[(provinces_features['total_quakes'] < 2000) & 
+                                       (provinces_features['nearest_fault_km'] < 300)]
+    
+    for risk_level in ['Low', 'Medium']:
+        data = filtered_data[filtered_data['risk_level'] == risk_level]
+        if len(data) > 0:
+            ax1.scatter(data['total_quakes'], data['major_quakes_m3plus'], data['nearest_fault_km'],
+                       s=100, alpha=0.7, label=risk_level, color=risk_colors[risk_level],
+                       edgecolor='black', linewidth=0.5)
+    
+    ax1.set_xlabel('Total Earthquakes', fontsize=10, fontweight='bold')
+    ax1.set_ylabel('Major EQs (M≥3.0)', fontsize=10, fontweight='bold')
+    ax1.set_zlabel('Fault Distance (km)', fontsize=10, fontweight='bold')
+    ax1.set_title('3D Projection: Clustering', fontsize=12, fontweight='bold')
+    ax1.legend(fontsize=9)
+    ax1.view_init(elev=20, azim=45)
+    
+    # ========== Plot 2: 2D Projection (Total vs Major - normalized axes 0-2000) ==========
+    ax2 = fig.add_subplot(2, 2, 2)
+    
+    # Use the same filtered data (< 2000 quakes)
+    filtered_data_2d = provinces_features[provinces_features['total_quakes'] < 2000]
+    
+    for risk_level in ['Low', 'Medium']:
+        data = filtered_data_2d[filtered_data_2d['risk_level'] == risk_level]
+        if len(data) > 0:
+            ax2.scatter(data['total_quakes'], data['major_quakes_m3plus'],
+                       s=100, alpha=0.6, label=risk_level, color=risk_colors[risk_level],
+                       edgecolor='black', linewidth=0.5)
+    
+    # Normalize axes to 0-2000
+    ax2.set_xlim(0, 2000)
+    ax2.set_ylim(0, 2000)
+    
+    ax2.set_xlabel('Total Earthquakes', fontsize=11, fontweight='bold')
+    ax2.set_ylabel('Major Earthquakes (M≥3.0)', fontsize=11, fontweight='bold')
+    ax2.set_title('2D Projection: Total vs Major', fontsize=12, fontweight='bold')
+    ax2.legend(fontsize=9)
+    ax2.grid(True, alpha=0.3)
+    
+    # ========== Plot 3: 2D Projection (Total vs Fault Distance - fault distance < 150km) ==========
+    ax3 = fig.add_subplot(2, 2, 3)
+    
+    # Filter for fault distance < 150km
+    fault_filtered_data = provinces_features[provinces_features['nearest_fault_km'] < 150]
+    
+    for risk_level in ['Low', 'Medium']:
+        data = fault_filtered_data[fault_filtered_data['risk_level'] == risk_level]
+        if len(data) > 0:
+            ax3.scatter(data['total_quakes'], data['nearest_fault_km'],
+                       s=100, alpha=0.6, label=risk_level, color=risk_colors[risk_level],
+                       edgecolor='black', linewidth=0.5)
+    
+    ax3.set_xlabel('Total Earthquakes', fontsize=11, fontweight='bold')
+    ax3.set_ylabel('Fault Distance (km)', fontsize=11, fontweight='bold')
+    ax3.set_title('2D Projection: Total vs Fault Distance', fontsize=12, fontweight='bold')
+    ax3.legend(fontsize=9)
+    ax3.grid(True, alpha=0.3)
+    
+    # ========== Plot 4: Risk Distribution Bar Chart ==========
+    ax4 = fig.add_subplot(2, 2, 4)
+    risk_counts = provinces_features['risk_level'].value_counts()
+    risk_order = ['Low', 'Medium']
+    risk_counts = risk_counts.reindex(risk_order, fill_value=0)
+    bars = ax4.bar(risk_order, risk_counts.values, color=[risk_colors[r] for r in risk_order], 
+                   edgecolor='black', linewidth=1.5, width=0.6)
+    
+    ax4.set_ylabel('Number of Provinces', fontsize=11, fontweight='bold')
+    ax4.set_title('Province Distribution by Risk Level', fontsize=12, fontweight='bold')
+    ax4.grid(True, alpha=0.3, axis='y')
+    
+    # Add value labels on bars
+    for bar in bars:
+        height = bar.get_height()
+        if height > 0:
+            ax4.text(bar.get_x() + bar.get_width()/2., height,
+                    f'{int(height)}', ha='center', va='bottom', fontsize=12, fontweight='bold')
+    
+    plt.tight_layout()
+    
+    # Save the plot
+    output_path = os.path.join(output_dir, 'province_risk_clustering_3d_v8.png')
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    print(f"✓ 3D visualization saved to: {output_path}")
+    
+    plt.show()
+
+
+def main():
+    print("="*70)
+    print("PROVINCE RISK CLUSTERING V8 (3D with Fault Distance)")
+    print("="*70)
+    print("\nClustering Features:")
+    print("1. total_quakes        - How active? (quantity)")
+    print("2. major_quakes_m3plus - How dangerous? (M≥3.0)")
+    print("3. nearest_fault_km    - How close to fault lines?")
+    print("\nStrategy: Train K-Means on clean data (< 2000), predict ALL provinces")
+    print("Result: Low and Medium risk levels")
+    print("="*70)
+    
+    # Load province features
+    provinces_features = load_province_features()
+    
+    print(f"\nNumber of provinces: {len(provinces_features)}")
+    print("\nProvince Features Summary:")
+    print(provinces_features[['total_quakes', 'major_quakes_m3plus', 'nearest_fault_km']].describe())
+    
+    # Cluster with filtered model (3D)
+    provinces_features, kmeans, scaler = cluster_with_filtered_model_3d(
+        provinces_features, 
+        filter_threshold=2000,
+        n_clusters=2
+    )
+    
+    # Map clusters to risk levels
+    provinces_features, cluster_to_risk = map_clusters_to_risk_levels(provinces_features)
+    
+    # Display results
+    print("\n" + "="*70)
+    print("RISK-BASED CLUSTERING RESULTS (V8 3D)")
+    print("="*70)
+    
+    for risk_level in ['Low', 'Medium']:
+        risk_data = provinces_features[provinces_features['risk_level'] == risk_level]
+        if len(risk_data) > 0:
+            print(f"\n{risk_level.upper()} RISK ({len(risk_data)} provinces):")
+            print(f"{'Province':<30} {'Total EQ':>10} {'Major EQ':>10} {'Fault Dist':>12} {'Avg Mag':>10} {'Is Outlier':>15}")
+            print("-" * 100)
+            for _, row in risk_data.sort_values('total_quakes', ascending=False).head(15).iterrows():
+                outlier_mark = "YES (>2000)" if row['is_outlier'] else "No"
+                print(f"{row['province']:<30} {int(row['total_quakes']):>10} {int(row['major_quakes_m3plus']):>10} {row['nearest_fault_km']:>11.2f}km {row['avg_magnitude']:>10.2f} {outlier_mark:>15}")
+            if len(risk_data) > 15:
+                print(f"  ... and {len(risk_data) - 15} more provinces")
+    
+    # Create visualizations
+    output_dir = THIS_DIR
+    create_3d_visualizations(provinces_features, kmeans, scaler, output_dir)
+    
+    # Save the model and scaler
+    model_path = os.path.join(output_dir, 'province_risk_kmeans_3d_model.joblib')
+    scaler_path = os.path.join(output_dir, 'province_risk_3d_scaler.joblib')
+    cluster_mapping_path = os.path.join(output_dir, 'province_risk_3d_cluster_mapping.joblib')
+    
+    joblib.dump(kmeans, model_path)
+    joblib.dump(scaler, scaler_path)
+    joblib.dump(cluster_to_risk, cluster_mapping_path)
+    
+    print(f"\n✓ Model saved to: {model_path}")
+    print(f"✓ Scaler saved to: {scaler_path}")
+    print(f"✓ Cluster mapping saved to: {cluster_mapping_path}")
+    
+    # Export results to CSV
+    print("\n" + "="*70)
+    print("EXPORTING RESULTS TO CSV")
+    print("="*70)
+    export_results_to_csv(provinces_features, output_dir)
+    
+    # Export results to JSON
+    print("\n" + "="*70)
+    print("EXPORTING RESULTS TO JSON")
+    print("="*70)
+    export_results_to_json(provinces_features, output_dir)
+    
+    # Export evaluation metrics
+    print("\n" + "="*70)
+    print("EXPORTING EVALUATION METRICS")
+    print("="*70)
+    export_evaluation_metrics(provinces_features, kmeans, scaler, output_dir)
+    
+    print("\n" + "="*70)
+    print("CLUSTERING COMPLETE!")
+    print("="*70)
+
+
+if __name__ == "__main__":
+    main()

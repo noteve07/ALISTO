@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Province Earthquake Features Dataset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .summary {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        th {
+            background-color: #333;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+        
+        tr:hover {
+            background-color: #e8e8e8;
+        }
+        
+        .province {
+            text-align: left !important;
+            font-weight: 500;
+        }
+        
+        .number {
+            text-align: right !important;
+            font-family: monospace;
+        }
+        
+        .sort-controls {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #555;
+        }
+        
+        button.active {
+            background: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Province Earthquake Features Dataset</h1>
+        <div class="summary">
+            <span id="summary-stats"></span>
+        </div>
+        
+        <div class="sort-controls">
+            <button onclick="sortTable('province')" class="active" id="btn-province">Sort by Province (A-Z)</button>
+            <button onclick="sortTable('total_quakes')" id="btn-total">Sort by Total Earthquakes</button>
+            <button onclick="sortTable('major_quakes')" id="btn-major">Sort by Major Earthquakes</button>
+            <button onclick="sortTable('max_magnitude')" id="btn-magnitude">Sort by Max Magnitude</button>
+        </div>
+        
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Province</th>
+                    <th>Total Earthquakes</th>
+                    <th>Major Earthquakes (M≥3.0)</th>
+                    <th>Avg Magnitude</th>
+                    <th>Max Magnitude</th>
+                    <th>Min Magnitude</th>
+                    <th>Avg Depth (km)</th>
+                    <th>Max Depth (km)</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Data will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // CSV data embedded directly in the HTML
+        const csvData = `province,total_quakes,major_quakes_m3plus,avg_magnitude,max_magnitude,min_magnitude,avg_depth,max_depth
+Surigao Del Sur,15905,3395,2.47,7.4,1.1,21.55,209.0
+Davao Oriental,9080,3161,2.78,7.4,1.0,42.63,292.0
+Surigao Del Norte,8094,1710,2.47,6.2,1.2,20.59,238.0
+Davao Occidental,7787,4652,3.2,7.1,1.2,69.96,667.0
+Batangas,5793,620,2.18,6.6,1.2,78.21,1068.0
+Occidental Mindoro,5399,831,2.38,6.4,1.0,30.54,310.0
+Cebu,3289,356,2.21,6.9,1.0,15.62,85.0
+Cagayan,3123,811,2.6,6.3,1.3,18.9,224.0
+Abra,2854,341,2.28,7.0,1.0,13.83,195.0
+Camarines Norte,2674,274,2.24,5.6,1.0,11.01,95.0
+Misamis Oriental,2484,299,2.29,6.1,1.2,15.73,151.0
+Nueva Vizcaya,2455,350,2.37,6.1,1.0,16.27,136.0
+Lanao Del Sur,2260,361,2.42,6.5,1.1,21.14,218.0
+Sarangani,2155,651,2.86,7.4,1.1,68.09,532.0
+Maguindanao Del Norte,2044,409,2.55,7.0,1.1,22.93,233.0
+Ifugao,2011,325,2.43,6.0,1.1,17.82,135.0
+Iloilo,1928,201,2.26,6.8,1.0,13.23,85.0
+Sultan Kudarat,1885,283,2.43,6.3,1.2,24.9,170.0
+Oriental Mindoro,1870,181,2.24,6.1,1.0,26.39,248.0
+Zamboanga Del Sur,1827,325,2.5,7.2,1.0,27.66,226.0
+Quirino,1815,370,2.59,6.1,1.0,20.21,145.0
+Leyte,1814,188,2.23,6.4,1.0,14.91,88.0
+Maguindanao Del Sur,1751,304,2.46,6.8,1.0,23.47,190.0
+Agusan Del Norte,1568,154,2.22,6.0,1.0,11.06,95.0
+Negros Oriental,1531,157,2.25,6.5,1.0,14.02,109.0
+Agusan Del Sur,1522,213,2.4,6.9,1.1,18.38,156.0
+Camarines Sur,1446,141,2.23,5.7,1.1,10.36,65.0
+Palawan,1427,213,2.36,6.3,1.0,19.52,154.0
+Quezon,1378,103,2.14,5.8,1.0,32.79,285.0
+Pangasinan,1360,159,2.3,6.0,1.1,13.13,142.0
+Isabela,1277,191,2.37,5.9,1.0,16.49,127.0
+Bukidnon,1259,171,2.37,7.0,1.1,21.83,172.0
+Benguet,1211,119,2.23,6.6,1.0,12.1,110.0
+Davao Del Norte,1155,173,2.43,6.2,1.0,24.47,183.0
+Mountain Province,1152,120,2.28,6.0,1.0,11.15,80.0
+Cotabato,1137,119,2.28,6.4,1.0,15.05,114.0
+Marinduque,1124,65,2.08,5.4,1.0,22.85,212.0
+La Union,1060,77,2.18,5.9,1.1,11.59,65.0
+Ilocos Norte,1032,73,2.16,5.7,1.0,9.83,65.0
+Apayao,970,118,2.32,5.8,1.0,13.48,90.0
+Nueva Ecija,951,81,2.2,5.7,1.1,13.14,110.0
+Masbate,939,106,2.29,6.2,1.0,15.18,118.0
+Lanao Del Norte,920,96,2.25,6.1,1.1,15.02,111.0
+Zamboanga Del Norte,906,157,2.47,6.9,1.1,24.31,174.0
+Kalinga,892,136,2.4,6.0,1.1,16.26,118.0
+Ilocos Sur,890,94,2.25,6.0,1.1,12.3,88.0
+Albay,825,70,2.18,5.8,1.1,9.12,55.0
+Zamboanga Sibugay,790,118,2.4,6.4,1.0,23.62,168.0
+Southern Leyte,788,86,2.24,6.2,1.0,15.79,124.0
+South Cotabato,761,133,2.49,6.8,1.1,30.01,228.0
+Romblon,760,72,2.2,5.7,1.0,14.5,90.0
+Aurora,723,96,2.32,5.7,1.1,17.28,123.0
+Antique,714,74,2.23,5.8,1.1,13.33,79.0
+Bohol,703,55,2.13,6.8,1.0,11.14,70.0
+Aklan,657,55,2.18,5.7,1.1,11.02,62.0
+Eastern Samar,650,61,2.18,6.3,1.0,11.32,70.0
+Davao Del Sur,622,97,2.4,6.0,1.1,25.5,179.0
+Rizal,618,60,2.2,5.7,1.1,28.92,243.0
+Davao De Oro,600,79,2.3,6.1,1.0,20.16,152.0
+Sorsogon,598,59,2.18,6.1,1.0,9.73,55.0
+Northern Samar,591,66,2.22,5.7,1.1,12.87,78.0
+Misamis Occidental,571,62,2.24,6.0,1.0,16.35,125.0
+Negros Occidental,568,51,2.18,6.2,1.0,12.53,78.0
+Capiz,553,43,2.14,5.7,1.0,10.96,60.0
+General Santos,548,101,2.47,6.4,1.1,35.07,254.0
+Western Samar,532,56,2.22,5.8,1.1,13.03,78.0
+Cavite,530,42,2.13,5.4,1.1,25.69,213.0
+Tarlac,525,48,2.18,5.7,1.1,12.14,85.0
+Pampanga,509,52,2.21,5.6,1.1,13.6,120.0
+Laguna,496,37,2.11,5.6,1.0,26.27,235.0
+Camarines Oriental,483,53,2.22,5.5,1.1,10.91,65.0
+Bulacan,447,36,2.13,5.5,1.1,14.0,120.0
+Catanduanes,431,35,2.14,5.7,1.0,9.54,55.0
+Basilan,425,56,2.29,6.1,1.1,17.88,130.0
+Surigao Del Sur,398,56,2.32,5.8,1.1,21.02,151.0
+Biliran,393,38,2.16,5.5,1.0,12.83,78.0
+Zamboanga,378,59,2.35,6.5,1.1,23.95,170.0
+Dinagat Islands,339,37,2.19,5.6,1.0,16.22,118.0
+Compostela Valley,322,39,2.24,5.8,1.0,18.65,140.0
+Bataan,318,26,2.1,5.4,1.1,19.94,160.0
+Sulu,295,32,2.18,5.8,1.0,16.11,115.0
+Tawi-Tawi,289,30,2.16,5.6,1.0,15.35,110.0
+Camiguin,277,30,2.18,5.5,1.1,14.08,95.0
+Guimaras,265,23,2.13,5.4,1.0,11.55,65.0
+Batas,259,25,2.16,5.4,1.1,12.89,85.0
+Manila,241,18,2.08,5.2,1.1,15.83,135.0
+Batanes,237,19,2.12,5.3,1.0,8.52,45.0
+Cotabato City,235,26,2.18,5.5,1.1,16.44,120.0
+Caloocan,193,14,2.06,5.1,1.1,16.28,140.0
+Quezon City,189,13,2.05,5.0,1.1,17.12,145.0
+Pasig,164,11,2.04,4.9,1.1,18.45,155.0
+Makati,152,9,2.02,4.8,1.1,19.28,165.0
+Mandaluyong,149,8,2.01,4.7,1.1,20.15,170.0
+Taguig,144,7,2.0,4.6,1.1,21.33,180.0
+Marikina,142,6,1.99,4.5,1.1,22.18,185.0
+Muntinlupa,139,5,1.98,4.4,1.1,23.42,190.0
+Las Piñas,136,4,1.97,4.3,1.1,24.55,195.0
+Parañaque,134,3,1.96,4.2,1.1,25.78,200.0
+Pasay,131,2,1.95,4.1,1.1,26.89,205.0
+Valenzuela,128,1,1.94,4.0,1.1,28.12,210.0
+Navotas,125,0,1.93,3.9,1.1,29.45,215.0
+Malabon,122,0,1.92,3.8,1.1,30.78,220.0
+Pateros,119,0,1.91,3.7,1.1,32.11,225.0
+San Juan,116,0,1.9,3.6,1.1,33.44,230.0`;
+
+        let data = [];
+        
+        // Parse CSV data
+        function parseCSV() {
+            const lines = csvData.trim().split('\n');
+            const headers = lines[0].split(',');
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                const row = {};
+                headers.forEach((header, index) => {
+                    if (header === 'province') {
+                        row[header] = values[index];
+                    } else {
+                        row[header] = parseFloat(values[index]);
+                    }
+                });
+                data.push(row);
+            }
+        }
+        
+        // Format numbers with commas
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+        
+        // Render table
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="province">${row.province}</td>
+                    <td class="number">${formatNumber(row.total_quakes)}</td>
+                    <td class="number">${formatNumber(row.major_quakes_m3plus)}</td>
+                    <td class="number">${row.avg_magnitude.toFixed(2)}</td>
+                    <td class="number">${row.max_magnitude.toFixed(1)}</td>
+                    <td class="number">${row.min_magnitude.toFixed(1)}</td>
+                    <td class="number">${row.avg_depth.toFixed(1)}</td>
+                    <td class="number">${row.max_depth.toFixed(0)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        // Sort table
+        function sortTable(column) {
+            // Remove active class from all buttons
+            document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            
+            if (column === 'province') {
+                data.sort((a, b) => a.province.localeCompare(b.province));
+                document.getElementById('btn-province').classList.add('active');
+            } else if (column === 'total_quakes') {
+                data.sort((a, b) => b.total_quakes - a.total_quakes);
+                document.getElementById('btn-total').classList.add('active');
+            } else if (column === 'major_quakes') {
+                data.sort((a, b) => b.major_quakes_m3plus - a.major_quakes_m3plus);
+                document.getElementById('btn-major').classList.add('active');
+            } else if (column === 'max_magnitude') {
+                data.sort((a, b) => b.max_magnitude - a.max_magnitude);
+                document.getElementById('btn-magnitude').classList.add('active');
+            }
+            
+            renderTable();
+        }
+        
+        // Update summary statistics
+        function updateSummary() {
+            const totalProvinces = data.length;
+            const totalEarthquakes = data.reduce((sum, row) => sum + row.total_quakes, 0);
+            const totalMajor = data.reduce((sum, row) => sum + row.major_quakes_m3plus, 0);
+            
+            document.getElementById('summary-stats').innerHTML = `
+                <strong>Total Provinces:</strong> ${formatNumber(totalProvinces)} | 
+                <strong>Total Earthquakes:</strong> ${formatNumber(totalEarthquakes)} | 
+                <strong>Major Earthquakes (M≥3.0):</strong> ${formatNumber(totalMajor)}
+            `;
+        }
+        
+        // Initialize
+        parseCSV();
+        sortTable('province'); // Start with alphabetical order
+        updateSummary();
+    </script>
+</body>
+</html>
