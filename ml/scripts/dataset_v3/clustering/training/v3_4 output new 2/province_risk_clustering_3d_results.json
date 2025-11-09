@@ -8,13 +8,7 @@
       "total_quakes",
       "major_quakes_m3plus",
       "nearest_fault_km"
-    ],
-    "evaluation_metrics": {
-      "silhouette_score": 0.401,
-      "davies_bouldin_index": 1.046,
-      "calinski_harabasz_score": 24.256,
-      "kmeans_inertia": 102.388
-    }
+    ]
   },
   "provinces": [
     {
@@ -33,7 +27,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -52,7 +46,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.4595024932766906
+        "threshold_filter": 2000
       }
     },
     {
@@ -71,7 +65,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.5833657668726622
+        "threshold_filter": 2000
       }
     },
     {
@@ -90,7 +84,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5849520314690468
+        "threshold_filter": 2000
       }
     },
     {
@@ -109,7 +103,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6640707894553516
+        "threshold_filter": 2000
       }
     },
     {
@@ -128,7 +122,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.4315468888016261
+        "threshold_filter": 2000
       }
     },
     {
@@ -147,7 +141,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6498473250362107
+        "threshold_filter": 2000
       }
     },
     {
@@ -166,7 +160,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.4875917088137659
+        "threshold_filter": 2000
       }
     },
     {
@@ -185,7 +179,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.34102348799726895
+        "threshold_filter": 2000
       }
     },
     {
@@ -204,7 +198,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.4094891646176982
+        "threshold_filter": 2000
       }
     },
     {
@@ -223,7 +217,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.22602957511401486
+        "threshold_filter": 2000
       }
     },
     {
@@ -242,7 +236,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -261,7 +255,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6559600323318727
+        "threshold_filter": 2000
       }
     },
     {
@@ -280,7 +274,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6153518356233091
+        "threshold_filter": 2000
       }
     },
     {
@@ -299,7 +293,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.39524574842482696
+        "threshold_filter": 2000
       }
     },
     {
@@ -318,7 +312,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.5013791127179419
+        "threshold_filter": 2000
       }
     },
     {
@@ -337,7 +331,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.583900133342123
+        "threshold_filter": 2000
       }
     },
     {
@@ -356,7 +350,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -375,7 +369,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6200329874190991
+        "threshold_filter": 2000
       }
     },
     {
@@ -394,7 +388,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.45144453963102266
+        "threshold_filter": 2000
       }
     },
     {
@@ -413,7 +407,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.4478449787779641
+        "threshold_filter": 2000
       }
     },
     {
@@ -432,7 +426,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5720238967030595
+        "threshold_filter": 2000
       }
     },
     {
@@ -451,7 +445,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.22851217236593444
+        "threshold_filter": 2000
       }
     },
     {
@@ -470,7 +464,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5994799993834456
+        "threshold_filter": 2000
       }
     },
     {
@@ -489,7 +483,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -508,7 +502,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.5155919120738235
+        "threshold_filter": 2000
       }
     },
     {
@@ -527,7 +521,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6510811143466216
+        "threshold_filter": 2000
       }
     },
     {
@@ -546,7 +540,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -565,7 +559,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -584,7 +578,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.4940631561005055
+        "threshold_filter": 2000
       }
     },
     {
@@ -603,7 +597,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -622,7 +616,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.4193606545355041
+        "threshold_filter": 2000
       }
     },
     {
@@ -641,7 +635,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6456813010853043
+        "threshold_filter": 2000
       }
     },
     {
@@ -660,7 +654,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -679,7 +673,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.4509967560120585
+        "threshold_filter": 2000
       }
     },
     {
@@ -698,7 +692,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6569924684836139
+        "threshold_filter": 2000
       }
     },
     {
@@ -717,7 +711,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.718339137038435
+        "threshold_filter": 2000
       }
     },
     {
@@ -736,7 +730,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6274290281382864
+        "threshold_filter": 2000
       }
     },
     {
@@ -755,7 +749,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5066472553286366
+        "threshold_filter": 2000
       }
     },
     {
@@ -774,7 +768,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6094252484648808
+        "threshold_filter": 2000
       }
     },
     {
@@ -793,7 +787,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5967931710952536
+        "threshold_filter": 2000
       }
     },
     {
@@ -812,7 +806,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6208208289630252
+        "threshold_filter": 2000
       }
     },
     {
@@ -831,7 +825,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.6871246683279587
+        "threshold_filter": 2000
       }
     },
     {
@@ -850,7 +844,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6551864551927196
+        "threshold_filter": 2000
       }
     },
     {
@@ -869,7 +863,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.647487596380329
+        "threshold_filter": 2000
       }
     },
     {
@@ -888,7 +882,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6365949829776009
+        "threshold_filter": 2000
       }
     },
     {
@@ -907,7 +901,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.31775101329432476
+        "threshold_filter": 2000
       }
     },
     {
@@ -926,7 +920,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5621787183122655
+        "threshold_filter": 2000
       }
     },
     {
@@ -945,7 +939,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6252509284421028
+        "threshold_filter": 2000
       }
     },
     {
@@ -964,7 +958,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6417040242343359
+        "threshold_filter": 2000
       }
     },
     {
@@ -983,7 +977,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6227093565219639
+        "threshold_filter": 2000
       }
     },
     {
@@ -1002,7 +996,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.5787675777355532
+        "threshold_filter": 2000
       }
     },
     {
@@ -1021,7 +1015,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.7225894329433618
+        "threshold_filter": 2000
       }
     },
     {
@@ -1040,7 +1034,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -1059,7 +1053,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.6273052947152303
+        "threshold_filter": 2000
       }
     },
     {
@@ -1078,7 +1072,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6395632299479427
+        "threshold_filter": 2000
       }
     },
     {
@@ -1097,7 +1091,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6458225446979532
+        "threshold_filter": 2000
       }
     },
     {
@@ -1116,7 +1110,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -1135,7 +1129,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5155339579544164
+        "threshold_filter": 2000
       }
     },
     {
@@ -1154,7 +1148,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.578621402431392
+        "threshold_filter": 2000
       }
     },
     {
@@ -1173,7 +1167,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.673852499522807
+        "threshold_filter": 2000
       }
     },
     {
@@ -1192,7 +1186,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.6797584120251516
+        "threshold_filter": 2000
       }
     },
     {
@@ -1211,7 +1205,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.7405992036303481
+        "threshold_filter": 2000
       }
     },
     {
@@ -1230,7 +1224,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.593789101516139
+        "threshold_filter": 2000
       }
     },
     {
@@ -1249,7 +1243,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5766098131296399
+        "threshold_filter": 2000
       }
     },
     {
@@ -1268,7 +1262,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6603658460886821
+        "threshold_filter": 2000
       }
     },
     {
@@ -1287,7 +1281,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6586153764853296
+        "threshold_filter": 2000
       }
     },
     {
@@ -1306,7 +1300,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.8410322402821558
+        "threshold_filter": 2000
       }
     },
     {
@@ -1325,7 +1319,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.542351629946437
+        "threshold_filter": 2000
       }
     },
     {
@@ -1344,7 +1338,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5520215144399822
+        "threshold_filter": 2000
       }
     },
     {
@@ -1363,7 +1357,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6321187380439568
+        "threshold_filter": 2000
       }
     },
     {
@@ -1382,7 +1376,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.6273932411061581
+        "threshold_filter": 2000
       }
     },
     {
@@ -1401,7 +1395,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.8494764080585312
+        "threshold_filter": 2000
       }
     },
     {
@@ -1420,7 +1414,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.21745261463128096
+        "threshold_filter": 2000
       }
     },
     {
@@ -1439,7 +1433,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -1458,7 +1452,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -1477,7 +1471,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6586006490240389
+        "threshold_filter": 2000
       }
     },
     {
@@ -1496,7 +1490,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.18180271071776094
+        "threshold_filter": 2000
       }
     },
     {
@@ -1515,7 +1509,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": true,
-        "confidence_score": 0.99
+        "threshold_filter": 2000
       }
     },
     {
@@ -1534,7 +1528,7 @@
       "clustering_info": {
         "cluster_id": 1,
         "is_outlier": false,
-        "confidence_score": 0.5128166987406467
+        "threshold_filter": 2000
       }
     },
     {
@@ -1553,7 +1547,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.5922731455037844
+        "threshold_filter": 2000
       }
     },
     {
@@ -1572,7 +1566,7 @@
       "clustering_info": {
         "cluster_id": 0,
         "is_outlier": false,
-        "confidence_score": 0.6190733535679029
+        "threshold_filter": 2000
       }
     }
   ]
