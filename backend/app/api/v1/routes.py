@@ -12,6 +12,7 @@ from .endpoints import risk_evaluations
 from .endpoints import users
 from .endpoints import chatbot
 from .endpoints import simulation
+from .endpoints import alerts
 
 
 api_router = APIRouter()
@@ -39,6 +40,8 @@ async def api_v1_root():
             "simulation_earthquake": "/api/v1/simulation/simulate-earthquake",
             "simulation_volcanic": "/api/v1/simulation/simulate-volcanic-advisory",
             "simulation_reset_volcanic": "/api/v1/simulation/reset-volcanic-advisory",
+            "alert": "/api/v1/alert",
+            "chatbot": "/api/v1/chatbot",
         },
         "timestamp": now,
     }
@@ -52,3 +55,4 @@ api_router.include_router(risk_evaluations.router)
 api_router.include_router(users.router)
 api_router.include_router(chatbot.router)
 api_router.include_router(simulation.router)
+api_router.include_router(alerts.router)
