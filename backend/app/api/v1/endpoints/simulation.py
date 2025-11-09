@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, Query
+import httpx
 
 from app.core.database import supabase
 from app.services.live.earthquakes.earthquake_updater import earthquake_updater
@@ -83,6 +84,14 @@ async def simulate_earthquake(
                 status_code=400,
                 detail=f"Invalid option. Must be 1, 2, or 3. Got: {option}"
             )
+
+        # (demo) trigger phone alert endpoint when earthquake is option 3
+        if option == 3:
+            async with httpx.AsyncClient() as client:
+                response = await client.post("http://localhost:8000/api/v1/alerts/trigger", json={"alert": True})
+                # Optionally check response status and data
+                if response.status_code != 200:
+                    print("Failed to trigger alert:", response.text)
         
         earthquake_data = test_earthquakes[option]
         
