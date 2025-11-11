@@ -1,7 +1,7 @@
 VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-07 23:36:00
+Updated: 2025-11-11 21:03:48
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status
