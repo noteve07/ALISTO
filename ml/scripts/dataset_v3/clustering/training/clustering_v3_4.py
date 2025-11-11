@@ -299,7 +299,7 @@ def create_3d_visualizations(provinces_features, kmeans, scaler, output_dir):
     ax1.set_xlabel('Total Earthquakes', fontsize=9, fontweight='bold')
     ax1.set_ylabel('Major EQs (M≥3.0)', fontsize=9, fontweight='bold')
     ax1.set_zlabel('Fault Distance (km)', fontsize=9, fontweight='bold')
-    ax1.set_title('Training Data (< 2000 quakes)', fontsize=10, fontweight='bold')
+    ax1.set_title('Training Data (k=2)', fontsize=10, fontweight='bold')
     ax1.legend(fontsize=8)
     ax1.view_init(elev=20, azim=45)
     

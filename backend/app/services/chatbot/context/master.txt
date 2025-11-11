@@ -56,35 +56,29 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 74 | Minor (<3.0): 57 | Major (>=3.0): 17
-Average Magnitude: 2.54 | Highest: 5.6
-Updated: 2025-11-07 23:38:52
+Total: 68 | Minor (<3.0): 57 | Major (>=3.0): 11
+Average Magnitude: 2.36 | Highest: 4.3
+Updated: 2025-11-12 01:20:18
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
-2025-11-07T22:51:00 | 3.5 | 10km | Cebu
-2025-11-07T20:49:00 | 3.4 | 12km | Pangasinan
-2025-11-07T19:39:40.348123 | 5.6 | 32km | Bataan
-2025-11-07T19:00:00 | 4.4 | 10km | Cebu
-2025-11-07T18:25:00 | 4.7 | 10km | Isabela
-2025-11-07T14:59:00 | 4.2 | 10km | Cebu
-2025-11-07T14:28:00 | 3.1 | 15km | Davao De Oro
-2025-11-07T14:14:00 | 3.1 | 11km | Pangasinan
-2025-11-07T13:33:00 | 4 | 50km | Negros Oriental
-2025-11-07T13:23:00 | 4.7 | 10km | Pangasinan
-2025-11-07T11:34:00 | 3 | 7km | Cebu
-2025-11-07T10:43:00 | 3.1 | 7km | Leyte
-2025-11-07T10:27:00 | 4.1 | 160km | Davao Occidental
-2025-11-07T10:27:00 | 3.8 | 141km | Davao Occidental
-2025-11-07T07:30:00 | 3.9 | 3km | Cebu
-2025-11-07T02:42:00 | 3 | 5km | Batanes
-2025-11-06T23:42:00 | 3.6 | 155km | Davao Occidental
+2025-11-12T00:29:00 | 3.4 | 7km | Cebu
+2025-11-12T00:16:00 | 3.2 | 10km | Cebu
+2025-11-12T00:16:00 | 3.2 | 7km | Cebu
+2025-11-11T23:51:00 | 4.2 | 10km | Cebu
+2025-11-11T22:46:00 | 4.3 | 10km | Cebu
+2025-11-11T22:46:00 | 4.1 | 6km | Cebu
+2025-11-11T22:37:00 | 4 | 25km | Davao De Oro
+2025-11-11T22:02:00 | 3.1 | 7km | Eastern Samar
+2025-11-11T19:02:00 | 3.1 | 4km | Cebu
+2025-11-11T09:25:00 | 3 | 32km | Davao De Oro
+2025-11-11T05:11:00 | 3.2 | 7km | Cebu
     
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-07 23:36:00
+Updated: 2025-11-12 01:35:25
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status

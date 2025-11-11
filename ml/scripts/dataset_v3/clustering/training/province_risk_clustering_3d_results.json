@@ -1,0 +1,1573 @@
+{
+  "metadata": {
+    "total_provinces": 82,
+    "clustering_algorithm": "K-Means",
+    "n_clusters": 2,
+    "filter_threshold": 2000,
+    "features": [
+      "total_quakes",
+      "major_quakes_m3plus",
+      "nearest_fault_km"
+    ]
+  },
+  "provinces": [
+    {
+      "province": "Abra",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 2854,
+        "major_earthquakes_m3plus": 341,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.28,
+        "max_magnitude": 7.0,
+        "min_magnitude": 1.0,
+        "average_depth_km": 13.83,
+        "max_depth_km": 195.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Agusan Del Norte",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 700,
+        "major_earthquakes_m3plus": 125,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.44,
+        "max_magnitude": 5.8,
+        "min_magnitude": 1.3,
+        "average_depth_km": 18.03,
+        "max_depth_km": 117.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Agusan Del Sur",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1610,
+        "major_earthquakes_m3plus": 189,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.31,
+        "max_magnitude": 5.3,
+        "min_magnitude": 1.1,
+        "average_depth_km": 24.86,
+        "max_depth_km": 175.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Aklan",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 35,
+        "major_earthquakes_m3plus": 9,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.46,
+        "max_magnitude": 4.0,
+        "min_magnitude": 1.4,
+        "average_depth_km": 15.63,
+        "max_depth_km": 40.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Albay",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 276,
+        "major_earthquakes_m3plus": 46,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.36,
+        "max_magnitude": 4.8,
+        "min_magnitude": 1.3,
+        "average_depth_km": 22.35,
+        "max_depth_km": 107.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Antique",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 529,
+        "major_earthquakes_m3plus": 173,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.76,
+        "max_magnitude": 5.1,
+        "min_magnitude": 1.3,
+        "average_depth_km": 15.17,
+        "max_depth_km": 137.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Apayao",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 333,
+        "major_earthquakes_m3plus": 24,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.12,
+        "max_magnitude": 4.4,
+        "min_magnitude": 1.3,
+        "average_depth_km": 25.66,
+        "max_depth_km": 119.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Aurora",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1242,
+        "major_earthquakes_m3plus": 137,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.26,
+        "max_magnitude": 5.1,
+        "min_magnitude": 1.2,
+        "average_depth_km": 16.44,
+        "max_depth_km": 102.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Basilan",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 31,
+        "major_earthquakes_m3plus": 5,
+        "nearest_fault_distance_km": 47.59,
+        "average_magnitude": 2.41,
+        "max_magnitude": 3.8,
+        "min_magnitude": 1.5,
+        "average_depth_km": 31.29,
+        "max_depth_km": 72.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Bataan",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 373,
+        "major_earthquakes_m3plus": 31,
+        "nearest_fault_distance_km": 38.86,
+        "average_magnitude": 2.16,
+        "max_magnitude": 4.6,
+        "min_magnitude": 1.3,
+        "average_depth_km": 78.3,
+        "max_depth_km": 210.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Batanes",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 995,
+        "major_earthquakes_m3plus": 550,
+        "nearest_fault_distance_km": 47.55,
+        "average_magnitude": 3.11,
+        "max_magnitude": 6.7,
+        "min_magnitude": 1.4,
+        "average_depth_km": 29.12,
+        "max_depth_km": 219.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Batangas",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 5794,
+        "major_earthquakes_m3plus": 620,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.18,
+        "max_magnitude": 6.6,
+        "min_magnitude": 1.2,
+        "average_depth_km": 78.21,
+        "max_depth_km": 1068.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Benguet",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 326,
+        "major_earthquakes_m3plus": 30,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.18,
+        "max_magnitude": 4.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 19.63,
+        "max_depth_km": 127.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Biliran",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 358,
+        "major_earthquakes_m3plus": 80,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.6,
+        "max_magnitude": 5.0,
+        "min_magnitude": 1.4,
+        "average_depth_km": 10.96,
+        "max_depth_km": 99.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Bohol",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1064,
+        "major_earthquakes_m3plus": 90,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.23,
+        "max_magnitude": 5.9,
+        "min_magnitude": 1.2,
+        "average_depth_km": 20.98,
+        "max_depth_km": 587.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Bukidnon",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 977,
+        "major_earthquakes_m3plus": 179,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.5,
+        "max_magnitude": 5.9,
+        "min_magnitude": 1.3,
+        "average_depth_km": 10.57,
+        "max_depth_km": 121.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Bulacan",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 49,
+        "major_earthquakes_m3plus": 4,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 1.99,
+        "max_magnitude": 3.3,
+        "min_magnitude": 1.1,
+        "average_depth_km": 21.29,
+        "max_depth_km": 40.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Cagayan",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 3123,
+        "major_earthquakes_m3plus": 811,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.6,
+        "max_magnitude": 6.3,
+        "min_magnitude": 1.3,
+        "average_depth_km": 18.9,
+        "max_depth_km": 224.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Camarines Norte",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 487,
+        "major_earthquakes_m3plus": 93,
+        "nearest_fault_distance_km": 7.3,
+        "average_magnitude": 2.49,
+        "max_magnitude": 5.3,
+        "min_magnitude": 1.3,
+        "average_depth_km": 14.07,
+        "max_depth_km": 121.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Camarines Sur",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 770,
+        "major_earthquakes_m3plus": 114,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.29,
+        "max_magnitude": 4.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 14.71,
+        "max_depth_km": 102.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Camiguin",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 28,
+        "major_earthquakes_m3plus": 4,
+        "nearest_fault_distance_km": 32.52,
+        "average_magnitude": 2.4,
+        "max_magnitude": 4.0,
+        "min_magnitude": 1.7,
+        "average_depth_km": 17.89,
+        "max_depth_km": 45.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Capiz",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 22,
+        "major_earthquakes_m3plus": 2,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.55,
+        "max_magnitude": 3.7,
+        "min_magnitude": 1.8,
+        "average_depth_km": 17.86,
+        "max_depth_km": 48.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Catanduanes",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 617,
+        "major_earthquakes_m3plus": 183,
+        "nearest_fault_distance_km": 72.34,
+        "average_magnitude": 2.68,
+        "max_magnitude": 6.2,
+        "min_magnitude": 1.3,
+        "average_depth_km": 23.02,
+        "max_depth_km": 235.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Cavite",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 57,
+        "major_earthquakes_m3plus": 15,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.4,
+        "max_magnitude": 4.0,
+        "min_magnitude": 1.4,
+        "average_depth_km": 28.25,
+        "max_depth_km": 202.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Cebu",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 3289,
+        "major_earthquakes_m3plus": 356,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.21,
+        "max_magnitude": 6.9,
+        "min_magnitude": 1.0,
+        "average_depth_km": 15.62,
+        "max_depth_km": 85.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Compostela Valley",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1332,
+        "major_earthquakes_m3plus": 147,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.29,
+        "max_magnitude": 6.0,
+        "min_magnitude": 1.2,
+        "average_depth_km": 20.39,
+        "max_depth_km": 165.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Davao Del Norte",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 328,
+        "major_earthquakes_m3plus": 58,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.48,
+        "max_magnitude": 4.9,
+        "min_magnitude": 1.3,
+        "average_depth_km": 24.94,
+        "max_depth_km": 170.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Davao Del Sur",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 9476,
+        "major_earthquakes_m3plus": 5065,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 3.09,
+        "max_magnitude": 7.1,
+        "min_magnitude": 1.2,
+        "average_depth_km": 60.75,
+        "max_depth_km": 667.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Davao Oriental",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 9083,
+        "major_earthquakes_m3plus": 3161,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.78,
+        "max_magnitude": 7.4,
+        "min_magnitude": 1.0,
+        "average_depth_km": 42.62,
+        "max_depth_km": 292.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Dinagat Islands",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 688,
+        "major_earthquakes_m3plus": 98,
+        "nearest_fault_distance_km": 19.73,
+        "average_magnitude": 2.36,
+        "max_magnitude": 5.7,
+        "min_magnitude": 1.3,
+        "average_depth_km": 42.83,
+        "max_depth_km": 214.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Eastern Samar",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 2672,
+        "major_earthquakes_m3plus": 908,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.76,
+        "max_magnitude": 6.5,
+        "min_magnitude": 1.4,
+        "average_depth_km": 19.94,
+        "max_depth_km": 193.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Guimaras",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 169,
+        "major_earthquakes_m3plus": 13,
+        "nearest_fault_distance_km": 37.38,
+        "average_magnitude": 2.27,
+        "max_magnitude": 4.0,
+        "min_magnitude": 1.2,
+        "average_depth_km": 18.97,
+        "max_depth_km": 88.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Ifugao",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 226,
+        "major_earthquakes_m3plus": 17,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.05,
+        "max_magnitude": 3.8,
+        "min_magnitude": 1.3,
+        "average_depth_km": 24.16,
+        "max_depth_km": 192.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Ilocos Norte",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 2593,
+        "major_earthquakes_m3plus": 504,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.45,
+        "max_magnitude": 5.7,
+        "min_magnitude": 1.1,
+        "average_depth_km": 18.4,
+        "max_depth_km": 333.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Ilocos Sur",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1825,
+        "major_earthquakes_m3plus": 363,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.5,
+        "max_magnitude": 5.1,
+        "min_magnitude": 1.2,
+        "average_depth_km": 20.26,
+        "max_depth_km": 151.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Iloilo",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 311,
+        "major_earthquakes_m3plus": 54,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.48,
+        "max_magnitude": 4.9,
+        "min_magnitude": 1.3,
+        "average_depth_km": 17.92,
+        "max_depth_km": 101.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Isabela",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1204,
+        "major_earthquakes_m3plus": 235,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.48,
+        "max_magnitude": 5.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 24.71,
+        "max_depth_km": 158.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Kalinga",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 143,
+        "major_earthquakes_m3plus": 15,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.26,
+        "max_magnitude": 4.0,
+        "min_magnitude": 1.2,
+        "average_depth_km": 26.77,
+        "max_depth_km": 183.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "La Union",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 636,
+        "major_earthquakes_m3plus": 99,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.38,
+        "max_magnitude": 5.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 28.11,
+        "max_depth_km": 113.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Laguna",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 112,
+        "major_earthquakes_m3plus": 8,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.0,
+        "max_magnitude": 3.7,
+        "min_magnitude": 1.0,
+        "average_depth_km": 19.89,
+        "max_depth_km": 70.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Lanao Del Norte",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 72,
+        "major_earthquakes_m3plus": 8,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.29,
+        "max_magnitude": 4.1,
+        "min_magnitude": 1.4,
+        "average_depth_km": 26.29,
+        "max_depth_km": 615.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Lanao Del Sur",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 444,
+        "major_earthquakes_m3plus": 55,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.35,
+        "max_magnitude": 6.0,
+        "min_magnitude": 1.1,
+        "average_depth_km": 14.35,
+        "max_depth_km": 619.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Leyte",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1580,
+        "major_earthquakes_m3plus": 286,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.46,
+        "max_magnitude": 5.8,
+        "min_magnitude": 1.2,
+        "average_depth_km": 11.53,
+        "max_depth_km": 188.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Maguindanao",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 332,
+        "major_earthquakes_m3plus": 52,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.44,
+        "max_magnitude": 6.4,
+        "min_magnitude": 1.4,
+        "average_depth_km": 33.17,
+        "max_depth_km": 636.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Maguindanao Del Norte",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 185,
+        "major_earthquakes_m3plus": 24,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.31,
+        "max_magnitude": 4.9,
+        "min_magnitude": 1.3,
+        "average_depth_km": 23.95,
+        "max_depth_km": 604.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Marinduque",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 176,
+        "major_earthquakes_m3plus": 16,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.27,
+        "max_magnitude": 3.8,
+        "min_magnitude": 1.2,
+        "average_depth_km": 13.42,
+        "max_depth_km": 58.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Masbate",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1872,
+        "major_earthquakes_m3plus": 486,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.6,
+        "max_magnitude": 6.6,
+        "min_magnitude": 1.2,
+        "average_depth_km": 11.14,
+        "max_depth_km": 123.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Metropolitan Manila",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 1,
+        "major_earthquakes_m3plus": 0,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 1.1,
+        "max_magnitude": 1.1,
+        "min_magnitude": 1.1,
+        "average_depth_km": 25.0,
+        "max_depth_km": 25.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Misamis Occidental",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 39,
+        "major_earthquakes_m3plus": 5,
+        "nearest_fault_distance_km": 3.91,
+        "average_magnitude": 2.32,
+        "max_magnitude": 4.2,
+        "min_magnitude": 1.5,
+        "average_depth_km": 14.64,
+        "max_depth_km": 105.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Misamis Oriental",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 135,
+        "major_earthquakes_m3plus": 36,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.61,
+        "max_magnitude": 4.7,
+        "min_magnitude": 1.4,
+        "average_depth_km": 17.87,
+        "max_depth_km": 168.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Mountain Province",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 180,
+        "major_earthquakes_m3plus": 6,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.02,
+        "max_magnitude": 4.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 27.31,
+        "max_depth_km": 131.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Negros Occidental",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1767,
+        "major_earthquakes_m3plus": 276,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.44,
+        "max_magnitude": 5.1,
+        "min_magnitude": 1.0,
+        "average_depth_km": 18.19,
+        "max_depth_km": 142.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Negros Oriental",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1349,
+        "major_earthquakes_m3plus": 214,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.43,
+        "max_magnitude": 4.9,
+        "min_magnitude": 1.0,
+        "average_depth_km": 16.52,
+        "max_depth_km": 132.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "North Cotabato",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 2468,
+        "major_earthquakes_m3plus": 482,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.5,
+        "max_magnitude": 6.6,
+        "min_magnitude": 1.4,
+        "average_depth_km": 21.35,
+        "max_depth_km": 422.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Northern Samar",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1180,
+        "major_earthquakes_m3plus": 309,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.59,
+        "max_magnitude": 5.7,
+        "min_magnitude": 1.2,
+        "average_depth_km": 25.36,
+        "max_depth_km": 175.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Nueva Ecija",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 221,
+        "major_earthquakes_m3plus": 13,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.06,
+        "max_magnitude": 4.7,
+        "min_magnitude": 1.2,
+        "average_depth_km": 23.87,
+        "max_depth_km": 186.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Nueva Vizcaya",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 384,
+        "major_earthquakes_m3plus": 39,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.23,
+        "max_magnitude": 4.4,
+        "min_magnitude": 1.3,
+        "average_depth_km": 18.52,
+        "max_depth_km": 96.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Occidental Mindoro",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 5403,
+        "major_earthquakes_m3plus": 832,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.38,
+        "max_magnitude": 6.4,
+        "min_magnitude": 1.0,
+        "average_depth_km": 30.53,
+        "max_depth_km": 310.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Oriental Mindoro",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 692,
+        "major_earthquakes_m3plus": 61,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.2,
+        "max_magnitude": 5.1,
+        "min_magnitude": 1.0,
+        "average_depth_km": 19.17,
+        "max_depth_km": 181.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Palawan",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 177,
+        "major_earthquakes_m3plus": 25,
+        "nearest_fault_distance_km": 24.18,
+        "average_magnitude": 2.4,
+        "max_magnitude": 5.1,
+        "min_magnitude": 1.5,
+        "average_depth_km": 25.39,
+        "max_depth_km": 161.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Pampanga",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 118,
+        "major_earthquakes_m3plus": 13,
+        "nearest_fault_distance_km": 16.68,
+        "average_magnitude": 2.27,
+        "max_magnitude": 3.8,
+        "min_magnitude": 1.4,
+        "average_depth_km": 43.14,
+        "max_depth_km": 175.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Pangasinan",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1165,
+        "major_earthquakes_m3plus": 230,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.46,
+        "max_magnitude": 5.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 27.56,
+        "max_depth_km": 211.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Quezon",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1534,
+        "major_earthquakes_m3plus": 235,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.34,
+        "max_magnitude": 5.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 13.44,
+        "max_depth_km": 135.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Quirino",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 79,
+        "major_earthquakes_m3plus": 4,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.06,
+        "max_magnitude": 4.9,
+        "min_magnitude": 1.4,
+        "average_depth_km": 24.42,
+        "max_depth_km": 108.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Rizal",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 39,
+        "major_earthquakes_m3plus": 1,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 1.94,
+        "max_magnitude": 3.9,
+        "min_magnitude": 1.1,
+        "average_depth_km": 23.95,
+        "max_depth_km": 47.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Romblon",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 209,
+        "major_earthquakes_m3plus": 43,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.47,
+        "max_magnitude": 4.8,
+        "min_magnitude": 1.2,
+        "average_depth_km": 14.65,
+        "max_depth_km": 201.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Samar",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 332,
+        "major_earthquakes_m3plus": 40,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.32,
+        "max_magnitude": 5.2,
+        "min_magnitude": 1.2,
+        "average_depth_km": 35.98,
+        "max_depth_km": 233.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Sarangani",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1461,
+        "major_earthquakes_m3plus": 254,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.41,
+        "max_magnitude": 6.1,
+        "min_magnitude": 1.3,
+        "average_depth_km": 34.9,
+        "max_depth_km": 572.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Siquijor",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 68,
+        "major_earthquakes_m3plus": 7,
+        "nearest_fault_distance_km": 24.37,
+        "average_magnitude": 2.3,
+        "max_magnitude": 4.4,
+        "min_magnitude": 1.4,
+        "average_depth_km": 30.68,
+        "max_depth_km": 550.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Sorsogon",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 424,
+        "major_earthquakes_m3plus": 108,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.53,
+        "max_magnitude": 5.4,
+        "min_magnitude": 1.1,
+        "average_depth_km": 28.54,
+        "max_depth_km": 198.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "South Cotabato",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 424,
+        "major_earthquakes_m3plus": 46,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.27,
+        "max_magnitude": 5.0,
+        "min_magnitude": 1.3,
+        "average_depth_km": 26.95,
+        "max_depth_km": 414.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Southern Leyte",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1697,
+        "major_earthquakes_m3plus": 243,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.36,
+        "max_magnitude": 5.8,
+        "min_magnitude": 1.2,
+        "average_depth_km": 17.84,
+        "max_depth_km": 209.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Sultan Kudarat",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1388,
+        "major_earthquakes_m3plus": 271,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.5,
+        "max_magnitude": 7.1,
+        "min_magnitude": 1.2,
+        "average_depth_km": 38.22,
+        "max_depth_km": 686.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Sulu",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 43,
+        "major_earthquakes_m3plus": 32,
+        "nearest_fault_distance_km": 82.13,
+        "average_magnitude": 3.49,
+        "max_magnitude": 4.8,
+        "min_magnitude": 2.1,
+        "average_depth_km": 149.47,
+        "max_depth_km": 621.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Surigao Del Norte",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 8205,
+        "major_earthquakes_m3plus": 1744,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.47,
+        "max_magnitude": 6.2,
+        "min_magnitude": 1.2,
+        "average_depth_km": 20.53,
+        "max_depth_km": 238.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Surigao Del Sur",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 15980,
+        "major_earthquakes_m3plus": 3419,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.48,
+        "max_magnitude": 7.4,
+        "min_magnitude": 1.1,
+        "average_depth_km": 21.59,
+        "max_depth_km": 209.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Tarlac",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 218,
+        "major_earthquakes_m3plus": 31,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.24,
+        "max_magnitude": 5.7,
+        "min_magnitude": 1.2,
+        "average_depth_km": 54.19,
+        "max_depth_km": 191.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Tawi-Tawi",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 21,
+        "major_earthquakes_m3plus": 21,
+        "nearest_fault_distance_km": 100.25,
+        "average_magnitude": 4.33,
+        "max_magnitude": 4.8,
+        "min_magnitude": 3.0,
+        "average_depth_km": 274.52,
+        "max_depth_km": 635.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Zambales",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 2352,
+        "major_earthquakes_m3plus": 323,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.3,
+        "max_magnitude": 6.1,
+        "min_magnitude": 1.1,
+        "average_depth_km": 27.57,
+        "max_depth_km": 172.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": true,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Zamboanga Del Norte",
+      "risk_level": "Medium",
+      "data": {
+        "total_earthquakes": 1040,
+        "major_earthquakes_m3plus": 173,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.35,
+        "max_magnitude": 5.5,
+        "min_magnitude": 1.2,
+        "average_depth_km": 24.53,
+        "max_depth_km": 176.0
+      },
+      "clustering_info": {
+        "cluster_id": 1,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Zamboanga Del Sur",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 496,
+        "major_earthquakes_m3plus": 66,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 2.3,
+        "max_magnitude": 4.9,
+        "min_magnitude": 1.2,
+        "average_depth_km": 21.48,
+        "max_depth_km": 122.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    },
+    {
+      "province": "Zamboanga Sibugay",
+      "risk_level": "Low",
+      "data": {
+        "total_earthquakes": 148,
+        "major_earthquakes_m3plus": 8,
+        "nearest_fault_distance_km": 0.0,
+        "average_magnitude": 1.96,
+        "max_magnitude": 5.0,
+        "min_magnitude": 1.2,
+        "average_depth_km": 26.44,
+        "max_depth_km": 205.0
+      },
+      "clustering_info": {
+        "cluster_id": 0,
+        "is_outlier": false,
+        "threshold_filter": 2000
+      }
+    }
+  ]
+}

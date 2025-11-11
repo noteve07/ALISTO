@@ -9,24 +9,28 @@ const Developer = () => {
       name: "Nicko James E. Barata",
       role: "Full Stack Developer",
       initials: "NB",
+      image: "/devs/dev1.png",
     },
     {
       id: 2,
       name: "Jealla Rose M. Waje",
       role: "UI/UX Designer",
       initials: "JW",
+      image: "/devs/dev2.png",
     },
     {
       id: 3,
       name: "Miguel Grant V. Bagtas",
       role: "Backend Developer",
       initials: "MB",
+      image: "/devs/dev3.png",
     },
     {
       id: 4,
       name: "Michale Joseph M. Talabo",
       role: "Backend Developer",
       initials: "MT",
+      image: "/devs/dev4.png",
     },
   ];
 
@@ -69,10 +73,20 @@ const Developer = () => {
               }`}
               style={{ transitionDelay: `${300 + index * 75}ms` }}
             >
-              {/* Avatar placeholder */}
-              <div className="w-28 h-28 mx-auto mb-6 bg-background rounded-2xl flex items-center justify-center text-2xl font-bold text-primary-v2 transition-all duration-300 group-hover:bg-primary-v2 group-hover:text-white shadow-lg">
-                {developer.initials}
-              </div>
+              {/* Avatar */}
+              <img
+                src={developer.image}
+                alt={`${developer.name} headshot`}
+                className="w-28 h-28 mx-auto mb-6 object-cover rounded-2xl shadow-lg transition-transform duration-300 group-hover:scale-105 border border-slate-900"
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const fallback = document.createElement('div');
+                  fallback.className = 'w-28 h-28 mx-auto mb-6 bg-background rounded-2xl flex items-center justify-center text-2xl font-bold text-primary-v2 shadow-lg border border-slate-900';
+                  fallback.textContent = developer.initials;
+                  e.currentTarget.parentElement?.insertBefore(fallback, e.currentTarget.nextSibling);
+                }}
+              />
 
               {/* Developer info */}
               <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-primary-v2">

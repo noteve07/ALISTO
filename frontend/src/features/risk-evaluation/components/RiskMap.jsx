@@ -15,6 +15,7 @@ import ProvinceRiskList from "./ProvinceRiskList";
 import CombinedLegend from "./CombinedLegend";
 import LocationRiskAssessment from "./LocationRiskAssessment";
 import MunicipalityOverlay from "./MunicipalityOverlay";
+import EmergencyFacilityMarkers from "./EmergencyFacilityMarkers";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -82,6 +83,12 @@ const RiskMap = ({
   const [currentZoom, setCurrentZoom] = useState(6);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedMunicipality, setSelectedMunicipality] = useState(null);
+  
+  // State for location assessment
+  const [assessmentStarted, setAssessmentStarted] = useState(false);
+  const [assessmentData, setAssessmentData] = useState(null);
+  const [assessmentLoading, setAssessmentLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
 
   // Handle zoom changes
   const handleZoomChange = (zoom) => {
@@ -112,6 +119,51 @@ const RiskMap = ({
     if (currentZoom >= 12 && mapRef.current) {
       console.log(`📍 Zooming to user location at street level (zoom 14)`);
       mapRef.current.flyTo(position, 14, {
+        duration: 1.5,
+        easeLinearity: 0.25,
+      });
+    }
+  };
+
+  // Handle starting location assessment
+  const handleStartAssessment = (locationInfo) => {
+    console.log('🔍 Starting location assessment for:', locationInfo);
+    setAssessmentLoading(true);
+    setLoadingStep(0);
+    
+    // Step-by-step loading simulation with hardcoded arbitrary delays (1-2 seconds each)
+    const steps = [
+      { delay: 1200, step: 0, message: 'Analyzing landslide risk...' },
+      { delay: 1800, step: 1, message: 'Checking tsunami vulnerability...' },
+      { delay: 1500, step: 2, message: 'Evaluating liquefaction potential...' },
+      { delay: 1100, step: 3, message: 'Finding nearest school...' },
+      { delay: 1700, step: 4, message: 'Locating nearest hospital...' },
+      { delay: 1300, step: 5, message: 'Identifying evacuation center...' },
+    ];
+    
+    let currentDelay = 0;
+    steps.forEach(({ delay, step, message }) => {
+      currentDelay += delay;
+      setTimeout(() => {
+        console.log(`📊 ${message}`);
+        setLoadingStep(step + 1);
+      }, currentDelay);
+    });
+    
+    // Complete assessment
+    setTimeout(() => {
+      setAssessmentStarted(true);
+      setAssessmentData(locationInfo);
+      setAssessmentLoading(false);
+      setLoadingStep(0);
+    }, currentDelay + 500);
+  };
+
+  // Handle facility click to zoom to location
+  const handleFacilityClick = (coordinates) => {
+    if (mapRef.current && coordinates) {
+      console.log('🏥 Zooming to facility at:', coordinates);
+      mapRef.current.flyTo(coordinates, 16, {
         duration: 1.5,
         easeLinearity: 0.25,
       });
@@ -284,10 +336,11 @@ const RiskMap = ({
     if (centroid) {
       layer.bindPopup(popupHtml, {
         closeButton: true,
-        autoClose: true,
+        autoClose: false,
         closeOnClick: false,
         className: "province-risk-popup",
         maxWidth: 250,
+        autoPan: false,
       });
     }
 
@@ -301,11 +354,52 @@ const RiskMap = ({
           fillColor: darkenColor(baseColor, 0.1),
           fillOpacity: 0.9,
         });
+        
+        // Show popup on hover
+        if (centroid) {
+          target.openPopup(centroid);
+          
+          // Add event listeners to popup to prevent closing when hovering over it
+          setTimeout(() => {
+            const popup = target.getPopup();
+            if (popup && popup._container) {
+              const popupElement = popup._container;
+              
+              popupElement.addEventListener('mouseenter', () => {
+                target._hoveringPopup = true;
+              });
+              
+              popupElement.addEventListener('mouseleave', () => {
+                target._hoveringPopup = false;
+                // Close popup when leaving popup area
+                setTimeout(() => {
+                  if (!target._hoveringPopup && !target._hoveringLayer) {
+                    target.closePopup();
+                    if (geoJsonRef.current) {
+                      geoJsonRef.current.resetStyle(target);
+                    }
+                  }
+                }, 100);
+              });
+            }
+          }, 10);
+        }
+        
+        target._hoveringLayer = true;
       },
       mouseout: (e) => {
-        if (geoJsonRef.current) {
-          geoJsonRef.current.resetStyle(e.target);
-        }
+        const target = e.target;
+        target._hoveringLayer = false;
+        
+        // Delay closing to check if mouse moved to popup
+        setTimeout(() => {
+          if (!target._hoveringPopup && !target._hoveringLayer) {
+            target.closePopup();
+            if (geoJsonRef.current) {
+              geoJsonRef.current.resetStyle(target);
+            }
+          }
+        }, 100);
       },
       click: (e) => {
         const target = e.target;
@@ -433,7 +527,16 @@ const RiskMap = ({
           showVolcano={filters.showVolcanoes}
           showFault={filters.showFaultLines}
         />
-        <UserLocationMarker onLocationClick={handleUserLocationClick} />
+        <UserLocationMarker 
+          onLocationClick={handleUserLocationClick} 
+          onStartAssessment={handleStartAssessment}
+        />
+        <EmergencyFacilityMarkers 
+          userLocation={assessmentData} 
+          assessmentStarted={assessmentStarted}
+          assessmentLoading={assessmentLoading}
+          loadingStep={loadingStep}
+        />
       </MapContainer>
 
       <RiskFilterPanel filters={filters} onFilterChange={onFilterChange} />
@@ -442,7 +545,12 @@ const RiskMap = ({
         onProvinceClick={handleProvinceClick}
       />
       <CombinedLegend />
-      <LocationRiskAssessment />
+      <LocationRiskAssessment 
+        assessmentStarted={assessmentStarted} 
+        assessmentLoading={assessmentLoading}
+        loadingStep={loadingStep}
+        onFacilityClick={handleFacilityClick}
+      />
     </div>
   );
 };

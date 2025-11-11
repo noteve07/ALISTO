@@ -26,53 +26,36 @@ const MapLegend = ({ earthquakeData }) => {
     },
   ];
 
-  // Test function to simulate the earthquake alert functionality
-  const testEarthquakeAlert = () => {
-    if (!earthquakeData.length) {
-      alert("No earthquake data available for testing");
-      return;
-    }
-
-    const latestEarthquake = earthquakeData[0];
-
-    console.log("🧪 Testing earthquake alert for:", latestEarthquake.location);
-
-    // Play sound notification using shared utility
+  // Test function: delegate entirely to backend simulation (no local map actions)
+  const testEarthquakeAlert = async () => {
     try {
-      const urgency = getEarthquakeUrgency(latestEarthquake.magnitude);
-      
-      playEarthquakeSound(latestEarthquake.magnitude, {
-        urgency,
-        source: 'test'
-      });
-    } catch (error) {
-      console.log("🔇 Audio not supported or blocked:", error);
-    }
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
 
-    // Calculate appropriate zoom level based on magnitude
-    const getZoomLevel = (magnitude) => {
-      if (magnitude >= 6) return 9; // Major earthquakes - closer view
-      if (magnitude >= 5) return 8; // Strong earthquakes
-      if (magnitude >= 4) return 7; // Moderate earthquakes
-      return 7; // Minor earthquakes
-    };
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/v1/simulation/simulate-earthquake?option=3",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ option: 3 }),
+          signal: controller.signal,
+        }
+      );
+      clearTimeout(timeoutId);
 
-    const targetZoom = getZoomLevel(latestEarthquake.magnitude);
-
-    // Smooth pan and zoom to the latest earthquake
-    map.flyTo(
-      [latestEarthquake.latitude, latestEarthquake.longitude],
-      targetZoom,
-      {
-        duration: 2, // 2 seconds animation
-        easeLinearity: 0.25,
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
       }
-    );
 
-    // Show brief notification
-    setTimeout(() => {
-      console.log("🎯 Test completed - focused on latest earthquake");
-    }, 2000);
+      const data = await response.json();
+      console.log("🧪 Simulation triggered:", data?.message ?? "OK");
+      // Backend handles map panning/zooming and notifications.
+    } catch (err) {
+      console.warn("⚠️ Simulation request failed:", err);
+    }
   };
 
   return (
@@ -155,7 +138,7 @@ const MapLegend = ({ earthquakeData }) => {
               <button
                 onClick={testEarthquakeAlert}
                 className="w-full mt-2 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-medium rounded transition-colors duration-200 flex items-center justify-center gap-1.5"
-                title="Test earthquake alert sound and auto-pan functionality"
+                title="Trigger backend earthquake simulation"
               >
                 <svg
                   className="w-3 h-3"
