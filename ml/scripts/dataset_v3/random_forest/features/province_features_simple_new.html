@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dataset V3 Features - Time Series Data</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background: white;
+            }
+            
+            h1 {
+                color: #333;
+                font-size: 24px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0 auto;
+                background: white;
+                font-size: 13px;
+            }
+            
+            th {
+                background-color: #333;
+                color: white;
+                font-weight: bold;
+                padding: 12px 8px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+            
+            td {
+                padding: 8px;
+                text-align: center;
+                border: 1px solid #ddd;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #f8f8f8;
+            }
+            
+            .province {
+                text-align: left !important;
+                font-weight: 500;
+            }
+            
+            .number {
+                text-align: right !important;
+                font-family: monospace;
+            }
+            
+            .separator {
+                background-color: #f5f5f5 !important;
+                font-style: italic;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Dataset V3 Features - Earthquake Time Series Data</h1>
+        <p><strong>Total Provinces:</strong> 83 | <strong>Total Records:</strong> 234,392 | <strong>Time Series:</strong> Daily earthquake features per province</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Province</th>
+                    <th>Date</th>
+                    <th>EQ Count<br>(30d)</th>
+                    <th>Max Mag<br>(30d)</th>
+                    <th>Avg Mag<br>(30d)</th>
+                    <th>Avg Depth<br>(30d)</th>
+                    <th>Days Since<br>Last EQ</th>
+                    <th>Days Since<br>Major EQ</th>
+                    <th>EQ Count<br>(7d)</th>
+                    <th>Next 7d<br>EQ Count</th>
+                    <th>Next 7d<br>Max Mag</th>
+                    <th>Risk Level</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td class="province"><strong>Abra</strong></td>
+                    <td class="number">2018-01-31</td>
+                    <td class="number">2</td>
+                    <td class="number">2.5</td>
+                    <td class="number">2.3</td>
+                    <td class="number">21.0</td>
+                    <td class="number">19</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-01</td>
+                    <td class="number">2</td>
+                    <td class="number">2.5</td>
+                    <td class="number">2.3</td>
+                    <td class="number">21.0</td>
+                    <td class="number">20</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-02</td>
+                    <td class="number">2</td>
+                    <td class="number">2.5</td>
+                    <td class="number">2.3</td>
+                    <td class="number">21.0</td>
+                    <td class="number">21</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-03</td>
+                    <td class="number">2</td>
+                    <td class="number">2.5</td>
+                    <td class="number">2.3</td>
+                    <td class="number">21.0</td>
+                    <td class="number">22</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-04</td>
+                    <td class="number">2</td>
+                    <td class="number">2.5</td>
+                    <td class="number">2.3</td>
+                    <td class="number">21.0</td>
+                    <td class="number">23</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+
+                <tr class="separator">
+                    <td colspan="12">... 2,845 more days for Abra ...</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"><strong>Agusan Del Norte</strong></td>
+                    <td class="number">2018-01-31</td>
+                    <td class="number">6</td>
+                    <td class="number">4.1</td>
+                    <td class="number">2.7</td>
+                    <td class="number">18.5</td>
+                    <td class="number">2</td>
+                    <td class="number">30</td>
+                    <td class="number">1</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-01</td>
+                    <td class="number">6</td>
+                    <td class="number">4.1</td>
+                    <td class="number">2.7</td>
+                    <td class="number">18.5</td>
+                    <td class="number">3</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-02</td>
+                    <td class="number">6</td>
+                    <td class="number">4.1</td>
+                    <td class="number">2.7</td>
+                    <td class="number">18.5</td>
+                    <td class="number">4</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-03</td>
+                    <td class="number">6</td>
+                    <td class="number">4.1</td>
+                    <td class="number">2.7</td>
+                    <td class="number">18.5</td>
+                    <td class="number">5</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-04</td>
+                    <td class="number">6</td>
+                    <td class="number">4.1</td>
+                    <td class="number">2.7</td>
+                    <td class="number">18.5</td>
+                    <td class="number">6</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+
+                <tr class="separator">
+                    <td colspan="12">... 2,845 more days for Agusan Del Norte ...</td>
+                </tr>
+
+                <tr>
+                    <td class="province"><strong>Bataan</strong></td>
+                    <td class="number">2018-01-31</td>
+                    <td class="number">3</td>
+                    <td class="number">2.8</td>
+                    <td class="number">2.3</td>
+                    <td class="number">65.7</td>
+                    <td class="number">7</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-01</td>
+                    <td class="number">3</td>
+                    <td class="number">2.8</td>
+                    <td class="number">2.3</td>
+                    <td class="number">65.7</td>
+                    <td class="number">8</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-02</td>
+                    <td class="number">3</td>
+                    <td class="number">2.8</td>
+                    <td class="number">2.3</td>
+                    <td class="number">65.7</td>
+                    <td class="number">9</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-03</td>
+                    <td class="number">3</td>
+                    <td class="number">2.8</td>
+                    <td class="number">2.3</td>
+                    <td class="number">65.7</td>
+                    <td class="number">10</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+        
+                <tr>
+                    <td class="province"></td>
+                    <td class="number">2018-02-04</td>
+                    <td class="number">3</td>
+                    <td class="number">2.8</td>
+                    <td class="number">2.3</td>
+                    <td class="number">65.7</td>
+                    <td class="number">11</td>
+                    <td class="number">30</td>
+                    <td class="number">0</td>
+                    <td class="number">0</td>
+                    <td class="number">0.0</td>
+                    <td class="number">Low</td>
+                </tr>
+
+                <tr class="separator">
+                    <td colspan="12">... 513 more days for Bataan ...</td>
+                </tr>
+
+                <tr class="separator" style="background-color: #e8e8e8; font-weight: bold; color: #333;">
+                    <td colspan="12"><strong>... 80 more provinces with similar time series data ...</strong></td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+            <h3>Column Descriptions:</h3>
+            <ul style="font-size: 12px;">
+                <li><strong>EQ Count (30d/7d):</strong> Number of earthquakes in the last 30/7 days</li>
+                <li><strong>Max/Avg Mag:</strong> Maximum/Average magnitude in the period</li>
+                <li><strong>Avg Depth:</strong> Average depth of earthquakes in kilometers</li>
+                <li><strong>Days Since Last EQ/Major EQ:</strong> Days since the last earthquake/major earthquake (M≥3.0)</li>
+                <li><strong>Next 7d:</strong> Predicted earthquake count and maximum magnitude for the next 7 days</li>
+                <li><strong>Risk Level:</strong> Low, Medium, or High risk classification</li>
+            </ul>
+            <p style="margin-top: 15px; font-size: 11px; color: #666;">
+                <strong>Note:</strong> This dataset shows daily earthquake features for each province from 2018-2025, 
+                with features calculated based on historical seismic activity and labels for machine learning prediction tasks.
+            </p>
+        </div>
+    </body>
+    </html>

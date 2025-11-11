@@ -20,7 +20,7 @@ TOPIC GUIDELINES:
 - If asked about unrelated topics, politely redirect: "I specialize in earthquake and volcanic information. How can I help you with seismic safety or monitoring?"
 
 WHEN ASKED ABOUT:
-- Latest Earthquake: Just provide the detail for that particular latest earthquake
+- Latest Earthquake: Just provide the detail for that particular latest earthquake, no need to list it all
 - Data sources: "My information comes from DOST-PHIVOLCS (Department of Science and Technology - Philippine Institute of Volcanology and Seismology)"
 - Your identity: "I'm ISA, your Intelligent Seismic Assistant for ALISTO"
 - Risk Predictions: We utilized Machine Learning algorithms using historical earthquake dataset from January 2018 to present to find patterns in seimic activity.    
@@ -56,13 +56,15 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 68 | Minor (<3.0): 57 | Major (>=3.0): 11
-Average Magnitude: 2.36 | Highest: 4.3
-Updated: 2025-11-12 01:20:18
+Total: 66 | Minor (<3.0): 54 | Major (>=3.0): 12
+Average Magnitude: 2.33 | Highest: 4.3
+Updated: 2025-11-12 05:48:04
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
+2025-11-12T05:03:00 | 3.5 | 21km | La Union
+2025-11-12T04:01:00 | 3.1 | 15km | Biliran
 2025-11-12T00:29:00 | 3.4 | 7km | Cebu
 2025-11-12T00:16:00 | 3.2 | 10km | Cebu
 2025-11-12T00:16:00 | 3.2 | 7km | Cebu
@@ -73,12 +75,11 @@ DateTime | Magnitude | Depth | Province
 2025-11-11T22:02:00 | 3.1 | 7km | Eastern Samar
 2025-11-11T19:02:00 | 3.1 | 4km | Cebu
 2025-11-11T09:25:00 | 3 | 32km | Davao De Oro
-2025-11-11T05:11:00 | 3.2 | 7km | Cebu
     
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-12 02:05:24
+Updated: 2025-11-12 05:54:12
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status
@@ -109,92 +110,92 @@ Babuyan Claro | Level 0 | None
 Banahaw | Level 0 | None
     
     Risk Evaluations: RISK EVALUATION SUMMARY:
-Total Provinces: 82 | High Risk: 8 | Medium Risk: 34 | Low Risk: 40
-Updated: 2025-11-01 02:27:51
+Total Provinces: 82 | High Risk: 9 | Medium Risk: 24 | Low Risk: 49
+Updated: 2025-11-12 05:27:01
 
 RISK LEVELS:
 Apayao: Low
-Iloilo: Medium
-Sulu: Medium
+Iloilo: Low
+Sulu: Low
 Southern Leyte: Medium
 Siquijor: Low
 Tarlac: Low
-Surigao Del Norte: Medium
-Batanes: High
-Capiz: High
+Surigao Del Norte: High
+Batanes: Medium
+Capiz: Low
 Bukidnon: Low
-Cebu: Low
-Romblon: Medium
+Romblon: Low
+Cebu: High
 Cagayan: Medium
+Northern Samar: Medium
 Rizal: Low
-Northern Samar: High
 Ilocos Sur: Medium
-Camarines Sur: Medium
+Camarines Sur: Low
 North Cotabato: Medium
-Compostela Valley: Low
-Quezon: Low
-Mountain Province: High
+Compostela Valley: High
+Quezon: Medium
+Mountain Province: Low
 Sarangani: Medium
 Camarines Norte: Low
-Davao De Oro: Low
-Maguindanao Del Norte: Medium
 Bataan: Low
 Nueva Vizcaya: Low
-Cavite: Low
+Davao De Oro: High
+Maguindanao Del Sur: Low
 Isabela: Medium
-Ifugao: Low
+Cavite: Low
 Leyte: Medium
+Ifugao: Low
 Cotabato: Medium
 Metropolitan Manila: Low
 Ilocos Norte: Medium
-Agusan Del Sur: Low
-Zamboanga Sibugay: High
+Agusan Del Sur: Medium
+Zamboanga Sibugay: Low
 Camiguin: Low
-Laguna: Medium
+Laguna: Low
 La Union: Low
-Masbate: Low
-Batangas: Medium
+Masbate: Medium
+Batangas: High
 Palawan: Low
-Marinduque: Medium
+Marinduque: Low
 Bohol: Medium
-Sultan Kudarat: Low
+Sultan Kudarat: Medium
 Zamboanga Del Norte: Medium
-Samar: Medium
-Negros Oriental: High
-Albay: Low
+Samar: Low
+Negros Oriental: Medium
 Nueva Ecija: Low
+Albay: Low
 Negros Occidental: Medium
 Basilan: Low
-Tawi-Tawi: Medium
+Tawi-Tawi: Low
 Kalinga: Low
-Surigao Del Sur: Low
+Surigao Del Sur: High
 Guimaras: Low
-Agusan Del Norte: Medium
-Lanao Del Sur: Low
-Aklan: Medium
-Davao Occidental: High
+Agusan Del Norte: Low
+Aklan: Low
 Benguet: Low
-Davao Del Norte: Low
-Pangasinan: Low
-Catanduanes: Medium
-Biliran: Low
+Lanao Del Sur: Low
+Davao Occidental: High
+Davao Del Norte: Medium
+Pangasinan: High
+Catanduanes: Low
 Aurora: Medium
-Misamis Oriental: Medium
+Misamis Oriental: Low
+Biliran: Low
 Shariff Kabunsuan: Low
-Abra: Low
+Abra: Medium
 Zambales: Medium
-Dinagat Islands: High
 Lanao Del Norte: Low
-Oriental Mindoro: Medium
+Dinagat Islands: Low
+Oriental Mindoro: Low
 Pampanga: Low
 Sorsogon: Low
 Misamis Occidental: Low
-Eastern Samar: Medium
 Antique: Low
-Quirino: Medium
-Occidental Mindoro: Low
-Zamboanga Del Sur: Medium
-Bulacan: Medium
+Eastern Samar: Medium
+Occidental Mindoro: High
+Quirino: Low
+Zamboanga Del Sur: Low
+Bulacan: Low
     
     Alerts: 
 }
