@@ -56,13 +56,17 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 53 | Minor (<3.0): 46 | Major (>=3.0): 7
+Total: 68 | Minor (<3.0): 57 | Major (>=3.0): 11
 Average Magnitude: 2.36 | Highest: 4.3
-Updated: 2025-11-11 23:39:39
+Updated: 2025-11-12 01:20:18
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
+2025-11-12T00:29:00 | 3.4 | 7km | Cebu
+2025-11-12T00:16:00 | 3.2 | 10km | Cebu
+2025-11-12T00:16:00 | 3.2 | 7km | Cebu
+2025-11-11T23:51:00 | 4.2 | 10km | Cebu
 2025-11-11T22:46:00 | 4.3 | 10km | Cebu
 2025-11-11T22:46:00 | 4.1 | 6km | Cebu
 2025-11-11T22:37:00 | 4 | 25km | Davao De Oro
@@ -74,7 +78,7 @@ DateTime | Magnitude | Depth | Province
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-11 23:33:52
+Updated: 2025-11-12 01:35:25
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status

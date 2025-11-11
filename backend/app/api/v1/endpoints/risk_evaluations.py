@@ -1,9 +1,73 @@
 # app/api/v1/routers/risk_evaluations.py
 from fastapi import APIRouter
 from app.core.database import supabase
+from app.services.risk_assessment import RiskAssessmentService
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/risk", tags=["Risk Evaluation"])
 
+
+
+@router.post("/update-risk-level")
+async def update_risk_level():
+    """Update risk levels for provinces based on latest earthquake data and ML predictions"""
+    try:
+        logger.info("🚀 Risk level update requested via API")
+        
+        # Initialize risk assessment service
+        risk_service = RiskAssessmentService()
+        
+        # Update high-risk provinces in database (includes console output)
+        result = risk_service.update_high_risk_provinces_in_database()
+        
+        if result['success']:
+            return {
+                "success": True,
+                "message": f"Risk assessment and database update completed. {result['updated_provinces']} high-risk provinces updated in database.",
+                "data": {
+                    "updated_provinces": result['updated_provinces'],
+                    "total_high_risk": result.get('total_high_risk', 0),
+                    "failed_provinces": result.get('failed_provinces', []),
+                    "console_output": "Check server console for detailed results"
+                }
+            }
+        else:
+            return {
+                "success": False,
+                "error": f"Risk assessment or database update failed: {result.get('error', 'Unknown error')}",
+                "data": None
+            }
+            
+    except Exception as e:
+        logger.error(f"❌ Error updating risk levels: {e}")
+        return {
+            "success": False,
+            "error": f"Failed to update risk levels: {str(e)}",
+            "data": None
+        }
+
+
+@router.get("/health")
+async def check_risk_assessment_health():
+    """Check the health of risk assessment services"""
+    try:
+        risk_service = RiskAssessmentService()
+        health_status = risk_service.validate_services_health()
+        
+        return {
+            "success": True,
+            "data": health_status
+        }
+        
+    except Exception as e:
+        logger.error(f"Health check failed: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "data": None
+        }
 
 
 @router.get("/provinces")

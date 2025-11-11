@@ -299,12 +299,15 @@ const RiskMap = ({
         <div style="background: ${headerStyle.bg}; padding: 8px 12px; margin: -12px -16px 8px -16px; border-radius: 4px 4px 0 0;">
           <p style="margin: 0; font-weight: 600; font-size: 14px; color: ${headerStyle.text}; letter-spacing: 0.3px;">${provinceName}</p>
         </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
           <div style="width: 10px; height: 10px; border-radius: 50%; background: ${riskColor}; flex-shrink: 0;"></div>
           <div style="flex: 1;">
             <p style="margin: 0; font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Risk Level</p>
             <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #111827;">${riskLevelLabel}</p>
           </div>
+        </div>
+        <div style="padding-top: 6px; border-top: 1px solid #e5e7eb;">
+          <p style="margin: 0; font-size: 11px; color: #6b7280;">Risk Score: <strong style="color: #111827;">${dynamicScore}/10</strong></p>
         </div>
       </div>
     `;
