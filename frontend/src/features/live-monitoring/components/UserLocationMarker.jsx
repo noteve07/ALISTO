@@ -18,7 +18,7 @@ const userLocationIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
-const UserLocationMarker = ({ onLocationClick }) => {
+const UserLocationMarker = ({ onLocationClick, onStartAssessment }) => {
   const { location, loading } = useUserLocation();
   const map = useMap();
 
@@ -75,6 +75,12 @@ const UserLocationMarker = ({ onLocationClick }) => {
           <p className="text-[10px] text-gray-500">
             {position[0].toFixed(4)}, {position[1].toFixed(4)}
           </p>
+          <button
+            onClick={() => onStartAssessment && onStartAssessment(location)}
+            className="mt-2 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-medium rounded transition-colors duration-200"
+          >
+            Start Location Assessment
+          </button>
         </div>
       </Popup>
     </Marker>

@@ -55,10 +55,6 @@ const ProvinceRiskList = ({ riskByProvince, onProvinceClick }) => {
         name: provinceData[provinceId]?.name || `Province ${provinceId}`,
         center: provinceData[provinceId]?.center,
         riskLevel: risk?.riskLevel || "unknown",
-        riskScore: risk?.dynamicRiskScore || 0,
-        riskScoreOut10: risk?.dynamicRiskScore
-          ? (risk.dynamicRiskScore * 10).toFixed(1)
-          : "0.0",
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [riskByProvince, provinceData]);
@@ -120,10 +116,7 @@ const ProvinceRiskList = ({ riskByProvince, onProvinceClick }) => {
                     </span>
                   </div>
                   <div className="text-right shrink-0">
-                    <div className="text-xs font-semibold text-gray-700">
-                      {province.riskScoreOut10}/10
-                    </div>
-                    <div className="text-xs text-gray-500 capitalize">
+                    <div className="text-xs font-semibold text-gray-700 capitalize">
                       {province.riskLevel}
                     </div>
                   </div>
@@ -136,7 +129,7 @@ const ProvinceRiskList = ({ riskByProvince, onProvinceClick }) => {
         {/* Footer */}
         <div className="border-t border-gray-200 px-3 py-1.5 bg-gray-50 shrink-0">
           <p className="text-xs text-gray-500 text-center">
-            Risk scores calculated from seismic data
+            Risk levels based on seismic analysis
           </p>
         </div>
       </div>
