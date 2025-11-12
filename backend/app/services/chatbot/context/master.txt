@@ -56,9 +56,9 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 66 | Minor (<3.0): 54 | Major (>=3.0): 12
-Average Magnitude: 2.33 | Highest: 4.3
-Updated: 2025-11-12 05:48:04
+Total: 62 | Minor (<3.0): 50 | Major (>=3.0): 12
+Average Magnitude: 2.34 | Highest: 4.3
+Updated: 2025-11-12 08:06:02
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
@@ -79,7 +79,7 @@ DateTime | Magnitude | Depth | Province
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-12 05:54:12
+Updated: 2025-11-12 07:54:11
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status
