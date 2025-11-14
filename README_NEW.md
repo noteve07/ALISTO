@@ -264,13 +264,13 @@ For questions, suggestions, or support, please:
 <tr>
 <td align="center">
 <strong>Miguel</strong><br>
-<em>Frontend Developer & GIS Specialist</em><br>
-🗺️ Interactive Maps, GeoJSON Integration
+<em>Backend Developer</em><br>
+🗺️ AI Chatbot Services
 </td>
 <td align="center">
 <strong>Michael</strong><br>
 <em>Backend Developer & Database Engineer</em><br>
-🗄️ Database Design, API Development
+🗄️ Database Design
 </td>
 </tr>
 </table>
