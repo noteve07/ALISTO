@@ -1,6 +1,5 @@
 <h1 align="center" style="border-bottom: none; margin-bottom: -px;">⚡ALISTO⚡</h1>
 <p align="center"><b>A</b>utomated <b>L</b>ive <b>I</b>nformation for <b>S</b>eismic <b>T</b>racking and <b>O</b>bservation</p>
-
 <p align="center">
   <img src="https://img.shields.io/badge/React-19.1.1-61DAFB?style=flat&logo=react" alt="React">
   <img src="https://img.shields.io/badge/FastAPI-0.116.1-009688?style=flat&logo=fastapi" alt="FastAPI">
@@ -10,37 +9,105 @@
 
 ---
 
+<p align="center">
+  <img 
+    src="https://raw.githubusercontent.com/noteve07/misc/37736657fa7f51232867f2d0feadfdb5fda81538/assets/software-under-development.gif" 
+    alt="Software Under Development"
+  >
+</p>
+
+<p align="center">
+  <b>🚧 PROJECT UNDER DEVELOPMENT 🚧</b>
+</p>
+
+---
+
 **ALISTO** is a comprehensive disaster preparedness platform that provides real-time earthquake and volcanic monitoring for the Philippines. Using machine learning algorithms and data from DOST-PHIVOLCS, the platform delivers intelligent risk assessments and personalized alerts to enhance public safety and disaster preparedness.
 
 ## ✨ Key Features
 
-### 🔐 **User Management**
+### 1. Dashboard
 
-- Secure JWT authentication with Supabase
-- User registration and profile management
-- Role-based access control
+**Cards**
 
-### 🗺️ **Interactive Monitoring**
+- Today’s Earthquakes
+- Strongest Magnitude (last 24h)
+- Nearby (within 100 km)
+- Risk Level (User Location)
 
-- **Real-time Earthquake Tracking** - Live data from DOST-PHIVOLCS
-- **Volcanic Activity Monitoring** - Automated bulletin scraping and alerts
-- **Interactive Maps** - Leaflet.js with province-level visualization
-- **Geolocation Services** - Location-based personalized alerts
+**Details**
 
-### 🤖 **Intelligent Analytics**
+- User Location (province/municipality)
+- Last Earthquake (timestamp, magnitude, depth)
 
-- **ISA Chatbot** - AI-powered seismic assistant using Google Gemini
-- **Risk Assessment** - ML-driven provincial risk classification (Low/Medium/High)
-- **Data Analytics** - Historical trend analysis and visualization
-- **Export Functionality** - CSV/JSON data export capabilities
+**Graphs**
 
-### 📱 **User Interface**
+- Bar – Last 7 days earthquake frequency
+- Pie – Provincial distribution (last 7 days)
 
-- **Responsive Dashboard** - Real-time metrics and visualizations
-- **Live Monitoring** - Interactive maps with real-time data overlays
-- **Risk Evaluation** - Province-specific risk analysis
-- **Notification Center** - Personalized alerts and notifications
-- **Analytics** - Chart.js powered data visualization
+**Lists**
+
+- Recent Earthquakes
+- Volcanic Advisories
+- High‑Risk Provinces (current model output)
+
+---
+
+### 2. Live Hazard Monitoring
+
+**Real-Time Earthquake Monitoring**
+
+- Live data from DOST–PHIVOLCS
+- Interactive map (Leaflet.js / React‑Leaflet)
+- Displays magnitude, depth, location, time
+- Automated updates via scheduled scraping
+
+**Volcanic Advisory Monitoring**
+
+- Bulletins from PHIVOLCS
+- Shows advisory level, status, timestamps
+- Integrated with risk logic and chatbot
+
+---
+
+### 3. Intelligent Risk Assessment
+
+**K‑Means Clustering (Low & Medium Risk)**
+
+- Historical data (2018–present)
+- Features: total earthquakes, major earthquakes, proximity to fault lines
+- Cluster visualization overlays on the map
+
+**Random Forest Classifier (High‑Risk Detection)**
+
+- Short‑term provincial high‑risk prediction
+- Uses past 30‑day seismic patterns and temporal features
+- Served via FastAPI for real‑time classification
+- Evaluated with accuracy, precision, and recall
+
+---
+
+### 4. User Location Hazard Insights
+
+- Province + municipality selection (or auto geolocation)
+- Nearest active fault line and distance
+- Distance to active volcano
+- Tsunami exposure and coastal proximity
+- Landslide susceptibility context
+- Nearest evacuation centers
+- Nearest hospitals
+- Personalized hazard summary
+
+---
+
+### 5. ISA Chatbot
+
+- Real‑time earthquake updates
+- Volcanic advisories
+- Provincial risk levels explained
+- Emergency hotlines and safety tips
+- Earthquake safety guidelines
+- Context‑aware responses powered by Google Gemini
 
 ## 🛠️ Tech Stack
 
@@ -155,6 +222,18 @@ Once the backend is running, access the interactive API documentation:
 - `/api/v1/risk-evaluations` - ML-based risk assessments
 - `/api/v1/dashboard` - Dashboard analytics
 
+## 🖥️ Main UI Pages
+
+- Landing Page (navigation, hero, project overview, footer)
+- Dashboard (personalized statistics and summaries)
+- Live Monitoring (real-time map with overlays)
+- Risk Assessment (province-level risk analysis)
+- Emergency Hotlines (contact information)
+- Earthquake Information (educational resources)
+- ISA Chatbot (interactive Q&A interface)
+- Notifications (personalized alerts)
+- Account (profile and settings)
+
 ## 📁 Project Structure
 
 ```
@@ -202,6 +281,11 @@ We welcome contributions! Please follow these steps:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 📚 Data Sources
+
+- DOST-PHIVOLCS (earthquake data and volcanic advisories)
+- CGIAR Consortium for Spatial Information (CGIAR-CSI)
+
 ## 🙏 Acknowledgments
 
 - **DOST-PHIVOLCS** - Earthquake and volcanic data source
@@ -247,9 +331,3 @@ For questions, suggestions, or support, please:
 </td>
 </tr>
 </table>
-
----
-
-<p align="center">
-  <strong>Built with ❤️ for disaster preparedness in the Philippines</strong>
-</p>
