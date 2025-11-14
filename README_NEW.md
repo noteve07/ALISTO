@@ -24,158 +24,33 @@
 
 **ALISTO** is a comprehensive disaster preparedness platform that provides real-time earthquake and volcanic monitoring for the Philippines. Using machine learning algorithms and data from DOST-PHIVOLCS, the platform delivers intelligent risk assessments and personalized alerts to enhance public safety and disaster preparedness.
 
-## ✨ Key Features
-
-<div align="center">
-
-<table>
-  <tr>
-    <td align="center"><a href="#1-dashboard">📊<br><b>Dashboard</b></a></td>
-    <td align="center"><a href="#2-live-hazard-monitoring">🗺️<br><b>Live Monitoring</b></a></td>
-    <td align="center"><a href="#3-intelligent-risk-assessment">🧠<br><b>Risk Assessment</b></a></td>
-    <td align="center"><a href="#4-user-location-hazard-insights">📍<br><b>Location Insights</b></a></td>
-    <td align="center"><a href="#5-isa-chatbot">🤖<br><b>ISA Chatbot</b></a></td>
-  </tr>
-  <tr>
-    <td colspan="5" align="center"><sub>Quick links to each feature</sub></td>
-  </tr>
-  
-</table>
-
-</div>
+## 🚀 Key Features
 
 ### 1. Dashboard
-
-<table>
-  <tr>
-    <th align="left">Cards</th>
-    <td>
-      • Today’s Earthquakes<br>
-      • Strongest Magnitude (last 24h)<br>
-      • Nearby (≤ 100 km)<br>
-      • Risk Level (User Location)
-    </td>
-  </tr>
-  <tr>
-    <th align="left">Details</th>
-    <td>
-      • User Location (province/municipality)<br>
-      • Last Earthquake (timestamp, magnitude, depth)
-    </td>
-  </tr>
-  <tr>
-    <th align="left">Graphs</th>
-    <td>
-      • Bar — Last 7 days earthquake frequency<br>
-      • Pie — Provincial distribution (last 7 days)
-    </td>
-  </tr>
-  <tr>
-    <th align="left">Lists</th>
-    <td>
-      • Recent Earthquakes<br>
-      • Volcanic Advisories<br>
-      • High‑Risk Provinces (model output)
-    </td>
-  </tr>
-</table>
-
----
+- Snapshot cards: Today’s quakes, strongest (24h), nearby (≤ 100 km), local risk level
+- Last quake details and quick stats
+- 7‑day frequency bar and provincial distribution pie
+- Lists: recent earthquakes, advisories, high‑risk provinces
 
 ### 2. Live Hazard Monitoring
-
-<table>
-  <tr>
-    <th align="left">Real‑Time Earthquake Monitoring</th>
-    <th align="left">Volcanic Advisory Monitoring</th>
-  </tr>
-  <tr>
-    <td>
-      • Live data from DOST‑PHIVOLCS<br>
-      • Interactive map (Leaflet.js / React‑Leaflet)<br>
-      • Displays magnitude, depth, location, time<br>
-      • Automated updates via scheduled scraping
-    </td>
-    <td>
-      • Bulletins from PHIVOLCS<br>
-      • Shows advisory level, status, timestamps<br>
-      • Integrated with risk logic and chatbot
-    </td>
-  </tr>
-</table>
-
----
+- Live DOST‑PHIVOLCS data on an interactive Leaflet map
+- Magnitude, depth, location, time with auto‑refresh via scheduler
+- Volcanic advisories with levels, status, and timestamps
 
 ### 3. Intelligent Risk Assessment
-
-<table>
-  <tr>
-    <th align="left">K‑Means Clustering<br><sub>(Low & Medium Risk)</sub></th>
-    <th align="left">Random Forest Classifier<br><sub>(High‑Risk Detection)</sub></th>
-  </tr>
-  <tr>
-    <td>
-      • Historical data (2018–present)<br>
-      • Features: total earthquakes, major earthquakes, proximity to fault lines<br>
-      • Cluster overlays on the map
-    </td>
-    <td>
-      • Short‑term provincial high‑risk prediction<br>
-      • Uses past 30‑day seismic patterns and temporal features<br>
-      • Served via FastAPI for real‑time classification<br>
-      • Evaluated with accuracy, precision, and recall
-    </td>
-  </tr>
-</table>
-
----
+- K‑Means for low/medium risk using historical (2018–present) features
+- Random Forest for short‑term high‑risk using last‑30‑day patterns
+- Results served via FastAPI and overlaid on the map
 
 ### 4. User Location Hazard Insights
-
-<table>
-  <tr>
-    <th align="left">Exposure & Proximity</th>
-    <th align="left">Readiness & Support</th>
-  </tr>
-  <tr>
-    <td>
-      • Province + municipality selection (or auto geolocation)<br>
-      • Nearest active fault line + distance<br>
-      • Distance to active volcano<br>
-      • Tsunami exposure and coastal proximity<br>
-      • Landslide susceptibility context
-    </td>
-    <td>
-      • Nearest evacuation centers<br>
-      • Nearest hospitals<br>
-      • Personalized hazard summary
-    </td>
-  </tr>
-</table>
-
----
+- Province/municipality (or auto‑geo), nearest fault & volcano distance
+- Tsunami and landslide context; nearby evacuation centers & hospitals
+- Personalized hazard summary
 
 ### 5. ISA Chatbot
-
-<table>
-  <tr>
-    <th align="left">Capabilities</th>
-    <th align="left">Context</th>
-  </tr>
-  <tr>
-    <td>
-      • Real‑time earthquake updates<br>
-      • Volcanic advisories<br>
-      • Provincial risk levels explained<br>
-      • Emergency hotlines and safety tips<br>
-      • Earthquake safety guidelines
-    </td>
-    <td>
-      • Context‑aware responses powered by Google Gemini<br>
-      • Integrated with live data and model outputs
-    </td>
-  </tr>
-</table>
+- Real‑time quake updates, volcanic advisories, provincial risk levels
+- Safety tips and emergency hotlines
+- Context‑aware responses powered by Google Gemini
 
 ## 🛠️ Tech Stack
 
