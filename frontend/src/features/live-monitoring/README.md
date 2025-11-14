@@ -4,7 +4,7 @@ This feature implements real-time earthquake monitoring using Supabase subscript
 
 ## Features
 
-- **Real-time Updates**: Live subscription to `latest_earthquakes` table in Supabase
+- **Real-time Updates**: Live subscription to `earthquakes` table in Supabase
 - **Interactive Map**: Leaflet-based map with earthquake markers
 - **Statistics Dashboard**: Live statistics showing total, max magnitude, average, and recent earthquakes
 - **Visual Indicators**: Color-coded markers based on magnitude with animated latest earthquake
@@ -32,10 +32,10 @@ This feature implements real-time earthquake monitoring using Supabase subscript
 
 ## Database Schema
 
-The feature expects a `latest_earthquakes` table with the following structure:
+The feature expects a `earthquakes` table with the following structure:
 
 ```sql
-create table public.latest_earthquakes (
+create table public.earthquakes (
   eq_id character varying(64) not null,
   datetime timestamp without time zone not null,
   latitude double precision not null,
@@ -45,8 +45,8 @@ create table public.latest_earthquakes (
   depth integer null,
   location text null,
   province_id integer null,
-  constraint latest_earthquakes_pkey primary key (eq_id),
-  constraint latest_earthquakes_province_id_fkey foreign KEY (province_id) references provinces (province_id)
+  constraint earthquakes_pkey primary key (eq_id),
+  constraint earthquakes_province_id_fkey foreign KEY (province_id) references provinces (province_id)
 );
 ```
 
@@ -61,13 +61,14 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 
 ## Real-time Setup
 
-1. **Enable Realtime** for the `latest_earthquakes` table in Supabase dashboard
+1. **Enable Realtime** for the `earthquakes` table in Supabase dashboard
 2. **Configure RLS** (Row Level Security) policies if needed
 3. **Ensure** the table is part of the `supabase_realtime` publication
 
 ## Usage
 
 The component automatically:
+
 1. Fetches initial earthquake data from the last 24 hours
 2. Subscribes to real-time updates for new earthquakes
 3. Updates the map and statistics in real-time
@@ -84,8 +85,8 @@ useRealtimeEarthquakes({
   onInsert: handleInsert,
   onUpdate: handleUpdate,
   onDelete: handleDelete,
-  filter: 'magnitude=gte.3.0' // Only earthquakes with magnitude >= 3.0
-})
+  filter: "magnitude=gte.3.0", // Only earthquakes with magnitude >= 3.0
+});
 ```
 
 ### Map Styling

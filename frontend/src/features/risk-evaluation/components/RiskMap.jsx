@@ -83,7 +83,7 @@ const RiskMap = ({
   const [currentZoom, setCurrentZoom] = useState(6);
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [selectedMunicipality, setSelectedMunicipality] = useState(null);
-  
+
   // State for location assessment
   const [assessmentStarted, setAssessmentStarted] = useState(false);
   const [assessmentData, setAssessmentData] = useState(null);
@@ -127,20 +127,20 @@ const RiskMap = ({
 
   // Handle starting location assessment
   const handleStartAssessment = (locationInfo) => {
-    console.log('🔍 Starting location assessment for:', locationInfo);
+    console.log("🔍 Starting location assessment for:", locationInfo);
     setAssessmentLoading(true);
     setLoadingStep(0);
-    
+
     // Step-by-step loading simulation with hardcoded arbitrary delays (1-2 seconds each)
     const steps = [
-      { delay: 1200, step: 0, message: 'Analyzing landslide risk...' },
-      { delay: 1800, step: 1, message: 'Checking tsunami vulnerability...' },
-      { delay: 1500, step: 2, message: 'Evaluating liquefaction potential...' },
-      { delay: 1100, step: 3, message: 'Finding nearest school...' },
-      { delay: 1700, step: 4, message: 'Locating nearest hospital...' },
-      { delay: 1300, step: 5, message: 'Identifying evacuation center...' },
+      { delay: 1200, step: 0, message: "Analyzing landslide risk..." },
+      { delay: 1800, step: 1, message: "Checking tsunami vulnerability..." },
+      { delay: 1500, step: 2, message: "Evaluating liquefaction potential..." },
+      { delay: 1100, step: 3, message: "Finding nearest school..." },
+      { delay: 1700, step: 4, message: "Locating nearest hospital..." },
+      { delay: 1300, step: 5, message: "Identifying evacuation center..." },
     ];
-    
+
     let currentDelay = 0;
     steps.forEach(({ delay, step, message }) => {
       currentDelay += delay;
@@ -149,7 +149,7 @@ const RiskMap = ({
         setLoadingStep(step + 1);
       }, currentDelay);
     });
-    
+
     // Complete assessment
     setTimeout(() => {
       setAssessmentStarted(true);
@@ -162,7 +162,7 @@ const RiskMap = ({
   // Handle facility click to zoom to location
   const handleFacilityClick = (coordinates) => {
     if (mapRef.current && coordinates) {
-      console.log('🏥 Zooming to facility at:', coordinates);
+      console.log("🏥 Zooming to facility at:", coordinates);
       mapRef.current.flyTo(coordinates, 16, {
         duration: 1.5,
         easeLinearity: 0.25,
@@ -219,10 +219,7 @@ const RiskMap = ({
   const riskKey = useMemo(() => {
     const entries = Object.entries(riskByProvince)
       .map(
-        ([provinceId, risk]) =>
-          `${provinceId}:${risk?.riskLevel ?? "unknown"}:${
-            risk?.dynamicRiskScore ?? "na"
-          }`
+        ([provinceId, risk]) => `${provinceId}:${risk?.riskLevel ?? "unknown"}`
       )
       .sort();
 
@@ -271,9 +268,6 @@ const RiskMap = ({
       ? risk.riskLevel.toUpperCase()
       : "NO DATA";
     const riskColor = getRiskColor(risk?.riskLevel);
-    const dynamicScore = risk?.dynamicRiskScore
-      ? (risk.dynamicRiskScore * 10).toFixed(1)
-      : "N/A";
 
     // Get light background color based on risk level
     const getHeaderStyle = () => {
@@ -305,9 +299,6 @@ const RiskMap = ({
             <p style="margin: 0; font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Risk Level</p>
             <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #111827;">${riskLevelLabel}</p>
           </div>
-        </div>
-        <div style="padding-top: 6px; border-top: 1px solid #e5e7eb;">
-          <p style="margin: 0; font-size: 11px; color: #6b7280;">Risk Score: <strong style="color: #111827;">${dynamicScore}/10</strong></p>
         </div>
       </div>
     `;
@@ -354,22 +345,22 @@ const RiskMap = ({
           fillColor: darkenColor(baseColor, 0.1),
           fillOpacity: 0.9,
         });
-        
+
         // Show popup on hover
         if (centroid) {
           target.openPopup(centroid);
-          
+
           // Add event listeners to popup to prevent closing when hovering over it
           setTimeout(() => {
             const popup = target.getPopup();
             if (popup && popup._container) {
               const popupElement = popup._container;
-              
-              popupElement.addEventListener('mouseenter', () => {
+
+              popupElement.addEventListener("mouseenter", () => {
                 target._hoveringPopup = true;
               });
-              
-              popupElement.addEventListener('mouseleave', () => {
+
+              popupElement.addEventListener("mouseleave", () => {
                 target._hoveringPopup = false;
                 // Close popup when leaving popup area
                 setTimeout(() => {
@@ -384,13 +375,13 @@ const RiskMap = ({
             }
           }, 10);
         }
-        
+
         target._hoveringLayer = true;
       },
       mouseout: (e) => {
         const target = e.target;
         target._hoveringLayer = false;
-        
+
         // Delay closing to check if mouse moved to popup
         setTimeout(() => {
           if (!target._hoveringPopup && !target._hoveringLayer) {
@@ -527,12 +518,12 @@ const RiskMap = ({
           showVolcano={filters.showVolcanoes}
           showFault={filters.showFaultLines}
         />
-        <UserLocationMarker 
-          onLocationClick={handleUserLocationClick} 
+        <UserLocationMarker
+          onLocationClick={handleUserLocationClick}
           onStartAssessment={handleStartAssessment}
         />
-        <EmergencyFacilityMarkers 
-          userLocation={assessmentData} 
+        <EmergencyFacilityMarkers
+          userLocation={assessmentData}
           assessmentStarted={assessmentStarted}
           assessmentLoading={assessmentLoading}
           loadingStep={loadingStep}
@@ -545,8 +536,8 @@ const RiskMap = ({
         onProvinceClick={handleProvinceClick}
       />
       <CombinedLegend />
-      <LocationRiskAssessment 
-        assessmentStarted={assessmentStarted} 
+      <LocationRiskAssessment
+        assessmentStarted={assessmentStarted}
         assessmentLoading={assessmentLoading}
         loadingStep={loadingStep}
         onFacilityClick={handleFacilityClick}

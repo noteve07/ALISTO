@@ -74,7 +74,7 @@ The ALISTO notification system provides real-time alerts for earthquakes, volcan
 ```python
 async def add_or_skip_earthquakes(self, new_earthquakes):
     # Insert earthquakes
-    result = supabase.table("latest_earthquakes").insert(new_earthquakes).execute()
+    result = supabase.table("earthquakes").insert(new_earthquakes).execute()
 
     # Trigger notifications
     await notification_service.create_earthquake_notifications_batch(new_earthquakes)

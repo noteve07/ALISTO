@@ -20,6 +20,7 @@ import HotlinePage from "./features/hotlines/pages/HotlinePage";
 import ChatbotPage from "./features/chatbot/pages/ChatbotPage";
 import AccountPage from "./features/account/pages/AccountPage";
 import NotificationsPage from "./features/notifications/pages/NotificationsPage";
+import EarthquakeInfoPage from "./features/earthquake-info/pages/EarthquakeInfoPage";
 
 // Shared Pages
 import ErrorPage from "./shared/pages/ErrorPage";
@@ -65,6 +66,7 @@ const App = () => {
         { path: "hazard-maps", element: <HazardMapsPage /> },
         { path: "risk-evaluation", element: <RiskEvaluationPage /> },
         { path: "emergency-hotlines", element: <HotlinePage /> },
+        { path: "earthquake-info", element: <EarthquakeInfoPage /> },
         { path: "chatbot", element: <ChatbotPage /> },
         { path: "notifications", element: <NotificationsPage /> },
         { path: "account", element: <AccountPage /> },

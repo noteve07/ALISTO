@@ -21,7 +21,7 @@ async def get_todays_earthquakes() -> Dict[str, int]:
 
     # query the database to get the earthquake for the current day
     today_result = (
-        supabase.table("latest_earthquakes")
+        supabase.table("earthquakes")
         .select("eq_id", count="exact")
         .gte("datetime", start_of_day.isoformat())
         .execute()
@@ -40,7 +40,7 @@ async def get_strongest_magnitude(hours: int = 24) -> Dict[str, object]:
 
     # query the database to get the highest magnitude (last 24 hours)
     result = (
-        supabase.table("latest_earthquakes")
+        supabase.table("earthquakes")
         .select("datetime, magnitude, location, latitude, longitude")
         .gte("datetime", start_time.isoformat())
         .order("magnitude", desc=True)
@@ -102,7 +102,7 @@ async def get_nearby_earthquakes(
     start_time = now - timedelta(hours=hours)
 
     result = (
-        supabase.table("latest_earthquakes")
+        supabase.table("earthquakes")
         .select("eq_id, datetime, magnitude, depth, location, latitude, longitude, province_id")
         .gte("datetime", start_time.isoformat())
         .order("datetime", desc=True)
@@ -178,40 +178,29 @@ async def get_risk_level(province_id: int = 10) -> Optional[Dict[str, Any]]:
         # Query the risk_evaluations table for the specified province
         result = (
             supabase.table("risk_evaluations")
-            .select("province_id, base_risk_score, dynamic_risk_score, risk_level, factors, calculated_at")
+            .select("province_id, risk_level, calculated_at")
             .eq("province_id", province_id)
-            .single()
             .execute()
         )
         
-        if not result.data:
+        print(f"Risk evaluation query result for province {province_id}: {result}")
+        
+        if not result.data or len(result.data) == 0:
+            print(f"No risk evaluation found for province {province_id}")
             # Return fallback data if no risk evaluation found
             return {
-                "level": "Moderate",
-                "score": 6.2,
-                "base_score": 5.8,
-                "dynamic_score": 6.2,
-                "factors": {
-                    "historical_activity": 0.7,
-                    "geological_factors": 0.6,
-                    "population_density": 0.8,
-                    "recent_activity": 0.5
-                },
+                "level": "Unknown",
                 "province_id": province_id,
                 "calculated_at": None
             }
         
-        record = result.data
+        record = result.data[0]  # Get first record instead of using single()
+        risk_level = record.get("risk_level")
         
-        # Use dynamic_risk_score if available, otherwise fall back to base_risk_score
-        score = record.get("dynamic_risk_score") or record.get("base_risk_score") or 6.2
+        print(f"Found risk level for province {province_id}: {risk_level}")
         
         return {
-            "level": record.get("risk_level") or "Moderate",
-            "score": float(score),
-            "base_score": float(record.get("base_risk_score") or 0),
-            "dynamic_score": float(record.get("dynamic_risk_score") or 0),
-            "factors": record.get("factors") or {},
+            "level": risk_level or "Unknown",
             "province_id": record.get("province_id"),
             "calculated_at": record.get("calculated_at")
         }
@@ -220,16 +209,7 @@ async def get_risk_level(province_id: int = 10) -> Optional[Dict[str, Any]]:
         print(f"Error fetching risk level for province {province_id}: {e}")
         # Return fallback data on error
         return {
-            "level": "Moderate", 
-            "score": 6.2,
-            "base_score": 5.8,
-            "dynamic_score": 6.2,
-            "factors": {
-                "historical_activity": 0.7,
-                "geological_factors": 0.6,
-                "population_density": 0.8,
-                "recent_activity": 0.5
-            },
+            "level": "Unknown", 
             "province_id": province_id,
             "calculated_at": None
         }

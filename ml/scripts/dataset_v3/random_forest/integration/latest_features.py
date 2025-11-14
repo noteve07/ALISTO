@@ -66,7 +66,7 @@ class EarthquakeDataFetcher:
             logger.info(f"Fetching earthquakes from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
             
             # Query earthquakes (no need to join provinces table since we have local mapping)
-            response = self.supabase.table('latest_earthquakes').select(
+            response = self.supabase.table('earthquakes').select(
                 '''
                 eq_id,
                 datetime,

@@ -38,14 +38,6 @@ export const getRiskColor = (level) => {
   return RISK_LEVELS[key].color
 }
 
-export const formatRiskScore = (score) => {
-  if (score === null || score === undefined || Number.isNaN(score)) {
-    return 'N/A'
-  }
-
-  return `${(Number(score) * 100).toFixed(1)}%`
-}
-
 export const formatTimestamp = (timestamp) => {
   if (!timestamp) return 'N/A'
 

@@ -38,7 +38,7 @@ class EarthquakeContextUpdater:
 
             # Query earthquakes from database
             query = (
-                supabase.table("latest_earthquakes")
+                supabase.table("earthquakes")
                 .select("datetime, magnitude, depth, province_id, location")
                 .gte("datetime", start_iso)
                 .order("datetime", desc=True)

@@ -51,7 +51,7 @@ class ProvinceFeatureService:
             logger.info(f"Fetching earthquakes from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
             
             # Query earthquakes
-            response = self.supabase.table('latest_earthquakes').select(
+            response = self.supabase.table('earthquakes').select(
                 '''
                 eq_id,
                 datetime,

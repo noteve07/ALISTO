@@ -1,19 +1,18 @@
 EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 68 | Minor (<3.0): 57 | Major (>=3.0): 11
-Average Magnitude: 2.36 | Highest: 4.3
-Updated: 2025-11-12 01:20:18
+Total: 73 | Minor (<3.0): 63 | Major (>=3.0): 10
+Average Magnitude: 2.33 | Highest: 4.0
+Updated: 2025-11-14 22:51:50
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
-2025-11-12T00:29:00 | 3.4 | 7km | Cebu
-2025-11-12T00:16:00 | 3.2 | 10km | Cebu
-2025-11-12T00:16:00 | 3.2 | 7km | Cebu
-2025-11-11T23:51:00 | 4.2 | 10km | Cebu
-2025-11-11T22:46:00 | 4.3 | 10km | Cebu
-2025-11-11T22:46:00 | 4.1 | 6km | Cebu
-2025-11-11T22:37:00 | 4 | 25km | Davao De Oro
-2025-11-11T22:02:00 | 3.1 | 7km | Eastern Samar
-2025-11-11T19:02:00 | 3.1 | 4km | Cebu
-2025-11-11T09:25:00 | 3 | 32km | Davao De Oro
-2025-11-11T05:11:00 | 3.2 | 7km | Cebu
+2025-11-14T18:48:00 | 3.4 | 4km | Cebu
+2025-11-14T18:20:00 | 3.1 | 21km | Surigao Del Norte
+2025-11-14T17:52:00 | 3.1 | 7km | Cebu
+2025-11-14T17:00:00 | 4 | 10km | Eastern Samar
+2025-11-14T15:16:00 | 4 | 14km | Eastern Samar
+2025-11-14T14:58:00 | 4 | 14km | Eastern Samar
+2025-11-14T09:53:00 | 3 | 4km | Batangas
+2025-11-14T07:25:00 | 3 | 2km | Cebu
+2025-11-14T05:57:00 | 3.4 | 10km | Davao De Oro
+2025-11-14T05:54:00 | 3.3 | 8km | Surigao Del Norte

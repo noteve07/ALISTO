@@ -19,14 +19,14 @@ export const useRealtimeEarthquakes = ({ onInsert, onUpdate, onDelete, filter } 
   }, [onInsert, onUpdate, onDelete])
 
   useEffect(() => {
-    const channelName = `realtime:latest_earthquakes${filter ? `:${filter}` : ''}`
+    const channelName = `realtime:earthquakes${filter ? `:${filter}` : ''}`
     const channel = supabase.channel(channelName)
 
     // Configure postgres changes subscription
     const subscriptionConfig = {
       event: '*',
       schema: 'public',
-      table: 'latest_earthquakes'
+      table: 'earthquakes'
     }
 
     if (filter) {

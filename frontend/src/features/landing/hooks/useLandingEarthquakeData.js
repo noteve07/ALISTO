@@ -35,7 +35,7 @@ const useLandingEarthquakeData = () => {
         
         // Fetch latest earthquakes from last 24 hours, ordered by datetime desc
         const { data, error } = await supabase
-          .from('latest_earthquakes')
+          .from('earthquakes')
           .select('*')
           .gte('datetime', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
           .order('datetime', { ascending: false })

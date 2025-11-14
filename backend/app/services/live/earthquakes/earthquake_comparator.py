@@ -21,7 +21,7 @@ class EarthquakeComparatorService:
 
         try:
             db_result = (
-                supabase.table("latest_earthquakes")
+                supabase.table("earthquakes")
                 .select("eq_id")
                 .order("datetime", desc=True)
                 .limit(1)
@@ -42,7 +42,7 @@ class EarthquakeComparatorService:
             new_earthquakes = []
             for earthquake in scraped_earthquakes:
                 existing = (
-                    supabase.table("latest_earthquakes")
+                    supabase.table("earthquakes")
                     .select("eq_id")
                     .eq("eq_id", earthquake["eq_id"])
                     .execute()

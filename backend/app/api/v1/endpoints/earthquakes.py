@@ -32,7 +32,7 @@ async def get_latest_earthquakes(
         start_iso = start_time.isoformat()
 
         query = (
-            supabase.table("latest_earthquakes")
+            supabase.table("earthquakes")
             .select("*")
             .gte("datetime", start_iso)
             .order("datetime", desc=True)

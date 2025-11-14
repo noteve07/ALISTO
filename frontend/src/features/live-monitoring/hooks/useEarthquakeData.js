@@ -45,7 +45,7 @@ const useEarthquakeData = (timeFilter = '24h') => {
         
         // Fetch latest earthquakes from last 30 days, ordered by datetime desc
         const { data, error } = await supabase
-          .from('latest_earthquakes')
+          .from('earthquakes')
           .select('*')
           .gte('datetime', new Date(Date.now() - fetchRange).toISOString())
           .order('datetime', { ascending: false })
