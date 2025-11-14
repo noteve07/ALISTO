@@ -26,88 +26,156 @@
 
 ## ✨ Key Features
 
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center"><a href="#1-dashboard">📊<br><b>Dashboard</b></a></td>
+    <td align="center"><a href="#2-live-hazard-monitoring">🗺️<br><b>Live Monitoring</b></a></td>
+    <td align="center"><a href="#3-intelligent-risk-assessment">🧠<br><b>Risk Assessment</b></a></td>
+    <td align="center"><a href="#4-user-location-hazard-insights">📍<br><b>Location Insights</b></a></td>
+    <td align="center"><a href="#5-isa-chatbot">🤖<br><b>ISA Chatbot</b></a></td>
+  </tr>
+  <tr>
+    <td colspan="5" align="center"><sub>Quick links to each feature</sub></td>
+  </tr>
+  
+</table>
+
+</div>
+
 ### 1. Dashboard
 
-**Cards**
-
-- Today’s Earthquakes
-- Strongest Magnitude (last 24h)
-- Nearby (within 100 km)
-- Risk Level (User Location)
-
-**Details**
-
-- User Location (province/municipality)
-- Last Earthquake (timestamp, magnitude, depth)
-
-**Graphs**
-
-- Bar – Last 7 days earthquake frequency
-- Pie – Provincial distribution (last 7 days)
-
-**Lists**
-
-- Recent Earthquakes
-- Volcanic Advisories
-- High‑Risk Provinces (current model output)
+<table>
+  <tr>
+    <th align="left">Cards</th>
+    <td>
+      • Today’s Earthquakes<br>
+      • Strongest Magnitude (last 24h)<br>
+      • Nearby (≤ 100 km)<br>
+      • Risk Level (User Location)
+    </td>
+  </tr>
+  <tr>
+    <th align="left">Details</th>
+    <td>
+      • User Location (province/municipality)<br>
+      • Last Earthquake (timestamp, magnitude, depth)
+    </td>
+  </tr>
+  <tr>
+    <th align="left">Graphs</th>
+    <td>
+      • Bar — Last 7 days earthquake frequency<br>
+      • Pie — Provincial distribution (last 7 days)
+    </td>
+  </tr>
+  <tr>
+    <th align="left">Lists</th>
+    <td>
+      • Recent Earthquakes<br>
+      • Volcanic Advisories<br>
+      • High‑Risk Provinces (model output)
+    </td>
+  </tr>
+</table>
 
 ---
 
 ### 2. Live Hazard Monitoring
 
-**Real-Time Earthquake Monitoring**
-
-- Live data from DOST–PHIVOLCS
-- Interactive map (Leaflet.js / React‑Leaflet)
-- Displays magnitude, depth, location, time
-- Automated updates via scheduled scraping
-
-**Volcanic Advisory Monitoring**
-
-- Bulletins from PHIVOLCS
-- Shows advisory level, status, timestamps
-- Integrated with risk logic and chatbot
+<table>
+  <tr>
+    <th align="left">Real‑Time Earthquake Monitoring</th>
+    <th align="left">Volcanic Advisory Monitoring</th>
+  </tr>
+  <tr>
+    <td>
+      • Live data from DOST‑PHIVOLCS<br>
+      • Interactive map (Leaflet.js / React‑Leaflet)<br>
+      • Displays magnitude, depth, location, time<br>
+      • Automated updates via scheduled scraping
+    </td>
+    <td>
+      • Bulletins from PHIVOLCS<br>
+      • Shows advisory level, status, timestamps<br>
+      • Integrated with risk logic and chatbot
+    </td>
+  </tr>
+</table>
 
 ---
 
 ### 3. Intelligent Risk Assessment
 
-**K‑Means Clustering (Low & Medium Risk)**
-
-- Historical data (2018–present)
-- Features: total earthquakes, major earthquakes, proximity to fault lines
-- Cluster visualization overlays on the map
-
-**Random Forest Classifier (High‑Risk Detection)**
-
-- Short‑term provincial high‑risk prediction
-- Uses past 30‑day seismic patterns and temporal features
-- Served via FastAPI for real‑time classification
-- Evaluated with accuracy, precision, and recall
+<table>
+  <tr>
+    <th align="left">K‑Means Clustering<br><sub>(Low & Medium Risk)</sub></th>
+    <th align="left">Random Forest Classifier<br><sub>(High‑Risk Detection)</sub></th>
+  </tr>
+  <tr>
+    <td>
+      • Historical data (2018–present)<br>
+      • Features: total earthquakes, major earthquakes, proximity to fault lines<br>
+      • Cluster overlays on the map
+    </td>
+    <td>
+      • Short‑term provincial high‑risk prediction<br>
+      • Uses past 30‑day seismic patterns and temporal features<br>
+      • Served via FastAPI for real‑time classification<br>
+      • Evaluated with accuracy, precision, and recall
+    </td>
+  </tr>
+</table>
 
 ---
 
 ### 4. User Location Hazard Insights
 
-- Province + municipality selection (or auto geolocation)
-- Nearest active fault line and distance
-- Distance to active volcano
-- Tsunami exposure and coastal proximity
-- Landslide susceptibility context
-- Nearest evacuation centers
-- Nearest hospitals
-- Personalized hazard summary
+<table>
+  <tr>
+    <th align="left">Exposure & Proximity</th>
+    <th align="left">Readiness & Support</th>
+  </tr>
+  <tr>
+    <td>
+      • Province + municipality selection (or auto geolocation)<br>
+      • Nearest active fault line + distance<br>
+      • Distance to active volcano<br>
+      • Tsunami exposure and coastal proximity<br>
+      • Landslide susceptibility context
+    </td>
+    <td>
+      • Nearest evacuation centers<br>
+      • Nearest hospitals<br>
+      • Personalized hazard summary
+    </td>
+  </tr>
+</table>
 
 ---
 
 ### 5. ISA Chatbot
 
-- Real‑time earthquake updates
-- Volcanic advisories
-- Provincial risk levels explained
-- Emergency hotlines and safety tips
-- Earthquake safety guidelines
-- Context‑aware responses powered by Google Gemini
+<table>
+  <tr>
+    <th align="left">Capabilities</th>
+    <th align="left">Context</th>
+  </tr>
+  <tr>
+    <td>
+      • Real‑time earthquake updates<br>
+      • Volcanic advisories<br>
+      • Provincial risk levels explained<br>
+      • Emergency hotlines and safety tips<br>
+      • Earthquake safety guidelines
+    </td>
+    <td>
+      • Context‑aware responses powered by Google Gemini<br>
+      • Integrated with live data and model outputs
+    </td>
+  </tr>
+</table>
 
 ## 🛠️ Tech Stack
 
