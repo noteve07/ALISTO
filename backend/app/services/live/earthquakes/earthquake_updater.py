@@ -21,7 +21,7 @@ class EarthquakeUpdaterService:
 
         try:
             result = (
-                supabase.table("latest_earthquakes")
+                supabase.table("earthquakes")
                 .insert(new_earthquakes)
                 .execute()
             )
@@ -54,7 +54,7 @@ class EarthquakeUpdaterService:
 
         try:
             count_result = (
-                supabase.table("latest_earthquakes")
+                supabase.table("earthquakes")
                 .select("*", count="exact")
                 .execute()
             )
@@ -63,7 +63,7 @@ class EarthquakeUpdaterService:
 
             if total_count > keep_count:
                 old_records = (
-                    supabase.table("latest_earthquakes")
+                    supabase.table("earthquakes")
                     .select("id")
                     .order("datetime", desc=False)
                     .limit(total_count - keep_count)
@@ -74,7 +74,7 @@ class EarthquakeUpdaterService:
                     old_ids = [record["id"] for record in old_records.data]
 
                     (
-                        supabase.table("latest_earthquakes")
+                        supabase.table("earthquakes")
                         .delete()
                         .in_("id", old_ids)
                         .execute()

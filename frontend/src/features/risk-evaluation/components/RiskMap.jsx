@@ -219,10 +219,7 @@ const RiskMap = ({
   const riskKey = useMemo(() => {
     const entries = Object.entries(riskByProvince)
       .map(
-        ([provinceId, risk]) =>
-          `${provinceId}:${risk?.riskLevel ?? "unknown"}:${
-            risk?.dynamicRiskScore ?? "na"
-          }`
+        ([provinceId, risk]) => `${provinceId}:${risk?.riskLevel ?? "unknown"}`
       )
       .sort();
 

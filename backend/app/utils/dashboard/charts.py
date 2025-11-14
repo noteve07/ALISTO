@@ -30,7 +30,7 @@ async def get_nearby_earthquakes_7days(province_id: int = 10) -> int:
         eight_days_ago_str = eight_days_ago.isoformat()
         
         # Fetch earthquakes from last 7 days in the specified province
-        response = supabase.table("latest_earthquakes") \
+        response = supabase.table("earthquakes") \
             .select("eq_id") \
             .eq("province_id", province_id) \
             .gte("datetime", eight_days_ago_str) \
@@ -50,7 +50,7 @@ async def get_earthquake_frequency() -> dict:
         eight_days_ago_str = eight_days_ago.isoformat()
         
         # Fetch earthquakes from last 7 days (excluding today)
-        response = supabase.table("latest_earthquakes") \
+        response = supabase.table("earthquakes") \
             .select("datetime, magnitude") \
             .gte("datetime", eight_days_ago_str) \
             .order("datetime", desc=False) \
@@ -148,7 +148,7 @@ async def get_province_activity() -> dict:
         eight_days_ago_str = eight_days_ago.isoformat()
         
         # Fetch earthquakes from last 7 days with province_id
-        response = supabase.table("latest_earthquakes") \
+        response = supabase.table("earthquakes") \
             .select("province_id") \
             .gte("datetime", eight_days_ago_str) \
             .not_.is_("province_id", "null") \

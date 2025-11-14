@@ -41,7 +41,7 @@
 
         async function loadQuakes() {
             const { data, error } = await supabase
-                .from('latest_earthquakes')
+                .from('earthquakes')
                 .select('*')
                 .order('datetime', { ascending: false })
                 .limit(20);
@@ -62,7 +62,7 @@
         .on('postgres_changes', { 
             event: '*',  // 🎯 ALL events (INSERT, UPDATE, DELETE)
             schema: 'public', 
-            table: 'latest_earthquakes' 
+            table: 'earthquakes' 
         }, (payload) => {
             console.log('Change detected:', payload);
             

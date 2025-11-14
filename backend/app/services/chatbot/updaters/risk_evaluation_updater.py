@@ -32,8 +32,8 @@ class RiskEvaluationContextUpdater:
             # Query risk evaluations from database
             query = (
                 supabase.table("risk_evaluations")
-                .select("province_id, base_risk_score, dynamic_risk_score, risk_level, calculated_at")
-                .order("dynamic_risk_score", desc=True)
+                .select("province_id, risk_level, calculated_at")
+                .order("province_id")
             )
 
             result = query.execute()

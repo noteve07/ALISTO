@@ -56,30 +56,28 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 62 | Minor (<3.0): 50 | Major (>=3.0): 12
-Average Magnitude: 2.34 | Highest: 4.3
-Updated: 2025-11-12 08:06:02
+Total: 73 | Minor (<3.0): 63 | Major (>=3.0): 10
+Average Magnitude: 2.33 | Highest: 4.0
+Updated: 2025-11-14 22:49:35
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
-2025-11-12T05:03:00 | 3.5 | 21km | La Union
-2025-11-12T04:01:00 | 3.1 | 15km | Biliran
-2025-11-12T00:29:00 | 3.4 | 7km | Cebu
-2025-11-12T00:16:00 | 3.2 | 10km | Cebu
-2025-11-12T00:16:00 | 3.2 | 7km | Cebu
-2025-11-11T23:51:00 | 4.2 | 10km | Cebu
-2025-11-11T22:46:00 | 4.3 | 10km | Cebu
-2025-11-11T22:46:00 | 4.1 | 6km | Cebu
-2025-11-11T22:37:00 | 4 | 25km | Davao De Oro
-2025-11-11T22:02:00 | 3.1 | 7km | Eastern Samar
-2025-11-11T19:02:00 | 3.1 | 4km | Cebu
-2025-11-11T09:25:00 | 3 | 32km | Davao De Oro
+2025-11-14T18:48:00 | 3.4 | 4km | Cebu
+2025-11-14T18:20:00 | 3.1 | 21km | Surigao Del Norte
+2025-11-14T17:52:00 | 3.1 | 7km | Cebu
+2025-11-14T17:00:00 | 4 | 10km | Eastern Samar
+2025-11-14T15:16:00 | 4 | 14km | Eastern Samar
+2025-11-14T14:58:00 | 4 | 14km | Eastern Samar
+2025-11-14T09:53:00 | 3 | 4km | Batangas
+2025-11-14T07:25:00 | 3 | 2km | Cebu
+2025-11-14T05:57:00 | 3.4 | 10km | Davao De Oro
+2025-11-14T05:54:00 | 3.3 | 8km | Surigao Del Norte
     
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-12 07:54:11
+Updated: 2025-11-14 22:49:35
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status
@@ -111,91 +109,91 @@ Banahaw | Level 0 | None
     
     Risk Evaluations: RISK EVALUATION SUMMARY:
 Total Provinces: 82 | High Risk: 9 | Medium Risk: 24 | Low Risk: 49
-Updated: 2025-11-12 05:27:01
+Updated: 2025-11-14 22:49:35
 
 RISK LEVELS:
-Apayao: Low
-Iloilo: Low
-Sulu: Low
-Southern Leyte: Medium
-Siquijor: Low
-Tarlac: Low
-Surigao Del Norte: High
-Batanes: Medium
-Capiz: Low
-Bukidnon: Low
-Romblon: Low
-Cebu: High
-Cagayan: Medium
-Northern Samar: Medium
-Rizal: Low
-Ilocos Sur: Medium
-Camarines Sur: Low
-North Cotabato: Medium
-Compostela Valley: High
-Quezon: Medium
-Mountain Province: Low
-Sarangani: Medium
-Camarines Norte: Low
-Bataan: Low
-Nueva Vizcaya: Low
-Davao De Oro: High
-Maguindanao Del Sur: Low
-Isabela: Medium
-Cavite: Low
-Leyte: Medium
-Ifugao: Low
-Cotabato: Medium
-Metropolitan Manila: Low
-Ilocos Norte: Medium
-Agusan Del Sur: Medium
-Zamboanga Sibugay: Low
-Camiguin: Low
-Laguna: Low
-La Union: Low
-Masbate: Medium
-Batangas: High
-Palawan: Low
-Marinduque: Low
-Bohol: Medium
-Sultan Kudarat: Medium
-Zamboanga Del Norte: Medium
-Samar: Low
-Negros Oriental: Medium
-Nueva Ecija: Low
-Albay: Low
-Negros Occidental: Medium
-Basilan: Low
-Tawi-Tawi: Low
-Kalinga: Low
-Surigao Del Sur: High
-Guimaras: Low
-Agusan Del Norte: Low
-Aklan: Low
-Benguet: Low
-Lanao Del Sur: Low
-Davao Occidental: High
-Davao Del Norte: Medium
-Pangasinan: High
-Catanduanes: Low
-Aurora: Medium
-Misamis Oriental: Low
-Biliran: Low
-Shariff Kabunsuan: Low
 Abra: Medium
-Zambales: Medium
-Lanao Del Norte: Low
-Dinagat Islands: Low
-Oriental Mindoro: Low
-Pampanga: Low
-Sorsogon: Low
-Misamis Occidental: Low
+Agusan Del Norte: Low
+Agusan Del Sur: Medium
+Aklan: Low
+Albay: Low
 Antique: Low
-Eastern Samar: Medium
-Occidental Mindoro: High
-Quirino: Low
-Zamboanga Del Sur: Low
+Apayao: Low
+Aurora: Medium
+Basilan: Low
+Bataan: Low
+Batanes: Medium
+Batangas: High
+Benguet: Low
+Biliran: Low
+Bohol: Medium
+Bukidnon: Low
 Bulacan: Low
+Cagayan: Medium
+Camarines Norte: Low
+Camarines Sur: Low
+Camiguin: Low
+Capiz: Low
+Catanduanes: Low
+Cavite: Low
+Cebu: High
+Compostela Valley: High
+Davao Del Norte: Medium
+Davao Occidental: High
+Davao De Oro: High
+Dinagat Islands: Low
+Eastern Samar: Medium
+Guimaras: Low
+Ifugao: Low
+Ilocos Norte: Medium
+Ilocos Sur: Medium
+Iloilo: Low
+Isabela: Medium
+Kalinga: Low
+La Union: Low
+Laguna: Low
+Lanao Del Norte: Low
+Lanao Del Sur: Low
+Leyte: Medium
+Maguindanao Del Sur: Low
+Marinduque: Low
+Masbate: Medium
+Metropolitan Manila: Low
+Misamis Occidental: Low
+Misamis Oriental: Low
+Mountain Province: Low
+Negros Occidental: Medium
+Negros Oriental: Medium
+North Cotabato: Medium
+Northern Samar: Medium
+Nueva Ecija: Low
+Nueva Vizcaya: Low
+Occidental Mindoro: High
+Oriental Mindoro: Low
+Palawan: Low
+Pampanga: Low
+Pangasinan: High
+Quezon: Medium
+Quirino: Low
+Rizal: Low
+Romblon: Low
+Samar: Low
+Sarangani: Medium
+Shariff Kabunsuan: Low
+Siquijor: Low
+Sorsogon: Low
+Cotabato: Medium
+Southern Leyte: Medium
+Sultan Kudarat: Medium
+Sulu: Low
+Surigao Del Norte: High
+Surigao Del Sur: High
+Tarlac: Low
+Tawi-Tawi: Low
+Zambales: Medium
+Zamboanga Del Norte: Medium
+Zamboanga Del Sur: Low
+Zamboanga Sibugay: Low
     
     Alerts: 
 }

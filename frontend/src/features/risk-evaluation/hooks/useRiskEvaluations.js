@@ -3,10 +3,7 @@ import { supabase } from '../../../lib/supabaseClient'
 
 const formatRiskRecord = (record) => ({
   provinceId: record.province_id,
-  baseRiskScore: record.base_risk_score !== null ? Number(record.base_risk_score) : null,
-  dynamicRiskScore: record.dynamic_risk_score !== null ? Number(record.dynamic_risk_score) : null,
   riskLevel: record.risk_level,
-  factors: record.factors || {},
   calculatedAt: record.calculated_at
 })
 
@@ -29,7 +26,7 @@ export const useRiskEvaluations = () => {
     try {
       const { data, error: fetchError } = await supabase
         .from('risk_evaluations')
-        .select('*')
+        .select('province_id, risk_level, calculated_at')
 
       if (fetchError) {
         throw fetchError
