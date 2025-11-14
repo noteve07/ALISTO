@@ -1,7 +1,7 @@
 EARTHQUAKE SUMMARY (Last 24 hours):
 Total: 73 | Minor (<3.0): 63 | Major (>=3.0): 10
 Average Magnitude: 2.33 | Highest: 4.0
-Updated: 2025-11-14 22:49:35
+Updated: 2025-11-14 22:51:50
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province

@@ -58,7 +58,7 @@ CONTEXT:
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
 Total: 73 | Minor (<3.0): 63 | Major (>=3.0): 10
 Average Magnitude: 2.33 | Highest: 4.0
-Updated: 2025-11-14 22:49:35
+Updated: 2025-11-14 22:51:50
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
@@ -77,7 +77,7 @@ DateTime | Magnitude | Depth | Province
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-14 22:49:35
+Updated: 2025-11-15 00:14:00
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status
@@ -109,7 +109,7 @@ Banahaw | Level 0 | None
     
     Risk Evaluations: RISK EVALUATION SUMMARY:
 Total Provinces: 82 | High Risk: 9 | Medium Risk: 24 | Low Risk: 49
-Updated: 2025-11-14 22:49:35
+Updated: 2025-11-14 22:51:51
 
 RISK LEVELS:
 Abra: Medium
