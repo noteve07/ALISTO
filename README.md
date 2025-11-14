@@ -255,7 +255,8 @@ For questions, suggestions, or support, please:
 <td align="center">
 <strong>Nicko</strong><br>
 <em>Full-Stack Developer & ML Engineer</em><br>
-🤖 Backend Architecture, API Integration, Interactive Maps, ML Models, AI Chatbot Services
+🤖 Backend Architecture, API Integration, Interactive Maps,<br>
+Machine Learning Models, AI Chatbot Services
 </td>
 <td align="center">
 <strong>Jealla</strong><br>
