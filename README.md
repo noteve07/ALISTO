@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <b>🚧 PROJECT UNDER DEVELOPMENT 🚧</b>
+  <b>🚧 PROJECT UNDER <del>DEVELOPMENT</del> ENHANCEMENT 🚧</b>
 </p>
 
 ---
