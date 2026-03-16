@@ -56,28 +56,23 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 73 | Minor (<3.0): 63 | Major (>=3.0): 10
-Average Magnitude: 2.33 | Highest: 4.0
-Updated: 2025-11-14 22:51:50
+Total: 36 | Minor (<3.0): 31 | Major (>=3.0): 5
+Average Magnitude: 2.24 | Highest: 4.1
+Updated: 2026-03-16 02:32:04
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
-2025-11-14T18:48:00 | 3.4 | 4km | Cebu
-2025-11-14T18:20:00 | 3.1 | 21km | Surigao Del Norte
-2025-11-14T17:52:00 | 3.1 | 7km | Cebu
-2025-11-14T17:00:00 | 4 | 10km | Eastern Samar
-2025-11-14T15:16:00 | 4 | 14km | Eastern Samar
-2025-11-14T14:58:00 | 4 | 14km | Eastern Samar
-2025-11-14T09:53:00 | 3 | 4km | Batangas
-2025-11-14T07:25:00 | 3 | 2km | Cebu
-2025-11-14T05:57:00 | 3.4 | 10km | Davao De Oro
-2025-11-14T05:54:00 | 3.3 | 8km | Surigao Del Norte
+2026-03-16T01:20:00 | 3.6 | 15km | Sultan Kudarat
+2026-03-15T20:56:00 | 3 | 33km | Ilocos Norte
+2026-03-15T20:51:00 | 4.1 | 13km | Eastern Samar
+2026-03-15T12:37:00 | 3.5 | 3km | Quezon
+2026-03-15T07:19:00 | 3.4 | 7km | Cebu
     
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
 Highest Alert Level: 2
-Updated: 2025-11-15 00:14:00
+Updated: 2025-11-18 14:06:20
 
 VOLCANIC ADVISORIES:
 Volcano | Alert Level | Status

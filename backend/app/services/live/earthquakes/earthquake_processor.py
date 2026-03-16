@@ -106,8 +106,8 @@ class EarthquakeProcessorService:
             print(f"❌ Province lookup failed for {province_name}: {e}")
             return None
 
-    async def generate_eq_hash(self, earthquake: Dict[str, Any]) -> str:
-        """Generate unique hash for earthquake using timestamp + magnitude + province."""
+    async def generate_eq_hash(self, earthquake: Dict[str, Any]) -> int:
+        """Generate deterministic BIGINT-compatible id using timestamp + magnitude + location."""
 
         timestamp = str(earthquake.get("datetime", ""))
         magnitude = str(earthquake.get("magnitude", ""))
@@ -115,8 +115,10 @@ class EarthquakeProcessorService:
 
         combined = f"{timestamp}_{magnitude}_{location}"
 
-        eq_hash = hashlib.md5(combined.encode()).hexdigest()
-        return eq_hash
+        # Keep value in signed BIGINT range (PostgreSQL bigint max ~= 9.22e18)
+        # by taking the first 15 hex chars (~60 bits).
+        eq_hash_hex = hashlib.md5(combined.encode()).hexdigest()[:15]
+        return int(eq_hash_hex, 16)
 
 
 earthquake_processor = EarthquakeProcessorService()

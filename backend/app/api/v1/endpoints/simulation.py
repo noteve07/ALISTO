@@ -86,13 +86,13 @@ async def simulate_earthquake(
             )
 
         # (demo) trigger phone alert endpoint when earthquake is option 3
-        if option == 3:
-            async with httpx.AsyncClient() as client:
-                response = await client.post("http://localhost:8000/api/v1/alerts/trigger", json={"alert": True})
-                # Optionally check response status and data
-                if response.status_code != 200:
-                    print("Failed to trigger alert:", response.text)
-        
+            # if option == 3:
+            #     async with httpx.AsyncClient() as client:
+            #         response = await client.post("http://localhost:8000/api/v1/alerts/trigger", json={"alert": True})
+            #         # Optionally check response status and data
+            #         if response.status_code != 200:
+            #             print("Failed to trigger alert:", response.text)
+            
         earthquake_data = test_earthquakes[option]
         
         # Insert earthquake using the updater service

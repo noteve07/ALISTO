@@ -6,6 +6,13 @@ import {
   initializeDesktopNotifications 
 } from "../utils/desktopNotifications";
 
+const isMissingNotificationsTableError = (error) => {
+  if (!error) return false;
+
+  const message = `${error.message || ""} ${error.hint || ""}`.toLowerCase();
+  return error.code === "PGRST205" && message.includes("notifications");
+};
+
 /**
  * Hook to fetch and subscribe to real-time notifications
  * @returns {Object} { notifications, loading, error, markAsRead, refreshNotifications }
@@ -14,6 +21,7 @@ export const useNotifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [tableAvailable, setTableAvailable] = useState(true);
 
   // Fetch initial notifications
   const fetchNotifications = useCallback(async () => {
@@ -28,11 +36,16 @@ export const useNotifications = () => {
         .limit(100);
 
       if (fetchError) {
-        console.error("Supabase fetch error:", fetchError);
+        if (isMissingNotificationsTableError(fetchError)) {
+          setTableAvailable(false);
+          setNotifications([]);
+          setError(null);
+          return;
+        }
         throw fetchError;
       }
 
-      console.log("Fetched notifications:", data);
+      setTableAvailable(true);
       setNotifications(data || []);
     } catch (err) {
       console.error("Error fetching notifications:", err);
@@ -48,6 +61,10 @@ export const useNotifications = () => {
     
     // Initialize desktop notifications
     initializeDesktopNotifications();
+
+    if (!tableAvailable) {
+      return;
+    }
 
     // Set up real-time subscription
     const channel = supabase
@@ -99,10 +116,14 @@ export const useNotifications = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [fetchNotifications]);
+  }, [fetchNotifications, tableAvailable]);
 
   // Mark notification as read
   const markAsRead = useCallback(async (notificationId) => {
+    if (!tableAvailable) {
+      return;
+    }
+
     try {
       const { error: updateError } = await supabase
         .from("notifications")
