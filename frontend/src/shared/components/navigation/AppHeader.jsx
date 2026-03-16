@@ -116,7 +116,7 @@ const AppHeader = ({ onLogout }) => {
   const firstName = userProfile?.firstName || "User";
   const lastName = userProfile?.lastName || "";
   const displayName = `${firstName} ${lastName}`.trim();
-  const userEmail = user?.email || "user@alisto.com";
+  const userEmail = user?.email || "user@epicentra.com";
   const userInitial = firstName.charAt(0).toUpperCase();
 
   // TEMPORARY: Test earthquake sound function - COMMENTED OUT
@@ -142,12 +142,12 @@ const AppHeader = ({ onLogout }) => {
           <div
             className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity duration-200"
             onClick={() => window.open("/", "_blank")}
-            title="Visit ALISTO Landing Page"
+            title="Visit EPICENTRA Landing Page"
           >
             <div className="relative">
               <img
                 src="/logo/alisto_logo.png"
-                alt="ALISTO Logo"
+                alt="EPICENTRA Logo"
                 className="w-8 h-8 object-contain select-none"
                 style={{
                   filter: "brightness(1.0) contrast(1.0) saturate(1.0)",
@@ -156,13 +156,9 @@ const AppHeader = ({ onLogout }) => {
               />
             </div>
             <h1 className="text-xl font-black tracking-wide text-primary-v2">
-              ALISTO
+              EPICENTRA
             </h1>
           </div>
-          <div className="h-6 w-px bg-gray-300"></div>
-          <p className="text-[11px] text-gray-600 font-light">
-            Automated Live Information for Seismic Tracking and Observation
-          </p>
         </div>
 
         {/* Right Side Actions */}

@@ -23,7 +23,7 @@ const DashboardLoadingScreen = ({ message = "Loading your dashboard..." }) => {
           className="mb-8"
           style={{ animation: "fadeInSlide 0.5s ease-out" }}
         >
-          <h1 className="text-6xl font-bold text-white mb-3">ALISTO</h1>
+          <h1 className="text-6xl font-bold text-white mb-3">EPICENTRA</h1>
           <div className="w-40 h-1 bg-white/50 rounded mx-auto"></div>
         </div>
 

@@ -23,7 +23,7 @@ const Header = () => {
     { label: "Home", href: "home" },
     { label: "Features", href: "core-features" },
     { label: "Developers", href: "developers" },
-    { label: "About", href: "latest-paper" },
+    { label: "About", href: "about" },
   ];
 
   const scrollToSection = (sectionId) => {
@@ -49,13 +49,13 @@ const Header = () => {
         <div className="relative">
           <img
             src="/logo/alisto_logo.png"
-            alt="ALISTO Logo"
+            alt="EPICENTRA Logo"
             className="w-10 h-10 object-contain select-none"
             draggable={false}
           />
         </div>
         <h2 className="font-black text-2xl tracking-wide text-primary-v2">
-          ALISTO
+          EPICENTRA
         </h2>
       </div>
 

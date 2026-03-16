@@ -10,7 +10,7 @@ const Overview = () => {
             Project Overview
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            ALISTO (Automated Live Information for Seismic Tracking and Observation) is a comprehensive disaster monitoring and risk assessment platform designed to help communities prepare for and respond to natural disasters.
+            EPICENTRA is a comprehensive disaster monitoring and risk assessment platform designed to help communities prepare for and respond to natural disasters.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ const Overview = () => {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Risk Assessment</h3>
             <p className="text-gray-600">
-              Comprehensive risk evaluation tools to help communities understand and prepare for potential disasters.
+              Comprehensive risk assessment tools to help communities understand and prepare for potential disasters.
             </p>
           </div>
 
@@ -81,7 +81,7 @@ const Overview = () => {
             Meet Our Team
           </h2>
           <p className="text-lg text-gray-600 mb-12">
-            The talented developers behind ALISTO
+            The talented developers behind EPICENTRA
           </p>
           
           <div className="grid md:grid-cols-4 gap-8">

@@ -64,7 +64,7 @@ const LocationStepPage = ({ onLocationSet, onSkip }) => {
               <p className="text-sm text-gray-600">
                 {isUsingFallback 
                   ? "We're using Balanga City, Bataan as your default location for disaster monitoring."
-                  : "ALISTO can now provide personalized disaster alerts for your area."
+                  : "EPICENTRA can now provide personalized disaster alerts for your area."
                 }
               </p>
             </div>
@@ -101,7 +101,7 @@ const LocationStepPage = ({ onLocationSet, onSkip }) => {
               onClick={() => onLocationSet && onLocationSet(locationData)}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors"
             >
-              Continue to ALISTO
+              Continue to EPICENTRA
             </button>
           </div>
         </div>
@@ -152,7 +152,7 @@ const LocationStepPage = ({ onLocationSet, onSkip }) => {
           {/* Description */}
           <div className="text-center mb-6">
             <p className="text-sm text-gray-600">
-              ALISTO works better when we know your location. This helps us provide:
+              EPICENTRA works better when we know your location. This helps us provide:
             </p>
             <ul className="mt-3 text-sm text-gray-600 text-left space-y-1">
               <li>• Personalized earthquake alerts</li>

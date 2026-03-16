@@ -60,7 +60,7 @@ const Developer = () => {
                 : "opacity-0 translate-y-5"
             }`}
           >
-            The dedicated developers and designers behind ALISTO
+            The dedicated developers and designers behind EPICENTRA
           </p>
         </div>
 
@@ -89,7 +89,7 @@ const Developer = () => {
               />
 
               {/* Developer info */}
-              <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-primary-v2">
+              <h4 className="text-lg md:text-xl font-bold text-gray-800 mb-2 transition-colors duration-300 group-hover:text-primary-v2 px-2">
                 {developer.name}
               </h4>
               <p className="text-base md:text-lg text-gray-600 font-medium">

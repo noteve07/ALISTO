@@ -215,7 +215,7 @@ export const showDesktopNotification = async (notification) => {
       body: notificationBody,
       icon: '/favicon.ico', // Use your app's favicon
       badge: '/favicon.ico',
-      tag: `alisto-${notification.notification_id}`, // Prevent duplicate notifications
+      tag: `epicentra-${notification.notification_id}`, // Prevent duplicate notifications
       requireInteraction: urgency === 'high', // Keep high urgency notifications visible
       silent: true, // Always silent - we'll play custom sound instead
       timestamp: new Date(notification.created_at).getTime(),

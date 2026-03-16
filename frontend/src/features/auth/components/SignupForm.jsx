@@ -18,7 +18,7 @@ const SignupForm = ({ formData, loading, error, onInputChange, onSubmit }) => {
         <h2 className="text-3xl font-bold text-gray-900 mb-3">
           Create your account
         </h2>
-        <p className="text-gray-600">Get started with ALISTO today.</p>
+        <p className="text-gray-600">Get started with EPICENTRA today.</p>
       </div>
 
       {/* Error Alert */}

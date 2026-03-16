@@ -337,7 +337,7 @@ const ChatbotPage = () => {
               Hi! I'm ISA
             </h1>
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-slate-600 font-sans">
-              Welcome to ALISTO&apos;s Intelligent Seismic Assistant. I can help
+              Welcome to EPICENTRA&apos;s Intelligent Seismic Assistant. I can help
               you explore live quake data, volcano advisories, and risk levels
               across the Philippines.
             </p>

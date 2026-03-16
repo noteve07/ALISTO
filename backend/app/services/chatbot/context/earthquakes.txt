@@ -1,7 +1,7 @@
 EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 36 | Minor (<3.0): 31 | Major (>=3.0): 5
-Average Magnitude: 2.24 | Highest: 4.1
-Updated: 2026-03-16 02:32:04
+Total: 37 | Minor (<3.0): 34 | Major (>=3.0): 3
+Average Magnitude: 2.22 | Highest: 4.1
+Updated: 2026-03-16 13:06:38
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
@@ -9,5 +9,3 @@ DateTime | Magnitude | Depth | Province
 2026-03-16T01:20:00 | 3.6 | 15km | Sultan Kudarat
 2026-03-15T20:56:00 | 3 | 33km | Ilocos Norte
 2026-03-15T20:51:00 | 4.1 | 13km | Eastern Samar
-2026-03-15T12:37:00 | 3.5 | 3km | Quezon
-2026-03-15T07:19:00 | 3.4 | 7km | Cebu

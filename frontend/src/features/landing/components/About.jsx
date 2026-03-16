@@ -18,7 +18,7 @@ const About = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
           }`}
         >
-          About ALISTO
+          About EPICENTRA
         </h2>
         <p
           className={`mt-8 text-gray-700 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto transition-all duration-600 delay-200 ${
@@ -26,7 +26,7 @@ const About = () => {
           }`}
         >
           Our mission is to provide accessible, real-time seismic risk
-          assessment to empower communities across the Philippines. ALISTO is
+          assessment to empower communities across the Philippines. EPICENTRA is
           powered by official data from DOST-PHIVOLCS and enhanced with advanced
           machine learning technology to deliver timely and accurate seismic
           information.

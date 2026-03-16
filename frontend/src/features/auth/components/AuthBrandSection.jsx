@@ -46,7 +46,7 @@ const AuthBrandSection = ({ type = "login" }) => {
       <div className="relative z-10">
         {/* Logo/Brand */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">ALISTO</h1>
+          <h1 className="text-4xl font-bold mb-2">EPICENTRA</h1>
           <div className="w-20 h-1 bg-white/50 rounded"></div>
         </div>
 
@@ -125,7 +125,7 @@ const AuthBrandSection = ({ type = "login" }) => {
                   />
                 </svg>
               </div>
-              <p className="text-white/90">Interactive risk evaluation</p>
+              <p className="text-white/90">Interactive risk assessment</p>
             </div>
           </div>
         </div>

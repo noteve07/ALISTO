@@ -22,7 +22,7 @@ const ChatHero = () => {
       <div className="space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Hi! I'm ISA</h1>
         <p className="mx-auto max-w-2xl text-sm text-slate-500 sm:text-base">
-          Welcome to ALISTO's Intelligent Seismic Assistant. I can help with real-time earthquakes,
+          Welcome to EPICENTRA's Intelligent Seismic Assistant. I can help with real-time earthquakes,
           volcano advisories, and risk levels across the Philippines.
         </p>
       </div>

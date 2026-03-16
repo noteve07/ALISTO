@@ -6,7 +6,7 @@ const Features = () => {
   const features = [
     {
       id: 1,
-      title: "Live Monitoring",
+      title: "Seismic Monitoring",
       description:
         "Access real-time data feeds from seismic sensors deployed across the Philippines.",
       icon: "sensors",
@@ -20,7 +20,7 @@ const Features = () => {
     },
     {
       id: 3,
-      title: "Risk Evaluation",
+      title: "Risk Assessment",
       description:
         "Leverage predictive analytics to evaluate potential risks for specific areas.",
       icon: "security",
@@ -53,7 +53,7 @@ const Features = () => {
                 : "opacity-0 translate-y-5"
             }`}
           >
-            Explore the features that make ALISTO an essential tool for seismic
+            Explore the features that make EPICENTRA an essential tool for seismic
             awareness and preparedness.
           </p>
         </div>

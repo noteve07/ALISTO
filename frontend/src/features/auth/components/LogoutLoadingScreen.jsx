@@ -23,7 +23,7 @@ const LogoutLoadingScreen = ({ message = "Signing you out..." }) => {
           className="mb-8"
           style={{ animation: "fadeInSlide 0.5s ease-out" }}
         >
-          <h1 className="text-6xl font-bold text-white mb-3">ALISTO</h1>
+          <h1 className="text-6xl font-bold text-white mb-3">EPICENTRA</h1>
           <div className="w-40 h-1 bg-white/50 rounded mx-auto"></div>
         </div>
 
@@ -64,7 +64,7 @@ const LogoutLoadingScreen = ({ message = "Signing you out..." }) => {
 
         {/* Loading Message */}
         <p className="text-xl text-white font-semibold mb-2">{message}</p>
-        <p className="text-sm text-white/80">Thank you for using ALISTO</p>
+        <p className="text-sm text-white/80">Thank you for using EPICENTRA</p>
 
         {/* Progress bar */}
         <div className="mt-8 max-w-xs mx-auto">

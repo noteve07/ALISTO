@@ -25,7 +25,7 @@ const Footer = () => {
                   <circle cx="12" cy="9" r="2.5" fill="white" />
                 </svg>
               </div>
-              <h4 className="font-black text-xl tracking-wide">ALISTO</h4>
+              <h4 className="font-black text-xl tracking-wide">EPICENTRA</h4>
             </div>
 
             <p className="mt-6 text-base text-gray-300 max-w-md leading-relaxed">
@@ -95,8 +95,7 @@ const Footer = () => {
 
         <div className="mt-12 border-t border-gray-700 pt-8 text-center text-base text-gray-400">
           <p>
-            © 2025 Automated Live Information for Seismic Tracking and
-            Observation (ALISTO)
+            © 2025 EPICENTRA. All rights reserved.
           </p>
         </div>
       </div>

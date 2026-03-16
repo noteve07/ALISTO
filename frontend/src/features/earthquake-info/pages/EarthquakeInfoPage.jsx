@@ -350,7 +350,7 @@ const EarthquakeInfoPage = () => {
                   <p className="text-gray-600 text-sm">
                     Advanced algorithms analyze seismic patterns to improve
                     earthquake detection, location accuracy, and risk assessment
-                    like ALISTO's system.
+                    like EPICENTRA's system.
                   </p>
                 </div>
               </div>
@@ -497,7 +497,7 @@ const EarthquakeInfoPage = () => {
               </div>
               <div className="text-left">
                 <h3 className="font-semibold text-gray-800 text-sm">
-                  Live Monitoring
+                  Seismic Monitoring
                 </h3>
                 <p className="text-xs text-gray-600">Real-time data</p>
               </div>

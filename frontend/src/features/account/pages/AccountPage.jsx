@@ -4,7 +4,7 @@ const AccountPage = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [profileData, setProfileData] = useState({
     fullName: 'John Doe',
-    email: 'john.doe@alisto.com',
+    email: 'john.doe@epicentra.com',
     role: 'Disaster Response Coordinator',
     department: 'Emergency Management',
     phone: '+63 917 123 4567',
@@ -271,7 +271,7 @@ const AccountPage = () => {
                   </label>
                   <select className="w-full max-w-md px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary">
                     <option>Overview Dashboard</option>
-                    <option>Live Monitoring</option>
+                    <option>Seismic Monitoring</option>
                     <option>Risk Assessment</option>
                     <option>Analytics</option>
                   </select>

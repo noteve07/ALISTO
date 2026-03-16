@@ -17,13 +17,13 @@ const TermsOfService = () => {
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center mb-12 pb-8 border-b-2 border-gray-200">
             <h1 className="text-4xl font-black text-[#1A2B48] mb-2">Terms and Conditions</h1>
-            <p className="text-lg text-gray-500 font-medium">Automated Live Information for Seismic Tracking and Observation (ALISTO)</p>
+            <p className="text-lg text-gray-500 font-medium">EPICENTRA - Seismic Tracking and Observation</p>
           </div>
 
           <div className="mb-10">
             <h2 className="text-2xl font-bold text-[#C85A2D] mb-4 uppercase tracking-wide">GENERAL</h2>
             <p className="text-[#1A2B48] leading-7 mb-4 text-justify">
-              The Terms and Conditions contained herein on this web and mobile application (the "App") shall govern your use of this App, including all pages to which you may be redirected. These terms apply in full force and effect to your use of this App. Your personal data, whenever provided within the App (including geolocation data for alert purposes) shall be processed and shall be governed by the provisions of the Republic Act (RA) No 10173 or the Data Privacy Act of 2012 (DPA), and all other applicable laws. Whenever used herein, "App Owner" shall mean the Researchers and Developers responsible for the creation and maintenance of the ALISTO application.
+              The Terms and Conditions contained herein on this web and mobile application (the "App") shall govern your use of this App, including all pages to which you may be redirected. These terms apply in full force and effect to your use of this App. Your personal data, whenever provided within the App (including geolocation data for alert purposes) shall be processed and shall be governed by the provisions of the Republic Act (RA) No 10173 or the Data Privacy Act of 2012 (DPA), and all other applicable laws. Whenever used herein, "App Owner" shall mean the Researchers and Developers responsible for the creation and maintenance of the EPICENTRA application.
             </p>
           </div>
 
@@ -69,7 +69,7 @@ const TermsOfService = () => {
               You understand and acknowledge that the App's risk level predictions and real-time alerts are based on data from official sources (e.g., DOST-PHIVOLCS), historical records, and machine learning models. These models provide estimations and analyses, not guaranteed forecasts. Earthquakes and volcanic eruptions are complex, unpredictable natural phenomena.
             </p>
             <p className="text-[#1A2B48] mb-4">
-              The App Owner (Researchers/Developers), their affiliates, and partners are not liable for any direct, indirect, or consequential damages, including loss of life or property, arising from the accuracy, completeness, or timeliness of the information, alerts, or risk predictions provided by ALISTO.
+              The App Owner (Researchers/Developers), their affiliates, and partners are not liable for any direct, indirect, or consequential damages, including loss of life or property, arising from the accuracy, completeness, or timeliness of the information, alerts, or risk predictions provided by EPICENTRA.
             </p>
             <p className="text-[#1A2B48]">
               The App is a supplemental tool for awareness and preparedness and must not replace official warnings, advisories, or mandatory evacuation orders issued by DOST-PHIVOLCS, NDMMC, or local government units (LGUs).
@@ -96,7 +96,7 @@ const TermsOfService = () => {
               </li>
               <li className="relative pl-6 text-[#1A2B48] leading-7">
                 <span className="absolute left-0 text-[#C85A2D] font-bold text-xl">•</span>
-                Publicly performing and/or showing any App material without proper attribution to ALISTO and the official data sources (e.g., DOST-PHIVOLCS);
+                Publicly performing and/or showing any App material without proper attribution to EPICENTRA and the official data sources (e.g., DOST-PHIVOLCS);
               </li>
               <li className="relative pl-6 text-[#1A2B48] leading-7">
                 <span className="absolute left-0 text-[#C85A2D] font-bold text-xl">•</span>

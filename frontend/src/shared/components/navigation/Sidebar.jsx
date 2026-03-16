@@ -121,7 +121,7 @@ const Sidebar = () => {
     },
     {
       id: "live-monitoring",
-      label: "Live Monitoring",
+      label: "Seismic Monitoring",
       path: "/app/live-monitoring",
       icon: (
         <svg
@@ -141,7 +141,7 @@ const Sidebar = () => {
     },
     {
       id: "risk-evaluation",
-      label: "Risk Evaluation",
+      label: "Risk Assessment",
       path: "/app/risk-evaluation",
       icon: (
         <svg
@@ -271,7 +271,7 @@ const Sidebar = () => {
           </button>
         </div>
         <div className="text-[11px] text-gray-400 font-medium">
-          © ALISTO Dev Team 2025
+          © EPICENTRA Dev Team 2025
         </div>
       </div>
     </aside>

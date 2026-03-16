@@ -10,7 +10,7 @@ const AuthLoadingScreen = ({ message = "Setting up your account..." }) => {
       <div className="text-center">
         {/* Animated Logo/Brand */}
         <div className="mb-8" style={{ animation: "scaleIn 0.5s ease-out" }}>
-          <h1 className="text-5xl font-bold text-primary-v2 mb-2">ALISTO</h1>
+          <h1 className="text-5xl font-bold text-primary-v2 mb-2">EPICENTRA</h1>
           <div className="w-32 h-1 bg-primary-v2/30 rounded mx-auto"></div>
         </div>
 

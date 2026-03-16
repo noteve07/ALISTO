@@ -41,7 +41,7 @@ const RiskEvaluationPage = () => {
     <div className="flex h-full flex-col gap-5">
       {/* <div className="flex flex-col gap-2">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900">Provincial Risk Evaluation</h1>
+          <h1 className="text-2xl font-semibold text-slate-900">Provincial Risk Assessment</h1>
           <p className="text-sm text-slate-500">Visualize current dynamic risk levels across Philippine provinces.</p>
         </div>
 
@@ -57,7 +57,7 @@ const RiskEvaluationPage = () => {
         {error && !loading && (
           <div className="absolute inset-4 z-10 rounded-xl border border-rose-200 bg-rose-50/90 p-4 text-rose-700 shadow-inner">
             <p className="text-sm font-semibold">
-              Failed to load risk evaluations.
+              Failed to load risk assessments.
             </p>
             <p className="text-xs text-rose-500">Please try again later.</p>
           </div>

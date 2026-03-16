@@ -13,13 +13,13 @@ const PrivacyPolicy = () => {
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center mb-12 pb-8 border-b-2 border-gray-200">
             <h1 className="text-4xl font-black text-[#1A2B48] mb-2">Data Privacy Notice</h1>
-            <p className="text-lg text-gray-500 font-medium">Automated Live Information for Seismic Tracking and Observation (ALISTO)</p>
+            <p className="text-lg text-gray-500 font-medium">EPICENTRA - Seismic Tracking and Observation</p>
           </div>
 
           <div className="mb-10">
             <h2 className="text-2xl font-bold text-[#C85A2D] mb-4 tracking-wide">General Statement</h2>
             <p className="text-[#1A2B48] leading-7 mb-4 text-justify">
-              The ALISTO web and mobile application (the "App") is developed and maintained by the Researchers and Developers (the "App Owner") to enhance disaster preparedness and public safety regarding seismic and volcanic activity in the Philippines.
+              The EPICENTRA web and mobile application (the "App") is developed and maintained by the Researchers and Developers (the "App Owner") to enhance disaster preparedness and public safety regarding seismic and volcanic activity in the Philippines.
             </p>
             <p className="text-[#1A2B48] leading-7 mb-4 text-justify">
               The App Owner recognizes the critical nature of the data you share, especially in disaster-related applications. We are committed to protecting your personal data and ensuring strict compliance with the Data Privacy Act of 2012 (RA 10173), its Implementing Rules and Regulations, and issuances by the National Privacy Commission.
@@ -144,7 +144,7 @@ const PrivacyPolicy = () => {
           <div className="mb-10">
             <h2 className="text-2xl font-bold text-[#C85A2D] mb-4 tracking-wide">How We Use and Share Your Personal Data</h2>
             <p className="text-[#1A2B48] leading-7 mb-6 text-justify">
-              We will only use your Personal Data to operate the ALISTO App and deliver its intended services. We may not process or use your information without your express consent.
+              We will only use your Personal Data to operate the EPICENTRA App and deliver its intended services. We may not process or use your information without your express consent.
             </p>
 
             <h3 className="text-xl font-semibold text-[#1A2B48] mb-3 mt-6">Primary Use</h3>
@@ -171,7 +171,7 @@ const PrivacyPolicy = () => {
           <div className="mb-10">
             <h2 className="text-2xl font-bold text-[#C85A2D] mb-4 tracking-wide">Your Rights as a Data Subject</h2>
             <p className="text-[#1A2B48] leading-7 mb-6 text-justify">
-              As a user of ALISTO, you are entitled to the following data privacy rights under the DPA:
+              As a user of EPICENTRA, you are entitled to the following data privacy rights under the DPA:
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -200,7 +200,7 @@ const PrivacyPolicy = () => {
                   <h4 className="text-lg font-bold text-[#C85A2D]">Right to Access</h4>
                 </div>
                 <p className="text-[#1A2B48] text-sm leading-6">
-                  To reasonably access any Personal Information collected and processed by ALISTO.
+                  To reasonably access any Personal Information collected and processed by EPICENTRA.
                 </p>
               </div>
 
