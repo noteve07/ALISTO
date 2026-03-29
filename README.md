@@ -20,8 +20,6 @@
   <b>🚧 PROJECT UNDER <del>DEVELOPMENT</del> ENHANCEMENT 🚧</b>
 </p> -->
 
----
-
 **ALISTO** is a comprehensive disaster preparedness platform that provides real-time earthquake and volcanic monitoring for the Philippines. Using machine learning algorithms and data from DOST-PHIVOLCS, the platform delivers intelligent risk assessments and personalized alerts to enhance public safety and disaster preparedness.
 
 ---
