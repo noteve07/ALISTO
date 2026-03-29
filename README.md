@@ -9,7 +9,7 @@
 
 ---
 
-<p align="center">
+<!-- <p align="center">
   <img 
     src="https://raw.githubusercontent.com/noteve07/misc/37736657fa7f51232867f2d0feadfdb5fda81538/assets/software-under-development.gif" 
     alt="Software Under Development"
@@ -18,7 +18,7 @@
 
 <p align="center">
   <b>🚧 PROJECT UNDER <del>DEVELOPMENT</del> ENHANCEMENT 🚧</b>
-</p>
+</p> -->
 
 ---
 
