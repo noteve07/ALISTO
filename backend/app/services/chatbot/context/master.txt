@@ -56,16 +56,19 @@ HAZARD INFORMATION:
 CONTEXT:
 {
     Earthquakes: EARTHQUAKE SUMMARY (Last 24 hours):
-Total: 37 | Minor (<3.0): 34 | Major (>=3.0): 3
-Average Magnitude: 2.22 | Highest: 4.1
-Updated: 2026-03-16 13:06:38
+Total: 54 | Minor (<3.0): 48 | Major (>=3.0): 6
+Average Magnitude: 2.29 | Highest: 3.6
+Updated: 2026-04-23 15:11:42
 
 MAJOR EARTHQUAKES (>=3.0):
 DateTime | Magnitude | Depth | Province
 ==================================================
-2026-03-16T01:20:00 | 3.6 | 15km | Sultan Kudarat
-2026-03-15T20:56:00 | 3 | 33km | Ilocos Norte
-2026-03-15T20:51:00 | 4.1 | 13km | Eastern Samar
+2026-04-23T01:48:00 | 3.6 | 45km | Davao Occidental
+2026-04-22T18:35:00 | 3 | 10km | Cagayan
+2026-04-22T16:51:00 | 3.1 | 10km | Eastern Samar
+2026-04-22T16:51:00 | 3 | 19km | Eastern Samar
+2026-04-22T16:10:00 | 3.5 | 144km | Batangas
+2026-04-22T16:10:00 | 3.5 | 147km | Batangas
     
     Volcanic Advisories: VOLCANIC ADVISORY SUMMARY:
 Total Monitored: 24 | Active Alerts: 4 | Normal: 20
